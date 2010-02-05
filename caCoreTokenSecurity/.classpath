@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/MSSOUserValidator.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1/system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1/system/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="test/lib/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

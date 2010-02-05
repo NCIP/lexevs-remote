@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="caCOREAPI" default="build-system" basedir="../build">
+	<description>Build script for EVS API</description>
+	
+
+	<!-- The DEBUG_FLAG property has value on or off. Set off to hide any debugging information -->
+	<property name="DEBUG_FLAG" value="on" />
+	<import file="${basedir}/sdk_build.xml" />
+
+	<target name="build-system">	
+		<SDKecho message="Generating EVS API" />		
+		<antcall target="caCORESDK.build-system" />
+	</target>
+
+	
+	<target name="help" description="Default target that lists commonly used targets within this build script">
+		<echo>===============================</echo>
+		<echo>caCORE</echo>
+		<echo>===============================</echo>
+		<echo>
+		</echo>
+		<echo>To run the entire caCORE code generation process, use:</echo>
+		<echo>
+		</echo>
+		<echo>    ant build-system</echo>
+		<echo>
+		</echo>
+	</target>
+	<!--***********************************************************************
+	*** Runs the Codegen 
+	*********************************************************************** -->
+
+	<target name="codegen" description="Runs the code generator">
+		<SDKecho message="${ant.project.name}: Running the EVS API code generator"/>
+		<antcall target="caCORESDK.codegen"></antcall>	
+		<!--
+		<copy todir="${system.dir}/src/gov/nih/nci/evs" overwrite="true">			
+			<fileset dir="${output.src.dir}/gov/nih/nci/evs"/>					
+		</copy>
+		-->
+	</target>
+
+	
+	<!--***********************************************************************
+	*** Compiles the generated beans 
+	*********************************************************************** -->
+	<target name="compile-beans" description="Compiles the generated beans" >
+		<copy todir="${output.src.dir}" overwrite="true"> 
+			<fileset dir="${basedir}/mappings"/>	
+		</copy>
+		<replace dir="${output.src.dir}">
+		  <include name="*.hbm.xml"/>
+		  	 <replacetoken>table="</replacetoken>
+			 <replacevalue>table="@PREFIX@</replacevalue>
+		</replace>
+
+	    <antcall target="caCORESDK.compile-beans"></antcall>
+	</target>
+	
+	
+	<!--***********************************************************************
+	*** Prepare 
+	*********************************************************************** -->
+	<target name="prepare-system">
+		<SDKecho message="${ant.project.name}: Preparing the EVS system project"/>
+		<antcall target="caCORESDK.prepare-system"></antcall>	
+	<!-- create client framework for lexevs -->
+	<jar destfile="system/dist/lexevs-client-framework.jar" basedir="system/build/classes">
+		<manifest>
+			<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
+		</manifest>
+			<include name="org/LexGrid/LexBIG/caCore/client/**" />
+			<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />
+			<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+			<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
+			<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+			<fileset dir="system/src">
+				<include name="org/LexGrid/LexBIG/caCore/client/**" />
+				<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />	
+				<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+			</fileset>
+	</jar>		
+	<jar destfile="system/dist/lexevs-core.jar" basedir="system/build/classes">
+		<manifest>
+			<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
+		</manifest>
+				<include name="org/LexGrid/LexBIG/caCore/applicationservice/**" />
+				<include name="org/LexGrid/LexBIG/caCore/connection/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/dao/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />
+				<include name="org/LexGrid/LexBIG/caCore/security/**" />
+			    <include name="org/LexGrid/LexBIG/caCore/utils/**" />
+				<include name="org/LexGrid/LexBIG/caCore/web/**" />
+				<include name="org/LexGrid/LexBIG/caCore/webservice/**" />
+				<fileset dir="system/src">
+					<include name="org/LexGrid/LexBIG/caCore/applicationservice/**" />
+					<include name="org/LexGrid/LexBIG/caCore/connection/**" />
+					<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+					<include name="org/LexGrid/LexBIG/caCore/dao/**" />	
+					<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />
+					<include name="org/LexGrid/LexBIG/caCore/security/**" />
+					<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+					<include name="org/LexGrid/LexBIG/caCore/web/**" />
+					<include name="org/LexGrid/LexBIG/caCore/webservice/**" />
+				</fileset>
+	</jar>		
+</target>
+	
+	
+	<target name="package-webapp">
+			<SDKecho message="${ant.project.name}: Packaging the webapp"/>
+		<antcall target="caCORESDK.package-webapp"></antcall>	
+			<war destfile="${package.system.dir}\${PROJECT_NAME}.jboss.war" webxml="${build.conf.web-inf.dir}\web.xml">
+				<manifest>
+					<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
+					<attribute name="Version" value="${VERSION}"/>
+				</manifest>
+				<lib dir="${system.dir}\${system.dist.dir}" includes="*.jar"/>
+				<lib dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
+					<exclude name="${read-api-exclude-list}"/>
+				</lib>
+				<lib dir="${build.jar.dir}" includes="${bean.file}" />
+				<lib dir="${build.jar.dir}" includes="${orm.file}" />
+				<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
+					<exclude name="commons-logging*.*"/>
+					<exclude name="log4j*.*"/>
+					<exclude name="servlet.jar"/>
+					<exclude name="xercesImpl*.*"/>
+					<exclude name="cog*.*"/>
+				</lib>
+				<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
+				<fileset dir="${build.conf.system.web.dir}">
+					<include name="**/*"/>
+					<exclude name="**/web.xml"/>
+					<exclude name="${server-exclude-classes-list}"/>
+				</fileset>
+				<fileset dir="${system.dir}\${system.web.dir}">
+					<include name="**/*"/>
+				</fileset>
+				<fileset dir="${build.dir}">
+					<include name="docs/**/*"/>
+				</fileset>
+				<classes dir="${output.src.dir}">
+					<include name="${csm.security.config.file}"/>
+					<include name="${csm.ehcache.file}"/>
+					<include name="${clm.object.state.logger.config}"/>
+				</classes>
+				<webinf dir="${output.src.dir}">
+					<include name="server-config.wsdd"/>
+				</webinf>
+			</war>
+		<war destfile="${package.system.dir}\${PROJECT_NAME}.tomcat.war" webxml="${build.conf.web-inf.dir}\web.xml">
+			<manifest>
+				<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
+				<attribute name="Version" value="${VERSION}"/>
+			</manifest>
+			<lib dir="${system.dir}\${system.dist.dir}" includes="*.jar"/>
+			<lib dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
+				<exclude name="${read-api-exclude-list}"/>
+			</lib>
+			<lib dir="${build.jar.dir}" includes="${bean.file}" />
+			<lib dir="${build.jar.dir}" includes="${orm.file}" />
+			<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
+				<exclude name="servlet.jar"/>
+				<exclude name="xercesImpl*.*"/>
+				<exclude name="cog*.*"/>
+			</lib>
+			<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
+			<fileset dir="${build.conf.system.web.dir}">
+				<include name="**/*"/>
+				<exclude name="**/web.xml"/>
+				<exclude name="${server-exclude-classes-list}"/>
+			</fileset>
+			<fileset dir="${system.dir}\${system.web.dir}">
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="${build.dir}">
+				<include name="docs/**/*"/>
+			</fileset>
+			<classes dir="${output.src.dir}">
+				<include name="${csm.security.config.file}"/>
+				<include name="${csm.ehcache.file}"/>
+				<include name="${clm.object.state.logger.config}"/>
+			</classes>
+			<webinf dir="${output.src.dir}">
+				<include name="server-config.wsdd"/>
+			</webinf>
+		</war>
+		<copy file="${conf.dir}/properties-service.xml" todir="${package.system.dir}"/>
+		</target>	
+	<!--***********************************************************************
+	*** Generates Javadocs for the Java Beans
+	*********************************************************************** -->
+	<target name="doc" description="Generates javadocs for the domain Java beans">
+		<SDKecho message="${ant.project.name}: Skipping Javadocs..."/>
+		<javadoc packagenames="*" destdir="${build.doc.dir}"
+		           sourcepath="system/src"         
+		           defaultexcludes="yes"
+		           author="true"
+		           version="true"
+		           use="true"
+		           windowtitle="Test API"/>
+	</target>
+
+</project>

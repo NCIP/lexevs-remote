@@ -1,0 +1,9 @@
+<ehcache>
+	<diskStore path="@CACHE_PATH@/@WEBSERVICE_NAME@"/>
+	<defaultCache
+		maxElementsInMemory="100"
+		eternal="false"
+		timeToIdleSeconds="1800"
+		timeToLiveSeconds="100000"
+		overflowToDisk="true"/>	
+</ehcache>

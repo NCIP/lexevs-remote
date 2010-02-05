@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<!--                  -->
+	<!-- Exposed services -->
+	<!--                  -->
+	<bean name="/applicationService"	class="org.LexGrid.LexBIG.caCore.applicationservice.LexEvsHttpInvokerServiceExporter">
+		<property name="serviceInterface" value="org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService"/>
+		<property name="service"><ref bean="ApplicationService" /></property>
+	</bean>
+		
+</beans>

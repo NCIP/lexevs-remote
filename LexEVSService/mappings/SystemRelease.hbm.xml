@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    
+   <class name="org.LexGrid.versions.SystemRelease" table="systemRelease" lazy="false">
+   
+   <cache usage="read-write"/>
+  
+   	   <id name="_releaseId" access="field" column="releaseId">
+         <generator class="assigned"/>
+   	   </id>
+		
+		<!-- SystemRelease -->
+		<property name="_releaseURI" type="string" access="field" column="releaseURI" />
+		<property name="_releaseDate" type="timestamp" access="field" column="releaseDate" />
+		<property name="_releaseAgency" access="field" column="releaseAgency" />
+		<property name="_basedOnRelease" access="field" column="basedOnRelease" />
+				
+		<!-- Describable -->
+        <many-to-one name="_entityDescription" access="field" class="org.LexGrid.commonTypes.EntityDescription$SystemRelease" not-found="ignore">
+  			<formula>releaseId</formula>
+  		</many-to-one>
+     </class>
+     
+       <class name="org.LexGrid.commonTypes.EntityDescription" table="systemRelease" polymorphism="explicit"
+   			entity-name="org.LexGrid.commonTypes.EntityDescription$SystemRelease">
+     	  
+     	    <id column="releaseId" type="string">
+        		<generator class="assigned"/>
+   			</id>
+      		<property name="_content" access="field" column="entityDescription" />
+    </class>
+    
+</hibernate-mapping>
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-lazy-init="false" default-dependency-check="none" default-autowire="no">
+
+	<bean name="LexEVSProperties" class="org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties"/>
+	
+	<bean name="SecurityValidator" class="org.LexGrid.LexBIG.caCore.security.Validator">
+			<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
+	</bean>
+
+	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" depends-on="DBConnector" singleton="true">
+		<constructor-arg ref="SecurityValidator" index="0"></constructor-arg>	
+	</bean>
+
+	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
+		<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
+	</bean>
+
+	<bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
+		<property name="securityEnabled" value="false"/>
+		<property name="instanceLevelSecurityEnabled" value="false"/>
+		<property name="attributeLevelSecurityEnabled" value="false"/>
+		<!--
+		<property name="authorizationManager">
+			<bean factory-bean="userDetailsService" factory-method="authorizationManagerInstance" />
+		</property>
+		-->
+	</bean>
+
+	<bean id="ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="ApplicationServiceImpl" />
+		<property name="interfaces" value="org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService" />
+		<property name="interceptorNames">
+			<list>
+				<!-- <value>TxInterceptor1</value> -->
+				<!-- <value>hibernateInterceptor</value> -->
+				<!-- <idref local="TxInterceptor1" /> -->
+				<!-- <idref local="TxInterceptor2" /> -->
+				<!-- <idref local="CLMInterceptor" /> -->
+			</list>
+		</property>
+	</bean>
+	
+</beans>

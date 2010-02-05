@@ -1,0 +1,22 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.LexGrid.commonTypes.EntityDescription"
+		table="entity"
+		entity-name="org.LexGrid.commonTypes.EntityDescription$Entity">
+
+		<cache usage="read-write"/>
+
+		<composite-id
+			class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.EntityKey">
+			<key-property name="entityCode" />
+			<key-property name="codingSchemeName" />
+		</composite-id>
+		<property name="_content" type="text" access="field"
+			column="entityDescription" />
+			
+	</class>
+</hibernate-mapping>
+

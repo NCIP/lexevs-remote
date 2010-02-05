@@ -1,0 +1,44 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+
+        <class name="org.LexGrid.commonTypes.PropertyQualifier" table="codingSchemePropMultiAttrib" 
+    where="typeName = 'qualifier'" entity-name="org.LexGrid.commonTypes.PropertyQualifier$CodingScheme">  
+    
+    <cache usage="read-write"/>
+            
+        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemePropMultiAttribKey">
+            <key-property name="codingSchemeName"/>          
+            <key-property name="propertyId"/>            
+            <key-property name="typeName"/>
+            <key-property name="attributeValue"/>
+      </composite-id>      
+           
+          <property name="_propertyQualifierName" access="field" insert="false" update="false" type="string" column="typeName" />  
+          <property name="_propertyQualifierType" access="field" formula="'codingScheme'" />    
+           
+           <many-to-one name="_value" access="field" class="org.LexGrid.commonTypes.Text$CodingSchemePropertyQualifier" not-found="ignore">
+           		<formula>codingSchemeName</formula>
+           		<formula>propertyId</formula>
+           		<formula>typeName</formula>
+           		<formula>attributeValue</formula>
+           </many-to-one>
+                  
+    </class>
+    
+      <class name="org.LexGrid.commonTypes.Text" table="codingSchemePropMultiAttrib" 
+    		entity-name="org.LexGrid.commonTypes.Text$CodingSchemePropertyQualifier">
+    		
+    		<cache usage="read-write"/>
+    		
+         <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemePropMultiAttribKey">
+            <key-property name="codingSchemeName"/>          
+            <key-property name="propertyId"/>            
+            <key-property name="typeName"/>
+            <key-property name="attributeValue"/>
+      	</composite-id>      
+        <property name="_content" access="field" update="false" insert="false" column="attributeValue"/>  
+    </class>
+</hibernate-mapping>

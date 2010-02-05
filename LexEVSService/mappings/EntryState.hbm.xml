@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    
+    <class name="org.LexGrid.versions.EntryState" table="entryState" lazy="true">
+  
+  		<cache usage="read-write"/>
+  
+   	   <id column="entryStateId" type="string">
+         <generator class="assigned"/>
+   	   </id>
+		
+		<property name="_containingRevision" access="field" column="revisionId"/>
+		<property name="_relativeOrder" type="long" access="field" column="relativeOrder"/>
+    	<property name="_changeType" type="ChangeTypesEnum" access="field" column="changeType" not-null="true"/>
+    	<property name="_prevRevision" access="field" column="prevRevisionId"/>
+    	  
+    </class>
+    
+</hibernate-mapping>
+
+

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- *****************************************************************  
+	SET basedir PROPERTY TO POINT TO THE HOME DIRECTORY OF THE EVS API 
+	***************************************************************** -->
+<project name="caCORE LexEVS API" default="build-system" basedir=".">
+	<description>Build script for caCORE APIs</description>
+
+	<!--  *****************************************************************
+	*** SET sdk_home PROPERTY TO POINT TO THE HOME DIRECTORY OF SDK 
+	***************************************************************** -->
+	<property name="anthill.dependency.artifacts.dir" value = ".."/>
+	<property name="sdk_dir" value="${anthill.dependency.artifacts.dir}/SDK4_1_1" />
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="conf.dir" value="${build.dir}/conf"/>
+	<property name="codegen.dir" value="${build.dir}/codegen"/>
+	<property name="system.dir" value="${build.dir}/system"/>
+	<property name="models.dir" value="${build.dir}/models"/>
+	<property name="scripts.dir" value="${build.dir}/build-scripts"/>
+	<property name="output.dir" value="${build.dir}/output"/>
+	<property name="writable.dir" value="${build.dir}/writable-api"/>
+	<property name="grid.dir" value="${build.dir}/grid"/>
+	<property name="mappings.dir" value="${build.dir}/mappings"/>
+	
+	<!-- *****************************************************************
+	**** LOAD PROPERTIES FILES 
+	*****************************************************************-->
+	<property file="${basedir}/conf/deploy.properties"  />
+
+	<!-- *****************************************************************
+	*** The DEBUG_FLAG property has value on or off. Set off to hide any debugging information 
+	***************************************************************** -->
+	<property name="DEBUG_FLAG" value="on" />
+	
+	<condition property="BUILD_DISTRIBUTED_ONLY" value="true">
+		<equals arg1="${DISTRIBUTED_ONLY}" arg2="true" casesensitive="false" trim="true" />
+	</condition>
+
+	<!--*****************************************************************
+	*** GENERATE THE EVS API
+	*****************************************************************-->
+	<target name="build-system">
+		<antcall target="clean"/>
+		<echo message="Generate the caCORE LexEVS API " />
+		<mkdir dir="${build.dir}"/>
+		<antcall target="generate-lexevs-api">
+		</antcall>
+	</target>
+
+	<!--*****************************************************************
+	*** GENERATE THE EVS API
+	*****************************************************************-->
+	<target name="generate-lexevs-api" >
+		<!--  CREATE TEMPORARY CACHE TO BUILD SYSTEM -->
+		<antcall target="generate-system"/>
+	</target>
+	<!--**************************************************
+	*** CLEAN SYSTEM
+	**************************************************-->
+	<target name="clean">
+		<delete dir="${build.dir}" quiet="true"/>
+		<delete dir="output" quiet="true"/>
+	</target>
+	<!--**************************************************
+	*** GENERATE OUTPUT
+	**************************************************-->
+	<target name="create-output">
+		<mkdir dir="output" />
+		<copy todir="output" overwrite="true">
+			<fileset dir="${output.dir}" />
+		</copy>
+		<mkdir dir="output/${PROJECT_NAME}/package/client" />
+		<!-- create client for LexEVS -->
+		<jar destfile="output/${PROJECT_NAME}/package/client/${PROJECT_NAME}-client.jar" basedir="${system.dir}/build/classes">
+			<manifest>
+				<attribute name="Generated-By" value="caCORE SDK Code Generator" />
+			</manifest>
+			<include name="org/LexGrid/LexBIG/caCore/client/**" />
+				<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />
+				<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
+				<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+					<fileset dir="system/src">
+						<include name="org/LexGrid/LexBIG/caCore/client/**" />
+						<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />	
+						<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
+						<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
+						<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+					</fileset>
+		</jar>
+
+		<copy tofile="output/${PROJECT_NAME}/package/remote-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
+		</copy>
+		<copy tofile="output/${PROJECT_NAME}/package/local-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
+		</copy>
+		<copy tofile="output/${PROJECT_NAME}/package/ws-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
+		</copy>	
+
+		<copy todir="output/${PROJECT_NAME}/package/remote-client/lib" overwrite="true">
+			<fileset dir="${basedir}/system/lib">
+				<exclude name="MSSOUserValidator.jar" />
+			</fileset>
+		</copy>
+		<copy todir="output/${PROJECT_NAME}/package/local-client/lib" overwrite="true">
+			<fileset dir="${basedir}/system/lib">
+				<exclude name="MSSOUserValidator.jar" />
+			</fileset>
+		</copy>
+		<copy todir="output/${PROJECT_NAME}/package/ws-client/lib" overwrite="true">
+			<fileset dir="${basedir}/system/lib">
+				<exclude name="MSSOUserValidator.jar" />
+			</fileset>
+		</copy>
+			<zip destfile="output/${PROJECT_NAME}/package/client/${PROJECT_NAME}-client.zip">
+				<zipfileset dir="output/${PROJECT_NAME}/package/remote-client" prefix="${PROJECT_NAME}-client">
+					<include name="**/*" />
+				</zipfileset>
+			</zip>
+
+		</target>
+		<!--**************************************************
+	*** LOAD SDK 
+	**************************************************-->
+		<target name="load-sdk" >
+			
+			<copy todir="${codegen.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/codegen"/>
+			</copy>
+			
+			<copy todir="${conf.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/conf"/>
+			</copy>
+			<copy todir="${models.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/models"/>
+			</copy>
+			<copy todir="${system.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/system"/>
+			</copy>
+			<copy todir="${writable.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/writable-api"/>
+			</copy>
+			<copy todir="${grid.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/grid"/>
+			</copy>
+			<copy todir="${scripts.dir}" overwrite="true">
+				<fileset dir="${sdk_dir}/build-scripts"/>
+			</copy>
+		</target>
+	
+	<!--**************************************************
+	*** Compiling Security Jar
+	**************************************************-->
+	<target name="compileSecurity">	
+		<echo message="Custom LexEVS Token Security -- see caCoreTokenSecurity project for more info." />	
+	</target>
+	
+	<target name="adjustWebXML" depends="copyWebXML">
+		<delete file="${conf.dir}/system/web/WEB-INF/web-distributed-only.xml"/>
+	</target>
+	
+	<target name="copyWebXML" if="BUILD_DISTRIBUTED_ONLY">
+		<echo message="Adjusting web.xml for Distributed LexEVS ONLY!" />
+		<copy file="${basedir}/conf/system/web/WEB-INF/web-distributed-only.xml" 
+			tofile="${conf.dir}/system/web/WEB-INF/web.xml"
+			overwrite="true"/>
+	</target> 
+	
+		<!--**************************************************
+	*** LOAD EVS API 
+	**************************************************-->
+		<target name="load-evs">
+			<replace dir="${basedir}/conf/system/web/WEB-INF/classes">
+				<replacefilter token="@PROJECT_NAME@" value="${PROJECT_NAME}" />
+			</replace>
+			
+			<copy todir="${conf.dir}" overwrite="true">
+				<fileset dir="${basedir}/conf"/>
+			</copy>
+			
+			<copy todir="${models.dir}" overwrite="true">
+				<fileset dir="${basedir}/models"/>
+			</copy>
+			
+			<copy todir="${system.dir}" overwrite="true">
+				<fileset dir="${basedir}/system"/>
+			</copy>
+			
+			<copy todir="${mappings.dir}" overwrite="true">
+				<fileset dir="${basedir}/mappings"/>
+			</copy>
+			
+		</target>
+		<!--**************************************************
+	*** UPDATE PROPERTIES FILES 
+	**************************************************-->
+		<target name="update-properties" depends="adjustWebXML">
+			<copyfile dest="${build.dir}/sdk_build.xml" src="${sdk_dir}/build.xml"/>
+			<copyfile dest="${build.dir}/build.properties" src="${sdk_dir}/build.properties"/>
+			<copyfile dest="${build.dir}/lexevs_build.xml" src="${basedir}/lexevs_build.xml"/>
+		</target>
+		<!--**************************************************
+	*** GENERATE SYSTEM 
+	**************************************************-->
+		<target name="generate-system" depends="load-sdk, compileSecurity, load-evs, update-properties">
+			<ant antfile="${build.dir}\lexevs_build.xml" target="build-system" inheritall="false" inheritrefs="false" />
+			<antcall target="create-output">
+			</antcall>
+		</target>
+		<!--**************************************************
+	*** HELP 
+	**************************************************-->
+
+		<target name="help" description="Default target that lists commonly used targets within this build script">
+			<echo>===============================</echo>
+			<echo>caCORE EVS API </echo>
+			<echo>===============================</echo>
+			<echo>
+			</echo>
+			<echo>To run the entire caCORE EVS API code generation process, use:</echo>
+			<echo>
+			</echo>
+			<echo>    ant build-system</echo>
+			<echo>
+			</echo>
+		</target>
+	</project>

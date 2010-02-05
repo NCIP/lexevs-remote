@@ -1,0 +1,22 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    <class name="org.LexGrid.commonTypes.Source" table="entryState" lazy="true"
+    entity-name="org.LexGrid.commonTypes.Source$EntryState">
+    
+    <cache usage="read-write"/>
+  
+   	   <id column="entryStateId" type="string">
+         <generator class="assigned"/>
+   	   </id>
+		
+		<property name="_content" access="field" column="owner"/>
+		<property name="_subRef" access="field" insert="false" update="false" formula="''" />
+      	<property name="_role" access="field" insert="false" update="false" type="string" formula="''" />
+    </class>
+    
+</hibernate-mapping>
+
+

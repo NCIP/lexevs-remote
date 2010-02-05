@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="test/lib/axis.jar"/>
+	<classpathentry kind="lib" path="mappings"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
+	<classpathentry kind="src" path="conf/system/package/local-client/src"/>
+	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
+	<classpathentry kind="src" path="writable-api/src"/>
+	<classpathentry kind="src" path="system/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="test/lib/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-lang-2.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-pool-1.3.jar"/>
+	<classpathentry kind="lib" path="system/lib/jakarta-regexp-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/LexEVSSecurity.jar" sourcepath="/caCoreTokenSecurity/src"/>
+	<classpathentry kind="lib" path="system/lib/lexbig.jar" sourcepath="W:/user/m005256/EclipseWorkSpaces/LexBIG2009/lbImpl/src"/>
+	<classpathentry kind="lib" path="system/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="system/lib/MSSOUserValidator.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-bean-serializer.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
+	<classpathentry kind="lib" path="system/lib/lucene-core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-regex-2.4.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-snowball-2.4.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/struts2-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/struts2-core-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/xwork-2.0-beta-1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="test/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/acegi-security-1.0.4.jar" sourcepath="C:/Temp/ACEGI"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/asm.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/backport-util-concurrent.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/c3p0-0.9.0.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-data-common-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-data-utils-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-metadata-data-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-sdkQuery4-beans-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/caGrid-sdkQuery4-processor-1.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/castor-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/clm-4.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/cog-axis.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/cog-jglobus.jar" sourcepath="/jglobus-cog-1.5"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/csmapi-4.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/dom4j-1.4.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/ehcache-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/freemarker-2.3.4.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/jta.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/mmbase.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/mysql-connector-java-3.1.13-bin.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/ognl-2.6.7.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/saaj.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/spring.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="output/lexevsapi51/package/remote-client/conf"/>
+	<classpathentry kind="lib" path="/SDK4_1_1/system/lib/axis.jar"/>
+	<classpathentry kind="lib" path="test/lib/LexEVSWebServiceClient.jar"/>
+	<classpathentry kind="lib" path="test/lib/activation.jar"/>
+	<classpathentry kind="lib" path="test/lib/saaj.jar"/>
+	<classpathentry kind="lib" path="test/lib/wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="test/lib/xercesImpl.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<project name="WebServiceStubs" default="all" basedir=".">
+
+	
+<property name="wsdlURL" value="http://bmidev4:8180/lexevsapi51/services/lexevsapi51Service?wsdl"/>
+<property name="webServiceNamespace" value="http://bmidev4:8180/lexevsapi51/services/lexevsapi51Service"/>
+
+	
+	
+<property name="build.dir" value="build"/>	
+<property name="build.src.dir" value="${build.dir}/src"/>
+<property name="build.classes.dir" value="${build.dir}/classes"/>
+<property name="dist.dir" value="dist"/>	
+<property name="clientPackageName" value="org.LexGrid.LexBIG.caCore.webservice.client"/>
+	
+<echo>Constructing classpath</echo>
+<path id="classpath">
+    <fileset dir="../test/lib">
+        <include name="*.jar" />
+    </fileset>
+	<fileset dir="../system/lib">
+	        <include name="*.jar" />
+	 </fileset>
+   </path>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${build.classes.dir}"/>
+		<mkdir dir="${build.src.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+	
+<target name="wsdl2java" depends="init" >
+	<echo>Executing wsdl2java</echo>
+          <java classname="org.apache.axis.wsdl.WSDL2Java"  classpathref="classpath">
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:codingSchemes.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:commonTypes.LexGrid.org"/>
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:builtins.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:concepts.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:naming.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:relations.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="urn:versions.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="http://valueDomains.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="http://types.valueDomains.LexGrid.org"/> 
+          	<arg value="--nsExclude"/>
+          	<arg value="http://types.versions.LexGrid.org"/>  
+          	
+          	<arg value="--NStoPkg"/>
+          	<arg value="${webServiceNamespace}=${clientPackageName}"/> 
+          	
+          	<arg value="-o"/>
+            <arg value="${build.src.dir}"/>   	
+            <arg value="${wsdlURL}"/>
+            <classpath refid="classpath"/>
+       </java>
+   </target>
+	
+	<target name="compile" depends="wsdl2java">
+		<javac srcdir="${build.src.dir}"
+				 destdir="${build.classes.dir}">
+				 	<classpath>
+				 		<path refid="classpath" />
+				 	</classpath>
+			</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="${dist.dir}/LexEVSWebServiceClient.jar" basedir="${build.classes.dir}"/>
+	</target>
+						
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+	
+	<target name="all" depends="jar" description="generates stubs" />
+</project>

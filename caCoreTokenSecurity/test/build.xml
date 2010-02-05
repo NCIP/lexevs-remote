@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+                         cacoresystem unit tests
+**************************************************************************** -->
+<project name="ToeknSecurity API Unit Tests" default="alltests-html" basedir=".">
+
+	<property name="systemlib.dir" value="../lib" />
+    <property name="lib.dir" value="lib" />
+	<property name="src.dir" value="src" />
+	<property name="resource.dir" value="resources" />
+	<property name="build.dir" value="../build" />
+	<property name="buildtest.dir" value="build/classes" />
+	<property name="test.reports" value="reports" />
+	
+	<property name="lexEVSPropName" value="lexevs.properties" />
+	<property name="tokenPropName" value="token.properties" />
+		
+	<property name="propertyFileName" value="lexevs.properties" />
+	<property name="tokenFileName" value="token.properties" />
+	
+    <path id="libs">    
+    	<pathelement location="${buildtest.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    	 <fileset dir="${systemlib.dir}">
+    	    <include name="**/*.jar"/>
+    	</fileset>
+    	<fileset dir = "${build.dir}">
+    	    <include name="**/*.jar"/>
+    	</fileset>
+    </path>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for building the tests                                   -->
+	<!-- ********************************************************************-->
+	<target name="check-built">
+		<antcall target="-test.build.dir"/>
+	</target>	
+	
+    <target name="clean"
+    		description="Removes generated test artifacts">
+        <delete dir="${buildtest.dir}" quiet="true"/>
+    	   <delete dir="${test.reports}" quiet="true"/>
+    </target>
+        	
+	<target name="init" depends="clean, check-built" 
+			description="Creates necessary directories">
+		<mkdir dir="${buildtest.dir}"/>
+	</target>
+				
+    <target name="compile" depends="init"
+            description="Compiles the unit tests">
+        <javac srcdir="${src.dir}" destdir="${buildtest.dir}" 
+            encoding="cp1252" debug="true" debuglevel="lines,source">
+            <classpath refid="libs"/>
+
+        </javac>        
+    </target>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for running the tests                                    -->
+	<!-- ********************************************************************-->
+
+    <target name="alltests" depends="compile">
+    	<mkdir dir="${test.reports}" />
+    	<junit printsummary="yes" fork="yes"> 
+    		<sysproperty key="${lexEVSPropName}" value="${resource.dir}/${propertyFileName}" />
+    		<sysproperty key="${tokenPropName}" value="./${tokenFileName}" />
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+		  <test name="org.LexGrid.LexBIG.caCore.security.test.AllTests" todir="${test.reports}"/> 
+    	</junit>	
+    </target>
+	
+    <target name="alltests-html" depends="compile">
+    	<mkdir dir="${test.reports}" />
+    	<junit printsummary="yes" fork="yes">  
+    		<sysproperty key="${lexEVSPropName}" value="${resource.dir}/${propertyFileName}" />
+    		<sysproperty key="${tokenPropName}" value="./${tokenFileName}" />
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+		  <test name="org.LexGrid.LexBIG.caCore.security.test.AllTests" todir="${test.reports}"/>  	
+    	</junit>
+    	
+	  <junitreport todir="${test.reports}">
+	    <fileset dir="${test.reports}">
+	      <include name="TEST-*.xml" />
+	    </fileset>
+	    <report format="frames" todir="${test.reports}" />
+	  </junitreport>
+    </target>
+	
+    <target name="-test.build.dir" description="Check if build folder was created.">
+        <available file="${build.dir}"
+             type="dir"
+             property="build.dir.exists"
+             value="true"
+        />
+        <fail unless="build.dir.exists">
+            &gt;
+            Error: '${build.dir}' directory does not exist.
+            Build the project prior to running tests.
+        </fail>
+        <echo message="Found build directory!"/>
+    </target>
+
+
+</project>

@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+
+        <class name="org.LexGrid.commonTypes.Source" table="codingSchemePropMultiAttrib" 
+    where="typeName = 'source'" entity-name="org.LexGrid.commonTypes.Source$CodingScheme"> 
+    <cache usage="read-write"/>
+              
+        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemePropMultiAttribKey">
+            <key-property name="codingSchemeName"/>       
+            <key-property name="propertyId"/>            
+            <key-property name="typeName"/>
+            <key-property name="attributeValue"/>
+      </composite-id>
+            
+          <!-- Source -->
+          <property name="_content" access="field" insert="false" update="false" type="string" column="attributeValue" />
+          <property name="_subRef" access="field" insert="false" update="false" type="string" column="val1" />
+      	  <property name="_role" access="field" type="string" column="val2" />
+      
+    </class>
+ 
+</hibernate-mapping>
+
+

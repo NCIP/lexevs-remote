@@ -1,0 +1,61 @@
+<project name="LexEVS Security" basedir="." default="build">
+
+	<property name="sdk_dir" value="${basedir}/../SDK4_1_1" />
+	
+	<target name="init" depends="clean">
+		<property name="build.classes.dir" location="build/classes"/>
+		<property environment="env"/>
+		 <path id="build.path">		
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+			<pathelement path="${build.classes.dir}"/>		
+		 </path>	
+		 <path id="sdk.path">		
+			<fileset dir="${sdk_dir}/system/lib">
+				<include name="*.jar"/>
+			</fileset>
+					
+		 </path>	
+	</target>
+	
+	<target name="compile" depends="init">
+		<mkdir dir="build/classes"/>
+		<javac srcdir="${sdk_dir}/system/src"
+			destdir="build/classes"
+			includes="gov/nih/nci/system/applicationservice/*.java">
+				<classpath>
+					<path refid="sdk.path" />
+				</classpath>
+		</javac>
+		
+		<javac srcdir="${sdk_dir}/writable-api/src"
+		    destdir="build/classes"
+			includes="gov/nih/nci/system/applicationservice/*.java">
+					<classpath>
+				<path refid="sdk.path" />
+			</classpath>
+		</javac>
+		
+		<javac srcdir="src"
+				 destdir="build/classes">
+				 	<classpath>
+				 		<path refid="build.path" />
+				 		<path refid="sdk.path" />
+				 	</classpath>
+			</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="dist/LexEVSSecurity.jar" basedir="build/classes"
+			excludes="gov/nih/nci/system/applicationservice**, gov/nih/nci/system/query**"/>
+		<jar destfile="dist/LexEVSSecurityClient.jar" basedir="build/classes"
+			includes="org/LexGrid/LexBIG/caCore/security/interfaces/**,gov/nih/nci/evs/security/**"/>
+	</target>
+				
+	<target name="build" depends="jar"/>
+		
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+</project>

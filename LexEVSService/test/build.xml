@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+                         cacoresystem unit tests
+**************************************************************************** -->
+<project name="EVS API Unit Tests" default="alltests-html" basedir=".">
+
+    <property name="client.dir" value="../output/lexevsapi51/package/remote-client" />
+    <property name="wsclient.dir" value="../output/lexevsapi51/package/ws-client" />
+    <property name="lib.dir" value="../system/lib" />
+	<property name="testlib.dir" value="./lib"/>
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="../build" />
+    <property name="buildtest.dir" value = "./buildtest" />
+	<property name="conf.dir" value="${buildtest.dir}/conf"/>
+	<property name="resources.dir" value = "./resources" />
+	<property name="test.dir" value = "${resources.dir}/Test.properties" />
+	<property name="test.xml" value = "${resources.dir}/Test.xml" />
+	<property name="test.reports" value="reports" />
+	<property name="build.dist" value="${build.dir}/system/dist" />
+	
+    <path id="libs">
+        <pathelement location="${client.dir}/conf"/>
+        <pathelement location="${build.dir}"/>
+    	<pathelement location="${buildtest.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    	<fileset dir = "${testlib.dir}">
+    	    <include name="**/*.jar"/>
+    	</fileset>
+    	<fileset dir = "${build.dist}">
+    	    <include name="**/*.jar"/>
+    	</fileset>
+        <fileset dir="${client.dir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${wsclient.dir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for building the tests                                   -->
+	<!-- ********************************************************************-->
+	<target name="check-compile-condition">
+		<condition property="compiled">
+			<available file="${build.dir}"/>
+		</condition>
+	</target>
+	
+	<target name="check-built-condition">
+		<condition property="system-built">
+			<available file="${client.dir}"/>
+		</condition>
+	</target>
+	
+	<target name="check-compile" depends="check-compile-condition" unless="compiled">
+		<condition property="system-built">
+			<available file="${client.dir}"/>
+		</condition>
+	</target>
+		
+	<target name="check-built" depends="check-built-condition" 
+			unless="system-built">
+		<echo message="System must be built before running demos." />
+	</target>
+	
+    <target name="clean"
+    		description="Removes generated test artifacts">
+        <delete dir="${buildtest.dir}" quiet="true"/>
+    	   <delete dir="${test.reports}" quiet="true"/>
+    </target>
+        	
+	<target name="init" depends="clean" 
+			description="Creates necessary directories">
+		<mkdir dir="${buildtest.dir}"/>
+	</target>
+				
+    <target name="compile" depends="init,check-built" if="system-built"
+            description="Compiles the unit tests">
+        <javac srcdir="${src.dir}" destdir="${buildtest.dir}" 
+            encoding="cp1252" debug="true" debuglevel="lines,source">
+            <classpath refid="libs"/>
+
+        </javac>        
+    </target>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for running the tests                                    -->
+	<!-- ********************************************************************-->
+	
+	<!--
+		These DLB tests depend on the test data being loaded via the 
+		ReloadTestData script, which must be run against a local LexBig 
+		install (e.g. not via DLB).
+	-->
+    <target name="dlbtests" depends="check-built,compile" if="system-built">
+		<junit printsummary="yes" fork="yes">
+        	<sysproperty key="test.property" value="${test.dir}" />
+	      <sysproperty key="test.xml" value="${test.xml}" />
+	      <classpath refid="libs" />
+		  <formatter type="plain"/>
+		  <test name="org.LexGrid.LexBIG.distributed.test.testUtility.AllDistributedLexEVSTests"/>
+		</junit>
+	</target>
+	
+
+	
+	    <target name="dlbtests-html" depends="check-built,compile" if="system-built">
+	    	<mkdir dir="${test.reports}" />
+
+	    	<junit printsummary="yes" fork="yes">
+	        	<sysproperty key="test.property" value="${test.dir}" />
+	    		<sysproperty key="test.xml" value="${test.xml}" />
+		      <classpath refid="libs" />
+			  <formatter type="xml"/>
+			  <test name="org.LexGrid.LexBIG.distributed.test.testUtility.AllDistributedLexEVSTests" todir="${test.reports}"/>  	
+	    	</junit>
+	    	
+		  <junitreport todir="${test.reports}">
+		    <fileset dir="${test.reports}">
+		      <include name="TEST-*.xml" />
+		    </fileset>
+		    <report format="frames" todir="${test.reports}" />
+		  </junitreport>
+		</target>
+	
+	
+	    <target name="dataservicetests"  depends="check-built,compile" if="system-built">
+			<junit printsummary="yes" fork="yes">
+	        	<sysproperty key="test.property" value="${test.dir}" />
+			<sysproperty key="test.xml" value="${test.xml}" />
+		      <classpath refid="libs" />
+			  <formatter type="plain"/>
+			  <test name="org.LexGrid.LexBIG.caCore.test.setup.AllDataServiceTests"/>
+			</junit>
+		</target>	
+	    <target name="dataservicetests-html"  depends="check-built,compile" if="system-built">
+	    	<mkdir dir="${test.reports}" />
+	    	<junit printsummary="yes" fork="yes">
+	        	<sysproperty key="test.property" value="${test.dir}" />
+	    		<sysproperty key="test.xml" value="${test.xml}" />
+		      <classpath refid="libs" />
+			  <formatter type="xml"/>
+			  <test name="org.LexGrid.LexBIG.caCore.test.setup.AllDataServiceTests" todir="${test.reports}"/>  	
+	    	</junit>
+	    	
+		  <junitreport todir="${test.reports}">
+		    <fileset dir="${test.reports}">
+		      <include name="TEST-*.xml" />
+		    </fileset>
+		    <report format="frames" todir="${test.reports}" />
+		  </junitreport>
+		</target>
+	
+    <target name="alltests" depends="compile" if="system-built">
+    	<mkdir dir="${test.reports}" />
+    	<junit printsummary="yes" fork="yes">
+        	<sysproperty key="test.property" value="${test.dir}" />
+    		<sysproperty key="test.xml" value="${test.xml}" />
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+		  <test name="org.LexGrid.LexBIG.testUtil.AllLexEVSAPITests" todir="${test.reports}"/> 
+    	</junit>	
+    </target>
+	
+    <target name="alltests-html" depends="compile" if="system-built">
+    	<mkdir dir="${test.reports}" />
+    	<junit printsummary="yes" fork="yes">
+        	<sysproperty key="test.property" value="${test.dir}" />
+    		<sysproperty key="test.xml" value="${test.xml}" />
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+		  <test name="org.LexGrid.LexBIG.testUtil.AllLexEVSAPITests" todir="${test.reports}"/>  	
+    	</junit>
+    	
+	  <junitreport todir="${test.reports}">
+	    <fileset dir="${test.reports}">
+	      <include name="TEST-*.xml" />
+	    </fileset>
+	    <report format="frames" todir="${test.reports}" />
+	  </junitreport>
+    </target>
+
+
+</project>

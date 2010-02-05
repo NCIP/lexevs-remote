@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-lazy-init="false" default-dependency-check="none" default-autowire="no">
+
+
+	
+	<!-- Bean Definitions -->
+	<bean name="ClassCache" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache" singleton="true">
+		<constructor-arg ref="DAOListFactory" index="0"/>
+		<property name="selectionStrategies">
+			<list>				
+					<ref bean="TokenSecurityStrategy"/>
+					<ref bean="CodingSchemeSelectionStrategy"/>
+					<ref bean="HistoryOrCodingSchemeSelectionStrategy"/>
+			</list>
+		</property>		
+	</bean>
+	
+	<bean name="TokenSecurityStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.TokenSecurityStrategy">
+		<property name="validator" ref="SecurityValidator"/>
+	</bean>
+	
+	<bean name="HistoryOrCodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.HistoryOrCodingSchemeStrategy">
+		<property name="historyClasses">
+			<list>
+				<value>org.LexGrid.versions.EditHistory</value>
+				<value>org.LexGrid.versions.EntityVersion</value>
+				<value>org.LexGrid.versions.ChangedEntry</value>
+				<value>org.LexGrid.versions.Revision</value>
+				<value>org.LexGrid.versions.SystemRelease</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="CodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.CodingSchemeSelectionStrategy">
+		<property name="dbConnector" ref="DBConnector"/>
+	</bean>
+	
+	<bean name="LexEVSProperties" class="org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties"/>
+	
+	<bean name="SecurityValidator" class="org.LexGrid.LexBIG.caCore.security.Validator">
+			<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
+	</bean>
+
+	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" singleton="true">
+		<constructor-arg ref="ClassCache" index="0"></constructor-arg>
+		<constructor-arg ref="SecurityValidator" index="1"></constructor-arg>
+		<property name="nestedObjectToCriteriaTranslator" ref="NestedObjectToCriteria"/>
+		<property name="gridCQLToDetachedCriteriaTranslator" ref="GridCQLToDetachedCriteria"/>
+		<property name="qbePathToDetachedCriteriaTranslator" ref="QBEPathToDetachedCriteria"/>
+		<property name="sdkCQLToDetachedCriteriaTranslator" ref="SDKCQLToDetachedCriteria"/>
+		<property name="paginationHelper" ref="PaginationHelper"/>
+	</bean>
+
+	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
+		<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
+	</bean>
+
+	<bean name="WebSystemProperties" class="java.util.Properties">
+		<constructor-arg>
+			<props>
+				<prop key="resultOutputFormatter">resultOutputFormatter.xsl</prop>
+				<prop key="rowCounter">50</prop>
+				<prop key="securityEnabled">false</prop>
+			</props>
+		</constructor-arg>
+	</bean>
+
+	<bean name="maxResultsPerQuery" class="java.lang.Integer">
+		<constructor-arg type="java.lang.String" value="100"/>
+	</bean>
+	
+	
+	<bean name="PaginationHelper" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.PaginationHelper">
+		<property name="lexEVSApplicationService" ref="ApplicationServiceImpl"/>
+		<property name="maxResultsPerQuery" ref="maxResultsPerQuery"/>
+	</bean>
+
+	<bean name="GridCQLToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.GridCQLToDetachedCriteria" singleton="true">
+		<property name="prefixCastorUnderscore" value="true"/>
+	</bean>
+	
+	<bean name="NestedObjectToCriterion" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriterion" singleton="true"/>
+	<bean name="SDKCQLToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.SDKCQLToDetachedCriteria" singleton="true"/>
+	
+	<bean name="NestedObjectToCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriteria" singleton="true">
+		<property name="translator" ref="NestedObjectToCriterion"/>
+	</bean>
+	
+	<bean name="QBEPathToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.QBEPathToDetachedCriteria" singleton="true">
+		<property name="translator" ref="NestedObjectToCriterion"/>
+	</bean>
+
+	<bean name="DAOListFactory" class="org.LexGrid.LexBIG.caCore.connection.DAOListFactory">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="resultCountPerQuery" ref="maxResultsPerQuery" />
+		<property name="connector" ref="DBConnector" />
+	</bean>
+
+	<bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
+		<property name="securityEnabled" value="false"/>
+		<property name="instanceLevelSecurityEnabled" value="false"/>
+		<property name="attributeLevelSecurityEnabled" value="false"/>
+		<!--
+		<property name="authorizationManager">
+			<bean factory-bean="userDetailsService" factory-method="authorizationManagerInstance" />
+		</property>
+		-->
+	</bean>
+
+	<bean id="ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="ApplicationServiceImpl" />
+		<property name="interfaces" value="org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService" />
+		<property name="interceptorNames">
+			<list>
+				<!-- <value>TxInterceptor1</value> -->
+				<!-- <value>hibernateInterceptor</value> -->
+				<!-- <idref local="TxInterceptor1" /> -->
+				<!-- <idref local="TxInterceptor2" /> -->
+				<!-- <idref local="CLMInterceptor" /> -->
+			</list>
+		</property>
+	</bean>
+	
+</beans>

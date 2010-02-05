@@ -1,0 +1,111 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    <class name="org.LexGrid.codingSchemes.CodingScheme" table="codingScheme" lazy="true">
+   
+   <cache usage="read-write"/>
+   
+    <id name="_codingSchemeName" access="field" column="codingSchemeName">
+        <generator class="assigned"/>
+    </id>
+    
+    	<!-- Versionable -->
+		<property name="_status" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.status from @PREFIX@entryState where
+			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<property name="_effectiveDate" type="date" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.effectiveDate from @PREFIX@entryState where
+			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<property name="_expirationDate" type="date" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.expirationDate from @PREFIX@entryState where
+			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<many-to-one name="_owner" access="field" not-found="ignore"
+			class="org.LexGrid.commonTypes.Source$EntryState">
+			<formula>entryStateId</formula>
+		</many-to-one>
+		 
+		<many-to-one name="_entryState" access="field" not-found="ignore"
+			class="org.LexGrid.versions.EntryState">
+			<formula>entryStateId</formula>
+		</many-to-one>	
+
+	<!-- CodingScheme -->
+	<property name="_codingSchemeURI" access="field" column="codingSchemeURI" /> 
+   	<property name="_formalName" access="field" column="formalName" /> 
+  	<property name="_defaultLanguage" access="field" column="defaultLanguage" />
+  	<property name="_approxNumConcepts" access="field" column="approxNumConcepts" />
+ 	<property name="_representsVersion" access="field" column="representsVersion" />
+ 
+    <bag name="_localNameList" access="field" cascade="all" table="codingSchemeMultiAttrib" where="typeName = 'localName'" lazy="false"> 
+      <key>           
+        <column name="codingSchemeName"/>            
+      </key>   
+        <element formula='attributeValue' type='string'/>                                  
+    </bag>
+    
+    <bag name="_sourceList" access="field" cascade="all" table="codingSchemeMultiAttrib" where="typeName = 'source'" lazy="false"> 
+      <key>           
+        <column name="codingSchemeName"/>            
+      </key>   
+        <one-to-many class="org.LexGrid.commonTypes.Source$CodingScheme" />                                   
+    </bag>
+         
+   	<many-to-one name="_copyright" access="field" class="org.LexGrid.commonTypes.Text$CodingSchemeCopyright" not-found="ignore">
+  		<formula>codingSchemeName</formula> 		
+ 	</many-to-one>
+ 
+ 	<many-to-one name="_properties" access="field" class="org.LexGrid.commonTypes.Properties$CodingScheme" not-found="ignore">
+  		<formula>codingSchemeName</formula> 		
+ 	</many-to-one>
+ 
+ 
+    <many-to-one name="_mappings" access="field" unique="true" not-null="true" class="org.LexGrid.naming.Mappings" not-found="ignore">
+  		<formula>codingSchemeName</formula> 
+ 	</many-to-one>
+ 	
+ 	<!--  LEAVE THIS OUT FOR NOW
+ 	<component name="_entities" access="field" class="org.LexGrid.concepts.Entities">
+  		<bag name="_entityList" access="field" table="entity" lazy="true">  
+			 <key>
+			 	<column name="codingSchemeName"/>	  
+			 </key>
+			<one-to-many class="org.LexGrid.commonTypes.Property$CodingScheme"/>
+		</bag> 
+ 	</component>
+ 	-->
+ 	
+ 	 <!-- Versionable -->
+	<property name="_isActive" insert="false" update="false" access="field" type="boolean" column="isActive" />
+	
+	<!-- VersionableAndDescribable -->
+	<component name="_entityDescription" access="field" class="org.LexGrid.commonTypes.EntityDescription">
+        <property name="_content" access="field" column="entityDescription"/>      
+    </component>
+  
+     </class>
+     
+        <class name="org.LexGrid.commonTypes.Text" table="codingScheme" 
+    		entity-name="org.LexGrid.commonTypes.Text$CodingSchemeCopyright">
+      		<composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemeKey">
+           		 <key-property name="codingSchemeName"/>
+      		</composite-id>
+        	<property name="_content" access="field" update="false" insert="false" type="text" column="copyright"/>  
+    	</class>
+    	
+    	<class name="org.LexGrid.commonTypes.Text" table="codingScheme" 
+    		entity-name="org.LexGrid.commonTypes.Text$CodingSchemeEntityDescription">
+      		<composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemeKey">
+           		 <key-property name="codingSchemeName"/>
+      		</composite-id>
+        	<property name="_content" access="field" update="false" insert="false" type="text" column="entityDescription"/>  
+    	</class>
+       
+</hibernate-mapping>

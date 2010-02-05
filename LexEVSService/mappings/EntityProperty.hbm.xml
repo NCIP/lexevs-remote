@@ -1,0 +1,140 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    <class name="org.LexGrid.commonTypes.Property" table="entityProperty" discriminator-value="property"
+    	where="codingSchemeName = '@CODING_SCHEME_NAME@'" 
+    	entity-name="org.LexGrid.commonTypes.Property$Entity" lazy="false">
+    
+    	<cache usage="read-write"/>
+    
+        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.EntityPropertyKey">
+        	<key-property name="codingSchemeName"/>
+        	<key-property name="entityCodeNamespace"/>
+        	<key-property name="entityCode"/>
+        	<key-property name="propertyId"/>     
+        </composite-id>
+    
+    <discriminator column="propertyType"/>	
+	
+	<!-- Property -->
+    <property name="_propertyName" access="field" type="string" column="propertyName" />   
+    <property name="_propertyId" insert="false" update="false" access="field" type="string" column="propertyId" />   
+    <property name="_propertyType" insert="false" update="false" access="field" column="propertyType" />
+    <property name="_language" insert="false" update="false" access="field" column="language" />   	
+    <property name="_isActive" type="boolean" insert="false" update="false" access="field" column="isActive" />
+
+    
+      <bag name="_sourceList" access="field" table="entityPropertyMultiAttrib" where="typeName = 'source'" lazy="false">  
+			 <key>	
+			 	<column name="codingSchemeName"/>
+        		<column name="entityCodeNamespace"/>
+        		<column name="entityCode"/>
+        		<column name="propertyId"/> 
+			 </key>
+			<many-to-many class="org.LexGrid.commonTypes.Source$Entity" lazy="false" not-found="ignore">
+				<formula>codingSchemeName</formula>	
+				<formula>entityCodeNamespace</formula>		
+				<formula>entityCode</formula>
+				<formula>propertyId</formula>	
+				<formula>typeName</formula>				
+				<formula>attributeValue</formula>	
+				<formula>val1</formula>		
+			</many-to-many>			
+		</bag> 
+		
+		<bag name="_usageContextList" access="field" table="entityPropertyMultiAttrib" where="typeName = 'usageContext'" lazy="false">  
+			 <key>	
+			  	<column name="codingSchemeName"/>
+        		<column name="entityCodeNamespace"/>
+        		<column name="entityCode"/>
+        		<column name="propertyId"/>  
+			 </key>
+			<element type="string" column="attributeValue"/>
+		</bag> 
+		
+		   <bag name="_propertyQualifierList" access="field" table="entityPropertyMultiAttrib" where="typeName = 'qualifier'" lazy="false">  
+			 <key>	
+			  	<column name="codingSchemeName"/>
+        		<column name="entityCodeNamespace"/>
+        		<column name="entityCode"/>
+        		<column name="propertyId"/> 
+			 </key>
+			<many-to-many class="org.LexGrid.commonTypes.PropertyQualifier$Entity" lazy="false" not-found="ignore">
+				<formula>codingSchemeName</formula>	
+				<formula>entityCodeNamespace</formula>		
+				<formula>entityCode</formula>
+				<formula>propertyId</formula>	
+				<formula>typeName</formula>
+            	<formula>attributeValue</formula>
+            	<formula>val1</formula>	
+			</many-to-many>			
+		</bag> 
+		
+	   <many-to-one name="_value" access="field" class="org.LexGrid.commonTypes.Text$EntityProperty" not-found="ignore">
+       		<formula>codingSchemeName</formula>
+       		<formula>entityCodeNamespace</formula>
+       		<formula>entityCode</formula>
+      		<formula>propertyId</formula>    
+       </many-to-one>
+       
+       	<!-- Versionable -->
+       <property name="_status" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.status from @PREFIX@entryState where
+			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<property name="_effectiveDate" type="date" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.effectiveDate from @PREFIX@entryState where
+			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<property name="_expirationDate" type="date" access="field" lazy="true">
+			<formula>(select @PREFIX@entryState.expirationDate from @PREFIX@entryState where
+			@PREFIX@entryState.entryStateId = entryStateId)</formula>
+		</property>
+		
+		<many-to-one name="_owner" access="field" not-found="ignore"
+			class="org.LexGrid.commonTypes.Source$EntryState">
+			<formula>entryStateId</formula>
+		</many-to-one>
+		 
+		<many-to-one name="_entryState" access="field" not-found="ignore"
+			class="org.LexGrid.versions.EntryState">
+			<formula>entryStateId</formula>
+		</many-to-one>	
+		
+	 <!-- Subclasses -->
+	 <subclass name="org.LexGrid.concepts.Presentation" discriminator-value="presentation"
+	 	entity-name="org.LexGrid.concepts.Presentation$Entity">	
+      	  <property name="_isPreferred" type="boolean" access="field" column="isPreferred"/>
+      	  <property name="_degreeOfFidelity" type="string" access="field" column="degreeOfFidelity"/>
+      	  <property name="_matchIfNoContext" type="boolean" access="field" column="matchIfNoContext"/>
+      	  <property name="_representationalForm" type="string" access="field" column="representationalForm"/>
+      </subclass>
+         
+       <subclass name="org.LexGrid.concepts.Definition" discriminator-value="definition"
+       	entity-name="org.LexGrid.concepts.Definition$Entity">      	
+      	  <property name="_isPreferred" type="boolean" access="field" column="isPreferred"/>   
+      </subclass>
+       
+       <subclass name="org.LexGrid.concepts.Comment" discriminator-value="comment"
+       	entity-name="org.LexGrid.concepts.Comment$Entity"/>
+
+    </class>
+    
+     <class name="org.LexGrid.commonTypes.Text" table="entityProperty" 
+    	entity-name="org.LexGrid.commonTypes.Text$EntityProperty">
+    	<cache usage="read-write"/>
+        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.EntityPropertyKey">
+        	<key-property name="codingSchemeName"/>
+        	<key-property name="entityCodeNamespace"/>
+        	<key-property name="entityCode"/>
+        	<key-property name="propertyId"/>      
+        </composite-id> 
+        <property name="_content" access="field" update="false" insert="false" type="text" column="propertyValue"/>  
+    </class>
+  
+</hibernate-mapping>
+

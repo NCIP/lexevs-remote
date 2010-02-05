@@ -1,0 +1,46 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>  
+    <class name="org.LexGrid.relations.AssociationSource" table="entityAssnsToEntity" lazy="false">
+     
+    <cache usage="read-write"/>
+     
+     	<id column="multiAttributesKey" type="string">
+        	<generator class="uuid"/>
+    	</id>
+      
+		<!-- AssociationSource -->
+    	<property name="_sourceEntityCodeNamespace" insert="false" update="false" access="field" column="sourceEntityCodeNamespace" />
+    	<property name="_sourceEntityCode" insert="false" update="false" access="field" column="sourceEntityCode" />
+    	  
+    	   <bag name="_targetList" access="field" table="entityAssnsToEntity" lazy="false">  
+			 <key>
+			 	<column name="multiAttributesKey"/>
+			 </key>
+			<many-to-many class="org.LexGrid.relations.AssociationTarget" not-found="ignore">	 	
+				<formula>multiAttributesKey</formula>	
+			</many-to-many>			
+			</bag> 
+		
+			 
+		  <bag name="_targetDataList" table="entityAssnsToEntity" access="field" lazy="false">  
+			 <key>
+			 	<column name="multiAttributesKey"/>
+			 </key>
+			<many-to-many class="org.LexGrid.relations.AssociationData" not-found="ignore">	 	
+				<formula>codingSchemeName</formula>
+				<formula>containerName</formula>	
+				<formula>entityCodeNamespace</formula>			 
+				<formula>entityCode</formula>
+				<formula>sourceEntityCodeNamespace</formula>
+				<formula>sourceEntityCode</formula>
+			</many-to-many>			
+		 	</bag> 
+		 	
+        </class>
+   
+</hibernate-mapping>
+
+
