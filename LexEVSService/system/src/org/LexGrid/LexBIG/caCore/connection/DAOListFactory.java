@@ -19,47 +19,24 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.connection;
 
-import gov.nih.nci.system.dao.DAO;
-import gov.nih.nci.system.dao.DAOException;
-import gov.nih.nci.system.dao.orm.HibernateConfigurationHolder;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeTagList;
-import org.LexGrid.LexBIG.Impl.dataAccess.ResourceManager;
-import org.LexGrid.LexBIG.Impl.helpers.SQLConnectionInfo;
-import org.LexGrid.LexBIG.caCore.connection.orm.ConnectionConstants;
-import org.LexGrid.LexBIG.caCore.connection.orm.LexEVSSessionFactoryBean;
 import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
 import org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector;
-import org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAOImpl;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO.DAOType;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.io.ClassPathResource;
+import org.lexevs.locator.LexEvsServiceLocator;
+import org.lexevs.registry.model.RegistryEntry;
+import org.lexevs.registry.service.Registry.ResourceType;
 import org.springframework.core.io.Resource;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * Builds the List of DAOs associated with the underlying LexBIG installation. Also, a prefix-changing interceptor
@@ -78,55 +55,23 @@ public class DAOListFactory {
 	public void buildDAOs() throws Exception {	
 		daoList = new ArrayList<LexEVSDAO>();	
 		
-		//Get the CodingScheme DAOs
-		SQLConnectionInfo[] csConnections = connector.getCodingSchemeConnections();
-		List<SQLConnectionInfo> csConList = Arrays.asList(csConnections);
-		
-		//Get the History DAOs
-		SQLConnectionInfo[] historyConnections = connector.getHistoryConnections();
-		List<SQLConnectionInfo> histConList = Arrays.asList(historyConnections);
-		
-		List<SQLConnectionInfo> allConnections = new ArrayList<SQLConnectionInfo>();
-		allConnections.addAll(csConList);
-		allConnections.addAll(histConList);
-		
-		boolean useOneDatasource = this.canUseSingleDatasource(allConnections);
-		
-		if(useOneDatasource){
-			log.warn("Using a Single Pooled Datasource.");
-			DataSource datasource = this.createDataSource(csConnections[0]);
-			for (int i = 0; i < csConnections.length; i++) {
-				daoList.add(
-						buildDAO(
-								buildSessionFactoryBean(datasource), 
-								csConnections[i], DAOType.CODING_SCHEME));
-			}	
+		List<RegistryEntry> codingSchemeEntries = LexEvsServiceLocator.getInstance().getRegistry().getAllRegistryEntriesOfType(ResourceType.CODING_SCHEME);
 
-			for (int i = 0; i < historyConnections.length; i++) {
-				daoList.add(
-						buildDAO(
-								buildSessionFactoryBean(datasource), 
-								historyConnections[i], DAOType.HISTORY));
-			}	
-		} else {
-			log.warn("Using ONE Datasource per Ontology. This uses alot of database connections -- " +
-					"please configure your LexEVS System for Single Database mode.");
-			for (int i = 0; i < csConnections.length; i++) {
-				daoList.add(
-						buildDAO(
-								buildSessionFactoryBean(csConnections[i]), 
-								csConnections[i], DAOType.CODING_SCHEME));
-			}	
+		log.warn("Using a Single Pooled Datasource.");
+		DataSource datasource = this.createDataSource();
 
-			for (int i = 0; i < historyConnections.length; i++) {
-				daoList.add(
-						buildDAO(
-								buildSessionFactoryBean(historyConnections[i]), 
-								historyConnections[i], DAOType.HISTORY));
-			}	
+		for(RegistryEntry entry : codingSchemeEntries){
+			daoList.add(
+					buildDAO(
+							buildSessionFactoryBean(datasource), 
+							entry, DAOType.CODING_SCHEME));
 		}
 	}
-	
+
+	protected DataSource createDataSource() {
+		return LexEvsServiceLocator.getInstance().getLexEvsDatabaseOperations().getDataSource();
+	}
+
 	protected LocalSessionFactoryBean buildSessionFactoryBean(DataSource datasource){
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setConfigLocation(configLocation);
@@ -134,17 +79,10 @@ public class DAOListFactory {
 		return sessionFactory;
 	}
 	
-	protected LocalSessionFactoryBean buildSessionFactoryBean(SQLConnectionInfo connection){
-		LexEVSSessionFactoryBean sessionFactory = new LexEVSSessionFactoryBean();	
-		sessionFactory.setConfigLocation(configLocation);	
-		sessionFactory.setConnection(connection);
-		return sessionFactory;
-	}
-	
-	private LexEVSDAO buildDAO(LocalSessionFactoryBean sessionFactory, SQLConnectionInfo connection, DAOType type) throws Exception {	
-		String uri = connection.urn;
-		String version = connection.version;
-		String prefix = connection.prefix;
+	private LexEVSDAO buildDAO(LocalSessionFactoryBean sessionFactory, RegistryEntry connection, DAOType type) throws Exception {	
+		String uri = connection.getResourceUri();
+		String version = connection.getResourceVersion();
+		String prefix = connection.getPrefix();
 			
 		EVSHibernateInterceptor interceptor = new EVSHibernateInterceptor();
 		interceptor.setPrefix(prefix);	
@@ -177,31 +115,6 @@ public class DAOListFactory {
 		return dao;
 	}
 	
-	protected boolean canUseSingleDatasource(List<SQLConnectionInfo> connections){
-		Set<String> urls = new HashSet<String>();
-		for(SQLConnectionInfo conInfo : connections){
-			if(StringUtils.isNotBlank(conInfo.dbName)){
-				return false;
-			}
-			urls.add(conInfo.server);
-		}
-		return urls.size() == 1;
-	}
-	
-	protected DataSource createDataSource(SQLConnectionInfo connection) throws Exception {	
-		log.warn("Creating common datasource.");
-		ComboPooledDataSource cpds = new ComboPooledDataSource(); 
-		cpds.setDriverClass(connection.driver); 
-		cpds.setJdbcUrl(connection.server); 
-		cpds.setUser(connection.username); 
-		cpds.setPassword(connection.password); 
-		cpds.setAcquireIncrement(1); 
-		cpds.setMaxPoolSize(10); 
-		cpds.setIdleConnectionTestPeriod(5000);
-		cpds.setMaxIdleTime(5000);
-		return cpds;
-	}
-
 	public List<LexEVSDAO> getDaoList(){
 		return this.daoList;
 	}

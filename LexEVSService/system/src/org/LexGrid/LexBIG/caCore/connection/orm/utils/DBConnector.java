@@ -20,22 +20,20 @@
 package org.LexGrid.LexBIG.caCore.connection.orm.utils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeTagList;
-import org.LexGrid.LexBIG.DataModel.Core.AbsoluteCodingSchemeVersionReference;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeSummary;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
+import org.LexGrid.LexBIG.DataModel.Core.types.CodingSchemeVersionStatus;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
-import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
-import org.LexGrid.LexBIG.Impl.dataAccess.ResourceManager;
-import org.LexGrid.LexBIG.Impl.helpers.SQLConnectionInfo;
 import org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl;
 import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.apache.log4j.Logger;
+import org.lexevs.locator.LexEvsServiceLocator;
+import org.lexevs.system.service.SystemResourceService;
 
 /**
  * The junction point between the LexEVSAPI and the local LexBIG installation.
@@ -50,10 +48,9 @@ public class DBConnector {
     /** The Constant LEXBIG_SYSPROPERTY. */
     private static final String LEXBIG_SYSPROPERTY = "LG_CONFIG_FILE";
     
-	private SQLConnectionInfo[] codingSchemeConnections;
-	private SQLConnectionInfo[] historyConnections;
-	private ResourceManager rm;
 	private CodingSchemeRendering[] csr;
+	
+	private SystemResourceService systemResourceService;
 
 	/**
 	 * Create a connection to a local LexBIG installation, given a set of properties.
@@ -64,7 +61,7 @@ public class DBConnector {
 		 
 		try {
 			System.setProperty(LEXBIG_SYSPROPERTY, properties.getLexBigConfigFileLocation());
-			rm = ResourceManager.instance();
+			systemResourceService = LexEvsServiceLocator.getInstance().getSystemResourceService();
 			CodingSchemeRenderingList csrl = LexBIGServiceImpl.defaultInstance().getSupportedCodingSchemes();
 
 			CodingSchemeRendering[] allCodingSchemes = csrl.getCodingSchemeRendering();
@@ -73,16 +70,16 @@ public class DBConnector {
 			//Only use Active CodingSchemes
 			for (int i = 0; i < allCodingSchemes.length; i++) {
 				CodingSchemeRendering rendering = allCodingSchemes[i];
-				String name = rendering.getCodingSchemeSummary().getCodingSchemeURI();
-				String version = rendering.getCodingSchemeSummary().getRepresentsVersion();
-				if(rm.getRegistry().isActive(name, version)){
+				
+				CodingSchemeVersionStatus status = rendering.getRenderingDetail().getVersionStatus();
+				
+				if(status.equals(CodingSchemeVersionStatus.ACTIVE)){
 					activeCodingSchemes.add(rendering);
 				}
 			}
 		
 			csr = activeCodingSchemes.toArray(new CodingSchemeRendering[activeCodingSchemes.size()]);
-			codingSchemeConnections = this.getDBCodingSchemeConnectionInfoFromLexBIG(csr);
-			historyConnections = this.getDBHistoryConnectionInfoFromLexBIG(csr);
+			
 		} catch (Exception e) {
 			log.error(e);
 		}	
@@ -97,58 +94,14 @@ public class DBConnector {
 	 * @throws LBParameterException
 	 */
 	public boolean isCodingSchemeActive(String name, CodingSchemeVersionOrTag csvt) throws LBParameterException {	
-		String version = getURIFromCodingSchemeName(name, csvt);
-		if(rm.getRegistry().isActive(name, version)){
-			return true;
-		} else {
-			return false;
-		}
+		String uri = this.systemResourceService.getUriForUserCodingSchemeName(name);
+		String version = getInternalVersionString(name, csvt);
+		
+		CodingSchemeRendering rendering = this.getCodingSchemeRenderingForURIAndVersion(uri, version);
+		
+		return rendering.getRenderingDetail().getVersionStatus().equals(CodingSchemeVersionStatus.ACTIVE);
 	}
-	
-	private SQLConnectionInfo[] getDBCodingSchemeConnectionInfoFromLexBIG(CodingSchemeRendering[] csr) throws LBInvocationException {
-		SQLConnectionInfo[] connections = new SQLConnectionInfo[csr.length];
 
-		for (int i = 0; i < csr.length; i++) {
-			AbsoluteCodingSchemeVersionReference acvr = new AbsoluteCodingSchemeVersionReference();
-			acvr.setCodingSchemeURN(csr[i].getCodingSchemeSummary().getCodingSchemeURI());
-			acvr.setCodingSchemeVersion(csr[i].getCodingSchemeSummary().getRepresentsVersion());
-
-			SQLConnectionInfo foundConnection = rm.getRegistry().getSQLConnectionInfoForCodeSystem(acvr);
-			connections[i] = foundConnection;
-		}
-		return connections;
-	}
-	
-	private SQLConnectionInfo[] getDBHistoryConnectionInfoFromLexBIG(CodingSchemeRendering[] csr) throws LBInvocationException {	
-		ArrayList<SQLConnectionInfo> connections = new ArrayList<SQLConnectionInfo>();
-
-		//We want to search for History connections based on UNIQUE URIs. That is, if we have two different
-		//versions of a Coding Scheme loaded that share a common URI, we don't want to end up finding 2 History
-		//connections.
-		HashSet<String> uniqueURIs = getUniqueURIs(csr);
-
-		for(String uri : uniqueURIs){
-			try{
-				SQLConnectionInfo[] foundConnection = rm.getRegistry().getSQLConnectionInfoForHistory(uri);
-				for (int j = 0; j < foundConnection.length; j++) {
-					connections.add(foundConnection[j]);
-				}
-			} catch (Exception e) {
-				//if there's no History loaded for the urn, just skip it - don't throw the Exception
-				log.debug("No History Service for: " + uri);
-			}
-		}	
-		return connections.toArray(new SQLConnectionInfo[connections.size()]);
-	}
-	
-	private HashSet<String> getUniqueURIs(CodingSchemeRendering[] csr){
-		HashSet<String> uniqueURIs = new HashSet<String>();
-		for(CodingSchemeRendering rendering : csr){
-			uniqueURIs.add(rendering.getCodingSchemeSummary().getCodingSchemeURI());
-		}
-		return uniqueURIs;
-	}
-	
 	/**
 	 * Returns the list of Tags associated with this Coding Scheme
 	 * 
@@ -177,18 +130,14 @@ public class DBConnector {
 	 * @return URI of the CodingScheme
 	 * @throws LBParameterException
 	 */
-	public String getURIFromCodingSchemeName(String codingSchemeName, CodingSchemeVersionOrTag tagOrVersion) throws LBParameterException {
-		String version = getInternalVersionString(codingSchemeName, tagOrVersion);
-		// this throws the necessary exceptions if it can't be mapped / found
-		String internalCodingSchemeName_ = rm.getInternalCodingSchemeNameForUserCodingSchemeName(codingSchemeName, version);
-		String uri = rm.getURNForInternalCodingSchemeName(internalCodingSchemeName_);
-		return uri;
+	public String getURIFromCodingSchemeName(String codingSchemeName) throws LBParameterException {
+		return this.systemResourceService.getUriForUserCodingSchemeName(codingSchemeName);
 	}
 	
 	private String getInternalVersionString(String codingSchemeName, CodingSchemeVersionOrTag tagOrVersion) throws LBParameterException {
 		String version = null;
 		if (tagOrVersion == null || tagOrVersion.getVersion() == null || tagOrVersion.getVersion().length() == 0) {
-	            version = rm.getInternalVersionStringFor(codingSchemeName,
+	            version = systemResourceService.getInternalVersionStringForTag(codingSchemeName,
 	                    (tagOrVersion == null ? null : tagOrVersion.getTag()));
 	        } else {
 	            version = tagOrVersion.getVersion();
@@ -233,13 +182,5 @@ public class DBConnector {
 	
 	public CodingSchemeRendering[] getCodingSchemeRenderings(){
 		return csr;
-	}
-
-	public SQLConnectionInfo[] getCodingSchemeConnections() {
-		return codingSchemeConnections;
-	}
-
-	public SQLConnectionInfo[] getHistoryConnections() {
-		return historyConnections;
 	}
 }

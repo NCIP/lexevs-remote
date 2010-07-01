@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
-import org.LexGrid.LexBIG.Impl.helpers.MyClassLoader;
+import org.lexevs.locator.LexEvsServiceLocator;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.remoting.rmi.CodebaseAwareObjectInputStream;
 
@@ -38,6 +38,10 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 	@Override
 	protected ObjectInputStream createObjectInputStream(InputStream is)
 			throws IOException {
-		 return new CodebaseAwareObjectInputStream(is, MyClassLoader.instance(), null);
+		 return new CodebaseAwareObjectInputStream(is, LexEvsServiceLocator.getInstance().getSystemResourceService().getClassLoader(), null);
 	}
+	
+	
+	
+	
 }

@@ -23,6 +23,7 @@ import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.client.proxy.BeanProxy;
 import gov.nih.nci.system.client.proxy.ProxyHelperImpl;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -32,20 +33,20 @@ import java.util.List;
 
 import net.sf.cglib.proxy.Enhancer;
 
-import org.LexGrid.LexBIG.Impl.logging.LoggerFactory;
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
+import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils.DoInReflectionCallback;
 import org.LexGrid.annotations.LgAdminFunction;
 import org.LexGrid.annotations.LgClientSideSafe;
-import org.LexGrid.annotations.LgHasRemoteDependencies;
-import org.LexGrid.annotations.LgProxyField;
+import org.LexGrid.annotations.LgProxyClass;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.log4j.Logger;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.target.SingletonTargetSource;
+import org.springframework.core.annotation.AnnotationUtils;
 
 /**
  * Object proxy implementation for EVS. Certain methods are overridden to
@@ -57,21 +58,13 @@ import org.springframework.aop.target.SingletonTargetSource;
 public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
 
     private static final Logger log = Logger.getLogger(LexEVSProxyHelperImpl.class);
-    static {
-        // must configure LexBig before attempting to create any proxies
-        LoggerFactory.setLightweight(true);
-    }
-
+   
     /**
      * Annotation class used to mark LexBig classes and methods as
      * safe for execution on a client without the LexBig environment.
      */
     private static final Class CLIENT_SAFE = LgClientSideSafe.class;
     
-    private static final Class PROXY_FIELD = LgProxyField.class;
-    
-    private static final Class HAS_REMOTE_DEPENDENCIES = LgHasRemoteDependencies.class;
-
     /**
      * Annotation class used to mark LexBig methods which are admin
      * functions and thus illegal for execution via the distributed API.
@@ -93,8 +86,7 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
         	//Get the current proxy target and update it with the retuned value
         	//from the server
         	Advised advised = (Advised)AopContext.currentProxy();
-        	advised.setTargetSource(new SingletonTargetSource(results.getObj()));	
-        	AopContext.setCurrentProxy(advised);
+        	advised.setTargetSource(new SingletonTargetSource(results.getObj()));
         	
         	obj = results.getReturnValue();      	
         }
@@ -105,36 +97,17 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
                 || obj instanceof BeanProxy)
             return obj;
      
+        /*
+        obj = LexEVSCaCoreUtils.recurseReflect(obj, new ProxyingCallback(as));
+        */
+        
         // Don't proxy client-safe LexBig objects
-        if (LexEVSCaCoreUtils.isLexBigClass(obj.getClass()) && isClientSafe(obj.getClass())) {
-        	if(hasRemoteDependencies(obj.getClass())){
-        		List<Field> remoteDependencies = this.getAnnotatedFields(obj, PROXY_FIELD);
-        		try {
-					proxyRemoteDependencies(obj, remoteDependencies, as);
-				} catch (Exception e) {
-					throw new RuntimeException("Problem Proxying Remote Dependencies: " + e);
-				}
-        	}
+        if (LexEVSCaCoreUtils.isLexBigClass(obj.getClass()) && 
+        		isClientSafe(obj.getClass())) {
             return obj;
+        } else {
+        	return LexEVSCaCoreUtils.createProxy(obj, as, this);
         }
- 
-        return createProxy(obj, as);
-    }
-    
-    protected Object createProxy(Object objectToProxy, ApplicationService advice){
-    	 ProxyFactory pf = new ProxyFactory(objectToProxy);
-         pf.setProxyTargetClass(true);
-         pf.addAdvice(new LexEVSBeanProxy(advice, this));
-         pf.setExposeProxy(true);
-         return pf.getProxy();
-    }
-    
-    private void proxyRemoteDependencies(Object obj, List<Field> remoteDependencies, ApplicationService advice) throws Exception {
-    	for(Field field : remoteDependencies){
-    		field.setAccessible(true);
-    		Object fieldValue = field.get(obj);
-    		field.set(obj, createProxy(fieldValue, advice));
-    	}
     }
 
     /**
@@ -176,7 +149,7 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
         Object bean = invocation.getThis();
         Method method = invocation.getMethod();
         String methodName = method.getName();
-
+        
         Object args[] = invocation.getArguments();
         Class implClass = bean.getClass();
 
@@ -185,17 +158,16 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
     
             Method methodImpl = implClass.getMethod(methodName,
                 method.getParameterTypes());
-
+/*
             for(int i=0; i<args.length; i++) {
-                if (args[i] != null) {
-                    if (Enhancer.isEnhanced(args[i].getClass())) {
-                        args[i] = unwrap(args[i]);
-                    }
-                }
+            	if (args[i] != null) {
+                	args[i] = LexEVSCaCoreUtils.recurseReflect(args[i], new UnwrappingCallback());
+            	}
             }
-            
+*/        
             LexEVSApplicationService eas = (LexEVSApplicationService)as;
-            Object results = eas.executeRemotely(invocation.getThis(),
+            Object results = eas.executeRemotely(
+            		bean,
                 methodImpl.getName(),  getParameterTypes(methodImpl), args);
           
             return results;
@@ -220,40 +192,6 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
         }
     }
      
-     protected boolean hasRemoteDependencies(Class<?> clazz){
-    	  return clazz.isAnnotationPresent(HAS_REMOTE_DEPENDENCIES);
-     }
-
-    /**
-     * Returns the underlying object that the specified proxy is advising.
-     *
-     * @param proxy the proxy
-     *
-     * @return the object
-     *
-     * @throws Exception the exception
-     */
-    private Object unwrap(Object proxy) throws Exception {
-        Object interceptor = null;
-        int i = 0;
-        while (true) {
-            Field field = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_"+i);
-            field.setAccessible(true);
-            Object value = field.get(proxy);
-            if (value.getClass().getName().contains("EqualsInterceptor")) {
-                interceptor = value;
-                break;
-            }
-            i++;
-        }
-
-        Field field = interceptor.getClass().getDeclaredField("advised");
-        field.setAccessible(true);
-        Advised advised = (Advised)field.get(interceptor);
-        Object realObject = advised.getTargetSource().getTarget();
-        return realObject;
-    }
-
     /**
      * Returns a list of class names that are parameters to the given method.
      * @param methodImpl
@@ -296,14 +234,9 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
                 }
             }
             return target;
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
     
     protected List<Field> getAnnotatedFields(Object obj, Class annotation){

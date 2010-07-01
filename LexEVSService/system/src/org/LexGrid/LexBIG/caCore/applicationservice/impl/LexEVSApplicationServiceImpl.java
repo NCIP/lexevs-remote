@@ -51,7 +51,6 @@ import org.LexGrid.LexBIG.Extensions.Query.Filter;
 import org.LexGrid.LexBIG.Extensions.Query.Sort;
 import org.LexGrid.LexBIG.History.HistoryService;
 import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
-import org.LexGrid.LexBIG.Impl.helpers.MyClassLoader;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeGraph;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
@@ -78,6 +77,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.impl.CriteriaImpl;
+import org.lexevs.locator.LexEvsServiceLocator;
+import org.lexevs.system.utility.MyClassLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ClassUtils;
 
@@ -159,7 +160,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
             int i = 0;
             Class[] parameterTypes = new Class[parameterClasses.length];
             for (String paramClass : parameterClasses) {
-                parameterTypes[i++] = ClassUtils.forName(paramClass, MyClassLoader.instance());
+                parameterTypes[i++] = ClassUtils.forName(paramClass, LexEvsServiceLocator.getInstance().getSystemResourceService().getClassLoader());
             }
             Method objMethod = object.getClass().getMethod(methodName,
                 parameterTypes);

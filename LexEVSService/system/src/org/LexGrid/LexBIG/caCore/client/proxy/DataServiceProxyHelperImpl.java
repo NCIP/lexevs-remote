@@ -24,41 +24,24 @@ import gov.nih.nci.system.client.proxy.BeanProxy;
 import gov.nih.nci.system.client.proxy.ListProxy;
 import gov.nih.nci.system.client.proxy.ProxyHelperImpl;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
-
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
-
-import net.sf.cglib.proxy.Enhancer;
-
-import org.LexGrid.LexBIG.Impl.logging.LoggerFactory;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
-import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
-import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceLazyLoadable;
-import org.LexGrid.annotations.LgAdminFunction;
-import org.LexGrid.annotations.LgClientSideSafe;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
-import org.springframework.aop.framework.Advised;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.target.SingletonTargetSource;
-
-
-import gov.nih.nci.evs.security.SecurityToken;
 
 /**
  * Object proxy implementation for EVS. Certain methods are overridden to
@@ -75,12 +58,7 @@ public class DataServiceProxyHelperImpl extends ProxyHelperImpl {
      * Special methods to exclude from Lazy Loading
      */
     private static final String[] NON_LAZY_LOAD_METHODS = new String[]{"getAllProperties"};
-    
-    static {
-        // must configure LexBig before attempting to create any proxies
-        LoggerFactory.setLightweight(true);
-    }
-    
+
 	public Object convertToProxy(ApplicationService as, Object obj) 
 	{
 		if(obj == null) return null;

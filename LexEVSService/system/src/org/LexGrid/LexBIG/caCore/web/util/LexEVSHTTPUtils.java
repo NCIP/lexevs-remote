@@ -88,8 +88,8 @@ public class LexEVSHTTPUtils implements Serializable{
 
 	private String query;
 	private String startIndex = "0";
-	private String resultCounter = "1000";
-	private String pageNumber;
+	//private String resultCounter = "1000";
+	//private String pageNumber;
 	private String pageSize;
 	private String criteria;
 	private String targetClassName;
@@ -112,7 +112,7 @@ public class LexEVSHTTPUtils implements Serializable{
 			String rowCounter = systemProperties.getProperty("rowCounter");
 			log.debug("rowCounter: " + rowCounter);
 			if (rowCounter != null) {
-				this.resultCounter = rowCounter;
+				this.pageSize = rowCounter;
 			}
 		} catch (Exception ex) {
 			log.error("Exception: ", ex);
@@ -191,15 +191,19 @@ public class LexEVSHTTPUtils implements Serializable{
 					else if(param.toLowerCase().startsWith("startindex")){
 						startIndex = param.substring("startIndex=".length());
 					}
+					/*
 					else if(param.toLowerCase().startsWith("resultcounter")){
 						resultCounter = param.substring("resultCounter=".length());
 					}
+					*/
 					else if(param.toLowerCase().startsWith("rolename=")){
 						roleName = param.substring("roleName=".length());
-					}					
+					}	
+					/*
 					else if(param.toLowerCase().startsWith("pagenumber=")){
 						pageNumber = param.substring("pageNumber=".length());
 					}
+					*/
 					else if(param.toLowerCase().startsWith("pagesize=")){
 						pageSize = param.substring("pageSize=".length());
 					}
@@ -209,9 +213,11 @@ public class LexEVSHTTPUtils implements Serializable{
 					else if(param.toLowerCase().startsWith("codingschemeversion=")){
 						codingSchemeVersion = param.substring("codingschemeversion=".length());
 					}
+					/*
 					else if(param.toLowerCase().startsWith("page=")){
 						pageSize = param.substring("page=".length());
 					} 
+					*/
 					else {
 						if(criteria == null){
 							criteria = param;
@@ -274,13 +280,7 @@ public class LexEVSHTTPUtils implements Serializable{
 	public String getCriteria(){
 		return criteria;
 	}
-	/**
-	 * Returns the pageNumber
-	 * @return
-	 */
-	public String getPageNumber(){
-		return pageNumber;
-	}
+	
 	/**
 	 * Sets the page size value
 	 * @param size
@@ -294,13 +294,6 @@ public class LexEVSHTTPUtils implements Serializable{
 	 */
 	public String getPageSize(){
 		return pageSize;
-	}
-	/**
-	 * Returns the resultCounter value
-	 * @return
-	 */
-	public String getResultCounter(){
-		return resultCounter;
 	}
 
 	public String getCodingSchemeName(){
@@ -374,12 +367,14 @@ public class LexEVSHTTPUtils implements Serializable{
 				path = classCache.getQualifiedClassName(className);
 			}
 
-			while(st.hasMoreElements()){
-				className = st.nextToken().trim();
-				if(className.indexOf(SystemConstant.DOT)>0){
-					path += SystemConstant.COMMA +  className;
-				} else {			
-					path += SystemConstant.COMMA + classCache.getQualifiedClassName(className);
+			if(st.countTokens()>0){
+				while(st.hasMoreElements()){
+					className = st.nextToken().trim();
+					if(className.indexOf(SystemConstant.DOT)>0){
+						path += SystemConstant.COMMA +  className;
+					} else {			
+						path += SystemConstant.COMMA + classCache.getQualifiedClassName(className);
+					}
 				}
 			}
 		return path;
@@ -483,35 +478,24 @@ public class LexEVSHTTPUtils implements Serializable{
 		int end = resultSet.length;
 		int rowCount = 0;
 		int index = 0;
-		int resultCount = 0;
+		int resultCount = Integer.parseInt(this.pageSize);
 		int nextStartIndex = 0;
 		int totalNumRecords = results.size();
 
 		if(!(startIndex.equals("0") || startIndex == null)){
 			index = Integer.valueOf(startIndex).intValue();
 		}
-
+/*
 		if(!(resultCounter.equals("0") ||resultCounter == null )){
 			resultCount = Integer.valueOf(resultCounter).intValue();
 		}
-
+*/
 		Element xmlElement = new Element("queryResponse");
 
 		String counter = String.valueOf(totalNumRecords);
 		xmlElement.addContent(new Element("recordCounter").setText(counter));
 
-		int resultLength = 0;
-		
-		if(resultSet.length > 0){
-			if(resultSet[0] instanceof List){
-				List resultList = (List)resultSet[0];
-				resultLength = resultList.size();
-			} else {
-				resultLength = resultSet.length;
-			}
-		}
-		
-		if(resultLength >0){
+		if(resultSet.length >0){
 
 			if(pageSize != null){
 				rowCount = Integer.parseInt(pageSize);
@@ -543,25 +527,8 @@ public class LexEVSHTTPUtils implements Serializable{
 
 			Set<String> resultClass = new HashSet<String>();
 			List<String> classes = new ArrayList<String>();
-			
-			//////////EDIT//////////
-			start = 0;
-			if(totalNumRecords < Integer.parseInt(this.resultCounter)){
-				end = totalNumRecords;
-			}
-			
 			for(int x=start; x<end; x++){
-				//if the result is a list, just get the first object in the list
-				String name = null;
-				if(resultSet[x] instanceof List){
-					List list = (List)resultSet[x];
-					if(list.size() > 0){
-						name = list.get(0).getClass().getName();
-					} 
-				} else {
-					name = resultSet[x].getClass().getName();
-				}
-				resultClass.add(name);
+				resultClass.add(resultSet[x].getClass().getName());
 			}
 
 			if(resultClass.size() >1){
@@ -599,22 +566,14 @@ public class LexEVSHTTPUtils implements Serializable{
 					int recNum = index + i + 1;
 					recordNum = String.valueOf(recNum);
 					Object result = resultSet[i];
-					
-					if(result instanceof List){
-						List list = (List)result;
-						for(int j=0; j<list.size(); j++ ){
-							xmlElement.addContent(getElement(list.get(j), recordNum + j));
-						}
-					} else {
-						xmlElement.addContent(getElement(result, recordNum));
-					}
+					xmlElement.addContent(getElement(result, recordNum));
 
 				}
 			}
 
 			if((index - resultCount)>=0){
 				nextStartIndex = index - resultCount;
-				String preLink = servletName +"?query="+targetClassName + SystemConstant.AMPERSAND + criteria +"&startIndex="+nextStartIndex+"&resultCounter="+resultCounter + getCodingSchemeNameAndVersionURLString();
+				String preLink = servletName +"?query="+targetClassName + SystemConstant.AMPERSAND + criteria +"&startIndex="+nextStartIndex+"&pageSize="+pageSize;
 				String preText = "<<< "+" PREVIOUS "+ resultCount +" RECORDS";
 				Element preElement = new Element("previous").setAttribute("type","simple",namespace).setAttribute("href",preLink,namespace).setText(preText);
 				xmlElement.addContent(preElement);
@@ -623,22 +582,23 @@ public class LexEVSHTTPUtils implements Serializable{
 			Element pagesElement = new Element("pages").setAttribute("count",pCount);
 			if((index + resultCount)< totalNumRecords){
 				nextStartIndex = index + resultCount;
-				String nextLink = servletName +"?query="+targetClassName + SystemConstant.AMPERSAND +criteria +"&startIndex="+nextStartIndex+"&resultCounter="+resultCounter + getCodingSchemeNameAndVersionURLString();
+				String nextLink = servletName +"?query="+targetClassName + SystemConstant.AMPERSAND +criteria +"&startIndex="+nextStartIndex+"&pageSize="+pageSize;
 				String nextText = "NEXT "+ resultCount+" RECORDS >>> ";
 				Element nextElement = new Element("next").setAttribute("type","simple",namespace).setAttribute("href",nextLink,namespace).setText(nextText);
 				xmlElement.addContent(nextElement);
 			}
 
+			/*
 			for(int i=0; i< pageCounter; i++){
 				int p = i + 1;
-				int nextPageStartIndex = ((i)* Integer.valueOf(pageSize));
-				String pageLink = servletName +"?query="+targetClassName+SystemConstant.AMPERSAND+criteria +"&pageNumber="+p+"&resultCounter="+resultCounter+"&startIndex="+nextPageStartIndex  + getCodingSchemeNameAndVersionURLString();;
+				String pageLink = servletName +"?query="+targetClassName+SystemConstant.AMPERSAND+criteria +"&pageNumber="+p+"&resultCounter="+resultCounter+"&startIndex="+startIndex;
 				String page = String.valueOf(p);
 				String pageText = SystemConstant.SPACE + page + SystemConstant.SPACE;
 				Element pElement = new Element("page").setAttribute("number",page).setAttribute("type","simple",namespace).setAttribute("href",pageLink,namespace).setText(pageText);
 				pagesElement.addContent(pElement);
 			}
-
+			*/
+			
 			xmlElement.addContent(pagesElement);
 
 			httpQuery.addContent(xmlElement);
@@ -650,14 +610,12 @@ public class LexEVSHTTPUtils implements Serializable{
 			xmlElement.addContent(new Element("recordCounter").setText("0"));
 		}
 
-		/* EDIT to make records-per-page display correctly
 		if((pageNumber -1)> 0){
 			index += ((pageNumber -1)* rowCount) + 1;
 		}
 		else{
 			index+= 1;
 		}
-		*/
 		int endRecordNum = rowCount + index - 1;
 		if(endRecordNum > totalNumRecords){
 			endRecordNum = totalNumRecords;
@@ -969,7 +927,6 @@ public class LexEVSHTTPUtils implements Serializable{
 
 		results = new ArrayList();
 		int index = 0;
-		int counter = 1000;
 
 		try{
 			String searchPath = getSearchClassNames(targetClassName);
@@ -992,9 +949,11 @@ public class LexEVSHTTPUtils implements Serializable{
 			if(startIndex != null || !startIndex.equals("0")){
 				index = Integer.parseInt(startIndex);
 			}
+			/*
 			if(resultCounter != null){
 				counter = Integer.parseInt(resultCounter);
 			}
+			*/
 			if (roleName != null){
 				results = applicationService.getAssociation(criteria, roleName, queryOptions);
 			} else {
@@ -1021,23 +980,13 @@ public class LexEVSHTTPUtils implements Serializable{
 			//	Hibernate.initialize(results);
 			//}
 		}
-		
 
-		if((counter + index) > results.size()){
-			counter = results.size();
-		}
-		else{
-			counter += index;
-		}
-
-		Object[] resultSet = new Object[counter];
+		int pageOfResults =  results.size() < Integer.parseInt(pageSize) ? results.size() : Integer.parseInt(pageSize);
 		
-		//if(pageNumber != null){
-		//	index = index - (Integer.valueOf(pageNumber) * Integer.valueOf(pageSize));
-		//}
+		Object[] resultSet = new Object[pageOfResults];
 		
-		for(int i = index, s=0; i< counter; i++,s++){
-			resultSet[s]= results.get(i);
+		for(int i=0;i<pageOfResults;i++){
+			resultSet[i] = results.get(i + Integer.parseInt(startIndex));
 		}
 
 		return resultSet;

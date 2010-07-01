@@ -65,7 +65,7 @@ public class CodingSchemeSelectionStrategy implements DAOSelectionStrategy {
 	private List<LexEVSDAO> restrictToCodingScheme(List<LexEVSDAO> list, String csName, CodingSchemeVersionOrTag tagOrVersion) throws SelectionStrategyException {
 		String urn = null;
 		try{
-			urn = dbConnector.getURIFromCodingSchemeName(csName, tagOrVersion);
+			urn = dbConnector.getURIFromCodingSchemeName(csName);
 		} catch (LBParameterException e) {
 			log.warn("Didn't find CodingScheme/History for CodingScheme Name: " + csName + " " + e.getMessage());
 			throw new SelectionStrategyException("Didn't find CodingScheme/History for CodingScheme Name: " + csName, e);
