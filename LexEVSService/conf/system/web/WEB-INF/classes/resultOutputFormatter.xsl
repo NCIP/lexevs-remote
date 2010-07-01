@@ -325,21 +325,6 @@
 			</td>
 		</xsl:for-each>
 	</xsl:template>
-	<xsl:template name="page" match="/xlink:httpQuery/queryResponse/pages" mode="page">
-		<xsl:choose>
-			<xsl:when test="@count > 1">
-				<xsl:for-each select="/xlink:httpQuery/queryResponse/pages/page">
-					<td bgcolor="#E0FFFF">
-						<font color="#25587E">
-							<a href="{@xlink:href}">
-								<xsl:value-of select="."/>
-							</a>
-						</font>
-					</td>
-				</xsl:for-each>
-			</xsl:when>
-		</xsl:choose>
-	</xsl:template>
 	<!-- 
 	-->
 	<xsl:template name="evs" match="/xlink:httpQuery/queryResponse/class/class">

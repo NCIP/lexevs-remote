@@ -60,6 +60,7 @@
 		<constructor-arg>
 			<props>
 				<prop key="resultOutputFormatter">resultOutputFormatter.xsl</prop>
+				<prop key="jsonOutputFormatter">jsonOutputFormatter.xsl</prop>
 				<prop key="rowCounter">50</prop>
 				<prop key="securityEnabled">false</prop>
 			</props>
