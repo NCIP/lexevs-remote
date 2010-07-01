@@ -134,7 +134,10 @@
 				<fileset dir="${sdk_dir}/models"/>
 			</copy>
 			<copy todir="${system.dir}" overwrite="true">
-				<fileset dir="${sdk_dir}/system"/>
+				<fileset dir="${sdk_dir}/system">
+					<exclude name="**/*.jar"/>
+					<exclude name="**/xml/**"/>
+				</fileset>
 			</copy>
 			<copy todir="${writable.dir}" overwrite="true">
 				<fileset dir="${sdk_dir}/writable-api"/>

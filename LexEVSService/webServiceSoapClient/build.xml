@@ -2,8 +2,8 @@
 <project name="WebServiceStubs" default="all" basedir=".">
 
 	
-<property name="wsdlURL" value="http://bmidev4:8180/lexevsapi51/services/lexevsapi51Service?wsdl"/>
-<property name="webServiceNamespace" value="http://bmidev4:8180/lexevsapi51/services/lexevsapi51Service"/>
+<property name="wsdlURL" value="http://localhost:8080/lexevsapi51/services/lexevsapi51Service?wsdl"/>
+<property name="webServiceNamespace" value="http://localhost:8080/lexevsapi51/services/lexevsapi51Service"/>
 
 	
 	
