@@ -1,130 +1,115 @@
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!--
+		Generated Jan 12, 2010 5:09:39 AM by Hibernate == Tools 3.2.0.CR1
+	-->
 <hibernate-mapping>
-	<class name="org.LexGrid.concepts.Entity" table="entity" lazy="true"
-		where="codingSchemeName = '@CODING_SCHEME_NAME@'"
+	<class name="org.LexGrid.concepts.Entity" table="entity"
 		polymorphism="explicit">
-		
-		<cache usage="read-write"/>
+		<id type="string" column="ENTITYGUID" length="36">
+			<generator class="uuid" />
+		</id>
 
-		<composite-id
-			class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.EntityKey">
-			<key-property name="codingSchemeName" />
-			<key-property name="entityCodeNamespace" />
-			<key-property name="entityCode" />
-		</composite-id>
+		<property name="_entityCode" access="field" type="string">
+			<column name="ENTITYCODE" length="200" not-null="true" />
+		</property>
 
-		<!-- Versionable (con't on bottom)-->
-		<property name="_isActive" insert="false" update="false"
-			access="field" type="boolean" column="isActive" />
-			
-		<!-- VersionableAndDescribable -->
-		<one-to-one name="_entityDescription" access="field"
-			class="org.LexGrid.commonTypes.EntityDescription$Entity">
-			<formula>entityCode</formula>
-			<formula>codingSchemeName</formula>
-		</one-to-one>
+		<property name="_entityCodeNamespace" access="field" type="string">
+			<column name="ENTITYCODENAMESPACE" length="50" not-null="true" />
+		</property>
 
-		<bag name="_entityTypeList" access="field" table="entityType"
-			lazy="false" cascade="all">
-			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+		<property name="_isDefined" access="field" type="boolean">
+			<column name="ISDEFINED" />
+		</property>
+
+		<property name="_isAnonymous" access="field" type="boolean">
+			<column name="ISANONYMOUS" />
+		</property>
+
+		<property name="_isActive" access="field" type="boolean">
+			<column name="ISACTIVE" length="1" />
+		</property>
+
+		<component name="_entityDescription" access="field"
+			class="org.LexGrid.commonTypes.EntityDescription">
+			<property name="content" type="text">
+				<column name="DESCRIPTION" />
+			</property>
+		</component>
+
+		<bag name="_entityTypeList" access="field" table="ENTITYTYPE"
+			cascade="all">
+			<key not-null="true">
+				<column name="ENTITYGUID" not-null="true" />
 			</key>
-			<element type="string" column="entityType" />
+			<element column="ENTITYTYPE" type="string" length="50" />
 		</bag>
 
-		<!-- Entity -->
-		<property name="_entityCode" insert="false" update="false"
-			access="field" column="entityCode" />
-		<property name="_entityCodeNamespace" insert="false"
-			update="false" access="field" column="entityCodeNamespace" />
-		<property name="_isAnonymous" insert="false" update="false"
-			access="field" type="boolean" column="isAnonymous" />
-		<property name="_isDefined" insert="false" update="false"
-			access="field" type="boolean" column="isDefined" />
+		<property name="_owner" access="field" type="string">
+			<column name="OWNER" length="250" />
+		</property>
 
-		<bag name="_presentationList" access="field"
-			where="propertyType = 'presentation'" table="entity" lazy="true">
-			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+		<property name="_status" access="field" type="string">
+			<column name="STATUS" length="50" />
+		</property>
+
+		<property name="_effectiveDate" access="field" type="date">
+			<column name="EFFECTIVEDATE" />
+		</property>
+
+		<property name="_expirationDate" access="field" type="date">
+			<column name="EXPIRATIONDATE" />
+		</property>
+
+		<bag name="_commentList" table="PROPERTY" access="field"
+			cascade="all, delete-orphan" where="propertyType='comment' and referenceType='entity'">
+			<key not-null="true">
+				<column name="REFERENCEGUID" not-null="true" />
 			</key>
-			<one-to-many
-				class="org.LexGrid.concepts.Presentation$Entity" />
+			<one-to-many class="org.LexGrid.concepts.Comment" />
 		</bag>
 
-		<bag name="_definitionList" access="field"
-			where="propertyType = 'definition'" table="entity" lazy="true">
-			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+		<bag name="_definitionList" table="PROPERTY" access="field"
+			cascade="all, delete-orphan" where="propertyType='definition' and referenceType='entity'">
+			<key not-null="true">
+				<column name="REFERENCEGUID" not-null="true" />
 			</key>
-			<one-to-many class="org.LexGrid.concepts.Definition$Entity" />
+			<one-to-many class="org.LexGrid.concepts.Definition" />
 		</bag>
 
-		<bag name="_commentList" access="field"
-			where="propertyType = 'comment'" table="entity" lazy="true">
-			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+		<bag name="_propertyList" table="PROPERTY" access="field"
+			cascade="all, delete-orphan" where="propertyType='property' and referenceType='entity'">
+			<key not-null="true">
+				<column name="REFERENCEGUID" not-null="true" />
 			</key>
-			<one-to-many class="org.LexGrid.concepts.Comment$Entity" />
+			<one-to-many class="org.LexGrid.commonTypes.Property$EntityProperty" />
 		</bag>
 
-		<bag name="_propertyList" access="field"
-			where="propertyType = 'property'" table="entity" lazy="true">
-			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+		<bag name="_presentationList" table="PROPERTY" access="field"
+			cascade="all, delete-orphan" where="propertyType='presentation' and referenceType='entity'">
+			<key not-null="true">
+				<column name="REFERENCEGUID" not-null="true" />
 			</key>
-			<one-to-many
-				class="org.LexGrid.commonTypes.Property$Entity" />
+			<one-to-many class="org.LexGrid.concepts.Presentation" />
 		</bag>
-
-		<bag name="_propertyLinkList" access="field"
-			table="entityPropertyLink" lazy="true">
+	
+		<bag name="_propertyLinkList" access="field" table="PROPERTYLINKS" cascade="all">
 			<key>
-				<column name="codingSchemeName" />
-				<column name="entityCodeNamespace" />
-				<column name="entityCode" />
+				<column name="ENTITYGUID" />
 			</key>
 			<one-to-many class="org.LexGrid.concepts.PropertyLink" />
 		</bag>
-	
-		<!-- Versionable -->  
-		<property name="_status" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.status from @PREFIX@entryState where
-			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
-		</property>
 		
-		<property name="_effectiveDate" type="date" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.effectiveDate from @PREFIX@entryState where
-			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
-		</property>
-		
-		<property name="_expirationDate" type="date" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.expirationDate from @PREFIX@entryState where
-			@PREFIX@entryState.entryStateId = entryStateId)</formula>
-		</property>
-		
-		<many-to-one name="_owner" access="field" not-found="ignore"
-			class="org.LexGrid.commonTypes.Source$EntryState">
-			<formula>entryStateId</formula>
-		</many-to-one>
-		 
-		<many-to-one name="_entryState" access="field" not-found="ignore"
-			class="org.LexGrid.versions.EntryState">
-			<formula>entryStateId</formula>
-		</many-to-one>	
-		
-	</class>
 
+<!--			does not support-->
+<!--		<many-to-one name="_entryState" class="org.LexGrid.versions.EntryState"-->
+<!--			cascade="all" unique="true" column="entrystateid" />-->
+
+		<!-- <join table="entryState">-->
+		<!-- <property name="_CHAGNETYPE" access="field" type="boolean">-->
+		<!--			<column name="CHANGETYPE" length="1" />-->
+		<!--		</property>-->
+		<!-- </join>-->
+	</class>
 </hibernate-mapping>

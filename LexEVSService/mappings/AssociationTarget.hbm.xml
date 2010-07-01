@@ -1,72 +1,86 @@
+<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.LexGrid.relations.AssociationTarget" table="entityAssnsToEntity"
+		lazy="false">
+		<cache usage="read-write" />
 
-<hibernate-mapping>  
-    <class name="org.LexGrid.relations.AssociationTarget" table="entityAssnsToEntity" lazy="false">
-     <cache usage="read-write"/>
-     
-   		<id column="multiAttributesKey" type="string">
-        	<generator class="uuid"/>
-    	</id>
+		<id column="ENTITYASSNSGUID" type="string" length="36">
+			<generator class="uuid" />
+		</id>
 
-		<!-- AssociationTarget -->		    	
-    	<property name="_targetEntityCode" access="field" update="false" insert="false" column="targetEntityCode" />
-    	<property name="_targetEntityCodeNamespace" access="field" update="false" insert="false" column="targetEntityCodeNamespace" />
-    		
-    	<!-- AssociationableElement -->
- 		<property name="_associationInstanceId" insert="false" update="false" access="field" column="associationInstanceId" />
-		<property name="_isInferred" insert="false" update="false" access="field" type="boolean" column="isInferred" />
-		<property name="_isDefining" insert="false" update="false" access="field" type="boolean" column="isDefining" />	
-		
-		<bag name="_usageContextList" access="field" table="entityAssnsToEntity" lazy="false">  
-			 <key>	
-			 	<column name="multiAttributesKey"/>
-			 </key>
-			 		
-			<element type="string" formula="(select @PREFIX@entityAssnsToEQuals.qualifierValue from 
-			@PREFIX@entityAssnsToEQuals
-			where @PREFIX@entityAssnsToEQuals.codingSchemeName = codingSchemeName 
-			and @PREFIX@entityAssnsToEQuals.multiAttributesKey = multiAttributesKey 
-			and @PREFIX@entityAssnsToEQuals.qualifierName = 'usageContext')"/>
-		</bag> 
+		<property name="_targetEntityCode" access="field" type="string">
+			<column name="TARGETENTITYCODE" length="200" not-null="true" />
+		</property>
 
-		  <bag name="_associationQualificationList" table="entityAssnsToEntity" access="field" lazy="false">  
-			 <key>
-			  	<column name="multiAttributesKey"/>
-			 </key>
-			<many-to-many  class="org.LexGrid.relations.AssociationQualification" not-found="ignore">
-				<formula>multiAttributesKey</formula>				
-			</many-to-many>
-		</bag> 
-    	   	
-		<!-- Versionable -->
-		<property name="_status" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.status from @PREFIX@entryState where
-			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
+		<property name="_targetEntityCodeNamespace" access="field"
+			type="string">
+			<column name="TARGETENTITYCODENAMESPACE" length="50" not-null="true" />
+		</property>
+
+		<property name="_effectiveDate" access="field" type="date">
+			<column name="EFFECTIVEDATE" />
+		</property>
+
+		<property name="_expirationDate" access="field" type="date">
+			<column name="EXPIRATIONDATE" />
 		</property>
 		
-		<property name="_effectiveDate" type="date" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.effectiveDate from @PREFIX@entryState where
-			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
-		</property>
-		
-		<property name="_expirationDate" type="date" access="field" lazy="true">
-			<formula>(select @PREFIX@entryState.expirationDate from @PREFIX@entryState where
-			 @PREFIX@entryState.entryStateId = entryStateId)</formula>
-		</property>
-		
-		<many-to-one name="_owner" access="field" not-found="ignore"
-			class="org.LexGrid.commonTypes.Source$EntryState">
-			<formula>entryStateId</formula>
-		</many-to-one>
-		 
-		<many-to-one name="_entryState" access="field" not-found="ignore"
-			class="org.LexGrid.versions.EntryState">
-			<formula>entryStateId</formula>
-		</many-to-one>	
+<!--		does not support yet-->
+<!--		<many-to-one name="_entryState" class="org.LexGrid.versions.EntryState"-->
+<!--			cascade="all" unique="true" column="entrystateid" />-->
 
-        </class>       
+		<property name="_status" access="field" type="string">
+			<column name="STATUS" length="50" />
+		</property>
+
+		<property name="_owner" access="field" type="string">
+			<column name="OWNER" length="250" />
+		</property>
+
+		<property name="_isActive" access="field" type="boolean">
+			<column name="ISACTIVE" />
+		</property>
+
+		<property name="_isInferred" access="field" type="boolean">
+			<column name="ISINFERRED" />
+		</property>
+
+		<property name="_isDefining" access="field" type="boolean">
+			<column name="ISDEFINING" />
+		</property>
+
+		<property name="_associationInstanceId" access="field" type="string">
+			<column name="ASSOCIATIONINSTANCEID" length="50" />
+		</property>
+
+<!--		<bag name="_usageContextList" access="field" table="LBENTITYASSNSTOENTITY"-->
+<!--			lazy="false">-->
+<!--			<key>-->
+<!--				<column name="multiAttributesKey" />-->
+<!--			</key>-->
+<!---->
+<!--			<element type="string"-->
+<!--				formula="(select lbentityassnquals.qualifierValue from -->
+<!--			lbentityassnquals-->
+<!--			where lbentityassnquals.referenceGuid = ENTITYASSNSGUID -->
+<!--			and lbentityassnquals.qualifierName = 'usageContext')" />-->
+<!--		</bag>-->
+
+		<!--		TODO-->
+		<!--<bag name="_associationQualificationList" table="LBENTITYASSNSTOENTITY"-->
+		<!--			access="field" lazy="false">-->
+		<!--			<key>-->
+		<!--				<column name="multiAttributesKey" />-->
+		<!--			</key>-->
+		<!--<many-to-many class="org.LexGrid.relations.AssociationQualification"-->
+		<!--				not-found="ignore">-->
+		<!--				<formula>multiAttributesKey</formula>-->
+		<!--			</many-to-many>-->
+		<!--		</bag>-->
+
+
+	</class>
 </hibernate-mapping>
-
-

@@ -1,167 +1,215 @@
+<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<!-- need to be tested with query. does not support insert operation	-->
+<hibernate-mapping>
+	<class name="org.LexGrid.naming.Mappings" table="codingScheme" lazy="true">
+	<cache usage="read-write"/>
+		<id column="CODINGSCHEMEGUID" type="string">
+			<generator class="assigned" />
+		</id>
 
-<hibernate-mapping>  
+		<bag name="_supportedAssociationList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Association'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedAssociation" />
+		</bag>
 
-      <class name="org.LexGrid.naming.Mappings" table="codingScheme" lazy="true">           
- 
- 		<cache usage="read-write"/>
- 
-       <id column="codingSchemeName" type="string">
-        <generator class="assigned"/>
-    	</id>   
-             
-          <bag name="_supportedAssociationList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Association'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedAssociation" />               
-         </bag>
-             
-          <bag name="_supportedAssociationQualifierList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'AssociationQualifier'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedAssociationQualifier"/>               
-         </bag>
-         
-          <bag name="_supportedCodingSchemeList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'CodingScheme'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedCodingScheme"/>               
-         </bag>
-                
-         <bag name="_supportedContainerList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Container'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedContainerName"/>               
-         </bag> 
-         
-         <bag name="_supportedContextList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Context'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedContext"/>               
-         </bag>
-         
-         <bag name="_supportedDataTypeList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'DataType'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedDataType"/>               
-         </bag>
-          
-              <bag name="_supportedDegreeOfFidelityList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'DegreeOfFidelity'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedDegreeOfFidelity"/>               
-         </bag>
-         
-               <bag name="_supportedEntityTypeList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'EntityType'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedEntityType"/>               
-         </bag>
-         
-            <bag name="_supportedHierarchyList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Hierarchy'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedHierarchy"/>               
-         </bag>
-         
-          <bag name="_supportedLanguageList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Language'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedLanguage" />               
-         </bag>
-         
-           <bag name="_supportedNamespaceList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Namespace'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedNamespace" />               
-         </bag>
-         
-          <bag name="_supportedPropertyList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Property'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedProperty" />               
-         </bag>
- 
-         <bag name="_supportedPropertyTypeList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'PropertyType'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedPropertyType" />               
-         </bag>
- 
-           <bag name="_supportedPropertyLinkList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'PropertyLink'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedPropertyLink" />               
-         </bag>
-         
-              <bag name="_supportedPropertyQualifierList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'PropertyQualifier'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedPropertyQualifier"/>               
-         </bag>
-         
-         <bag name="_supportedPropertyQualifierTypeList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'PropertyQualifierType'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedPropertyQualifierType"/>               
-         </bag>
-         
-          <bag name="_supportedRepresentationalFormList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'RepresentationalForm'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedRepresentationalForm"/>               
-         </bag>
-         
-          <bag name="_supportedSortOrderList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'SortOrder'" lazy="false">
-            <key>           
-             <column name="codingSchemeName"/>     
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedSortOrder" />               
-         </bag>          
-         
-           <bag name="_supportedSourceList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Source'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedSource"/>               
-         </bag>
-         
-      
-             <bag name="_supportedSourceRoleList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Source Role'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedSourceRole"/>               
-         </bag>
-         
-         
-          <bag name="_supportedStatusList" access="field" cascade="all" table="codingSchemeSupportedAttrib" where="supportedAttributeTag = 'Status'" lazy="false">
-            <key>              
-             <column name="codingSchemeName"/>   
-            </key>   
-            <one-to-many class="org.LexGrid.naming.SupportedStatus"/>               
-         </bag>
-         
-    </class>
-    
-    
+		<bag name="_supportedAssociationQualifierList" access="field"
+			cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'AssociationQualifier'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedAssociationQualifier" />
+		</bag>
+
+		<bag name="_supportedCodingSchemeList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'CodingScheme'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedCodingScheme" />
+		</bag>
+
+		<bag name="_supportedContextList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Context'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedContext" />
+		</bag>
+
+		<bag name="_supportedDataTypeList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'DataType'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedDataType" />
+		</bag>
+
+		<bag name="_supportedDegreeOfFidelityList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'DegreeOfFidelity'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedDegreeOfFidelity" />
+		</bag>
+
+		<bag name="_supportedEntityTypeList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'EntityType'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedEntityType" />
+		</bag>
+
+		<bag name="_supportedHierarchyList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Hierarchy'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedHierarchy" />
+		</bag>
+
+		<bag name="_supportedLanguageList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Language'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedLanguage" />
+		</bag>
+
+		<bag name="_supportedNamespaceList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Namespace'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedNamespace" />
+		</bag>
+
+		<bag name="_supportedPropertyList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Property'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedProperty" />
+		</bag>
+
+		<bag name="_supportedPropertyTypeList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyType'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedPropertyType" />
+		</bag>
+
+		<bag name="_supportedPropertyLinkList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyLink'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedPropertyLink" />
+		</bag>
+
+		<bag name="_supportedPropertyQualifierList" access="field"
+			cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyQualifier'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedPropertyQualifier" />
+		</bag>
+
+		<bag name="_supportedPropertyQualifierTypeList" access="field"
+			cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyQualifierType'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedPropertyQualifierType" />
+		</bag>
+
+		<bag name="_supportedRepresentationalFormList" access="field"
+			cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'RepresentationalForm'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedRepresentationalForm" />
+		</bag>
+
+		<bag name="_supportedSortOrderList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'SortOrder'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedSortOrder" />
+		</bag>
+
+		<bag name="_supportedSourceList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Source'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedSource" />
+		</bag>
+
+
+		<bag name="_supportedSourceRoleList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Source Role'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedSourceRole" />
+		</bag>
+
+
+		<bag name="_supportedStatusList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Status'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedStatus" />
+		</bag>
+
+		<bag name="_supportedConceptDomainList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Concept Domain'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedConceptDomain" />
+		</bag>
+
+		<bag name="_supportedContainerNameList" access="field" cascade="all"
+			table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Container Name'"
+			lazy="false">
+			<key not-null="true">
+				<column name="CODINGSCHEMEGUID" />
+			</key>
+			<one-to-many class="org.LexGrid.naming.SupportedContainerName" />
+		</bag>
+
+	</class>
 </hibernate-mapping>

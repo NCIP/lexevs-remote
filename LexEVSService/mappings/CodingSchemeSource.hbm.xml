@@ -1,27 +1,28 @@
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>  
+<hibernate-mapping>
+	<class name="org.LexGrid.commonTypes.Source" table="csMultiAttrib"
+		discriminator-value="source" entity-name="org.LexGrid.commonTypes.Source$CodingScheme">
 
-        <class name="org.LexGrid.commonTypes.Source" table="codingSchemePropMultiAttrib" 
-    where="typeName = 'source'" entity-name="org.LexGrid.commonTypes.Source$CodingScheme"> 
-    <cache usage="read-write"/>
-              
-        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.CodingSchemePropMultiAttribKey">
-            <key-property name="codingSchemeName"/>       
-            <key-property name="propertyId"/>            
-            <key-property name="typeName"/>
-            <key-property name="attributeValue"/>
-      </composite-id>
-            
-          <!-- Source -->
-          <property name="_content" access="field" insert="false" update="false" type="string" column="attributeValue" />
-          <property name="_subRef" access="field" insert="false" update="false" type="string" column="val1" />
-      	  <property name="_role" access="field" type="string" column="val2" />
-      
-    </class>
- 
+		<id type="string" column="CSMULTIATTRIBGUID" length="36">
+			<generator class="uuid" />
+		</id>
+
+		<discriminator column="ATTRIBUTETYPE" />
+
+		<property name="_content" type="string" access="field">
+			<column name="ATTRIBUTEVALUE" length="250" not-null="true" />
+		</property>
+
+		<property name="_subRef" type="string" access="field">
+			<column name="SUBREF" length="250" not-null="true" />
+		</property>
+
+		<property name="_role" type="string" access="field">
+			<column name="ROLE" length="250" not-null="true" />
+		</property>
+
+	</class>
 </hibernate-mapping>
-
-

@@ -3,30 +3,23 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>  
-    <class name="org.LexGrid.naming.URIMap" table="codingSchemeSupportedAttrib">
+    <class name="org.LexGrid.naming.URIMap" table="csSupportedAttrib">
     
-    <cache usage="read-write"/>
-    
-        <composite-id class="org.LexGrid.LexBIG.caCore.hibernate.compositeKeys.URIMapKey">   
-        
-        	<key-property name="codingSchemeName" column="codingSchemeName" />
-        	<key-property name="supportedAttributeTag" column="supportedAttributeTag" />        	
-        	<key-property name="id" column="id" />
-        	<key-property name="idValue" column="idValue" />
-        	<key-property name="val1" column="val1" />
-        	
-        </composite-id> 
+       <id type="string" column="CSSUPPATTRIBGUID" length="36" >
+            <generator class="uuid" />
+       </id>
  
-        <discriminator insert="false" column="supportedAttributeTag"/>  
+        <discriminator column="SUPPORTEDATTRIBUTETAG"/>  
         
-        <property name="_uri" insert="false" update="false" access="field" type="string" column="uri" />       
-        <property name="_localId" insert="false" update="false" access="field" type="string" column="id" /><property name="_content" insert="false" update="false" access="field" type="string" column="idValue" />
+        <property name="_uri"  access="field" type="string" column="URI" />       
+        <property name="_localId"  access="field" type="string" column="ID" />
+        <property name="_content" access="field" type="string" column="IDVALUE" />
       	
     	<subclass name="org.LexGrid.naming.SupportedAssociation" discriminator-value="Association"/>	  
     	<subclass name="org.LexGrid.naming.SupportedAssociationQualifier" discriminator-value="AssociationQualifier"/>	
       
       	<subclass name="org.LexGrid.naming.SupportedCodingScheme" discriminator-value="CodingScheme">
-      		<property name="_isImported" type="boolean" insert="false" update="false" access="field" column="val1"/>
+      		<property name="_isImported" type="boolean" insert="false" update="false" access="field" column="ISIMPORTED" />
      	</subclass>
       
       	<subclass name="org.LexGrid.naming.SupportedContainerName" discriminator-value="ContainerName"/>
@@ -36,14 +29,14 @@
         <subclass name="org.LexGrid.naming.SupportedEntityType" discriminator-value="EntityType"/>
           
         <subclass name="org.LexGrid.naming.SupportedHierarchy" discriminator-value="Hierarchy">	
-      	  <property name="_rootCode" insert="false" update="false" access="field" column="val1"/>
-      	  <property name="_isForwardNavigable" type="boolean" insert="false" update="false" access="field" column="val2"/>
+      	  <property name="_rootCode" access="field" column="ROOTCODE"/>
+      	  <property name="_isForwardNavigable" type="boolean" access="field" column="ISFORWARDNAVIGABLE"/>
       	</subclass>
        
         <subclass name="org.LexGrid.naming.SupportedLanguage" discriminator-value="Language"/>	
 
         <subclass name="org.LexGrid.naming.SupportedNamespace" discriminator-value="Namespace">
-        	<property name="_equivalentCodingScheme" insert="false" update="false" access="field" column="val1"/>
+        	<property name="_equivalentCodingScheme" access="field" column="EQUIVALENTCODINGSCHEME"/>
         </subclass>
  	
         <subclass name="org.LexGrid.naming.SupportedProperty" discriminator-value="Property"/>	
@@ -55,12 +48,12 @@
 		<subclass name="org.LexGrid.naming.SupportedSortOrder" discriminator-value="SortOrder"/>
          
         <subclass name="org.LexGrid.naming.SupportedSource" discriminator-value="Source">
-      		<property name="_assemblyRule" insert="false" update="false" access="field" column="val1"/>
+      		<property name="_assemblyRule" access="field" column="ASSEMBLYRULE"/>
       	</subclass>
          
         <subclass name="org.LexGrid.naming.SupportedSourceRole" discriminator-value="SourceRole"/>
         <subclass name="org.LexGrid.naming.SupportedStatus" discriminator-value="Status"/>
-      
+      	<subclass name="org.LexGrid.naming.SupportedConceptDomain" discriminator-value="Concept Domain"></subclass>
     </class>
 </hibernate-mapping>
 

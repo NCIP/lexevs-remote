@@ -3,22 +3,13 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>	
-		<property name="hibernate.shard.enable_cross_shard_relationship_checks">false</property>
-		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
-	
+	<session-factory>
 
-		<property name="c3p0.max_size">100</property>
-		<property name="c3p0.min_size">1</property>
-		<property name="c3p0.timeout">5000</property>
-		<property name="c3p0.max_statements">100</property>
-		<property name="c3p0.idle_test_period">3000</property>
-		<property name="c3p0.acquire_increment">1</property>
-		<property name="c3p0.validate">false</property>
-	
+		<property name="hibernate.connection.autocommit">true</property>
+
 		<property name="hibernate.show_sql">false</property>
-      	<property name="hibernate.format_sql">true</property>
-		
+		<property name="hibernate.format_sql">true</property>
+
 		<property name="cglib.use_reflection_optimizer">false</property>
 		<property name="jdbc.batch_versioned_data">true</property>
 		<property name="jdbc.use_streams_for_binary">true</property>
@@ -26,34 +17,19 @@
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		<property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</property>
 
-		<property name="hibernate.connection.autocommit">true</property>
-
-
 		<!-- MAPPINGS -->
-		<mapping resource="UserTypes.hbm.xml" />
-		<mapping resource="EntryStateSource.hbm.xml" />
-		<mapping resource="EntryState.hbm.xml" />
-		<mapping resource="Concept.hbm.xml" />		
 		<mapping resource="CodingScheme.hbm.xml" />
-		<mapping resource="EntityEntityDescription.hbm.xml" />
-		<mapping resource="CodingSchemeSource.hbm.xml" />
-		<mapping resource="CodingSchemeProperty.hbm.xml" />
-		<mapping resource="CodingSchemeProperties.hbm.xml" />
-		<mapping resource="URIMap.hbm.xml" />
-		<mapping resource="CodingSchemePropertyQualifier.hbm.xml" />
 		<mapping resource="Entity.hbm.xml" />
-		<mapping resource="EntityProperty.hbm.xml" />
+		<mapping resource="Relations.hbm.xml" />
+		<mapping resource="Property.hbm.xml" />
 		<mapping resource="PropertyLink.hbm.xml" />
-		<mapping resource="EntityPropertyQualifier.hbm.xml" />
-		<mapping resource="EntitySource.hbm.xml" />
-		<mapping resource="Association.hbm.xml" />
+		<mapping resource="CodingSchemeSource.hbm.xml" />
+		<mapping resource="PropertySource.hbm.xml" />
+		<mapping resource="AssociationPredicate.hbm.xml" />
 		<mapping resource="AssociationSource.hbm.xml" />
 		<mapping resource="AssociationTarget.hbm.xml" />
-		<mapping resource="AssociationQualification.hbm.xml" />
-		<mapping resource="AssociationData.hbm.xml" />
-		<mapping resource="SystemRelease.hbm.xml" />
-		<mapping resource="Instance.hbm.xml" />
-		<mapping resource="Mappings.hbm.xml" />
+		<mapping resource="URIMap.hbm.xml" />
+		<mapping resource="PropertyQualifier.hbm.xml" />
 
-    </session-factory>
+	</session-factory>
 </hibernate-configuration>
