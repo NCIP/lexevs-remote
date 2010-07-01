@@ -23,29 +23,11 @@
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
-import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.LexGrid.concepts.Presentation;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-import org.LexGrid.relations.AssociationSource;
-import org.apache.commons.lang.ArrayUtils;
-
-import junit.framework.TestCase;
 
 public class DataServiceProxyHelperImplTest2 extends ServiceTestCase
 {
@@ -64,46 +46,46 @@ public class DataServiceProxyHelperImplTest2 extends ServiceTestCase
 	}
 	
 	public void testIsLazyLoadable1() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", null);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));
 		
 	}
 
 	public void testIsLazyLoadable2() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentationCount", null);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));
 		
 	}
 	
 	public void testIsLazyLoadable3() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getDefinition", null);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));
 		
 	}
 	
 	public void testIsLazyLoadable4() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("enumeratePresentation", null);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
 	
 	public void testIsLazyLoadable5() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("iterateComment", null);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
 	
 	public void testIsLazyLoadable6() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("setPresentation", Presentation[].class);	
 		assertFalse(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
 	
 	public void testIsLazyLoadable7() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("toString", null);	
 		assertFalse(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
@@ -121,16 +103,14 @@ public class DataServiceProxyHelperImplTest2 extends ServiceTestCase
 	}
 	
 	public void testIsLazyLoadable10() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", int.class);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
 	
 	public void testIsLazyLoadable11() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("setPresentation", int.class, Presentation.class);	
 		assertFalse(dataServiceProxyHelper.isLazyLoadableMethod(method));		
 	}
-	
-	
 }

@@ -19,13 +19,8 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.lazyLoading;
 
-import java.util.List;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 
 public class LazyLoadTestSuite {
 	 public static Test suite() throws Exception

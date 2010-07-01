@@ -28,11 +28,11 @@ import gov.nih.nci.evs.security.SecurityToken;
 
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
+import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
+import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
 /**
  * The Class TestOtherMatchingTechniques.

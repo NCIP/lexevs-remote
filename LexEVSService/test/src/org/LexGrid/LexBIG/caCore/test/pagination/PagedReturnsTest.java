@@ -19,7 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.pagination;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
@@ -29,22 +28,9 @@ import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.commonTypes.Text;
-import org.LexGrid.concepts.Concept;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Restrictions;
+import org.LexGrid.concepts.Entity;
 
-import gov.nih.nci.cagrid.cqlquery.Predicate;
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.applicationservice.ApplicationException;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-import gov.nih.nci.system.query.cql.CQLAttribute;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLPredicate;
-import gov.nih.nci.system.query.cql.CQLQuery;
-import gov.nih.nci.system.query.hibernate.HQLCriteria;
-import junit.framework.TestCase;
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 
 public class PagedReturnsTest extends ServiceTestCase {
 	String testId = "LexEVSDataServiceSecurityTest";
@@ -64,7 +50,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		csvt.setVersion(ServiceTestCase.THES_VERSION);
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		List<Concept> concepts = svc.search(Concept.class, new Concept(), qo);
+		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);
 		LexEVSListProxy listProxy = (LexEVSListProxy)concepts;
 		assertTrue(listProxy.isHasAllRecords() == false);
 		assertTrue(listProxy.getListChunk().size() == 10);
@@ -73,7 +59,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		
 		//Step through 50 concepts
 		int i=0;
-		for (Concept c : concepts) {
+		for (Entity c : concepts) {
 			if(i == 50) break;
 			LexEVSListProxy lp = (LexEVSListProxy)concepts;
 			assertTrue(lp.isHasAllRecords() == false);
@@ -91,7 +77,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		csvt.setVersion(ServiceTestCase.THES_VERSION);
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		List<Concept> concepts = svc.search(Concept.class, new Concept(), qo);
+		List<Entity> concepts = svc.search(Concept.class, new Entity(), qo);
 		LexEVSListProxy listProxy = (LexEVSListProxy)concepts;
 		assertTrue(listProxy.isHasAllRecords() == false);
 		assertTrue(listProxy.getListChunk().size() == 50);
@@ -100,7 +86,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		
 		//Step through 1000 concepts
 		int i=0;
-		for (Concept c : concepts) {
+		for (Entity c : concepts) {
 			if(i == 1000) break;
 			LexEVSListProxy lp = (LexEVSListProxy)concepts;
 			assertTrue(lp.isHasAllRecords() == false);
@@ -180,7 +166,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		qo.setCodingSchemeVersionOrTag(csvt);
 		qo.setCodingScheme(ServiceTestCase.ZEBRAFISH_SCHEME);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		List<Concept> concepts = svc.search(Concept.class, new Concept(), qo);
+		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);
 		LexEVSListProxy listProxy = (LexEVSListProxy)concepts;
 		assertTrue(listProxy.isHasAllRecords() == false);
 		assertTrue(listProxy.getListChunk().size() == 50);
@@ -188,7 +174,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		assertTrue(concepts.size() > 0);
 		
 		//Step through an entire CodingScheme
-		for (Concept c : concepts) {	
+		for (Entity c : concepts) {	
 			//Step through....
 		}
 	}

@@ -25,23 +25,12 @@ package org.LexGrid.LexBIG.caCore.test.exampleUseCases;
 import java.util.Arrays;
 import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
 import org.LexGrid.relations.AssociationSource;
-import org.apache.commons.lang.ArrayUtils;
-
-import junit.framework.TestCase;
 
 public class GetAssociations extends ServiceTestCase
 {

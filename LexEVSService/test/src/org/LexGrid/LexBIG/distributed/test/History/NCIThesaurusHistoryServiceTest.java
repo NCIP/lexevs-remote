@@ -226,7 +226,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1135231200000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals(""));
         assertTrue(nce[0].getReferencename().equals("Grant_PI"));
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.MODIFY_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));
         
         csv = new CodingSchemeVersion();
         csv.setVersion("03-JAN-06");
@@ -247,7 +247,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[i].getEditDate().getTime() == Long.parseLong("1136268000000"));
         assertTrue(nce[i].getReferencecode().equals("C16205"));
         assertTrue(nce[i].getReferencename().equals("Healthcare_Activity"));
-        assertTrue(nce[i].getEditaction().getType() == ChangeType.MERGE_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MERGE));
     }
     
     /**
@@ -288,7 +288,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1135231200000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().length() == 0);
         assertTrue(nce[0].getReferencename().equals("Grant_PI"));
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.MODIFY_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));
         
         nce = hs.getEditActionList(Constructors.createConceptReference("C51826", ""), before, null).getEntry();
         assertTrue(nce.length == 1);
@@ -298,7 +298,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1136268000000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().length() == 0);
         assertTrue(nce[0].getReferencename() == null || nce[0].getReferencename().length() == 0);
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.CREATE_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.CREATE));
         
         nce = hs.getEditActionList(Constructors.createConceptReference("C51826", ""), before, after).getEntry();
         assertTrue(nce.length == 1);
@@ -307,7 +307,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1136268000000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().length() == 0);
         assertTrue(nce[0].getReferencename() == null || nce[0].getReferencename().length() == 0);
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.CREATE_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.CREATE));
     }
     
     /**
@@ -329,7 +329,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1133935200000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals(""));
         assertTrue(nce[0].getReferencename().equals("Current Dental Terminology 2005"));
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.MODIFY_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));
         
         nce = hs.getEditActionList(Constructors.createConceptReference("C640", null), new URI("urn:oid:2.16.840.1.113883.3.26.1.1:05.11f")).getEntry();
         
@@ -339,7 +339,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1133935200000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals(""));
         assertTrue(nce[0].getReferencename().equals("Current Dental Terminology 2005"));
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.MODIFY_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));
         
         nce = hs.getEditActionList(Constructors.createConceptReference("", null), new URI("urn:oid:2.16.840.1.113883.3.26.1.1:05.12f")).getEntry();
         

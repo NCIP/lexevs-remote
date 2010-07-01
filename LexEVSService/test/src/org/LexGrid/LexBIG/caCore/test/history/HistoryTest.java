@@ -23,32 +23,17 @@
 package org.LexGrid.LexBIG.caCore.test.history;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.EntityDescription;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-import org.LexGrid.relations.AssociationSource;
 import org.LexGrid.versions.SystemRelease;
-import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-
-import junit.framework.TestCase;
 
 public class HistoryTest extends ServiceTestCase
 {

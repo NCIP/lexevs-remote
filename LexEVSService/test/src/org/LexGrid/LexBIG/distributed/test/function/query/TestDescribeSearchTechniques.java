@@ -25,8 +25,8 @@ package org.LexGrid.LexBIG.distributed.test.function.query;
 // LexBIG Test ID: T1_FNC_26	TestDescribeSearchTechniques
 
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.ModuleDescription;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
 /**
  * The Class TestDescribeSearchTechniques.

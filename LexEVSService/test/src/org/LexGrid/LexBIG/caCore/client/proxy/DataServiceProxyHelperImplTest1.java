@@ -23,31 +23,14 @@
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
-import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.MockMethodInvocation;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
-import org.LexGrid.concepts.Presentation;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-import org.LexGrid.relations.AssociationSource;
+import org.LexGrid.concepts.Entity;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.lang.ArrayUtils;
 
-import junit.framework.TestCase;
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 
 public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 {
@@ -66,7 +49,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName1() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -74,7 +57,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName2() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentationCount", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -82,7 +65,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName3() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getDefinition", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -90,7 +73,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName4() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("enumeratePresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -98,7 +81,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName5() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("iteratePresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -106,7 +89,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName6() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", int.class);
 		MethodInvocation invocation = new MockMethodInvocation(method, new Object[]{1});		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -114,7 +97,7 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 	}
 	
 	public void testGetPropertyNameFromMethodName7() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("enumeratePresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
@@ -127,9 +110,5 @@ public class DataServiceProxyHelperImplTest1 extends ServiceTestCase
 		MethodInvocation invocation = new MockMethodInvocation(method, null);		
 		String propertyName = dataServiceProxyHelper.getPropertyNameFromMethodName(invocation);
 		assertTrue(propertyName.equals("_mappings"));
-	}
-
-
-	
-	
+	}	
 }

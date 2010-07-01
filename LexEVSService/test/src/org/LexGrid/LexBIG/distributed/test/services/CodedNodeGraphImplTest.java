@@ -22,7 +22,7 @@
  */
 package org.LexGrid.LexBIG.distributed.test.services;
 
-import junit.framework.TestCase;
+import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Collections.NameAndValueList;
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
@@ -121,10 +121,10 @@ public void testIntersection() throws LBException
         LexBIGService lbsi = LexEVSServiceHolder.instance().getLexEVSAppService();
         CodedNodeGraph cng = lbsi.getNodeGraph(THES_SCHEME, null, null);
 
-        ConceptReference[] cr = cng.listCodeRelationships(Constructors.createConceptReference("C32770",THES_SCHEME), Constructors.createConceptReference("C61410",THES_SCHEME), false).getConceptReference();
-       assertTrue("1",cr.length == 1);
+       List<String> rels = cng.listCodeRelationships(Constructors.createConceptReference("C32770",THES_SCHEME), Constructors.createConceptReference("C61410",THES_SCHEME), false);
+       assertTrue("1",rels.size() == 1);
         //Yes, has subtype should come back with the global oid for hasSubtype.
-        assertTrue("2",contains(cr, "A8", "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl"));
+        assertTrue("2",rels.contains("A8"));
     }
     
     /**
@@ -159,19 +159,5 @@ public void testIntersection() throws LBException
         //1 down link
         Association[] assn = rcr[0].getSourceOf().getAssociation();
         assertTrue("4",assn.length == 3);   
-    }
-  
-    private boolean contains(ConceptReference[] cr, String code, String codeSystem)
-    {
-        boolean contains = false;
-        for (int i = 0; i < cr.length; i++)
-        {
-            if (cr[i].getConceptCode().equals(code) && cr[i].getCodingSchemeName().equals(codeSystem))
-            {
-                contains = true;
-                break;
-            }
-        }
-        return contains;
     }
 }

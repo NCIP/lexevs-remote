@@ -33,8 +33,8 @@ import org.LexGrid.LexBIG.DataModel.NCIHistory.types.ChangeType;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.History.HistoryService;
 import org.LexGrid.LexBIG.Utility.Constructors;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
 /**
  * The Class TestVersionChanges.
@@ -71,6 +71,6 @@ public class TestVersionChanges extends ServiceTestCase
         assertTrue(nce[0].getConceptName().equals(" "));
         assertTrue(nce[0].getEditDate().getTime() == Long.parseLong("1072760400000"));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals("null"));
-        assertTrue(nce[0].getEditaction().getType() == ChangeType.MODIFY_TYPE);
+        assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));
     }
 }

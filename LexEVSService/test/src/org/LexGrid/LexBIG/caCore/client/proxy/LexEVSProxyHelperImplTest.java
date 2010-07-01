@@ -25,7 +25,6 @@ package org.LexGrid.LexBIG.caCore.client.proxy;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.annotations.LgClientSideSafe;
 import org.LexGrid.annotations.LgHasRemoteDependencies;
@@ -43,27 +42,7 @@ public class LexEVSProxyHelperImplTest extends ServiceTestCase{
 	public void setUp(){
 		proxyHelper = new LexEVSProxyHelperImpl();
 	}
-	
-	public void testIsLexBigClassValid(){
-		assertTrue(
-				proxyHelper.isLexBigClass(CodedNodeSet.class));
-	}
-	
-	public void testIsLexBigClassInvalid(){
-		assertFalse(
-				proxyHelper.isLexBigClass(String.class));
-	}
-	
-	public void testHasRemoteDependencies(){
-		assertTrue(
-				proxyHelper.hasRemoteDependencies(TestRemoteDependencies.class));		
-	}
-	
-	public void testHasNoRemoteDependencies(){
-		assertFalse(
-				proxyHelper.hasRemoteDependencies(TestNoRemoteDependencies.class));		
-	}
-	
+
 	public void testGetAnnotatedFieldHasField(){
 		List<Field> fields = proxyHelper.getAnnotatedFields(new TestRemoteDependencies(), LgProxyField.class);	
 		assertTrue(fields.size() == 1);	

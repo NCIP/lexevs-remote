@@ -26,8 +26,8 @@ package org.LexGrid.LexBIG.distributed.test.function.query;
 
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
 /**
  * The Class TestDiscoverAvailableVocabulariesandVersions.

@@ -19,8 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.distributed.test.services;
 
-import junit.framework.TestCase;
-
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;

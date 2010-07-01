@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
 
 import org.LexGrid.LexBIG.testUtil.MockMethodInvocation;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.aopalliance.intercept.MethodInvocation;
 
 public class TestSkipSpecialLazyLoadMethods extends ServiceTestCase
@@ -45,14 +45,14 @@ public class TestSkipSpecialLazyLoadMethods extends ServiceTestCase
 	}
 	
 	public void testAcceptableLazyLoadMethod() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null, concept);	
 		assertTrue(dataServiceProxyHelper.isLazyLoadableMethod(method));
 	}
 	
 	public void testSkipUserDefinedNonLazyLoadableMethod() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getAllProperties", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null, concept);	
 		assertFalse(dataServiceProxyHelper.isLazyLoadableMethod(method));

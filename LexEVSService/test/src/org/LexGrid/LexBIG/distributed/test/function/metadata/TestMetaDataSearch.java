@@ -24,9 +24,6 @@ package org.LexGrid.LexBIG.distributed.test.function.metadata;
 
 import java.util.HashSet;
 
-import junit.framework.TestCase;
-
-import org.LexGrid.LexBIG.DataModel.Collections.MetadataPropertyList;
 import org.LexGrid.LexBIG.DataModel.Core.AbsoluteCodingSchemeVersionReference;
 import org.LexGrid.LexBIG.DataModel.Core.MetadataProperty;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGServiceMetadata;

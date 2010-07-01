@@ -19,54 +19,14 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.queryOptions;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.xml.namespace.QName;
-import javax.xml.rpc.ParameterMode;
-import javax.xml.rpc.encoding.TypeMappingRegistry;
-
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDataService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.commonTypes.EntityDescription;
-import org.LexGrid.commonTypes.Text;
-import org.LexGrid.concepts.Concept;
-import org.LexGrid.naming.Mappings;
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.apache.axis.encoding.XMLType;
-import org.apache.commons.lang.ArrayUtils;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Restrictions;
-
-import edu.mayo.cagrid.encoding.CastorBeanDeserializerFactory;
-import edu.mayo.cagrid.encoding.CastorBeanSerializerFactory;
-
-import gov.nih.nci.cagrid.cqlquery.Predicate;
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.applicationservice.ApplicationException;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-import gov.nih.nci.system.query.cql.CQLAttribute;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLPredicate;
-import gov.nih.nci.system.query.cql.CQLQuery;
-import gov.nih.nci.system.query.hibernate.HQLCriteria;
-import junit.framework.TestCase;
 
 public class QueryOptionsVersionTest extends ServiceTestCase {
 	String testId = "LexEVS DataService QueryOptions Tests";

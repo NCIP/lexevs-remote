@@ -20,8 +20,6 @@
 package org.LexGrid.LexBIG.caCore.test.query.hql;
 
 import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLQuery;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.List;

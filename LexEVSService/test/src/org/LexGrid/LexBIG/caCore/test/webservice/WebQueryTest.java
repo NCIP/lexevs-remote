@@ -26,9 +26,9 @@ import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImplServiceLocat
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.EntityDescription;
-import org.LexGrid.concepts.Concept;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
+import org.LexGrid.concepts.Entity;
+
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 
 public class WebQueryTest extends ServiceTestCase {
 	String testId = "LexEVS DataService Web Service Test (SOAP)";
@@ -91,7 +91,7 @@ public class WebQueryTest extends ServiceTestCase {
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
 		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		concept.setEntityCodeNamespace(ServiceTestCase.SNOMED_SCHEME);
 		concept.setEntityCode("29506000");
 		

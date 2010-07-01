@@ -19,27 +19,20 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.gridcql;
 
-import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
-import gov.nih.nci.cagrid.cqlquery.Association;
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.cagrid.cqlquery.Attribute;
 import gov.nih.nci.cagrid.cqlquery.CQLQuery;
 import gov.nih.nci.cagrid.cqlquery.Group;
 import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
 import gov.nih.nci.cagrid.cqlquery.Object;
 import gov.nih.nci.cagrid.cqlquery.Predicate;
-import gov.nih.nci.cagrid.cqlquery.QueryModifier;
-import gov.nih.nci.cagrid.cqlquery.Object;
-import gov.nih.nci.cagrid.cqlresultset.CQLObjectResult;
-import gov.nih.nci.cagrid.cqlresultset.CQLQueryResults;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 
 public class GridCQLGroups extends ServiceTestCase
 {
@@ -75,10 +68,10 @@ public class GridCQLGroups extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() > 0);
-		for (Concept concept : results){
+		for (Entity concept : results){
 			assertTrue(concept.getEntityCode().equals("149164001"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -139,10 +132,10 @@ public class GridCQLGroups extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() > 0);
-		for (Concept concept : results){
+		for (Entity concept : results){
 			assertTrue(concept.getEntityCode().equals("149164001"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -211,10 +204,10 @@ public class GridCQLGroups extends ServiceTestCase
 		target.setGroup(mainGroup);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() > 0);
-		for (Concept concept : results){
+		for (Entity concept : results){
 			assertTrue(concept.getEntityCode().equals("149164001"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -294,10 +287,10 @@ public class GridCQLGroups extends ServiceTestCase
 
 		query.setTarget(target);
 		
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() > 0);
-		for (Concept concept : results){
+		for (Entity concept : results){
 			assertTrue(concept.getEntityCode().equals("149164001"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}

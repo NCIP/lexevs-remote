@@ -21,15 +21,13 @@ package org.LexGrid.LexBIG.distributed.test.dataAccess;
 
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 
-import java.rmi.RemoteException;
-
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.LexBIG.Impl.dataAccess.ResourceManager;
 import org.LexGrid.LexBIG.Impl.dataAccess.SQLImplementedMethods;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
+import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
+import org.lexevs.system.ResourceManager;
 
 public class SecurityTest extends ServiceTestCase {
 	final static String testID = "SecurityTest";
@@ -80,19 +78,5 @@ public class SecurityTest extends ServiceTestCase {
 			assertTrue("Exception thrown", true);
 			e.printStackTrace();
 		}
-	}
-	
-	public final void testCallSQLImplementedMethod(){
-		//Try to call a SQLImplementedMethods method -- this should throw an Exception
-		try {					
-			SQLImplementedMethods.buildCodingScheme("Zebrafish", "1");
-			fail("Should have thrown Exception");
-		} catch (Exception e) {
-			System.out.println("Calling SQLImplementedMethods methods failed");
-			assertTrue("Exception thrown", true);
-			e.printStackTrace();
-		}
-	}
-	
-	
+	}	
 }

@@ -20,17 +20,13 @@
 package org.LexGrid.LexBIG.caCore.test.query.getAssociation;
 
 import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLQuery;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.naming.Mappings;
-import org.LexGrid.concepts.Concept;
 import org.apache.commons.lang.ArrayUtils;
 
 public class GetAssociationCodingScheme extends ServiceTestCase

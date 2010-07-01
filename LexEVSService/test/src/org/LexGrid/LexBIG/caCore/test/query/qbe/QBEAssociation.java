@@ -22,20 +22,13 @@
  */
 package org.LexGrid.LexBIG.caCore.test.query.qbe;
 
-import java.util.List;
-
 import gov.nih.nci.system.applicationservice.ApplicationService;
+
+import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-
-import junit.framework.TestCase;
+import org.LexGrid.relations.AssociationPredicate;
 
 public class QBEAssociation extends ServiceTestCase
 {
@@ -49,9 +42,9 @@ public class QBEAssociation extends ServiceTestCase
 	public void testRetrieveAssociations() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
-		Association as = new Association();
+		AssociationPredicate as = new AssociationPredicate();
 		
-		List<Association> sourceList = service.search(Association.class, as);	
+		List<AssociationPredicate> sourceList = service.search(AssociationPredicate.class, as);	
 		
 		assertTrue(sourceList != null);
 		assertTrue(sourceList.size() > 0);
@@ -60,170 +53,30 @@ public class QBEAssociation extends ServiceTestCase
 	public void testRetrieveAssociationById() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
-		Association as = new Association();
-		as.setEntityCode("CHD");
+		AssociationPredicate as = new AssociationPredicate();
+		as.setAssociationName("CHD");
 		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() > 0);
-		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCode().equals("CHD"));
-		assertTrue(assoc.getForwardName().equals("CHD"));
-		assertTrue(assoc.getReverseName().equals("PAR"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);			
-	}	
-	
-	public void testRetrieveAssociationByForwardName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setForwardName("equivalentClass");
-		
-		List<Association> assocList = service.search(Association.class, as);	
+		List<AssociationPredicate> assocList = service.search(AssociationPredicate.class, as);	
 		
 		assertTrue(assocList != null);
 		assertTrue(assocList.size() > 0);
 		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCodeNamespace().equals(ServiceTestCase.THES_SCHEME));
-		assertTrue(assoc.getEntityCode().equals("equivalentClass"));
-		assertTrue(assoc.getForwardName().equals("equivalentClass"));
-		assertTrue(assoc.getReverseName().equals("equivalentClass"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);		
+		AssociationPredicate assoc = assocList.get(0);
+		assertTrue(assoc.getAssociationName().equals("CHD"));
 	}	
-	
-	public void testRetrieveAssociationByReverseName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setReverseName("equivalentClass");
-		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() > 0);
-		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCodeNamespace().equals(ServiceTestCase.THES_SCHEME));
-		assertTrue(assoc.getEntityCode().equals("equivalentClass"));
-		assertTrue(assoc.getForwardName().equals("equivalentClass"));
-		assertTrue(assoc.getReverseName().equals("equivalentClass"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);					
-	}	
-	
-	public void testRetrieveAssociationByWrongId() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setEntityCode("Chemical_Or_Drug_Is_Metabolized_By_Enzyme_WRONG");
-		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() == 0);		
-	}	
-	
-	public void testRetrieveAssociationByWrongForwardName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setForwardName("IsMetabolizedByEnzyme_WRONG");
-		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() == 0);			
-	}	
-	
-	public void testRetrieveAssociationByWrongReverseName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setReverseName("MetabolizedByEnzymehas_WRONG");
-		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() == 0);		
-	}	
-	
+
 	public void testRetrieveAssociationByIdWildCard() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setAssociationName("equival*tClass");
+		AssociationPredicate as = new AssociationPredicate();
+		as.setAssociationName("C*D");
 		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() > 0);
-		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCodeNamespace().equals(ServiceTestCase.THES_SCHEME));
-		assertTrue(assoc.getEntityCode().equals("equivalentClass"));
-		assertTrue(assoc.getForwardName().equals("equivalentClass"));
-		assertTrue(assoc.getReverseName().equals("equivalentClass"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);					
-	}	
-	
-	public void testRetrieveAssociationByWildCardForwardName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setForwardName("equival*tClass");
-		
-		List<Association> assocList = service.search(Association.class, as);	
+		List<AssociationPredicate> assocList = service.search(AssociationPredicate.class, as);	
 		
 		assertTrue(assocList != null);
 		assertTrue(assocList.size() > 0);
 		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCodeNamespace().equals(ServiceTestCase.THES_SCHEME));
-		assertTrue(assoc.getEntityCode().equals("equivalentClass"));
-		assertTrue(assoc.getForwardName().equals("equivalentClass"));
-		assertTrue(assoc.getReverseName().equals("equivalentClass"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);			
+		AssociationPredicate assoc = assocList.get(0);
+		assertTrue(assoc.getAssociationName().equals("CHD"));
 	}	
-	
-	public void testRetrieveAssociationByWildCardReverseName() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		Association as = new Association();
-		as.setEntityCodeNamespace(ServiceTestCase.THES_SCHEME);
-		as.setReverseName("equival*tClass");
-		
-		List<Association> assocList = service.search(Association.class, as);	
-		
-		assertTrue(assocList != null);
-		assertTrue(assocList.size() > 0);
-		
-		Association assoc = assocList.get(0);
-		assertTrue(assoc.getEntityCodeNamespace().equals(ServiceTestCase.THES_SCHEME));
-		assertTrue(assoc.getEntityCode().equals("equivalentClass"));
-		assertTrue(assoc.getForwardName().equals("equivalentClass"));
-		assertTrue(assoc.getReverseName().equals("equivalentClass"));
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsNavigable() == true);
-		assertTrue(assoc.getIsTransitive() == true);			
-	}	
-
-	
 }

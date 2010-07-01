@@ -19,31 +19,28 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.lazyLoading;
 
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.client.proxy.LexEVSListProxy;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Property;
-import org.LexGrid.commonTypes.Text;
-import org.LexGrid.concepts.Concept;
 import org.LexGrid.concepts.Definition;
+import org.LexGrid.concepts.Entity;
 import org.LexGrid.concepts.Presentation;
 
 
 public class LazyLoadConceptTest extends ServiceTestCase {
 	String testId = "LexEVSDataServiceSecurityTest";
 
-	private Concept concept;
+	private Entity concept;
 	
 	@Override
 	protected String getTestID() {
@@ -60,9 +57,9 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		csvt.setVersion(ServiceTestCase.THES_VERSION);
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCode("C53916");
-		List<Concept> concepts = null;
+		List<Entity> concepts = null;
 		try {
 			concepts = svc.search(Concept.class, c, qo);
 		} catch (ApplicationException e) {
@@ -114,7 +111,7 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 	}
 	
 	public void testEnumerate(){
-		Enumeration<Presentation> enumeration = concept.enumeratePresentation();
+		Enumeration<? extends Presentation> enumeration = concept.enumeratePresentation();
 		assertTrue(enumeration.hasMoreElements() == true);
 		
 		int expectedPresentations = 3;
@@ -129,7 +126,7 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 	}
 	
 	public void testIterate(){
-		Iterator<Presentation> itr = concept.iteratePresentation();
+		Iterator<? extends Presentation> itr = concept.iteratePresentation();
 		assertTrue(itr.hasNext());
 		
 		int expectedPresentations = 3;

@@ -24,22 +24,18 @@ package org.LexGrid.LexBIG.distributed.test.services;
 
 import java.lang.reflect.Field;
 
-import junit.framework.TestCase;
-
 import org.LexGrid.LexBIG.DataModel.Collections.ModuleDescriptionList;
-import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.ModuleDescription;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
-import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
-import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.ActiveOption;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
+import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.ActiveOption;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.PropertyType;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.springframework.aop.framework.Advised;
 
 /**
@@ -182,7 +178,7 @@ public void testRestrictPropertyTypeReturns() throws LBException
         // no type restriction
         ResolvedConceptReference[] rcrs = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
         assertTrue(rcrs.length == 1);
-        Concept ce = rcrs[0].getReferencedEntry();
+        Entity ce = rcrs[0].getReferencedEntry();
 
         assertTrue("1",ce.getCommentCount() == 0);
         assertTrue("2",ce.getPropertyCount() == 6);

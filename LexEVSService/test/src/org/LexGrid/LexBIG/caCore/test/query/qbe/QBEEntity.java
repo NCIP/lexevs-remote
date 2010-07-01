@@ -21,8 +21,6 @@ package org.LexGrid.LexBIG.caCore.test.query.qbe;
 
 import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
@@ -32,11 +30,13 @@ import org.LexGrid.commonTypes.EntityDescription;
 import org.LexGrid.commonTypes.Property;
 import org.LexGrid.commonTypes.Text;
 import org.LexGrid.concepts.Comment;
-import org.LexGrid.concepts.Concept;
 import org.LexGrid.concepts.Definition;
+import org.LexGrid.concepts.Entity;
 import org.LexGrid.concepts.Presentation;
 
-public class QBEConcept extends ServiceTestCase {
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
+
+public class QBEEntity extends ServiceTestCase {
 
 	private final String test_id = "QBETests";
 	private QueryOptions thesQueryOptions;
@@ -57,12 +57,12 @@ public class QBEConcept extends ServiceTestCase {
 	public void testGetConceptByCode() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCode("C43856");
 		c.setEntityCodeNamespace("NCI_Thesaurus");
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 		assertTrue(list.size() > 0);
-		Concept foundConcept = (Concept)list.get(0);
+		Entity foundConcept = (Entity)list.get(0);
 		assertTrue(foundConcept.getComment().length == 0);
 		assertTrue(foundConcept.getProperty().length == 4);
 		assertTrue(foundConcept.getDefinition().length == 1);
@@ -73,59 +73,59 @@ public class QBEConcept extends ServiceTestCase {
 	public void testGetConceptByCodeWildcard() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();	
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCode("C4385*");
 		c.setEntityCodeNamespace("NCI_Thesaurus");
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 		assertTrue(list.size() == 11);
 	}
 	
 	public void testGetConceptByCodeEntityDescription() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish");
 		c.setEntityDescription(ed);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C43856"));
 	}
 	
 	public void testGetConceptByCodeWrongEntityDescription() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish_WRONG");
 		c.setEntityDescription(ed);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 		assertTrue(list.size() == 0);
 	}
 	
 	public void testGetConceptByCodePresentation() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Irish Water Spaniel");
 		pres.setValue(text);
 		c.addPresentation(pres);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C53889"));
 	}
 	
 	public void testGetConceptByCodePreferredPresentation() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
@@ -133,34 +133,34 @@ public class QBEConcept extends ServiceTestCase {
 		pres.setValue(text);
 		pres.setIsPreferred(true);
 		c.addPresentation(pres);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C72387"));
 	}
 	
 	public void testGetConceptByCodeNonPreferredPresentation() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Cuckoo-bread");
 		pres.setValue(text);
 		c.addPresentation(pres);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C72387"));
 	}
 	
 	public void testGetConceptByCodeWrongPreferredPresentation() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
@@ -168,7 +168,7 @@ public class QBEConcept extends ServiceTestCase {
 		pres.setValue(text);
 		pres.setIsPreferred(true);
 		c.addPresentation(pres);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -176,24 +176,24 @@ public class QBEConcept extends ServiceTestCase {
 	public void testGetConceptByCodeDefinition() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Definition def = new Definition();
 		Text text = new Text();
 		text.setContent("A mechanical device that sometimes resembles a living animal and is capable of performing a variety of often complex human tasks on command or by being programmed in advance.");
 		def.setValue(text);
 		c.addDefinition(def);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C20678"));
 	}
 	
 	public void testGetConceptByCodeDefinitionWildcard() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Definition def = new Definition();
 		Text text = new Text();
@@ -201,17 +201,17 @@ public class QBEConcept extends ServiceTestCase {
 				"a variety of often complex human tasks on command or by being*");
 		def.setValue(text);
 		c.addDefinition(def);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C20678"));
 	}
 	
 	public void testGetConceptByProperty() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
@@ -219,17 +219,17 @@ public class QBEConcept extends ServiceTestCase {
 		cp.setValue(text);
 		cp.setPropertyName("UMLS_CUI");
 		c.addProperty(cp);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C20678"));
 	}
 	
 	public void testGetConceptByWrongProperty() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
@@ -237,7 +237,7 @@ public class QBEConcept extends ServiceTestCase {
 		cp.setValue(text);
 		cp.setPropertyName("CONCEPT_NAME");
 		c.addProperty(cp);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -245,7 +245,7 @@ public class QBEConcept extends ServiceTestCase {
 	public void testGetConceptByPropertyWithoutPropertyName() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
@@ -254,41 +254,41 @@ public class QBEConcept extends ServiceTestCase {
 		text.setContent("C0336537");
 		cp.setValue(text);
 		c.addProperty(cp);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C20678"));
 	}
 	
 	public void testGetConceptByComment() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C51993"));
 	}
 	
 	public void testGetConceptByWrongComment() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.WRONG");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -296,17 +296,17 @@ public class QBEConcept extends ServiceTestCase {
 	public void testGetConceptByWildcardComment() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
-		Concept c = new Concept();
+		Entity c = new Entity();
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints*");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Concept> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
-		Concept foundConcept = list.get(0);
+		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C51993"));
 	}
 }

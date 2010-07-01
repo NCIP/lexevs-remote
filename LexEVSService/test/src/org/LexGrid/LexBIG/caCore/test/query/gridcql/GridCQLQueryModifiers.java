@@ -19,8 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.gridcql;
 
-import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
-import gov.nih.nci.cagrid.cqlquery.Association;
 import gov.nih.nci.cagrid.cqlquery.Attribute;
 import gov.nih.nci.cagrid.cqlquery.CQLQuery;
 import gov.nih.nci.cagrid.cqlquery.Group;
@@ -28,18 +26,13 @@ import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
 import gov.nih.nci.cagrid.cqlquery.Object;
 import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.cagrid.cqlquery.QueryModifier;
-import gov.nih.nci.cagrid.cqlquery.Object;
-import gov.nih.nci.cagrid.cqlresultset.CQLObjectResult;
-import gov.nih.nci.cagrid.cqlresultset.CQLQueryResults;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 
 public class GridCQLQueryModifiers extends ServiceTestCase
 {
@@ -128,8 +121,8 @@ public class GridCQLQueryModifiers extends ServiceTestCase
 		assertTrue(results.size() == 1);	
 		java.lang.Object returnObj = results.get(0);
 		
-		assertTrue(returnObj instanceof Concept);	
-		Concept concept = (Concept)returnObj;
+		assertTrue(returnObj instanceof Entity);	
+		Entity concept = (Entity)returnObj;
 		
 		assertTrue(concept.getEntityCode().equals("149164001"));
 	}	

@@ -22,18 +22,7 @@
  */
 package org.LexGrid.LexBIG.caCore.test.query.qbe;
 
-import java.util.List;
-
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedSource;
-
-import junit.framework.TestCase;
 
 public class QBESupportedContext extends ServiceTestCase
 {

@@ -22,28 +22,15 @@
  */
 package org.LexGrid.LexBIG.caCore.test.exampleUseCases;
 
-import java.util.Arrays;
 import java.util.List;
-
-import gov.nih.nci.system.applicationservice.ApplicationService;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.EntityDescription;
-import org.LexGrid.concepts.Concept;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-import org.LexGrid.relations.AssociationSource;
-import org.apache.commons.lang.ArrayUtils;
-
-import junit.framework.TestCase;
+import org.LexGrid.concepts.Entity;
 
 public class GetConceptFromEntityDescription extends ServiceTestCase
 {
@@ -69,12 +56,12 @@ public class GetConceptFromEntityDescription extends ServiceTestCase
 	
 	public void testGetConceptFromEntityDescription() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Space of Mall");
 		concept.setEntityDescription(ed);
 		
-		List<Concept> results = service.search(Concept.class, concept, queryOptions);
+		List<Entity> results = service.search(Entity.class, concept, queryOptions);
 		
 		assertTrue(results.size() == 1);	
 		

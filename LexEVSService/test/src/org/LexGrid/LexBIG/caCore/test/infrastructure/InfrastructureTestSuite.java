@@ -19,17 +19,11 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.infrastructure;
 
-import org.LexGrid.LexBIG.caCore.client.proxy.DataServiceProxyHelperImplTest1;
-import org.LexGrid.LexBIG.caCore.client.proxy.ProxyTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.cql.CQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.getAssociation.GetAssociationTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.gridcql.GridCQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.hql.HQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.qbe.QBETestSuite;
-import org.LexGrid.LexBIG.caCore.test.security.SecurityTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.LexGrid.LexBIG.caCore.client.proxy.DataServiceProxyHelperImplTest1;
+import org.LexGrid.LexBIG.caCore.client.proxy.ProxyTestSuite;
 
 public class InfrastructureTestSuite {
     

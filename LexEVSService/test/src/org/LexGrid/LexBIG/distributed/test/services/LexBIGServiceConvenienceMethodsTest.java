@@ -21,8 +21,6 @@ package org.LexGrid.LexBIG.distributed.test.services;
 
 import java.util.Arrays;
 
-import junit.framework.TestCase;
-
 import org.LexGrid.LexBIG.DataModel.Collections.AssociationList;
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;

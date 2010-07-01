@@ -25,8 +25,8 @@ package org.LexGrid.LexBIG.distributed.test.function.query;
 // LexBIG Test ID: T1_FNC_32	TestMapAttributestoTypes
 
 import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.naming.Mappings;
 import org.LexGrid.naming.SupportedProperty;

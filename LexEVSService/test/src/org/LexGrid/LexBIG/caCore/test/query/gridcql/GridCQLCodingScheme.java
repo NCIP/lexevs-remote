@@ -23,14 +23,11 @@ import gov.nih.nci.cagrid.cqlquery.Attribute;
 import gov.nih.nci.cagrid.cqlquery.CQLQuery;
 import gov.nih.nci.cagrid.cqlquery.Group;
 import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
-import gov.nih.nci.cagrid.cqlquery.Predicate;
-
-
-import java.util.Iterator;
-import java.util.List;
-
 import gov.nih.nci.cagrid.cqlquery.Object;
+import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.system.applicationservice.ApplicationService;
+
+import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;

@@ -19,20 +19,12 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.distributed.test.services;
 
-import java.util.Arrays;
 import java.util.Date;
 
-import junit.framework.TestCase;
-
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
-import org.LexGrid.LexBIG.DataModel.Collections.ExtensionDescriptionList;
 import org.LexGrid.LexBIG.DataModel.Collections.ModuleDescriptionList;
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
-import org.LexGrid.LexBIG.DataModel.InterfaceElements.ExtensionDescription;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.ModuleDescription;
-import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.Extensions.Generic.LexBIGServiceConvenienceMethods;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;

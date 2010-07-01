@@ -28,11 +28,11 @@ import org.LexGrid.LexBIG.DataModel.Collections.ConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
+import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.commonTypes.Property;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 
 /**
  * The Class TestEnumerateProperties.
@@ -67,7 +67,7 @@ public class TestEnumerateProperties extends ServiceTestCase
         assertTrue(matches.getResolvedConceptReferenceCount() > 0);
         ResolvedConceptReference ref = (ResolvedConceptReference) matches.enumerateResolvedConceptReference()
                 .nextElement();
-        Concept entry = ref.getReferencedEntry();
+        Entity entry = ref.getReferencedEntry();
 
         // Print properties (definitions, comments, presentations
         // are not printed but would be similarly handled)

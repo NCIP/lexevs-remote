@@ -19,6 +19,7 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.security;
 
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.evs.security.SecurityToken;
 import gov.nih.nci.system.applicationservice.ApplicationException;
@@ -38,7 +39,7 @@ import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Text;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -579,11 +580,11 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		Concept meddraConcept = new Concept();
+		Entity meddraConcept = new Entity();
 		meddraConcept.setEntityCodeNamespace(ServiceTestCase.MEDDRA_SCHEME);
 		meddraConcept.setEntityCode("10056389");
 
-		Concept thesConcept = new Concept();
+		Entity thesConcept = new Entity();
 		thesConcept.setEntityCodeNamespace("NCI_Thesaurus");
 		thesConcept.setEntityCode("C12727");
 
@@ -593,11 +594,11 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List<Concept> cs = service.search(Concept.class.getName(), conceptList);
+			List<Entity> cs = service.search(Concept.class.getName(), conceptList);
 			// should not return anything without a token
 			assertTrue(cs.size() > 0);
 
-			for(Concept c : cs){
+			for(Entity c : cs){
 				assertTrue(c.getEntityCode().equals("C12727"));
 			}		
 		} catch (ApplicationException e) {
@@ -621,11 +622,11 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		Concept meddraConcept = new Concept();
+		Entity meddraConcept = new Entity();
 		meddraConcept.setEntityCodeNamespace(ServiceTestCase.MEDDRA_SCHEME);
 		meddraConcept.setEntityCode("10056389");
 
-		Concept thesConcept = new Concept();
+		Entity thesConcept = new Entity();
 		thesConcept.setEntityCodeNamespace("NCI_Thesaurus");
 		thesConcept.setEntityCode("C12727");
 
@@ -635,11 +636,11 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List<Concept> cs = service.search(Concept.class.getName(), conceptList);
+			List<Entity> cs = service.search(Concept.class.getName(), conceptList);
 			assertTrue("Size: " + cs.size(), cs.size() >= 2);
 			
 			boolean found = false;
-			for(Concept c : cs){
+			for(Entity c : cs){
 				if(c.getEntityCodeNamespace().equals(ServiceTestCase.MEDDRA_SCHEME) && 
 						c.getEntityCode().equals("10056389")){
 					found = true;
@@ -663,7 +664,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		Concept meddraConcept = new Concept();
+		Entity meddraConcept = new Entity();
 		meddraConcept.setEntityCodeNamespace(ServiceTestCase.MEDDRA_SCHEME);
 		meddraConcept.setEntityCode("10056389");
 
@@ -694,7 +695,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		Concept meddraConcept = new Concept();
+		Entity meddraConcept = new Entity();
 		meddraConcept.setEntityCodeNamespace(ServiceTestCase.MEDDRA_SCHEME);
 		meddraConcept.setEntityCode("10056389");
 

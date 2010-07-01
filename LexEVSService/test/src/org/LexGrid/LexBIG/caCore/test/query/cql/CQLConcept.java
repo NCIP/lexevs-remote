@@ -19,6 +19,7 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.cql;
 
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.query.cql.CQLAttribute;
 import gov.nih.nci.system.query.cql.CQLGroup;
@@ -31,8 +32,7 @@ import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 
 public class CQLConcept extends ServiceTestCase
 {
@@ -69,12 +69,12 @@ public class CQLConcept extends ServiceTestCase
 		target.setGroup(group);
 				
 		query.setTarget(target);
-		List<Concept> concepts = service.query(query);
+		List<Entity> concepts = service.query(query);
 		
 		assertTrue(concepts != null);
 		assertTrue(concepts.size() > 0);
 		
-		Concept concept = concepts.get(0);
+		Entity concept = concepts.get(0);
 		assertTrue(concept.getEntityCodeNamespace().equals("NCI_Thesaurus"));
 		assertTrue(concept.getEntityCode().equals("C26040"));
 	}	
@@ -105,13 +105,13 @@ public class CQLConcept extends ServiceTestCase
 		target.setGroup(group);
 		
 		query.setTarget(target);
-		List<Concept> concepts = service.query(query);
+		List<Entity> concepts = service.query(query);
 		
 		assertTrue(concepts != null);
 		assertTrue(concepts.size() > 0);
 		
 		//all returned Concepts should match 'C2604*'
-		for(Concept c : concepts){
+		for(Entity c : concepts){
 			assertTrue(c.getEntityCodeNamespace().equals("NCI_Thesaurus"));
 			assertTrue(c.getEntityCode().startsWith("C2604"));			
 		}

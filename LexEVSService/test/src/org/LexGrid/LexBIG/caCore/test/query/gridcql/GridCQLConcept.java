@@ -19,23 +19,21 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.gridcql;
 
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.cagrid.cqlquery.Association;
 import gov.nih.nci.cagrid.cqlquery.Attribute;
 import gov.nih.nci.cagrid.cqlquery.CQLQuery;
 import gov.nih.nci.cagrid.cqlquery.Group;
 import gov.nih.nci.cagrid.cqlquery.LogicalOperator;
-import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.cagrid.cqlquery.Object;
+import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
-
-import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 
 public class GridCQLConcept extends ServiceTestCase
 {
@@ -74,8 +72,8 @@ public class GridCQLConcept extends ServiceTestCase
 		
 		
 		boolean foundResults = false;
-		List<Concept> concepts = service.query(query);
-		for (Concept concept : concepts) {
+		List<Entity> concepts = service.query(query);
+		for (Entity concept : concepts) {
 			foundResults = true;
 			assertTrue(concept.getEntityCode().equals("149164001"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
@@ -110,8 +108,8 @@ public class GridCQLConcept extends ServiceTestCase
 		query.setTarget(target);
 		
 		boolean foundResults = false;
-		List<Concept> concepts = service.query(query);
-		for (Concept concept : concepts) {
+		List<Entity> concepts = service.query(query);
+		for (Entity concept : concepts) {
 			foundResults = true;
 			assertTrue(concept.getEntityCode().startsWith("10000500"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
@@ -148,8 +146,8 @@ public class GridCQLConcept extends ServiceTestCase
 		query.setTarget(target);
 			
 		boolean foundResults = false;
-		List<Concept> concepts = service.query(query);
-		for (Concept concept : concepts) {
+		List<Entity> concepts = service.query(query);
+		for (Entity concept : concepts) {
 			foundResults = true;
 			assertTrue(concept.getEntityCode().equals("29506000"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));

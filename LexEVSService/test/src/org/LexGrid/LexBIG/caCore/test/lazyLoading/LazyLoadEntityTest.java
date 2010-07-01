@@ -21,21 +21,16 @@ package org.LexGrid.LexBIG.caCore.test.lazyLoading;
 
 import gov.nih.nci.system.applicationservice.ApplicationException;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.client.proxy.LexEVSListProxy;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Property;
-import org.LexGrid.commonTypes.Text;
-import org.LexGrid.concepts.Concept;
 import org.LexGrid.concepts.Definition;
 import org.LexGrid.concepts.Entity;
 import org.LexGrid.concepts.Presentation;
@@ -64,7 +59,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		Entity e = new Entity();
 		e.setEntityCode("C53916");
-		List<Concept> concepts = null;
+		List<Entity> concepts = null;
 		try {
 			concepts = svc.search(Entity.class, e, qo);
 		} catch (ApplicationException ex) {
@@ -116,7 +111,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 	}
 	
 	public void testEnumerate(){
-		Enumeration<Presentation> enumeration = entity.enumeratePresentation();
+		Enumeration<? extends Presentation> enumeration = entity.enumeratePresentation();
 		assertTrue(enumeration.hasMoreElements() == true);
 		
 		int expectedPresentations = 3;
@@ -131,7 +126,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 	}
 	
 	public void testIterate(){
-		Iterator<Presentation> itr = entity.iteratePresentation();
+		Iterator<? extends Presentation> itr = entity.iteratePresentation();
 		assertTrue(itr.hasNext());
 		
 		int expectedPresentations = 3;

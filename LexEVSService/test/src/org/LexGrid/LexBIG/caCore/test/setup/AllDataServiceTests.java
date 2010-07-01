@@ -19,6 +19,9 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.setup;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.LexGrid.LexBIG.caCore.test.bugs.BugsTestSuite;
 import org.LexGrid.LexBIG.caCore.test.exampleUseCases.ExampleUseCasesTestSuite;
 import org.LexGrid.LexBIG.caCore.test.history.HistoryTestSuite;
@@ -28,12 +31,8 @@ import org.LexGrid.LexBIG.caCore.test.pagination.PaginationTestSuite;
 import org.LexGrid.LexBIG.caCore.test.query.QueryTestSuite;
 import org.LexGrid.LexBIG.caCore.test.queryOptions.QueryOptionsTestSuite;
 import org.LexGrid.LexBIG.caCore.test.rest.RESTTestSuite;
-import org.LexGrid.LexBIG.caCore.test.security.LexEVSDataServiceSecurityTest;
 import org.LexGrid.LexBIG.caCore.test.security.SecurityTestSuite;
 import org.LexGrid.LexBIG.caCore.test.webservice.WebServiceTestSuite;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 public class AllDataServiceTests {
 

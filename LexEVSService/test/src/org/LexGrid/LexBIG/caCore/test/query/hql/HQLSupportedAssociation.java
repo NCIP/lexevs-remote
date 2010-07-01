@@ -20,15 +20,12 @@
 package org.LexGrid.LexBIG.caCore.test.query.hql;
 
 import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLQuery;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.naming.SupportedAssociation;
 
 public class HQLSupportedAssociation extends ServiceTestCase

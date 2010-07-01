@@ -19,14 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.bugs;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.query.cql.CQLAttribute;
-import gov.nih.nci.system.query.cql.CQLGroup;
-import gov.nih.nci.system.query.cql.CQLLogicalOperator;
-import gov.nih.nci.system.query.cql.CQLObject;
-import gov.nih.nci.system.query.cql.CQLPredicate;
-import gov.nih.nci.system.query.cql.CQLQuery;
-
 import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
@@ -34,9 +26,7 @@ import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDataService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Property;
-import org.LexGrid.concepts.Concept;
 import org.LexGrid.concepts.Entity;
 
 public class GForge19716 extends ServiceTestCase

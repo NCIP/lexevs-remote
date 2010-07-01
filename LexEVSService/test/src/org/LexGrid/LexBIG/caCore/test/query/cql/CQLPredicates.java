@@ -19,6 +19,7 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.cql;
 
+import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.query.cql.CQLAttribute;
 import gov.nih.nci.system.query.cql.CQLGroup;
@@ -27,13 +28,12 @@ import gov.nih.nci.system.query.cql.CQLObject;
 import gov.nih.nci.system.query.cql.CQLPredicate;
 import gov.nih.nci.system.query.cql.CQLQuery;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.apache.commons.lang.ArrayUtils;
 
 public class CQLPredicates extends ServiceTestCase
@@ -157,12 +157,12 @@ public class CQLPredicates extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 2);
 		String[] expectedCodes = new String[]{"99998006", "99999003"};
 		String[] returnedCodes = new String[2];
-		for (Concept concept : results){
+		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -200,12 +200,12 @@ public class CQLPredicates extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 1);
 		String expectedCodes[] = new String[]{"99998006"};
 		String returnedCodes[] = new String[1];
-		for (Concept concept : results){
+		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -243,10 +243,10 @@ public class CQLPredicates extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 1);
-		for (Concept concept : results){
+		for (Entity concept : results){
 			assertTrue(concept.getEntityCode().equals("100000000"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
@@ -279,12 +279,12 @@ public class CQLPredicates extends ServiceTestCase
 		target.setGroup(group);
 
 		query.setTarget(target);
-		List<Concept> results = service.query(query);
+		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 2);
 		String expectedCodes[] = new String[]{"100000000", "10000006"};
 		String returnedCodes[] = new String[2];
-		for (Concept concept : results){
+		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}

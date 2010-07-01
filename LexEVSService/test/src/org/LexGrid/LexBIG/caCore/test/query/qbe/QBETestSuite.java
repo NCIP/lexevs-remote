@@ -37,7 +37,7 @@ public class QBETestSuite {
     public static Test suite() throws Exception
     {
         TestSuite mainSuite = new TestSuite("LexEVS caCORE Query QBE Tests");
-        mainSuite.addTestSuite(QBEConcept.class);
+        mainSuite.addTestSuite(QBEEntity.class);
         mainSuite.addTestSuite(QBEAssociationQualification.class);
         mainSuite.addTestSuite(QBEAssociationSource.class);
         mainSuite.addTestSuite(QBECodingScheme.class);       

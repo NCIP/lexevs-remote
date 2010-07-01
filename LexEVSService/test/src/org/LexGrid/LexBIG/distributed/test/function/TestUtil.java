@@ -31,10 +31,10 @@ import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.RenderingDetail;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGServiceManager;
 import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
+import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 
 /**
  * The Class TestUtil.
@@ -54,7 +54,7 @@ public class TestUtil
  * 
  * @throws LBInvocationException the LB invocation exception
  */
-    public static synchronized boolean verifyScheme(String localName, String urn, String version, int status)
+    public static synchronized boolean verifyScheme(String localName, String urn, String version, CodingSchemeVersionStatus status)
             throws LBInvocationException
     {
         // Verify vocabulary is loaded and active ...
@@ -62,7 +62,7 @@ public class TestUtil
 
         LexBIGService lbSvc = LexEVSServiceHolder.instance().getLexEVSAppService();
         CodingSchemeRenderingList csrl = lbSvc.getSupportedCodingSchemes();
-        Enumeration<CodingSchemeRendering> csrlEnum = csrl.enumerateCodingSchemeRendering();
+        Enumeration<? extends CodingSchemeRendering> csrlEnum = csrl.enumerateCodingSchemeRendering();
         while (csrlEnum.hasMoreElements() && !verified)
         {
             CodingSchemeRendering csr = csrlEnum.nextElement();
@@ -71,7 +71,7 @@ public class TestUtil
             if ((localName == null || localName.equalsIgnoreCase(css.getLocalName()))
                     && (urn == null || urn.equalsIgnoreCase(css.getCodingSchemeURI()))
                     && (version == null || version.equalsIgnoreCase(css.getRepresentsVersion()))
-                    && (status < 0 || status == rd.getVersionStatus().getType()))
+                    && (csr.getRenderingDetail().getVersionStatus().equals(rd.getVersionStatus())))
             {
                 verified = true;
                 break;
@@ -99,7 +99,7 @@ public class TestUtil
         lbsm.activateCodingSchemeVersion(ConvenienceMethods.createAbsoluteCodingSchemeVersionReference(urn, version));
 
         // Verify vocabulary is active ...
-        result = verifyScheme(null, urn, version, CodingSchemeVersionStatus.ACTIVE_TYPE);
+        result = verifyScheme(null, urn, version, CodingSchemeVersionStatus.ACTIVE);
 
         return result;
     }
@@ -121,7 +121,7 @@ public class TestUtil
                                            null);
 
         // Verify vocabulary is active ...
-        result = verifyScheme(null, urn, version, CodingSchemeVersionStatus.INACTIVE_TYPE);
+        result = verifyScheme(null, urn, version, CodingSchemeVersionStatus.INACTIVE);
 
         return result;
 
@@ -143,7 +143,7 @@ public class TestUtil
         lbsm.removeCodingSchemeVersion(ConvenienceMethods.createAbsoluteCodingSchemeVersionReference(urn, version));
 
         // Verify vocabulary is active ...
-        result = !verifyScheme(null, urn, version, -1);
+        result = !verifyScheme(null, urn, version, CodingSchemeVersionStatus.ACTIVE);
 
         return result;
     }

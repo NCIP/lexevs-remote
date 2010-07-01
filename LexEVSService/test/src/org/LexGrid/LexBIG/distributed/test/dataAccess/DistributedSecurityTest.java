@@ -19,13 +19,12 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.distributed.test.dataAccess;
 
+import gov.nih.nci.evs.security.SecurityToken;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
+
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
-
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-import junit.framework.TestCase;
 
 public class DistributedSecurityTest extends ServiceTestCase {
     String testId = "DistributedSecurityTest";

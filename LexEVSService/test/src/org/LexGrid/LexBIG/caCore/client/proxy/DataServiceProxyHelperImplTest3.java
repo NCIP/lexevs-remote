@@ -22,36 +22,17 @@
  */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-
-import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
-import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
-import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.MockMethodInvocation;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.concepts.Concept;
+import org.LexGrid.concepts.Entity;
 import org.LexGrid.concepts.Presentation;
-import org.LexGrid.naming.Mappings;
-import org.LexGrid.naming.SupportedAssociation;
-import org.LexGrid.naming.SupportedAssociationQualifier;
-import org.LexGrid.naming.SupportedCodingScheme;
-import org.LexGrid.relations.Association;
-import org.LexGrid.relations.AssociationSource;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.lang.ArrayUtils;
-
-import junit.framework.TestCase;
 
 public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 {
@@ -70,7 +51,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 	}
 	
 	public void testIsInitialized() throws Exception {
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null, concept);	
 		assertTrue(dataServiceProxyHelper.isInitialized(invocation));
@@ -94,7 +75,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 		result.add(new Presentation());
 		result.add(new Presentation());
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", null);
 		MethodInvocation invocation = new MockMethodInvocation(method, null);	
 		
@@ -115,7 +96,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 		result.add(searchPres);
 		result.add(new Presentation());
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentation", int.class);
 		MethodInvocation invocation = new MockMethodInvocation(method, new Object[]{1});	
 		
@@ -133,7 +114,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 		result.add(new Presentation());
 		result.add(new Presentation());
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("getPresentationCount");
 		MethodInvocation invocation = new MockMethodInvocation(method, null);	
 		
@@ -151,7 +132,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 		result.add(new Presentation());
 		result.add(new Presentation());
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("iteratePresentation");
 		MethodInvocation invocation = new MockMethodInvocation(method, null);	
 		
@@ -169,7 +150,7 @@ public class DataServiceProxyHelperImplTest3 extends ServiceTestCase
 		result.add(new Presentation());
 		result.add(new Presentation());
 		
-		Concept concept = new Concept();
+		Entity concept = new Entity();
 		Method method = concept.getClass().getMethod("enumeratePresentation");
 		MethodInvocation invocation = new MockMethodInvocation(method, null);	
 		

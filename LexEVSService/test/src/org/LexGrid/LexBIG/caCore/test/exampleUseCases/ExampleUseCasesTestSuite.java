@@ -19,13 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.exampleUseCases;
 
-import org.LexGrid.LexBIG.caCore.test.query.cql.CQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.getAssociation.GetAssociationTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.gridcql.GridCQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.hql.HQLTestSuite;
-import org.LexGrid.LexBIG.caCore.test.query.qbe.QBETestSuite;
-import org.LexGrid.LexBIG.caCore.test.security.SecurityTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
