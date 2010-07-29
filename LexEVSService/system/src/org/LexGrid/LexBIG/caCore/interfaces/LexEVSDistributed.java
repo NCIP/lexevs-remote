@@ -21,6 +21,9 @@ package org.LexGrid.LexBIG.caCore.interfaces;
 
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationService;
+import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
+import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
+import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 
 /**
  * The Distributed LexEVS Portion of LexEVSAPI. This interface is a framework for calling
@@ -28,4 +31,11 @@ import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationSe
  * 
  * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
  */
-public interface LexEVSDistributed extends TokenSecurableApplicationService, LexBIGService {}
+public interface LexEVSDistributed extends TokenSecurableApplicationService, LexBIGService {
+	
+	public LexEVSValueSetDefinitionServices getLexEVSValueSetDefinitionServices();
+	
+	public LexEVSConceptDomainServices getLexEVSConceptDomainServices();
+	
+	public LexEVSPickListDefinitionServices getLexEVSPickListDefinitionServices();
+}

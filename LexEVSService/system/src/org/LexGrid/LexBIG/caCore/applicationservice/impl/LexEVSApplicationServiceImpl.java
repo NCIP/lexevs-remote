@@ -79,6 +79,12 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.impl.CriteriaImpl;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.lexevs.system.utility.MyClassLoader;
+import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
+import org.lexgrid.conceptdomain.impl.LexEVSConceptDomainServicesImpl;
+import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
+import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
+import org.lexgrid.valuesets.impl.LexEVSPickListDefinitionServicesImpl;
+import org.lexgrid.valuesets.impl.LexEVSValueSetDefinitionServicesImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ClassUtils;
 
@@ -89,6 +95,8 @@ import org.springframework.util.ClassUtils;
  * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
  */
 public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl implements LexEVSApplicationService {
+
+	private static final long serialVersionUID = -6915753324402247212L;
 	
 	private LexEVSClassCache classCache;
 	private static Logger log = Logger.getLogger(LexEVSApplicationServiceImpl.class.getName());
@@ -767,6 +775,21 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     @LexEVSSecurityTokenRequired public CodedNodeSet getNodeSet(@LexEVSSecurityTokenRequiredForParameter String codingScheme, CodingSchemeVersionOrTag versionOrTag,
 			LocalNameList localNameList) throws LBException {
 		return lbs.getNodeSet(codingScheme, versionOrTag, localNameList);
+	}
+
+	@Override
+	public LexEVSConceptDomainServices getLexEVSConceptDomainServices() {
+		return LexEVSConceptDomainServicesImpl.defaultInstance();
+	}
+
+	@Override
+	public LexEVSValueSetDefinitionServices getLexEVSValueSetDefinitionServices() {
+		return LexEVSValueSetDefinitionServicesImpl.defaultInstance();
+	}
+
+	@Override
+	public LexEVSPickListDefinitionServices getLexEVSPickListDefinitionServices() {
+		return LexEVSPickListDefinitionServicesImpl.defaultInstance();
 	}
 
 	@Override
