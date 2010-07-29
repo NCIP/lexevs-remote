@@ -23,7 +23,6 @@ import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.client.proxy.BeanProxy;
 import gov.nih.nci.system.client.proxy.ProxyHelperImpl;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -31,22 +30,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.cglib.proxy.Enhancer;
-
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
-import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils.DoInReflectionCallback;
 import org.LexGrid.annotations.LgAdminFunction;
 import org.LexGrid.annotations.LgClientSideSafe;
-import org.LexGrid.annotations.LgProxyClass;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.log4j.Logger;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopContext;
-import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.target.SingletonTargetSource;
-import org.springframework.core.annotation.AnnotationUtils;
 
 /**
  * Object proxy implementation for EVS. Certain methods are overridden to
@@ -96,14 +89,13 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
                 || obj instanceof String || obj instanceof Date || obj instanceof LexEVSBeanProxy
                 || obj instanceof BeanProxy)
             return obj;
-     
-        /*
-        obj = LexEVSCaCoreUtils.recurseReflect(obj, new ProxyingCallback(as));
-        */
+
+        if( ! LexEVSCaCoreUtils.isLexBigClass(obj.getClass())){
+        	return obj;
+        }
         
         // Don't proxy client-safe LexBig objects
-        if (LexEVSCaCoreUtils.isLexBigClass(obj.getClass()) && 
-        		isClientSafe(obj.getClass())) {
+        if (isClientSafe(obj.getClass())) {
             return obj;
         } else {
         	return LexEVSCaCoreUtils.createProxy(obj, as, this);
@@ -158,13 +150,7 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
     
             Method methodImpl = implClass.getMethod(methodName,
                 method.getParameterTypes());
-/*
-            for(int i=0; i<args.length; i++) {
-            	if (args[i] != null) {
-                	args[i] = LexEVSCaCoreUtils.recurseReflect(args[i], new UnwrappingCallback());
-            	}
-            }
-*/        
+     
             LexEVSApplicationService eas = (LexEVSApplicationService)as;
             Object results = eas.executeRemotely(
             		bean,
