@@ -80,9 +80,14 @@ public class DAOListFactory {
 	}
 	
 	private LexEVSDAO buildDAO(LocalSessionFactoryBean sessionFactory, RegistryEntry connection, DAOType type) throws Exception {	
+		String defaultPrefix = LexEvsServiceLocator.getInstance().
+			getLexEvsDatabaseOperations().
+			getPrefixResolver().
+			resolveDefaultPrefix();
+		
 		String uri = connection.getResourceUri();
 		String version = connection.getResourceVersion();
-		String prefix = connection.getPrefix();
+		String prefix = defaultPrefix + connection.getPrefix();
 			
 		EVSHibernateInterceptor interceptor = new EVSHibernateInterceptor();
 		interceptor.setPrefix(prefix);	
