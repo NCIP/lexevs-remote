@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="org.LexGrid.commonTypes.Property" table="property">
+	<class name="org.LexGrid.commonTypes.Property" table="property" lazy="false">
 
 		<id type="string" column="PROPERTYGUID" length="36">
 			<generator class="uuid" />
@@ -42,7 +42,7 @@
 		</property>
 
 		<bag name="_sourceList" access="field" where="attributeType = 'source'"
-			cascade="all,delete-orphan">
+			lazy="false" cascade="all,delete-orphan">
 			<key column="PROPERTYGUID" not-null="true" />
 			<one-to-many class="org.LexGrid.commonTypes.Property$Source" />
 		</bag>
