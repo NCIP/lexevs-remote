@@ -25,6 +25,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeTagList;
+import org.LexGrid.LexBIG.DataModel.Core.types.CodingSchemeVersionStatus;
 import org.LexGrid.LexBIG.caCore.connection.orm.interceptors.EVSHibernateInterceptor;
 import org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
@@ -61,10 +62,12 @@ public class DAOListFactory {
 		DataSource datasource = this.createDataSource();
 
 		for(RegistryEntry entry : codingSchemeEntries){
-			daoList.add(
-					buildDAO(
-							buildSessionFactoryBean(datasource), 
-							entry, DAOType.CODING_SCHEME));
+			if(entry.getStatus().equals(CodingSchemeVersionStatus.ACTIVE.toString())){
+				daoList.add(
+						buildDAO(
+								buildSessionFactoryBean(datasource), 
+								entry, DAOType.CODING_SCHEME));
+			}
 		}
 	}
 
