@@ -14,7 +14,7 @@
 			<column name="ASSOCIATIONNAME" length="100" />
 		</property>
 
-		<bag name="_sourceList" access="field" table="ENTITYASSNSTOENTITY"
+		<bag name="_sourceList" access="field" table="entityAssnsToEntity"
 			lazy="true" outer-join="false" cascade="all">
 			<key not-null="true">
 				<column name="ASSOCIATIONPREDICATEGUID" />
