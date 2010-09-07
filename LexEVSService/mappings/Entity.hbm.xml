@@ -39,7 +39,7 @@
 		</component>
 
 		<bag name="_entityTypeList" access="field" table="entityType"
-			cascade="all">
+			cascade="all" lazy="false">
 			<key not-null="true">
 				<column name="ENTITYGUID" not-null="true" />
 			</key>
