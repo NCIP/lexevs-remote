@@ -38,7 +38,7 @@
 			</property>
 		</component>
 
-		<bag name="_entityTypeList" access="field" table="ENTITYTYPE"
+		<bag name="_entityTypeList" access="field" table="entityType"
 			cascade="all">
 			<key not-null="true">
 				<column name="ENTITYGUID" not-null="true" />
@@ -62,7 +62,7 @@
 			<column name="EXPIRATIONDATE" />
 		</property>
 
-		<bag name="_commentList" table="PROPERTY" access="field"
+		<bag name="_commentList" table="property" access="field"
 			cascade="all, delete-orphan" where="propertyType='comment' and referenceType='entity'">
 			<key not-null="true">
 				<column name="REFERENCEGUID" not-null="true" />
@@ -70,7 +70,7 @@
 			<one-to-many class="org.LexGrid.concepts.Comment" />
 		</bag>
 
-		<bag name="_definitionList" table="PROPERTY" access="field"
+		<bag name="_definitionList" table="property" access="field"
 			cascade="all, delete-orphan" where="propertyType='definition' and referenceType='entity'">
 			<key not-null="true">
 				<column name="REFERENCEGUID" not-null="true" />
@@ -78,7 +78,7 @@
 			<one-to-many class="org.LexGrid.concepts.Definition" />
 		</bag>
 
-		<bag name="_propertyList" table="PROPERTY" access="field"
+		<bag name="_propertyList" table="property" access="field"
 			cascade="all, delete-orphan" where="propertyType='property' and referenceType='entity'">
 			<key not-null="true">
 				<column name="REFERENCEGUID" not-null="true" />
@@ -86,7 +86,7 @@
 			<one-to-many class="org.LexGrid.commonTypes.Property$EntityProperty" />
 		</bag>
 
-		<bag name="_presentationList" table="PROPERTY" access="field"
+		<bag name="_presentationList" table="property" access="field"
 			cascade="all, delete-orphan" where="propertyType='presentation' and referenceType='entity'">
 			<key not-null="true">
 				<column name="REFERENCEGUID" not-null="true" />
@@ -94,7 +94,7 @@
 			<one-to-many class="org.LexGrid.concepts.Presentation" />
 		</bag>
 	
-		<bag name="_propertyLinkList" access="field" table="PROPERTYLINKS" cascade="all">
+		<bag name="_propertyLinkList" access="field" table="propertyLinks" cascade="all">
 			<key>
 				<column name="ENTITYGUID" />
 			</key>

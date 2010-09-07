@@ -36,7 +36,7 @@
 			</property>
 		</component>
 
-		<bag name="_entityTypeList" access="field" table="LBENTITYTYPE"
+		<bag name="_entityTypeList" access="field" table="entityType"
 			cascade="all">
 			<key not-null="true">
 				<column name="ENTITYGUID" not-null="true" />
@@ -115,12 +115,6 @@
 
 		<many-to-one name="_entryState" class="org.LexGrid.versions.EntryState"
 			cascade="all" unique="true" column="entrystateid" />
-
-		<!-- <join table="entryState">-->
-		<!-- <property name="_CHAGNETYPE" access="field" type="boolean">-->
-		<!--			<column name="CHANGETYPE" length="1" />-->
-		<!--		</property>-->
-		<!-- </join>-->
 
 	</class>
 </hibernate-mapping>

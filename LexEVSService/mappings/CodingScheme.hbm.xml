@@ -88,7 +88,7 @@
 		</bag>
 
 		<bag name="_localNameList" access="field" cascade="all"
-			table="CSMULTIATTRIB" where="attributeType = 'localName'" lazy="false">
+			table="csMultiAttrib" where="attributeType = 'localName'" lazy="false">
 			<key not-null="true">
 				<column name="CODINGSCHEMEGUID" not-null="true" length="36" />
 			</key>
@@ -97,7 +97,7 @@
 
 		<component name="_properties" access="field"
 			class="org.LexGrid.commonTypes.Properties">
-			<bag name="_propertyList" table="LBPROPERTY" access="field"
+			<bag name="_propertyList" table="property" access="field"
 				cascade="all, delete-orphan" where="propertyType='property' and referenceType='codingScheme'">
 				<key not-null="true">
 					<column name="REFERENCEGUID" not-null="true" />
@@ -106,7 +106,7 @@
 			</bag>
 		</component>
 
-		<bag name="_sourceList" access="field" table="CSMULTIATTRIB"
+		<bag name="_sourceList" access="field" table="csMultiAttrib"
 			where="attributeType = 'source'" cascade="all, delete-orphan">
 			<key not-null="true">
 				<column name="CODINGSCHEMEGUID" not-null="true" />
@@ -125,7 +125,7 @@
 			access="field">
 
 			<bag name="_supportedAssociationList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Association'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Association'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -134,7 +134,7 @@
 			</bag>
 
 			<bag name="_supportedAssociationQualifierList" access="field"
-				cascade="all" table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'AssociationQualifier'"
+				cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'AssociationQualifier'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -143,7 +143,7 @@
 			</bag>
 
 			<bag name="_supportedCodingSchemeList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'CodingScheme'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'CodingScheme'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -152,7 +152,7 @@
 			</bag>
 
 			<bag name="_supportedContextList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Context'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Context'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -161,7 +161,7 @@
 			</bag>
 
 			<bag name="_supportedDataTypeList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'DataType'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'DataType'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -170,7 +170,7 @@
 			</bag>
 
 			<bag name="_supportedDegreeOfFidelityList" access="field"
-				cascade="all" table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'DegreeOfFidelity'"
+				cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'DegreeOfFidelity'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -179,7 +179,7 @@
 			</bag>
 
 			<bag name="_supportedEntityTypeList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'EntityType'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'EntityType'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -188,7 +188,7 @@
 			</bag>
 
 			<bag name="_supportedHierarchyList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Hierarchy'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Hierarchy'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -197,7 +197,7 @@
 			</bag>
 
 			<bag name="_supportedLanguageList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Language'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Language'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -206,7 +206,7 @@
 			</bag>
 
 			<bag name="_supportedNamespaceList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Namespace'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Namespace'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -215,7 +215,7 @@
 			</bag>
 
 			<bag name="_supportedPropertyList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Property'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Property'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -224,7 +224,7 @@
 			</bag>
 
 			<bag name="_supportedPropertyTypeList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'PropertyType'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyType'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -233,7 +233,7 @@
 			</bag>
 
 			<bag name="_supportedPropertyLinkList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'PropertyLink'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyLink'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -242,7 +242,7 @@
 			</bag>
 
 			<bag name="_supportedPropertyQualifierList" access="field"
-				cascade="all" table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'PropertyQualifier'"
+				cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'PropertyQualifier'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -251,7 +251,7 @@
 			</bag>
 
 			<bag name="_supportedPropertyQualifierTypeList" access="field"
-				cascade="all" table="CSSUPPORTEDATTRIB"
+				cascade="all" table="csSupportedAttrib"
 				where="SUPPORTEDATTRIBUTETAG = 'PropertyQualifierType'" lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -260,7 +260,7 @@
 			</bag>
 
 			<bag name="_supportedRepresentationalFormList" access="field"
-				cascade="all" table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'RepresentationalForm'"
+				cascade="all" table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'RepresentationalForm'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -269,7 +269,7 @@
 			</bag>
 
 			<bag name="_supportedSortOrderList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'SortOrder'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'SortOrder'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -278,7 +278,7 @@
 			</bag>
 
 			<bag name="_supportedSourceList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Source'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Source'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -288,7 +288,7 @@
 
 
 			<bag name="_supportedSourceRoleList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Source Role'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Source Role'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -298,7 +298,7 @@
 
 
 			<bag name="_supportedStatusList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Status'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Status'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -307,7 +307,7 @@
 			</bag>
 
 			<bag name="_supportedConceptDomainList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Concept Domain'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Concept Domain'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />
@@ -316,7 +316,7 @@
 			</bag>
 
 			<bag name="_supportedContainerNameList" access="field" cascade="all"
-				table="CSSUPPORTEDATTRIB" where="SUPPORTEDATTRIBUTETAG = 'Container Name'"
+				table="csSupportedAttrib" where="SUPPORTEDATTRIBUTETAG = 'Container Name'"
 				lazy="false">
 				<key not-null="true">
 					<column name="CODINGSCHEMEGUID" />

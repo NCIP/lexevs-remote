@@ -51,7 +51,7 @@
 			<column name="STATUS" length="50" />
 		</property>
 
-		<bag name="_usageContextList" access="field" table="PROPERTYMULTIATTRIB"
+		<bag name="_usageContextList" access="field" table="propertyMultiAttrib"
 			lazy="false" where="ATTRIBUTETYPE = 'usageContext'">
 			<key>
 				<column name="PROPERTYGUID" />
@@ -64,7 +64,7 @@
 			entityPropertyMultiAttrib, but it is missing
 		-->
 		<bag name="_propertyQualifierList" access="field" 
-			lazy="false" where="attributeType='qualifier'" table="PROPERTYMULTIATTRIB">
+			lazy="false" where="attributeType='qualifier'" table="propertyMultiAttrib">
 			<key>
 				<column name="PROPERTYGUID" />
 			</key>
