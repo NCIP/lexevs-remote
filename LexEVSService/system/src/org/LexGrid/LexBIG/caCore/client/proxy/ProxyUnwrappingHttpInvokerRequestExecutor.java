@@ -68,8 +68,10 @@ public class ProxyUnwrappingHttpInvokerRequestExecutor extends AuthenticationSim
 
 		protected Object replaceObject(Object obj)
         throws IOException {
-			if(obj != null &&
-					Enhancer.isEnhanced(obj.getClass())){
+			Class<?> clazz = obj.getClass();
+			if(obj != null && 
+				LexEVSCaCoreUtils.isLexBigClass(clazz) &&
+					Enhancer.isEnhanced(clazz)){
 				try {
 					return unwrap(obj);
 				} catch (Exception e) {
