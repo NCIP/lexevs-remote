@@ -22,6 +22,8 @@ package org.LexGrid.LexBIG.caCore.applicationservice;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
@@ -38,10 +40,38 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 	@Override
 	protected ObjectInputStream createObjectInputStream(InputStream is)
 			throws IOException {
-		 return new CodebaseAwareObjectInputStream(is, LexEvsServiceLocator.getInstance().getSystemResourceService().getClassLoader(), null);
+		 return new ProxyWrappingObjectInputStream(is, LexEvsServiceLocator.getInstance().getSystemResourceService().getClassLoader(), null);
 	}
+
+	@Override
+	protected ObjectOutputStream createObjectOutputStream(OutputStream os)
+			throws IOException {
+		return new ProxyWrappingObjectOutputStream(os);
+	}
+
+	private class ProxyWrappingObjectInputStream extends CodebaseAwareObjectInputStream {
+
+		public ProxyWrappingObjectInputStream(InputStream in, ClassLoader classLoader, String codebaseUrl) throws IOException {
+			super(in, classLoader, codebaseUrl);
+			this.enableResolveObject(true);
+		}
+
+		@Override
+		protected Object resolveObject(Object obj) throws IOException {
+			return super.resolveObject(obj);
+		}
+	}	
 	
-	
-	
-	
+	private class ProxyWrappingObjectOutputStream extends ObjectOutputStream {
+
+		public ProxyWrappingObjectOutputStream(OutputStream os) throws IOException {
+			super(os);
+			this.enableReplaceObject(true);
+		}
+
+		@Override
+		protected Object replaceObject(Object obj) throws IOException {
+			return super.replaceObject(obj);
+		}
+	}	
 }
