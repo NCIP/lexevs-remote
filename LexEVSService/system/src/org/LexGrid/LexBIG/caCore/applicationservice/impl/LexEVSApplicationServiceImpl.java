@@ -28,6 +28,7 @@ import gov.nih.nci.system.dao.Response;
 import gov.nih.nci.system.query.cql.CQLQuery;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -36,6 +37,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Collections.ExtensionDescriptionList;
@@ -61,6 +64,7 @@ import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceSecurityTokenRequired;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequired;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequiredForParameter;
+import org.LexGrid.LexBIG.caCore.applicationservice.resource.TimedMap;
 import org.LexGrid.LexBIG.caCore.client.proxy.LexEVSListProxy;
 import org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
@@ -72,6 +76,7 @@ import org.LexGrid.LexBIG.caCore.dao.orm.translators.SDKCQLToDetachedCriteria;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.security.Validator;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
+import org.LexGrid.annotations.LgClientSideSafe;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
@@ -98,6 +103,8 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 
 	private static final long serialVersionUID = -6915753324402247212L;
 	
+	private Map<String,Object> resourceMap = new TimedMap<String,Object>();
+	
 	private LexEVSClassCache classCache;
 	private static Logger log = Logger.getLogger(LexEVSApplicationServiceImpl.class.getName());
 	protected ApplicationContext appContext;
@@ -108,6 +115,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     private final LexBIGService lbs;
     
     private boolean updateClientProxyTarget = false;
+    private boolean enableRemoteShell = false;
     
     private NestedObjectToCriteria nestedObjectToCriteriaTranslator;
     private GridCQLToDetachedCriteria gridCQLToDetachedCriteriaTranslator;
@@ -163,6 +171,12 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
             throw new SecurityException(
                     "Cannot execute method on non-LexBig object");
         }
+        
+        if(object instanceof RemoteShell){
+        	RemoteShell shell = (RemoteShell)object;
+        	object = resourceMap.get(shell.getResourceUuid());
+        	resourceMap.remove(shell.getResourceUuid());
+        }
 
         try {
             int i = 0;
@@ -174,6 +188,8 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
                 parameterTypes);
             Object result = objMethod.invoke(object, args);
             
+            result = replaceWithShell(result);
+
             //Wrap up the result and the current state of the object
             //and return it. We will use the object on the client side
             //to update the proxy state.
@@ -182,13 +198,76 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
             } else {
             	return result;
             }
+          
         }
         catch (Exception e) {
             throw new ApplicationException(
                 "Failed to execute LexBig method remotely",e);
         }
     }
-      
+
+	private Object replaceWithShell(Object result) {
+		if(this.enableRemoteShell
+				&&
+				LexEVSCaCoreUtils.isLexBigClass(result.getClass())
+				&&
+				!result.getClass().isAnnotationPresent(LgClientSideSafe.class)){
+			Class<?>[] classes = ClassUtils.getAllInterfaces(result);
+			if(classes.length > 0){
+		        String resourceUuid = UUID.randomUUID().toString();
+		        
+		        resourceMap.put(resourceUuid, result);
+		        RemoteShell shell = new RemoteShell(classes, result.getClass(), resourceUuid);
+		        
+		        result = shell;
+			}
+		}
+		return result;
+	}
+	
+    public static class RemoteShell implements Serializable {
+		private static final long serialVersionUID = -7534638346041169930L;
+		private Class<?>[] targetInterfaces;
+		private Class<?> targetClass;
+    	private String resourceUuid;
+    	
+    	public RemoteShell(){
+    		super();
+    	}
+
+		public RemoteShell(Class<?>[] targetInterfaces, Class<?> targetClass,
+				String resourceUuid) {
+			super();
+			this.targetInterfaces = targetInterfaces;
+			this.targetClass = targetClass;
+			this.resourceUuid = resourceUuid;
+		}
+
+		public Class<?>[] getTargetInterfaces() {
+			return targetInterfaces;
+		}
+
+		public void setTargetInterfaces(Class<?>[] targetInterfaces) {
+			this.targetInterfaces = targetInterfaces;
+		}
+
+		public Class<?> getTargetClass() {
+			return targetClass;
+		}
+
+		public void setTargetClass(Class<?> targetClass) {
+			this.targetClass = targetClass;
+		}
+
+		public String getResourceUuid() {
+			return resourceUuid;
+		}
+
+		public void setResourceUuid(String resourceUuid) {
+			this.resourceUuid = resourceUuid;
+		}
+    }
+    
     /**
      * Execute securely. (Note: currently the annotations parameter is used only on
      * the client side)
@@ -267,7 +346,9 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     				}
     			}	       
     		}	       
-    		return objMethod.invoke(this, args);
+    		Object returnObj = objMethod.invoke(this, args);
+    		
+    		return replaceWithShell(returnObj);
     	}
     	catch (Exception e) {
     		throw new ApplicationException(
@@ -852,5 +933,13 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 
 	public void setUpdateClientProxyTarget(boolean updateClientProxyTarget) {
 		this.updateClientProxyTarget = updateClientProxyTarget;
+	}
+
+	public void setEnableRemoteShell(boolean enableRemoteShell) {
+		this.enableRemoteShell = enableRemoteShell;
+	}
+
+	public boolean isEnableRemoteShell() {
+		return enableRemoteShell;
 	}
 }

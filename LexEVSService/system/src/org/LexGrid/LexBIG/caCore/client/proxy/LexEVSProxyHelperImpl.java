@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
+import org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl.RemoteShell;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.annotations.LgAdminFunction;
@@ -39,6 +40,7 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.apache.log4j.Logger;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopContext;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.target.SingletonTargetSource;
 
 /**
@@ -83,6 +85,18 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
         	
         	obj = results.getReturnValue();      	
         }
+
+        if(obj instanceof RemoteShell){
+        	Class<?>[] targetInterfaces = ((RemoteShell)obj).getTargetInterfaces();
+        	Class<?> targetClass = ((RemoteShell)obj).getTargetClass();
+        	ProxyFactory pf = new ProxyFactory(targetInterfaces);
+        	pf.addAdvice(new LexEVSBeanProxy(as, this));
+        	pf.setProxyTargetClass(true);
+        	pf.setTargetClass(targetClass);
+        	pf.setTarget(obj);
+        
+        	return pf.getProxy();
+        }
         
         if(obj instanceof Integer || obj instanceof Float || obj instanceof Double
                 || obj instanceof Character || obj instanceof Long || obj instanceof Boolean
@@ -107,7 +121,11 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
      */@SuppressWarnings("unchecked")
     @Override
     public boolean isInitialized(MethodInvocation invocation) throws Throwable {
-        Class implClass = invocation.getThis().getClass();
+    	 if(invocation.getThis() == null || invocation.getThis() instanceof RemoteShell){
+    		 return false;
+    	 }
+    	 
+    	 Class implClass = invocation.getThis().getClass();
 
         // LexBig objects have methods that must be executed remotely
         if (LexEVSCaCoreUtils.isLexBigClass(implClass)) {
@@ -143,23 +161,21 @@ public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
         String methodName = method.getName();
         
         Object args[] = invocation.getArguments();
+        
         Class implClass = bean.getClass();
 
         // LexBig objects have methods that must be executed remotely
         if (LexEVSCaCoreUtils.isLexBigClass(implClass)) {
-    
-            Method methodImpl = implClass.getMethod(methodName,
-                method.getParameterTypes());
-     
+   
             LexEVSApplicationService eas = (LexEVSApplicationService)as;
             Object results = eas.executeRemotely(
             		bean,
-                methodImpl.getName(),  getParameterTypes(methodImpl), args);
+            		methodName,  getParameterTypes(method), args);
           
             return results;
-        }
+       }
 
-        return null;
+       return null;
     }
 
     /**
