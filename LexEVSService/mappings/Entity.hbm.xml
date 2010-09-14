@@ -10,6 +10,10 @@
 		<id type="string" column="ENTITYGUID" length="36">
 			<generator class="uuid" />
 		</id>
+		
+		<many-to-one name="_entityDescription" access="field" 
+			class="org.LexGrid.commonTypes.EntityDescription$Entity"
+			cascade="all" insert="false" update="false" column="ENTITYGUID" />
 
 		<property name="_entityCode" access="field" type="string">
 			<column name="ENTITYCODE" length="200" not-null="true" />
@@ -30,13 +34,6 @@
 		<property name="_isActive" access="field" type="boolean">
 			<column name="ISACTIVE" length="1" />
 		</property>
-
-		<component name="_entityDescription" access="field"
-			class="org.LexGrid.commonTypes.EntityDescription">
-			<property name="content" type="text">
-				<column name="DESCRIPTION" />
-			</property>
-		</component>
 
 		<bag name="_entityTypeList" access="field" table="entityType"
 			cascade="all" lazy="false">

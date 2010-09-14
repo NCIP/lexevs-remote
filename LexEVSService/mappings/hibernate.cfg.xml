@@ -20,6 +20,7 @@
 		<!-- MAPPINGS -->
 		<mapping resource="CodingScheme.hbm.xml" />
 		<mapping resource="Entity.hbm.xml" />
+		<mapping resource="EntityEntityDescription.hbm.xml" />
 		<mapping resource="Relations.hbm.xml" />
 		<mapping resource="Property.hbm.xml" />
 		<mapping resource="PropertyLink.hbm.xml" />

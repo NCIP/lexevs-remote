@@ -1,0 +1,20 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.LexGrid.commonTypes.EntityDescription"
+		table="entity"
+		entity-name="org.LexGrid.commonTypes.EntityDescription$Entity">
+
+		<cache usage="read-write"/>
+
+		<id column="entityGuid" type="string">
+			<generator class="uuid" />
+		</id>
+		
+		<property name="_content" type="text" access="field"
+			column="description" />
+			
+	</class>
+</hibernate-mapping>
