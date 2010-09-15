@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
-import org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl.RemoteShell;
+import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteShell;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.annotations.LgAdminFunction;
