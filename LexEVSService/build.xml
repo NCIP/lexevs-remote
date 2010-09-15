@@ -80,12 +80,14 @@
 				<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
 				<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
 				<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+				<include name="org/LexGrid/LexBIG/caCore/applicationservice/resource/**" />		
 					<fileset dir="system/src">
 						<include name="org/LexGrid/LexBIG/caCore/client/**" />
 						<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />	
 						<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
 						<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
 						<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+						<include name="org/LexGrid/LexBIG/caCore/applicationservice/resource/**" />
 					</fileset>
 		</jar>
 
