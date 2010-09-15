@@ -50,6 +50,12 @@
 		<property name="qbePathToDetachedCriteriaTranslator" ref="QBEPathToDetachedCriteria"/>
 		<property name="sdkCQLToDetachedCriteriaTranslator" ref="SDKCQLToDetachedCriteria"/>
 		<property name="paginationHelper" ref="PaginationHelper"/>
+		<property name="remoteResourceManager" ref="remoteResourceManager"/>
+	</bean>
+	
+	<bean id="remoteResourceManager" 
+		class="org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager">
+		<property name="enableRemoteShell" value="true"/>
 	</bean>
 
 	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
