@@ -74,12 +74,14 @@
 			<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
 			<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
 			<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+			<include name="org/LexGrid/LexBIG/caCore/resource/**" />
 			<fileset dir="system/src">
 				<include name="org/LexGrid/LexBIG/caCore/client/**" />
 				<include name="org/LexGrid/LexBIG/caCore/applicationservice/*" />	
 				<include name="org/LexGrid/LexBIG/caCore/interfaces/**" />	
 				<include name="org/LexGrid/LexBIG/caCore/hibernate/**" />	
 				<include name="org/LexGrid/LexBIG/caCore/utils/**" />
+				<include name="org/LexGrid/LexBIG/caCore/resource/**" />
 			</fileset>
 	</jar>		
 	<jar destfile="system/dist/lexevs-core.jar" basedir="system/build/classes">
@@ -95,6 +97,7 @@
 			    <include name="org/LexGrid/LexBIG/caCore/utils/**" />
 				<include name="org/LexGrid/LexBIG/caCore/web/**" />
 				<include name="org/LexGrid/LexBIG/caCore/webservice/**" />
+				<include name="org/LexGrid/LexBIG/caCore/resource/**" />
 				<fileset dir="system/src">
 					<include name="org/LexGrid/LexBIG/caCore/applicationservice/**" />
 					<include name="org/LexGrid/LexBIG/caCore/connection/**" />
@@ -105,6 +108,7 @@
 					<include name="org/LexGrid/LexBIG/caCore/utils/**" />
 					<include name="org/LexGrid/LexBIG/caCore/web/**" />
 					<include name="org/LexGrid/LexBIG/caCore/webservice/**" />
+					<include name="org/LexGrid/LexBIG/caCore/resource/**" />
 				</fileset>
 	</jar>		
 </target>
