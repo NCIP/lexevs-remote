@@ -29,7 +29,8 @@ public class RemoteResourceManager {
 				&&
 				!result.getClass().isAnnotationPresent(LgClientSideSafe.class)
 				&&
-				!doMethodsContainClientSideSafeAnnotation(result.getClass())){
+				!doMethodsContainClientSideSafeAnnotation(result.getClass())
+				){
 			Class<?>[] classes = ClassUtils.getAllInterfaces(result);
 			if(classes.length > 0){
 		        String resourceUuid = UUID.randomUUID().toString();
@@ -46,7 +47,10 @@ public class RemoteResourceManager {
 	private boolean doMethodsContainClientSideSafeAnnotation(Class<?> clazz){
 		for(Method method : clazz.getMethods()){
 			if(method.isAnnotationPresent(LgClientSideSafe.class)){
-				return true;
+				LgClientSideSafe css = method.getAnnotation(LgClientSideSafe.class);
+				if(css.force()){
+					return true;
+				}
 			}
 		}
 		return false;
