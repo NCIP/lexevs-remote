@@ -74,112 +74,112 @@ public class RESTTest extends ServiceTestCase {
 		assertTrue(result.contains(ServiceTestCase.SNOMED_SCHEME));
 	}
 	public void testRESTXMLSearchByCriteria() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTHTMLSearchByCriteria() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTXMLSearchByPath() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept,org.LexGrid.commonTypes.EntityDescription&org.LexGrid.commonTypes.EntityDescription[@_content=Boxing]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity,org.LexGrid.commonTypes.EntityDescription&org.LexGrid.commonTypes.EntityDescription[@_content=Boxing]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTHTMLSearchByPath() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept,org.LexGrid.commonTypes.EntityDescription&org.LexGrid.commonTypes.EntityDescription[@_content=Boxing]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity,org.LexGrid.commonTypes.EntityDescription&org.LexGrid.commonTypes.EntityDescription[@_content=Boxing]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTXMLSearchByRoleName() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.commonTypes.EntityDescription&org.LexGrid.concepts.Concept[@_entityCode=29506000]&roleName=_entityDescription");
+		String result = callRestfulService("GetXML?query=org.LexGrid.commonTypes.EntityDescription&org.LexGrid.concepts.Entity[@_entityCode=29506000]&roleName=_entityDescription");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("Boxing"));
 	}
 	
 	public void testRESTHTMLSearchByRoleName() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.commonTypes.EntityDescription&org.LexGrid.concepts.Concept[@_entityCode=29506000]&roleName=_entityDescription");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.commonTypes.EntityDescription&org.LexGrid.concepts.Entity[@_entityCode=29506000]&roleName=_entityDescription");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("Boxing"));
 	}
 	
 	public void testRESTXMLSearchByMultipeCriteria() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTHTMLSearchByMultipeCriteria() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTXMLInvalidURLParenthesis() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("Invalid format: '[' parenthesis does not match number of ']' parenthesis"));
 	}
 	
 	public void testRESTNonFullyQualifiedClassNamesPath() throws Exception {	
-		String result = callRestfulService("GetHTML?query=Concept,EntityDescription&EntityDescription[@_content=Boxing]");
+		String result = callRestfulService("GetHTML?query=Entity,EntityDescription&EntityDescription[@_content=Boxing]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTNonFullyQualifiedClassNamesCriteria() throws Exception {	
-		String result = callRestfulService("GetHTML?query=Concept&Concept[@_entityCode=29506000]");
+		String result = callRestfulService("GetHTML?query=Entity&Entity[@_entityCode=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("29506000"));
 	}
 	
 	public void testRESTNonFullyQualifiedClassNamesRoleName() throws Exception {	
-		String result = callRestfulService("GetHTML?query=EntityDescription&Concept[@_entityCode=29506000]&roleName=_entityDescription");
+		String result = callRestfulService("GetHTML?query=EntityDescription&Entity[@_entityCode=29506000]&roleName=_entityDescription");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("Boxing"));
 	}
 	
 	public void testRESTHTMLInvalidURLParenthesis() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("Invalid format: '[' parenthesis does not match number of ']' parenthesis"));
 	}
 	
 	public void testRESTXMLInvalidCriteriaObject() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.ConceptINVALID[@_entityCode=29506000]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
-		assertTrue(result.contains("org.LexGrid.concepts.ConceptINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
+		assertTrue(result.contains("org.LexGrid.concepts.EntityINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
 	}
 	
 	public void testRESTHTMLInvalidCriteriaObject() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.ConceptINVALID[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
-		assertTrue(result.contains("org.LexGrid.concepts.ConceptINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
+		assertTrue(result.contains("org.LexGrid.concepts.EntityINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
 	}
 	
 	public void testRESTXMLInvalidAttribute() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCodeINVALID=29506000]");
+		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("The String of Attributes passed in: [@_entityCodeINVALID=29506000] is invalid"));
@@ -187,7 +187,7 @@ public class RESTTest extends ServiceTestCase {
 	}
 
 	public void testRESTHTMLInvalidAttribute() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Concept&org.LexGrid.concepts.Concept[@_entityCodeINVALID=29506000]");
+		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
 		assertTrue(result != null);
 		assertTrue(result.length() > 0);
 		assertTrue(result.contains("The String of Attributes passed in: [@_entityCodeINVALID=29506000] is invalid"));
