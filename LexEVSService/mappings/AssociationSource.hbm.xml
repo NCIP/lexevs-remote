@@ -18,7 +18,7 @@
 			<column name="SOURCEENTITYCODENAMESPACE" length="50" />
 		</property>
 
-		<bag name="_targetList" table="ENTITYASSNSTOENTITY" access="field"
+		<bag name="_targetList" table="entityAssnsToEntity" access="field"
 			lazy="false" cascade="all">
 			<key not-null="true">
 				<column name="ENTITYASSNSGUID" />
@@ -27,8 +27,6 @@
 			<formula>ENTITYASSNSGUID</formula>
 			</many-to-many>
 		</bag>
-		
-<!--	TODO: _targetDataList-->
 		
 	</class>
 </hibernate-mapping>

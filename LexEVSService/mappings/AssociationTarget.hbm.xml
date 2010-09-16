@@ -56,31 +56,5 @@
 			<column name="ASSOCIATIONINSTANCEID" length="50" />
 		</property>
 
-<!--		<bag name="_usageContextList" access="field" table="LBENTITYASSNSTOENTITY"-->
-<!--			lazy="false">-->
-<!--			<key>-->
-<!--				<column name="multiAttributesKey" />-->
-<!--			</key>-->
-<!---->
-<!--			<element type="string"-->
-<!--				formula="(select lbentityassnquals.qualifierValue from -->
-<!--			lbentityassnquals-->
-<!--			where lbentityassnquals.referenceGuid = ENTITYASSNSGUID -->
-<!--			and lbentityassnquals.qualifierName = 'usageContext')" />-->
-<!--		</bag>-->
-
-		<!--		TODO-->
-		<!--<bag name="_associationQualificationList" table="LBENTITYASSNSTOENTITY"-->
-		<!--			access="field" lazy="false">-->
-		<!--			<key>-->
-		<!--				<column name="multiAttributesKey" />-->
-		<!--			</key>-->
-		<!--<many-to-many class="org.LexGrid.relations.AssociationQualification"-->
-		<!--				not-found="ignore">-->
-		<!--				<formula>multiAttributesKey</formula>-->
-		<!--			</many-to-many>-->
-		<!--		</bag>-->
-
-
 	</class>
 </hibernate-mapping>
