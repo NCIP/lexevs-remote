@@ -32,7 +32,6 @@ public class ProxyTestSuite {
 	        mainSuite.addTestSuite(DataServiceProxyHelperImplTest2.class);
 	        mainSuite.addTestSuite(DataServiceProxyHelperImplTest3.class);
 	        mainSuite.addTestSuite(LexEVSApplicationServiceProxyTest.class);
-	        mainSuite.addTestSuite(LexEVSProxyHelperImplTest.class);
 	        mainSuite.addTestSuite(LexEVSApplicationServiceProxyTestGforge21879.class);
 	        
 	        return mainSuite;
