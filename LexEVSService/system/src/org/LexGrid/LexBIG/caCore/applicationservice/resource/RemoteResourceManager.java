@@ -1,5 +1,6 @@
 package org.LexGrid.LexBIG.caCore.applicationservice.resource;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,7 +27,9 @@ public class RemoteResourceManager {
 				&&
 				LexEVSCaCoreUtils.isLexBigClass(result.getClass())
 				&&
-				!result.getClass().isAnnotationPresent(LgClientSideSafe.class)){
+				!result.getClass().isAnnotationPresent(LgClientSideSafe.class)
+				&&
+				!doMethodsContainClientSideSafeAnnotation(result.getClass())){
 			Class<?>[] classes = ClassUtils.getAllInterfaces(result);
 			if(classes.length > 0){
 		        String resourceUuid = UUID.randomUUID().toString();
@@ -38,6 +41,15 @@ public class RemoteResourceManager {
 			}
 		}
 		return result;
+	}
+	
+	private boolean doMethodsContainClientSideSafeAnnotation(Class<?> clazz){
+		for(Method method : clazz.getMethods()){
+			if(method.isAnnotationPresent(LgClientSideSafe.class)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void setResourceMap(Map<String,Object> resourceMap) {
