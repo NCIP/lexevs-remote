@@ -9,6 +9,7 @@
 	<bean name="/applicationService"	class="org.LexGrid.LexBIG.caCore.applicationservice.LexEvsHttpInvokerServiceExporter">
 		<property name="serviceInterface" value="org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService"/>
 		<property name="service"><ref bean="ApplicationService" /></property>
+		<property name="remoteResourceManager" ref="remoteResourceManager" />
 	</bean>
 		
 </beans>
