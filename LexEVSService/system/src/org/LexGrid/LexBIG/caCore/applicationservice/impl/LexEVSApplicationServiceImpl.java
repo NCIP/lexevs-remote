@@ -62,7 +62,6 @@ import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceSecur
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequired;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequiredForParameter;
 import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager;
-import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteShell;
 import org.LexGrid.LexBIG.caCore.client.proxy.LexEVSListProxy;
 import org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
@@ -166,11 +165,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
         if ( !LexEVSCaCoreUtils.isLexBigClass(object.getClass() )) {  
             throw new SecurityException(
                     "Cannot execute method on non-LexBig object");
-        }
-        
-        if(object instanceof RemoteShell){
-        	RemoteShell shell = (RemoteShell)object;
-        	object = this.remoteResourceManager.getResource(shell.getResourceUuid());
         }
 
         try {

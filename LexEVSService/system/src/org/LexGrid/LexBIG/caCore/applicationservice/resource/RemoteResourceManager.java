@@ -43,6 +43,14 @@ public class RemoteResourceManager {
 		}
 		return result;
 	}
+
+	public Object unWrapShell(Object obj) {
+		if(obj instanceof RemoteShell){
+			RemoteShell shell = (RemoteShell)obj;
+			return this.getResource(shell.getResourceUuid());
+		}
+		return obj;
+	}
 	
 	private boolean doMethodsContainClientSideSafeAnnotation(Class<?> clazz){
 		for(Method method : clazz.getMethods()){
@@ -71,6 +79,6 @@ public class RemoteResourceManager {
 	public boolean isEnableRemoteShell() {
 		return enableRemoteShell;
 	}
-	
+
 	
 }

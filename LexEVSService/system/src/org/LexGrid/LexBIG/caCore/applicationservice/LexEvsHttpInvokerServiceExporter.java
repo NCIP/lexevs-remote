@@ -25,6 +25,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.remoting.rmi.CodebaseAwareObjectInputStream;
@@ -37,6 +38,8 @@ import org.springframework.remoting.rmi.CodebaseAwareObjectInputStream;
  */
 public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter {
 
+	private RemoteResourceManager remoteResourceManager;
+	
 	@Override
 	protected ObjectInputStream createObjectInputStream(InputStream is)
 			throws IOException {
@@ -58,7 +61,7 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 
 		@Override
 		protected Object resolveObject(Object obj) throws IOException {
-			return super.resolveObject(obj);
+			return remoteResourceManager.unWrapShell(obj);
 		}
 	}	
 	
@@ -73,5 +76,13 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 		protected Object replaceObject(Object obj) throws IOException {
 			return super.replaceObject(obj);
 		}
+	}
+
+	public RemoteResourceManager getRemoteResourceManager() {
+		return remoteResourceManager;
+	}
+
+	public void setRemoteResourceManager(RemoteResourceManager remoteResourceManager) {
+		this.remoteResourceManager = remoteResourceManager;
 	}	
 }
