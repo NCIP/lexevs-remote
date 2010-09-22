@@ -55,7 +55,7 @@
 	
 	<bean id="remoteResourceManager" 
 		class="org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager">
-		<property name="enableRemoteShell" value="true"/>
+		<property name="enableRemoteShell" value="false"/>
 	</bean>
 
 	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
