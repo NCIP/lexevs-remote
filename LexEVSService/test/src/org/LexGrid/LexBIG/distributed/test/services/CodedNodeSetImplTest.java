@@ -64,7 +64,7 @@ public class CodedNodeSetImplTest extends ServiceTestCase
 
     	cns = cns.union(cns2);
 
-    	cns.restrictToStatus(ActiveOption.ACTIVE_ONLY, null);
+    	cns = cns.restrictToStatus(ActiveOption.ACTIVE_ONLY, null);
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 50).getResolvedConceptReference();
     
         assertTrue("1",rcr.length == 2);
@@ -89,9 +89,9 @@ public class CodedNodeSetImplTest extends ServiceTestCase
 
         cns2 = cns2.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C48327", "C48326"}, THES_SCHEME));
 
-        cns.intersect(cns2);
+        CodedNodeSet cnsIntersect = cns.intersect(cns2);
 
-        ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 50).getResolvedConceptReference();
+        ResolvedConceptReference[] rcr = cnsIntersect.resolveToList(null, null, null, 50).getResolvedConceptReference();
 
         assertTrue("1",rcr.length == 1);
         assertTrue("2",contains(rcr, "C48327", THES_SCHEME));
@@ -115,9 +115,9 @@ public class CodedNodeSetImplTest extends ServiceTestCase
 
         cns2 = cns2.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C48328", "C48329"}, THES_SCHEME));
 
-        cns.difference(cns2);
+        CodedNodeSet difference = cns.difference(cns2);
 
-        ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 50).getResolvedConceptReference();
+        ResolvedConceptReference[] rcr = difference.resolveToList(null, null, null, 50).getResolvedConceptReference();
 
         assertTrue("1",rcr.length == 2);
         assertTrue("2",contains(rcr, "C48327", THES_SCHEME));
@@ -137,9 +137,9 @@ public class CodedNodeSetImplTest extends ServiceTestCase
 
         cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C48327"}, THES_SCHEME));
 
-        cns.union(cns);
+        CodedNodeSet union = cns.union(cns);
 
-        ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 50).getResolvedConceptReference();
+        ResolvedConceptReference[] rcr = union.resolveToList(null, null, null, 50).getResolvedConceptReference();
 
         assertTrue("1",rcr.length == 1);
         assertTrue("2",contains(rcr, "C48327", THES_SCHEME));
