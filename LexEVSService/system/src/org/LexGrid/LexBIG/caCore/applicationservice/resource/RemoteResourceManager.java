@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.annotations.LgClientSideSafe;
+import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
 public class RemoteResourceManager {
@@ -16,7 +17,6 @@ public class RemoteResourceManager {
 	
 	public Object getResource(String uuid){
 		Object resource = this.resourceMap.get(uuid);
-		this.resourceMap.remove(uuid);
 		return resource;
 	}
 	
@@ -47,7 +47,13 @@ public class RemoteResourceManager {
 	public Object unWrapShell(Object obj) {
 		if(obj instanceof RemoteShell){
 			RemoteShell shell = (RemoteShell)obj;
-			return this.getResource(shell.getResourceUuid());
+			Object resource = this.getResource(shell.getResourceUuid());
+
+			if(resource == null){
+				throw new RuntimeException("Remote Resource has timed out on the Server -- please re-execute your query.");
+			}
+			
+			return resource;
 		}
 		return obj;
 	}

@@ -13,7 +13,7 @@ public class TimedMap<K,V> extends HashMap<K,V> implements InitializingBean{
 	
 	private Timer evictionTimer;
 	
-	private long checkPeriod = 100000;
+	private long checkPeriod = 10000;
 	private long timeToLive = 1000000;
 	
 	private Map<K,Long> timeMap = new HashMap<K,Long>();
