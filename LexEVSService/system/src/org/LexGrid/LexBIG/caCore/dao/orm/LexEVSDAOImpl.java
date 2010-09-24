@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeTagList;
+import org.apache.commons.lang.SerializationUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -120,6 +121,8 @@ public class LexEVSDAOImpl extends ORMDAOImpl implements LexEVSDAO
 		
 	    if(request.getIsCount() != null && request.getIsCount())
 	    {
+	    	obj = (DetachedCriteria)SerializationUtils.clone(obj);
+	    	
 	    	HibernateCallback callBack = getExecuteCountCriteriaHibernateCallback(obj);
 	        Integer rowCount = (Integer)getHibernateTemplate().execute(callBack);
 			log.debug("DetachedCriteria ORMDAOImpl ===== count = " + rowCount);
@@ -151,18 +154,14 @@ public class LexEVSDAOImpl extends ORMDAOImpl implements LexEVSDAO
 		HibernateCallback callBack = new HibernateCallback(){
 
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+
 				Criteria exeCriteria = criteria.getExecutableCriteria(session);
 				
 				// Cast to CriteriaImpl to get access to the Projection and ResultTransformer
 			    CriteriaImpl cImpl = (CriteriaImpl) exeCriteria;
+			    cImpl.setFirstResult(0);
+			    cImpl.setFetchSize(0);
 
-			    // Save original Projection and ResultTransformer (if any, could be null).
-			    Projection originalProjection = cImpl.getProjection();
-			    ResultTransformer originalResultTransformer = cImpl.getResultTransformer();
-
-			    // Get total count of elements by setting a count projection
-			    //Integer totalElements = ((Integer) exeCriteria.setProjection(Projections.rowCount())
-			    //        .uniqueResult());
 			    int totalElements = 0;
 			    exeCriteria.setProjection(Projections.rowCount());
 			    List resultList = exeCriteria.list();
@@ -171,9 +170,6 @@ public class LexEVSDAOImpl extends ORMDAOImpl implements LexEVSDAO
 			    	totalElements += countResult;
 			    }	
 
-			    // Restore original Projection and ResultTransformer
-			    exeCriteria.setProjection(originalProjection);
-			    exeCriteria.setResultTransformer(originalResultTransformer); 
 				return totalElements;
 			}
 		};
