@@ -968,9 +968,11 @@ public class LexEVSHTTPUtils implements Serializable{
 			throw ex;
 		}
 		
-		//if(Hibernate.isInitialized(results)){	
-		//	Hibernate.initialize(results);
-		//}
+		if(results.size() < index + 1){	
+			throw new Exception("Start index is too high." +
+					" This result set contains " + results.size() + " entries." +
+					" Adjust the 'startIndex' parameter to be lower than this value.");
+		}
 		
 		//first, if the result set array contains a Collection, we want to pull it out
 		//and process the elements of the collection.
@@ -982,6 +984,10 @@ public class LexEVSHTTPUtils implements Serializable{
 		}
 
 		int pageOfResults =  results.size() < Integer.parseInt(pageSize) ? results.size() : Integer.parseInt(pageSize);
+		
+		if(pageOfResults + Integer.parseInt(startIndex) >= results.size()){
+			pageOfResults = results.size() - Integer.parseInt(startIndex);
+		}
 		
 		Object[] resultSet = new Object[pageOfResults];
 		

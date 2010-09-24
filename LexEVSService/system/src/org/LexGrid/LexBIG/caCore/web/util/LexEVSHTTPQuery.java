@@ -40,6 +40,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.exceptions.SelectionStrategyException;
+import org.LexGrid.LexBIG.caCore.web.exceptions.WebQueryException;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.output.XMLOutputter;
@@ -146,11 +148,6 @@ public class LexEVSHTTPQuery extends HttpServlet {
 			validateQuery(query);
 			httpUtils.setQueryArguments(query);
 
-			/*
-			if (httpUtils.getPageNumber() != null) {
-				pageNumber = Integer.parseInt(httpUtils.getPageNumber());
-			}
-			*/
 			httpUtils.setServletName(request.getRequestURL().toString());
 
 			if (httpUtils.getPageSize() != null) {
@@ -159,12 +156,8 @@ public class LexEVSHTTPQuery extends HttpServlet {
 				httpUtils.setPageSize(localPageSize);
 			}
 
-			try {
-				resultSet = httpUtils.getResultSet();
-			} catch (Exception ex) {
-				log.error("Get ResultSet Exception: " + ex.getMessage());
-				throw ex;
-			}
+			resultSet = httpUtils.getResultSet();
+	
 			try {
 
 				XMLOutputter xout = new XMLOutputter();
@@ -192,19 +185,23 @@ public class LexEVSHTTPQuery extends HttpServlet {
 				throw ex;
 			}
 		} catch (Exception ex) {
-			log.error("Exception: ", ex);
 			
-			if (queryType.endsWith("XML")) {
-				response.setContentType("text/xml");
+			log.error("Exception: ", ex);
+			if(ex instanceof SelectionStrategyException || (
+					ex.getCause() != null && ex.getCause() instanceof SelectionStrategyException)){
 				
-				out.println(getXMLErrorMsg(ex, query));
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, 
+						"The requested Coding Scheme is not available. \n\n" +
+						ex.getMessage());
+			}else if(ex instanceof WebQueryException || (
+					ex.getCause() != null && ex.getCause() instanceof WebQueryException)){
+				
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
+						ex.getMessage());
 			} else {
-				response.setContentType("text/html");
-				out.println(getHTMLErrorMsg(ex));
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
 			}
-			// Need to add JSON error output???
 		}
-
 	}
 	
 	/**
