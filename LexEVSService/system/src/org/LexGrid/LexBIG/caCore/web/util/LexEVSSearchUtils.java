@@ -368,46 +368,42 @@ public class LexEVSSearchUtils {
 			}
 		}
 		if(startCounter != endCounter){
-			throw new Exception("Invalid format: '[' parenthesis does not match number of ']' parenthesis");
+			throw new WebQueryException("Invalid format: '[' parenthesis does not match number of ']' parenthesis");
 		}
-		try{
-			if(attString.indexOf("][")<1){
-				String att = attString.substring(1,attString.lastIndexOf(SystemConstant.RIGHT_BRACKET));           
-				attList.add(att);
+
+		if(attString.indexOf("][")<1){
+			String att = attString.substring(1,attString.lastIndexOf(SystemConstant.RIGHT_BRACKET));           
+			attList.add(att);
+		}
+		else{
+			if(attString.charAt(0)==SystemConstant.LEFT_BRACKET){                
+				startCounter = 1;
+				endCounter =0;
+				startIndex = 1;
 			}
 			else{
-				if(attString.charAt(0)==SystemConstant.LEFT_BRACKET){                
-					startCounter = 1;
-					endCounter =0;
-					startIndex = 1;
-				}
-				else{
-					throw new Exception("Invalid Query format " + attString);
-				}
-
-				int count = attString.length();
-				for(int i=1; i<count;i++){                
-					if(attString.charAt(i)==SystemConstant.RIGHT_BRACKET){
-						endCounter++;
-						if(startCounter == endCounter){                        
-							String att = attString.substring(startIndex,i);
-							attList.add(att);                        
-							startIndex = i+2;
-							if(startIndex < count){
-								startCounter = 0;
-								endCounter =0;
-							}
-
-						}
-					}
-					else if(attString.charAt(i)==SystemConstant.LEFT_BRACKET){
-						startCounter++;
-					}                
-				}
+				throw new WebQueryException("Invalid Query format " + attString);
 			}
 
-		}catch(Exception ex){
-			throw new Exception(ex.getMessage());
+			int count = attString.length();
+			for(int i=1; i<count;i++){                
+				if(attString.charAt(i)==SystemConstant.RIGHT_BRACKET){
+					endCounter++;
+					if(startCounter == endCounter){                        
+						String att = attString.substring(startIndex,i);
+						attList.add(att);                        
+						startIndex = i+2;
+						if(startIndex < count){
+							startCounter = 0;
+							endCounter =0;
+						}
+
+					}
+				}
+				else if(attString.charAt(i)==SystemConstant.LEFT_BRACKET){
+					startCounter++;
+				}                
+			}
 		}
 		return attList;
 	}

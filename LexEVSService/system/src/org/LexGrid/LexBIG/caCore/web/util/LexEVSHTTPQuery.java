@@ -432,12 +432,12 @@ public class LexEVSHTTPQuery extends HttpServlet {
 				}
 			}
 			if (startCounter != endCounter) {
-				throw new Exception(
+				throw new WebQueryException(
 						"Invalid format: '[' parenthesis does not match number of ']' parenthesis");
 			}
 		} else {
 			Encode encoder = new Encode("ESCAPE_XML");
-			throw new Exception("Invalid Syntax: " + encoder.encode(query) + getQuerySyntax());
+			throw new WebQueryException("Invalid Syntax: " + encoder.encode(query) + getQuerySyntax());
 		}
 		return valid;
 	}
