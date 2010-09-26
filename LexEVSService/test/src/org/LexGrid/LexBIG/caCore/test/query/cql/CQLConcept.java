@@ -19,7 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.query.cql;
 
-import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.query.cql.CQLAttribute;
 import gov.nih.nci.system.query.cql.CQLGroup;
@@ -49,7 +48,7 @@ public class CQLConcept extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 		
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 		
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -85,7 +84,7 @@ public class CQLConcept extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 		
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 		
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");

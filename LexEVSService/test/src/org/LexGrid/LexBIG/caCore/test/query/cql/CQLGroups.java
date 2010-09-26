@@ -49,7 +49,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -84,7 +84,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -115,7 +115,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -150,7 +150,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -181,7 +181,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -224,7 +224,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -265,7 +265,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
@@ -310,7 +310,7 @@ public class CQLGroups extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		CQLObject target = new CQLObject();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");

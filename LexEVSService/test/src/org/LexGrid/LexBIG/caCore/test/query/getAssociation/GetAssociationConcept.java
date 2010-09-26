@@ -28,8 +28,6 @@ import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.concepts.Entity;
 
-import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
-
 public class GetAssociationConcept extends ServiceTestCase
 {
 	private final String test_id = "CQLTests";
