@@ -20,15 +20,18 @@
 package org.LexGrid.LexBIG.caCore.test.rest;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
 
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
+import org.springframework.util.Assert;
 
 public class RESTTest extends ServiceTestCase {
-	String testId = "LexEVS DataService Web Service Test (SOAP)";
+	String testId = "LexEVS DataService REST Test.";
 
 	String serviceEndPoint;
 	
@@ -130,10 +133,14 @@ public class RESTTest extends ServiceTestCase {
 	}
 	
 	public void testRESTXMLInvalidURLParenthesis() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Invalid format: '[' parenthesis does not match number of ']' parenthesis"));
+		try {
+			callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}
+		fail();
 	}
 	
 	public void testRESTNonFullyQualifiedClassNamesPath() throws Exception {	
@@ -158,40 +165,58 @@ public class RESTTest extends ServiceTestCase {
 	}
 	
 	public void testRESTHTMLInvalidURLParenthesis() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Invalid format: '[' parenthesis does not match number of ']' parenthesis"));
+		try {
+			callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}
+		fail();
 	}
 	
 	public void testRESTXMLInvalidCriteriaObject() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("org.LexGrid.concepts.EntityINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
+		try {
+			callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}
+		fail();
 	}
 	
 	public void testRESTHTMLInvalidCriteriaObject() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("org.LexGrid.concepts.EntityINVALID is an invalid query object. Check your spelling and make sure this is a valid object in this system."));
+		try {
+			callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.EntityINVALID[@_entityCode=29506000][@_entityCodeNamespace=SNOMED%20Clinical%20Terms]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}	
+		fail();
 	}
-	
+
 	public void testRESTXMLInvalidAttribute() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("The String of Attributes passed in: [@_entityCodeINVALID=29506000] is invalid"));
-		assertTrue(result.contains("Caused by: Invalid field name - _entityCodeINVALID"));
+		try {
+			callRestfulService("GetXML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}	
+		fail();
 	}
 
 	public void testRESTHTMLInvalidAttribute() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("The String of Attributes passed in: [@_entityCodeINVALID=29506000] is invalid"));
-		assertTrue(result.contains("Caused by: Invalid field name - _entityCodeINVALID"));
+		try {
+			callRestfulService("GetHTML?query=org.LexGrid.concepts.Entity&org.LexGrid.concepts.Entity[@_entityCodeINVALID=29506000]");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}	
+		fail();
 	}
 	
 	public void testRESTXMLWithCodingSchemeParameter() throws Exception {	
@@ -215,17 +240,24 @@ public class RESTTest extends ServiceTestCase {
 	}
 	
 	public void testRESTXMLWithWrongCodingSchemeParameter() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=INVALID_CODING_SCHEME");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Didn't find CodingScheme/History for CodingScheme Name:"));		
+		try {
+			callRestfulService("GetXML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=INVALID_CODING_SCHEME");
+		} catch (Exception e) {
+			Assert.isInstanceOf(FileNotFoundException.class, e);
+			return;
+		}	
+		fail();
 	}
 	
 	public void testRESTHTMLWithWrongCodingSchemeParameter() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=INVALID_CODING_SCHEME");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Didn't find CodingScheme/History for CodingScheme Name:"));		
+		try {
+			callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=INVALID_CODING_SCHEME");
+		} catch (Exception e) {
+			Assert.isInstanceOf(FileNotFoundException.class, e);
+			
+			return;
+		}	
+		fail();
 	}
 	
 	public void testRESTXMLWithCodingSchemeAndVersionParameter() throws Exception {	
@@ -249,26 +281,35 @@ public class RESTTest extends ServiceTestCase {
 	}
 
 	public void testRESTXMLWithWrongCodingSchemeAndVersionParameter() throws Exception {	
-		String result = callRestfulService("GetXML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=" + ServiceTestCase.THES_SCHEME + "&codingSchemeVersion=INVALID_VERSION");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Didn't find CodingScheme/History for CodingScheme Name:"));		
+		try {
+			callRestfulService("GetXML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=" + ServiceTestCase.THES_SCHEME + "&codingSchemeVersion=INVALID_VERSION");
+		} catch (Exception e) {
+			Assert.isInstanceOf(FileNotFoundException.class, e);
+			return;
+		}	
+		fail();
 	}
-	
+
 	public void testRESTHTMLWithWrongCodingSchemeAndVersionParameter() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=" + ServiceTestCase.THES_SCHEME + "&codingSchemeVersion=INVALID_VERSION");
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		assertTrue(result.contains("Didn't find CodingScheme/History for CodingScheme Name:"));		
+		try {
+			callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeName=" + ServiceTestCase.THES_SCHEME + "&codingSchemeVersion=INVALID_VERSION");
+		} catch (Exception e) {
+			Assert.isInstanceOf(FileNotFoundException.class, e);
+			return;
+		}	
+		fail();
 	}
-	
+
 	public void testRESTHTMLWithVersionParameterWithoutCodingScheme() throws Exception {	
-		String result = callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeVersion=" + ServiceTestCase.THES_VERSION);
-		assertTrue(result != null);
-		assertTrue(result.length() > 0);
-		
-		//Make sure a second Coding Scheme wasn't returned
-		assertTrue(result.contains("Cannot Pass in a CodingScheme Version without a CodingScheme Name."));		
+		try {
+
+			callRestfulService("GetHTML?query=org.LexGrid.codingSchemes.CodingScheme&org.LexGrid.codingSchemes.CodingScheme&codingSchemeVersion=" + ServiceTestCase.THES_VERSION);
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 400"));
+			return;
+		}	
+		fail();
 	}
 
 	private String callRestfulService(String putString) throws Exception {
