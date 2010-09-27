@@ -190,6 +190,9 @@ public class LexEVSHTTPUtils implements Serializable{
 					}
 					else if(param.toLowerCase().startsWith("startindex")){
 						startIndex = param.substring("startIndex=".length());
+						if(Integer.parseInt(startIndex) < 0){
+							throw new WebQueryException("The 'startIndex' parameter cannot be less than 0.");
+						}
 					}
 					/*
 					else if(param.toLowerCase().startsWith("resultcounter")){
@@ -563,7 +566,7 @@ public class LexEVSHTTPUtils implements Serializable{
 			} else{
 
 				for(int i = start; i< end; i++){
-					int recNum = index + i + 1;
+					int recNum = index + i;
 					recordNum = String.valueOf(recNum);
 					Object result = resultSet[i];
 					xmlElement.addContent(getElement(result, recordNum));
@@ -611,14 +614,12 @@ public class LexEVSHTTPUtils implements Serializable{
 		}
 
 		if((pageNumber -1)> 0){
-			index += ((pageNumber -1)* rowCount) + 1;
+			index += ((pageNumber -1)* rowCount);
 		}
-		else{
-			index+= 1;
-		}
+		
 		int endRecordNum = rowCount + index - 1;
 		if(endRecordNum > totalNumRecords){
-			endRecordNum = totalNumRecords;
+			endRecordNum = totalNumRecords - 1;
 		}
 
 		String startCounter = String.valueOf(index);
@@ -949,17 +950,18 @@ public class LexEVSHTTPUtils implements Serializable{
 			if(startIndex != null || !startIndex.equals("0")){
 				index = Integer.parseInt(startIndex);
 			}
-			/*
-			if(resultCounter != null){
-				counter = Integer.parseInt(resultCounter);
-			}
-			*/
+			
 			if (roleName != null){
 				results = applicationService.getAssociation(criteria, roleName, queryOptions);
 			} else {
 				results = applicationService.search(searchPath, criteria, queryOptions);
 			}
 
+			if(results == null || results.size() == 0){
+				return new Object[0];
+			}
+			
+			
 			if (results != null && (results instanceof ListProxy)){
 				((ListProxy)results).setAppService(applicationService);
 			}
@@ -971,16 +973,16 @@ public class LexEVSHTTPUtils implements Serializable{
 		if(results.size() < index + 1){	
 			throw new Exception("Start index is too high." +
 					" This result set contains " + results.size() + " entries." +
-					" Adjust the 'startIndex' parameter to be lower than this value.");
+					" Adjust the 'startIndex' parameter to be lower than this value." +
+					" \n\n" +
+					" NOTE: The index parameter is zero-based, meaing the first" + 
+					" result will be '0'.");
 		}
 		
 		//first, if the result set array contains a Collection, we want to pull it out
 		//and process the elements of the collection.
 		if(results.size() == 1 && results.get(0) instanceof List){
 			results = (List)results.get(0);
-			//if(Hibernate.isInitialized(results)){			
-			//	Hibernate.initialize(results);
-			//}
 		}
 
 		int pageOfResults =  results.size() < Integer.parseInt(pageSize) ? results.size() : Integer.parseInt(pageSize);
