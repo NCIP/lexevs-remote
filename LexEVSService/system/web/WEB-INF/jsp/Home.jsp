@@ -123,7 +123,7 @@
 																						<br>
 																						<br>
 																						
-																						The LexEVS 5.1 Release includes the following components:
+																						The LexEVS 6.0 Release includes the following components:
 
 
 																						<br>
@@ -180,7 +180,7 @@
 																								<a href="https://cabig-kc.nci.nih.gov/Vocab/KC/index.php/LexBig_and_LexEVS">caBIG Vocabulary Knowledge Center</a> - Contains LexEVS information provided by Vocabulary Knowledge Center
 																							</li>
 																							<li>
-																								<a href="https://gforge.nci.nih.gov/docman/view.php/491/19364/lexevsapi51_notes.html">LexEVS 5.1 Release Notes</a> - Contains the release history information, highlights New 
+																								<a href="https://gforge.nci.nih.gov/docman/view.php/491/23186/lexevsapi60_notes.html">LexEVS 6.0 Release Notes</a> - Contains the release history information, highlights New 
 																								Features and Updates, Bug fixes since the last release, identifies Known Issues, and 
 																								provides information on documentation and other helpful reference links. 
 																							</li>
@@ -188,10 +188,10 @@
 																								<a href="http://cagrid-portal.nci.nih.gov/">caGRID Portal</a> – Link to the caGrid Portal/Browser 
 																							</li>
 																							<li>
-																								<a href="http://lexevsapi-data51.nci.nih.gov/wsrf/services/cagrid/LexEVSDataService">LexEVS 5.1 Data Grid Service URL</a> - URL of the LexEVS Data Grid Services 
+																								<a href="http://lexevsapi-data60.nci.nih.gov/wsrf/services/cagrid/LexEVSDataService">LexEVS 6.0 Data Grid Service URL</a> - URL of the LexEVS Data Grid Services 
 																							</li>
 																							<li>
-																								<a href="http://lexevsapi-analytical51.nci.nih.gov/wsrf/services/cagrid/LexEVSGridService">LexEVS 5.1 Analytical Grid Service URL</a> - URL of the LexEVS Analytical Grid Services 
+																								<a href="http://lexevsapi-analytical60.nci.nih.gov/wsrf/services/cagrid/LexEVSGridService">LexEVS 6.0 Analytical Grid Service URL</a> - URL of the LexEVS Analytical Grid Services 
 																							</li>
 																						</ul>
 																						
@@ -199,7 +199,7 @@
 																						<br>
 																						<b>NOTE</b>: This page allows users to conduct <i><b>simple</i></b> queries against the underlying API. Advanced 
 																						level searching is NOT supported here but, is available by accessing the EVS API programmatically or by 
-																						using the <a href="http://bioportal.nci.nih.gov">NCI BioPortal</a>.
+																						using the <a href="http://nciterms.nci.nih.gov/ncitbrowser/start.jsf">NCI Term Browser</a>.
 
 																						
 																						
