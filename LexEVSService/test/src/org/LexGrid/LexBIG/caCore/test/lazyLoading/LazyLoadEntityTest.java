@@ -81,7 +81,6 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		int count = entity.getPresentationCount();
 		assertTrue(count > 0);
 		Presentation indivPres = entity.getPresentation(0);
-		assertTrue(indivPres.getPropertyId().equals("P0001"));
 		assertTrue(indivPres.getPropertyType().equals("presentation"));
 	}
 	

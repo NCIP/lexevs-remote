@@ -61,7 +61,7 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		c.setEntityCode("C53916");
 		List<Entity> concepts = null;
 		try {
-			concepts = svc.search(Concept.class, c, qo);
+			concepts = svc.search(Entity.class, c, qo);
 		} catch (ApplicationException e) {
 			fail(e.getMessage());
 		}
@@ -81,7 +81,6 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		int count = concept.getPresentationCount();
 		assertTrue(count > 0);
 		Presentation indivPres = concept.getPresentation(0);
-		assertTrue(indivPres.getPropertyId().equals("P0001"));
 		assertTrue(indivPres.getPropertyType().equals("presentation"));
 	}
 	
