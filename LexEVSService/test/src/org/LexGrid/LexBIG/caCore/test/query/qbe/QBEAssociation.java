@@ -39,16 +39,6 @@ public class QBEAssociation extends ServiceTestCase
 		return test_id;
 	}
 	
-	public void testRetrieveAssociations() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		AssociationPredicate as = new AssociationPredicate();
-		
-		List<AssociationPredicate> sourceList = service.search(AssociationPredicate.class, as);	
-		
-		assertTrue(sourceList != null);
-		assertTrue(sourceList.size() > 0);
-	}
 	
 	public void testRetrieveAssociationById() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
