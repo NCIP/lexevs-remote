@@ -14,13 +14,15 @@
 			<column name="ASSOCIATIONNAME" length="100" />
 		</property>
 
+		<!-- This is too expensive of a query 
 		<bag name="_sourceList" access="field" table="entityAssnsToEntity"
-			lazy="true" outer-join="false" cascade="all">
+			lazy="extra" outer-join="false" cascade="all">
 			<key not-null="true">
 				<column name="ASSOCIATIONPREDICATEGUID" />
 			</key>
 			<one-to-many class="org.LexGrid.relations.AssociationSource" />
 		</bag>
-
+		-->
+		
 	</class>
 </hibernate-mapping>
