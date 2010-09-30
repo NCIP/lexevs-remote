@@ -18,20 +18,18 @@
 		<property name="_propertyName" access="field" type="string">
 			<column name="PROPERTYNAME" length="250" />
 		</property>
+		
+		<property name="_propertyType" insert="false" update="false" access="field" type="string">
+			<column name="PROPERTYTYPE" length="250" />
+		</property>
 
 		<property name="_language" access="field" type="string">
 			<column name="LANGUAGE" length="32" />
 		</property>
 
-		<!--		cannot find any classes has format property-->
-		<!--		<property name="_format"></property>-->
-
-		<component name="_value" access="field"
-			class="org.LexGrid.commonTypes.Text">
-			<property name="content" type="text">
-				<column name="PROPERTYVALUE" />
-			</property>
-		</component>
+		<many-to-one name="_value" access="field" 
+			class="org.LexGrid.commonTypes.Text$Property"
+			cascade="all" insert="false" update="false" column="PROPERTYGUID" />
 
 		<property name="_isActive" access="field" type="boolean">
 			<column name="ISACTIVE" />
@@ -59,10 +57,6 @@
 			<element type="string" column="attributeValue" />
 		</bag>
 
-		<!--
-			for entity, it should be saved in the different table
-			entityPropertyMultiAttrib, but it is missing
-		-->
 		<bag name="_propertyQualifierList" access="field" 
 			lazy="false" where="attributeType='qualifier'" table="propertyMultiAttrib">
 			<key>
@@ -121,4 +115,12 @@
 
 
 	</class>
+	
+	 <class name="org.LexGrid.commonTypes.Text" table="property" 
+    	entity-name="org.LexGrid.commonTypes.Text$Property">
+    	<id type="string" column="PROPERTYGUID" length="36">
+			<generator class="uuid" />
+		</id>
+        <property name="_content" access="field" update="false" insert="false" type="text" column="propertyValue"/>  
+    </class>
 </hibernate-mapping>
