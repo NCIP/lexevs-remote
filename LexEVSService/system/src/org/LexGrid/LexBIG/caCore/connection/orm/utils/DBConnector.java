@@ -23,12 +23,14 @@ import java.util.ArrayList;
 
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeTagList;
+import org.LexGrid.LexBIG.DataModel.Core.AbsoluteCodingSchemeVersionReference;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeSummary;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.DataModel.Core.types.CodingSchemeVersionStatus;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
+import org.LexGrid.LexBIG.Utility.ServiceUtility;
 import org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl;
 import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.apache.log4j.Logger;
@@ -94,10 +96,12 @@ public class DBConnector {
 	 * @throws LBParameterException
 	 */
 	public boolean isCodingSchemeActive(String name, CodingSchemeVersionOrTag csvt) throws LBParameterException {	
-		String uri = this.systemResourceService.getUriForUserCodingSchemeName(name);
-		String version = getInternalVersionString(name, csvt);
+		AbsoluteCodingSchemeVersionReference ref = 
+			ServiceUtility.getAbsoluteCodingSchemeVersionReference(name, csvt, true);
 		
-		CodingSchemeRendering rendering = this.getCodingSchemeRenderingForURIAndVersion(uri, version);
+		CodingSchemeRendering rendering = this.getCodingSchemeRenderingForURIAndVersion(
+				ref.getCodingSchemeURN(), 
+				ref.getCodingSchemeVersion());
 		
 		return rendering.getRenderingDetail().getVersionStatus().equals(CodingSchemeVersionStatus.ACTIVE);
 	}
@@ -126,23 +130,15 @@ public class DBConnector {
 	 * Returns the URI of the CodingScheme given a local name.
 	 * 
 	 * @param codingSchemeName Local Name of the Coding Scheme
+	 * @param tagOrVersion 
 	 * @param tagOrVersion Version or Tag information
 	 * @return URI of the CodingScheme
 	 * @throws LBParameterException
 	 */
-	public String getURIFromCodingSchemeName(String codingSchemeName) throws LBParameterException {
-		return this.systemResourceService.getUriForUserCodingSchemeName(codingSchemeName);
-	}
-	
-	private String getInternalVersionString(String codingSchemeName, CodingSchemeVersionOrTag tagOrVersion) throws LBParameterException {
-		String version = null;
-		if (tagOrVersion == null || tagOrVersion.getVersion() == null || tagOrVersion.getVersion().length() == 0) {
-	            version = systemResourceService.getInternalVersionStringForTag(codingSchemeName,
-	                    (tagOrVersion == null ? null : tagOrVersion.getTag()));
-	        } else {
-	            version = tagOrVersion.getVersion();
-	        }
-		return version;
+	public String getURIFromCodingSchemeName(String codingSchemeName, CodingSchemeVersionOrTag tagOrVersion) throws LBParameterException {
+		return 
+			ServiceUtility.getAbsoluteCodingSchemeVersionReference(codingSchemeName, tagOrVersion, true).
+				getCodingSchemeURN();
 	}
 	
 	/**
