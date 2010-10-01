@@ -86,11 +86,10 @@ public class TestforCurrentOrObsoleteConcept extends ServiceTestCase
         //add a status restriction
         cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
         cns = cns.restrictToMatchingDesignations("Sex Not Known", SearchDesignationOption.ALL, "exactMatch", null);
-        cns = cns.restrictToStatus(ActiveOption.INACTIVE_ONLY, new String[] {"Retired_Concept"});
+        cns = cns.restrictToStatus(ActiveOption.INACTIVE_ONLY, null);
         rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
         assertTrue("4",rcr.length == 1);
 
-        assertTrue("5",rcr[0].getReferencedEntry().getStatus().equals("Retired_Concept"));
-        assertFalse("6",rcr[0].getReferencedEntry().getIsActive().booleanValue());
+        assertFalse("5",rcr[0].getReferencedEntry().getIsActive().booleanValue());
     }
 }
