@@ -33,6 +33,7 @@ import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
+import org.LexGrid.util.PrintUtility;
 
 /**
  * The Class TestEnumerateConceptsbyRelationship.
@@ -59,17 +60,13 @@ public class TestEnumerateConceptsbyRelationship extends ServiceTestCase
     	lbscm.setLexBIGService(LexEVSServiceHolder.instance().getLexEVSAppService());
     	
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, null, null);
-        cng = cng.restrictToAssociations(Constructors.createNameAndValueList(
-        		lbscm.getAssociationCodeFromAssociationName(
-        		THES_SCHEME, null, "Concept_In_Subset")),
-                null);
+        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Concept_In_Subset"), null);
+        
         CodedNodeSet cns = cng.toNodeList(Constructors.createConceptReference("C12366", THES_SCHEME),
-                true, false, -1, 0);
+                true, false, 1, -1);
         ResolvedConceptReferenceList rcrl= cns.resolveToList(null, null, null, -1);
         ResolvedConceptReference[] rcr = rcrl.getResolvedConceptReference();
-        
+
         assertTrue("Length : " + rcr.length, rcr.length == 5);
-
     }
-
 }
