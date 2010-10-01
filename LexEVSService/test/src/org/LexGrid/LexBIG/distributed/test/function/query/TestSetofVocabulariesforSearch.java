@@ -57,14 +57,14 @@ public class TestSetofVocabulariesforSearch extends ServiceTestCase
 
         CodedNodeSet cns2 = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(ZEBRAFISH_SCHEME, null);
 
-        cns.union(cns2);
+        cns = cns.union(cns2);
 
         cns = cns.restrictToMatchingDesignations("Pect", SearchDesignationOption.ALL, "startsWith", null);
 
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
 
         assertTrue("1",contains(rcr, THES_SCHEME, "C63647"));//Pectin
-        assertTrue("2",contains(rcr, ZEBRAFISH_SCHEME, "ZFA_0001161"));//Pectoral fin
+        assertTrue("2",contains(rcr, ZEBRAFISH_SCHEME, "ZFA:0001161"));//Pectoral fin
 
     }
 
