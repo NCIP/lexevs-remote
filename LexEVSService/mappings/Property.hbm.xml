@@ -27,7 +27,7 @@
 			<column name="LANGUAGE" length="32" />
 		</property>
 
-		<many-to-one name="_value" access="field" 
+		<many-to-one name="_value" access="field" lazy="false"
 			class="org.LexGrid.commonTypes.Text$Property"
 			cascade="all" insert="false" update="false" column="PROPERTYGUID" />
 
