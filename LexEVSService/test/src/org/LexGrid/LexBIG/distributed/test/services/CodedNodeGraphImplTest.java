@@ -66,7 +66,7 @@ public void testIntersection() throws LBException
         CodedNodeGraph cng2 = lbsi.getNodeGraph(THES_SCHEME, null, "roles");
         cng2.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C37927","C25377","C54453","C48326"}, THES_SCHEME, null));//color
         
-        cng.intersect(cng2);
+        cng = cng.intersect(cng2);
         ResolvedConceptReferenceList rcrl = cng.resolveAsList(null, true, false, -1, -1, null, null, null, 50);
         ResolvedConceptReference[] rcr = rcrl.getResolvedConceptReference();
         
@@ -124,7 +124,7 @@ public void testIntersection() throws LBException
        List<String> rels = cng.listCodeRelationships(Constructors.createConceptReference("C32770",THES_SCHEME), Constructors.createConceptReference("C61410",THES_SCHEME), false);
        assertTrue("1",rels.size() == 1);
         //Yes, has subtype should come back with the global oid for hasSubtype.
-        assertTrue("2",rels.contains("A8"));
+        assertTrue("2",rels.contains("Concept_In_Subset"));
     }
     
     /**
@@ -145,7 +145,7 @@ public void testIntersection() throws LBException
         cng2 = cng2.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C12727"}, THES_SCHEME, null));
 
         //join them
-        cng.union(cng2);
+        cng = cng.union(cng2);
         
         ResolvedConceptReference[] rcr = cng.resolveAsList(null, true, false, -1, -1, null, null, null, 50).getResolvedConceptReference();
 

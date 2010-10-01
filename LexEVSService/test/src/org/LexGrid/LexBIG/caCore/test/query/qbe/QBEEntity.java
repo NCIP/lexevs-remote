@@ -60,7 +60,7 @@ public class QBEEntity extends ServiceTestCase {
 		Entity c = new Entity();
 		c.setEntityCode("C43856");
 		c.setEntityCodeNamespace("NCI_Thesaurus");
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() > 0);
 		Entity foundConcept = (Entity)list.get(0);
 		assertTrue(foundConcept.getComment().length == 0);
@@ -76,7 +76,7 @@ public class QBEEntity extends ServiceTestCase {
 		Entity c = new Entity();
 		c.setEntityCode("C4385*");
 		c.setEntityCodeNamespace("NCI_Thesaurus");
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() == 11);
 	}
 	
@@ -88,7 +88,7 @@ public class QBEEntity extends ServiceTestCase {
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish");
 		c.setEntityDescription(ed);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C43856"));
@@ -102,7 +102,7 @@ public class QBEEntity extends ServiceTestCase {
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish_WRONG");
 		c.setEntityDescription(ed);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() == 0);
 	}
 	
@@ -116,7 +116,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("Irish Water Spaniel");
 		pres.setValue(text);
 		c.addPresentation(pres);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C53889"));
@@ -133,7 +133,7 @@ public class QBEEntity extends ServiceTestCase {
 		pres.setValue(text);
 		pres.setIsPreferred(true);
 		c.addPresentation(pres);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -150,7 +150,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("Cuckoo-bread");
 		pres.setValue(text);
 		c.addPresentation(pres);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -168,7 +168,7 @@ public class QBEEntity extends ServiceTestCase {
 		pres.setValue(text);
 		pres.setIsPreferred(true);
 		c.addPresentation(pres);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -183,7 +183,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("A mechanical device that sometimes resembles a living animal and is capable of performing a variety of often complex human tasks on command or by being programmed in advance.");
 		def.setValue(text);
 		c.addDefinition(def);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -201,7 +201,7 @@ public class QBEEntity extends ServiceTestCase {
 				"a variety of often complex human tasks on command or by being*");
 		def.setValue(text);
 		c.addDefinition(def);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -219,7 +219,7 @@ public class QBEEntity extends ServiceTestCase {
 		cp.setValue(text);
 		cp.setPropertyName("UMLS_CUI");
 		c.addProperty(cp);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -237,7 +237,7 @@ public class QBEEntity extends ServiceTestCase {
 		cp.setValue(text);
 		cp.setPropertyName("CONCEPT_NAME");
 		c.addProperty(cp);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -254,7 +254,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("C0336537");
 		cp.setValue(text);
 		c.addProperty(cp);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -271,7 +271,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);
@@ -288,7 +288,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.WRONG");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 0);
 	}
@@ -303,7 +303,7 @@ public class QBEEntity extends ServiceTestCase {
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints*");
 		comment.setValue(text);
 		c.addComment(comment);
-		List<Entity> list = service.search(Concept.class, c, thesQueryOptions);
+		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
 		assertTrue(list.size() == 1);
 		Entity foundConcept = list.get(0);

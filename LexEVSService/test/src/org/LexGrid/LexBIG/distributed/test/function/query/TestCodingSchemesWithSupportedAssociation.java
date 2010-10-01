@@ -54,7 +54,7 @@ public class TestCodingSchemesWithSupportedAssociation extends ServiceTestCase
     	//GForge #15437
         try {
 			ConvenienceMethods cm = new ConvenienceMethods(LexEVSServiceHolder.instance().getLexEVSAppService());
-			CodingSchemeRenderingList csrl = cm.getCodingSchemesWithSupportedAssociation("R81");
+			CodingSchemeRenderingList csrl = cm.getCodingSchemesWithSupportedAssociation("Disease_Has_Molecular_Abnormality");
 			CodingSchemeRendering csr[] = csrl.getCodingSchemeRendering();
 			boolean found = false;
 			

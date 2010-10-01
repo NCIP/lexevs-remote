@@ -50,7 +50,7 @@ public class GridCQLConcept extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		gov.nih.nci.cagrid.cqlquery.Object target = new gov.nih.nci.cagrid.cqlquery.Object();
 				
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 		
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
@@ -87,7 +87,7 @@ public class GridCQLConcept extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		Object target = new Object();
 				
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 		
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
@@ -123,7 +123,7 @@ public class GridCQLConcept extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		Object target = new Object();
 				
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 	
 		Attribute at = new Attribute();
 		at.setName("_entityCodeNamespace");

@@ -57,10 +57,10 @@ public class GetAssociationCodingScheme extends ServiceTestCase
 
 		List localNames = (List)val.get(0);
 		String[] expectedLocalNames = new String[]{"NCI Thesaurus", "NCI_Thesaurus", "Thesaurus.owl", 
-				"ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl"};
+				"ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl", "NCI"};
 		
 		Object[] foundLocalNames = (Object[])localNames.toArray();
-		
+
 		assertTrue(ArrayUtils.isSameLength(expectedLocalNames, foundLocalNames));
 		
 		for(int i = 0; i < foundLocalNames.length; i++) {

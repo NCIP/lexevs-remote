@@ -47,7 +47,7 @@ public class GridCQLPredicates extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		Object target = new Object();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
@@ -71,7 +71,7 @@ public class GridCQLPredicates extends ServiceTestCase
 		CQLQuery query = new CQLQuery();	
 		Object target = new Object();
 
-		target.setName("org.LexGrid.concepts.Concept");
+		target.setName("org.LexGrid.concepts.Entity");
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");

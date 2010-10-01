@@ -77,7 +77,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		csvt.setVersion(ServiceTestCase.THES_VERSION);
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		List<Entity> concepts = svc.search(Concept.class, new Entity(), qo);
+		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);
 		LexEVSListProxy listProxy = (LexEVSListProxy)concepts;
 		assertTrue(listProxy.isHasAllRecords() == false);
 		assertTrue(listProxy.getListChunk().size() == 50);
