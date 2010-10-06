@@ -68,17 +68,17 @@
 			<column name="EXPIRATIONDATE" />
 		</property>
 
-		<bag name="_associationPredicateList" access="field"
-			table="ASSOCIATIONPREDICATE" cascade="all">
+		<bag name="_associationPredicateList" lazy="false" access="field"
+			table="associationPredicate" cascade="all">
 			<key not-null="true">
 				<column name="RELATIONGUID" />
 			</key>
 			<one-to-many class="org.LexGrid.relations.AssociationPredicate" />
 		</bag>
 
-		<component name="_properties" access="field"
+		<component name="_properties" lazy="false" access="field"
 			class="org.LexGrid.commonTypes.Properties">
-			<bag name="_propertyList" table="LBPROPERTY" access="field"
+			<bag name="_propertyList" table="property" access="field" lazy="false"
 				cascade="all, delete-orphan" where="propertyType='property' and referenceType='relation'">
 				<key not-null="true">
 					<column name="REFERENCEGUID" not-null="true" />

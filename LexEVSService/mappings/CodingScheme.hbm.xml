@@ -68,6 +68,7 @@
 			<column name="EXPIRATIONDATE" />
 		</property>
 
+		<!--  Don't load Entities
 		<component name="_entities" access="field"
 			class="org.LexGrid.concepts.Entities">
 			<bag name="_entityList" table="ENTITY" access="field"
@@ -78,6 +79,7 @@
 				<one-to-many class="org.LexGrid.concepts.Entity" />
 			</bag>
 		</component>
+		-->
 
 		<bag name="_relationsList" access="field" cascade="all"
 		table="RELATION">
