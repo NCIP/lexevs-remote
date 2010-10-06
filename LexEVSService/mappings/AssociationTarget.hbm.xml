@@ -10,6 +10,13 @@
 		<id column="ENTITYASSNSGUID" type="string" length="36">
 			<generator class="uuid" />
 		</id>
+		
+		<bag name="_associationQualificationList" access="field" lazy="false">  
+			<key not-null="true">
+				<column name="REFERENCEGUID" not-null="true" />
+			</key>
+			<one-to-many class="org.LexGrid.relations.AssociationQualification" />
+		</bag> 
 
 		<property name="_targetEntityCode" access="field" type="string">
 			<column name="TARGETENTITYCODE" length="200" not-null="true" />
