@@ -24,11 +24,10 @@ import java.net.URL;
 import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImpl;
 import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImplServiceLocator;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.commonTypes.EntityDescription;
-import org.LexGrid.concepts.Entity;
-
-import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
+import org.LexGrid.ws.codingSchemes.CodingScheme;
+import org.LexGrid.ws.commonTypes.EntityDescription;
+import org.LexGrid.ws.concepts.Entity;
+import org.LexGrid.ws.naming.SupportedCodingScheme;
 
 public class WebQueryTest extends ServiceTestCase {
 	String testId = "LexEVS DataService Web Service Test (SOAP)";
@@ -37,31 +36,31 @@ public class WebQueryTest extends ServiceTestCase {
 	protected String getTestID() {	
 		return testId;		
 	}
-	
+
 	public void testConnectToWebService() throws Exception {
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));   
+		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));   
 	}
 
 	public void testQueryObject() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
 		
 		CodingScheme cs = new CodingScheme();
-		Object[] results = query.queryObject(CodingScheme.class.getName(), cs);
+		Object[] results = query.queryObject(org.LexGrid.naming.SupportedCodingScheme.class.getName(), cs);
 		
 		assertTrue(results != null);
 		assertTrue(results.length > 0);
 	}
-	
+
 	public void testQueryObjectCodingScheme() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
 		
 		CodingScheme cs = new CodingScheme();
 		cs.setCodingSchemeName(ServiceTestCase.SNOMED_SCHEME);
 		cs.setRepresentsVersion(ServiceTestCase.SNOMED_VERSION);
-		Object[] results = query.queryObject(CodingScheme.class.getName(), cs);
+		Object[] results = query.queryObject(org.LexGrid.codingSchemes.CodingScheme.class.getName(), cs);
 		
 		assertTrue(results != null);
 		assertTrue(results.length == 1);
@@ -73,11 +72,11 @@ public class WebQueryTest extends ServiceTestCase {
 	
 	public void testQueryWithStartIndex() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
 		CodingScheme cs = new CodingScheme();
 		cs.setCodingSchemeName(ServiceTestCase.SNOMED_SCHEME);
 		cs.setRepresentsVersion(ServiceTestCase.SNOMED_VERSION);
-		Object[] results = query.query(CodingScheme.class.getName(), cs, 0);
+		Object[] results = query.query(org.LexGrid.codingSchemes.CodingScheme.class.getName(), cs, 0);
 		
 		assertTrue(results != null);
 		assertTrue(results.length == 1);
@@ -89,7 +88,7 @@ public class WebQueryTest extends ServiceTestCase {
 	
 	public void testGetAssociation() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi51Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
 		
 		Entity concept = new Entity();
 		concept.setEntityCodeNamespace(ServiceTestCase.SNOMED_SCHEME);
