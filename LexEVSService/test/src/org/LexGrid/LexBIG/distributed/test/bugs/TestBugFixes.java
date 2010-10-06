@@ -112,10 +112,10 @@ public class TestBugFixes extends ServiceTestCase
     {
 
         CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService().
-                         getCodingSchemeConcepts(THES_SCHEME, null);
+                         getCodingSchemeConcepts(SNOMED_SCHEME, null);
         
         //priviously, just specifying a language restriction was causing an error.
-        cns = cns.restrictToMatchingDesignations("heart", SearchDesignationOption.ALL, "LuceneQuery", "en");
+        cns = cns.restrictToMatchingDesignations("heart", SearchDesignationOption.ALL, "LuceneQuery", "ENG");
         
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 50).getResolvedConceptReference();
         
