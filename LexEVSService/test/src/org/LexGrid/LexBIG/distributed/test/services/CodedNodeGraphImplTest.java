@@ -60,14 +60,14 @@ public void testIntersection() throws LBException
         CodedNodeGraph cng = lbsi.getNodeGraph(THES_SCHEME, null, "roles");
         
         NameAndValueList nv = Constructors.createNameAndValueList("subClassOf");
-        cng.restrictToAssociations(nv, null);
-        cng.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C25377"}, THES_SCHEME, null));
+        cng = cng.restrictToAssociations(nv, null);
+        cng = cng.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C25377"}, THES_SCHEME, null));
 
         CodedNodeGraph cng2 = lbsi.getNodeGraph(THES_SCHEME, null, "roles");
-        cng2.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C37927","C25377","C54453","C48326"}, THES_SCHEME, null));//color
+        cng2 = cng2.restrictToSourceCodes(cm.createCodedNodeSet(new String[] {"C37927","C25377","C54453","C48326"}, THES_SCHEME, null));//color
         
         cng = cng.intersect(cng2);
-        ResolvedConceptReferenceList rcrl = cng.resolveAsList(null, true, false, -1, -1, null, null, null, 50);
+        ResolvedConceptReferenceList rcrl = cng.resolveAsList(Constructors.createConceptReference("C25377", THES_SCHEME), true, false, -1, -1, null, null, null, 50);
         ResolvedConceptReference[] rcr = rcrl.getResolvedConceptReference();
         
         assertNotNull("0",rcr);
