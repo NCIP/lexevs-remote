@@ -2,8 +2,8 @@
 <project name="WebServiceStubs" default="all" basedir=".">
 
 	
-<property name="wsdlURL" value="http://localhost:8080/lexevsapi51/services/lexevsapi51Service?wsdl"/>
-<property name="webServiceNamespace" value="http://localhost:8080/lexevsapi51/services/lexevsapi51Service"/>
+<property name="wsdlURL" value="http://bmidev4:19280/lexevsapi60/services/lexevsapi60Service?wsdl"/>
+<property name="webServiceNamespace" value="http://bmidev4:19280/lexevsapi60/services/lexevsapi60Service"/>
 
 	
 	
@@ -32,27 +32,28 @@
 <target name="wsdl2java" depends="init" >
 	<echo>Executing wsdl2java</echo>
           <java classname="org.apache.axis.wsdl.WSDL2Java"  classpathref="classpath">
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:codingSchemes.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:commonTypes.LexGrid.org"/>
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:builtins.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:concepts.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:naming.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:relations.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="urn:versions.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="http://valueDomains.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="http://types.valueDomains.LexGrid.org"/> 
-          	<arg value="--nsExclude"/>
-          	<arg value="http://types.versions.LexGrid.org"/>  
-          	
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:codingSchemes.LexGrid.org=org.LexGrid.ws.codingSchemes"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:commonTypes.LexGrid.org=org.LexGrid.ws.commonTypes"/>
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:builtins.LexGrid.org=org.LexGrid.ws.builtins"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:naming.LexGrid.org=org.LexGrid.ws.naming"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:relations.LexGrid.org=org.LexGrid.ws.relations"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:concepts.LexGrid.org=org.LexGrid.ws.concepts"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="urn:versions.LexGrid.org=org.LexGrid.ws.versions"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="http://valueSets.LexGrid.org=org.LexGrid.ws.valueSets"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="http://types.valueSets.LexGrid.org=org.LexGrid.ws.valueSets.types"/> 
+          	<arg value="--NStoPkg"/>
+          	<arg value="http://types.versions.LexGrid.org=org.LexGrid.ws.versions.types"/>  
+          	<arg value="--NStoPkg"/>
+          	<arg value="http://lgModel.edu.mayo.org=org.mayo.edu.ws.lgModel"/>  
           	<arg value="--NStoPkg"/>
           	<arg value="${webServiceNamespace}=${clientPackageName}"/> 
           	
