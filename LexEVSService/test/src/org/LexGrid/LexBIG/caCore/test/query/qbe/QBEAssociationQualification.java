@@ -44,13 +44,13 @@ public class QBEAssociationQualification extends ServiceTestCase
 	public void testGetAssociationQualifications() throws Exception {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		QueryOptions options = new QueryOptions();
-		options.setCodingScheme(ServiceTestCase.ZEBRAFISH_SCHEME);
+		options.setCodingScheme(ServiceTestCase.SNOMED_SCHEME);
 		CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-		csvt.setVersion(ServiceTestCase.ZEBRAFISH_VERSION);
+		csvt.setVersion(ServiceTestCase.SNOMED_VERSION);
 		options.setCodingSchemeVersionOrTag(csvt);
 		
 		AssociationSource ai = new AssociationSource();	
-		ai.setSourceEntityCode("ZFA_0000035");
+		ai.setSourceEntityCode("12300005");
 		
 		List<AssociationSource> assocList = service.search(AssociationSource.class, ai, options);	
 		
@@ -59,12 +59,13 @@ public class QBEAssociationQualification extends ServiceTestCase
 		boolean found = false;
 		
 		for(AssociationSource instance : assocList){
-			if(instance.getTarget()[0].getTargetEntityCode().equals("ZFS_0000027")){
+			if(instance.getTarget()[0].getTargetEntityCode().equals("300350000")){
 				found = true;
 				AssociationQualification[] quals = instance.getTarget()[0].getAssociationQualification();
 				assertTrue(quals.length == 1);
 				AssociationQualification foundQual = quals[0];
-				assertTrue(foundQual.getAssociationQualifier().equals("owl:someValuesFrom"));
+				assertTrue(foundQual.getAssociationQualifier().equals("rela"));
+				assertTrue(foundQual.getQualifierText().getContent().equals("isa"));
 			}
 		}		
 		assertTrue(found);
