@@ -19,7 +19,6 @@
  *******************************************************************************/
 package org.LexGrid.LexBIG.caCore.test.security;
 
-import edu.mayo.informatics.lexgrid.convert.directConversions.TextCommon.Concept;
 import gov.nih.nci.cagrid.cqlquery.Predicate;
 import gov.nih.nci.evs.security.SecurityToken;
 import gov.nih.nci.system.applicationservice.ApplicationException;
@@ -523,13 +522,13 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		DetachedCriteria dc = DetachedCriteria.forClass(Concept.class);
+		DetachedCriteria dc = DetachedCriteria.forClass(Entity.class);
 		dc.add(Restrictions.like("_entityCode", "1005%"));
 		dc.add(Restrictions.eq("_entityCodeNamespace", ServiceTestCase.MEDDRA_SCHEME));
 		
 		try {
 			// try to get concepts from a secured coding scheme
-			List cs = service.query(dc, 100, Concept.class.getName());
+			List cs = service.query(dc, 100, Entity.class.getName());
 			// should not return anything without a token
 			assertTrue(cs.size() == 0);
 		} catch (ApplicationException e) {
@@ -554,13 +553,13 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			fail("Error Connecting to LexEVS Data Service");
 		}
 
-		DetachedCriteria dc = DetachedCriteria.forClass(Concept.class);
+		DetachedCriteria dc = DetachedCriteria.forClass(Entity.class);
 		dc.add(Restrictions.like("_entityCode", "10052%"));
 		dc.add(Restrictions.eq("_entityCodeNamespace", ServiceTestCase.MEDDRA_SCHEME));
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List cs = service.query(dc, 100, Concept.class.getName());
+			List cs = service.query(dc, 100, Entity.class.getName());
 			// should not return anything without a token
 			assertTrue(cs.size() > 0);
 		} catch (ApplicationException e) {
@@ -594,7 +593,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List<Entity> cs = service.search(Concept.class.getName(), conceptList);
+			List<Entity> cs = service.search(Entity.class.getName(), conceptList);
 			// should not return anything without a token
 			assertTrue(cs.size() > 0);
 
@@ -636,7 +635,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List<Entity> cs = service.search(Concept.class.getName(), conceptList);
+			List<Entity> cs = service.search(Entity.class.getName(), conceptList);
 			assertTrue("Size: " + cs.size(), cs.size() >= 2);
 			
 			boolean found = false;
@@ -670,7 +669,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List cs = service.search(Concept.class.getName(), meddraConcept);
+			List cs = service.search(Entity.class.getName(), meddraConcept);
 			// should not return anything without a token
 			assertTrue(cs.size() == 0);
 
@@ -701,7 +700,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 
 		try {
 			// try to get concepts from a secured coding scheme
-			List cs = service.search(Concept.class.getName(), meddraConcept);
+			List cs = service.search(Entity.class.getName(), meddraConcept);
 			assertTrue(cs.size() == 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
