@@ -79,7 +79,7 @@ public class QBESupportedSource extends ServiceTestCase
 		
 		//Should return CSP2000, CSP2002, and CSP2003
 		System.out.println(sourceList.size());
-		assertTrue("Size: " + sourceList.size(), sourceList.size() == 6);			
+		assertTrue("Size: " + sourceList.size(), sourceList.size() == 3);			
 	}
 		
 	public void testSearchCodingSchemeBySupportedSource() throws Exception {
