@@ -134,14 +134,6 @@ public class QueryOptionsTest extends ServiceTestCase {
 		assertTrue(rowCount == 1);
 	}
 
-	public void testGetAssociationObjectStringQueryOptions() throws Exception {
-		CodingScheme cs = new CodingScheme();	
-		List<Text> copyright = service.getAssociation(cs, "_copyright", queryOptions);
-		assertTrue(copyright != null);
-		assertTrue(copyright.size() == 1);
-		assertTrue(copyright.get(0).getContent().equals(ServiceTestCase.THES_COPYRIGHT));
-	}
-
 	public void testQueryCQLQueryGridQueryOptions() throws Exception {
 		gov.nih.nci.cagrid.cqlquery.CQLQuery query = new gov.nih.nci.cagrid.cqlquery.CQLQuery();
 		gov.nih.nci.cagrid.cqlquery.Object target = new gov.nih.nci.cagrid.cqlquery.Object();
