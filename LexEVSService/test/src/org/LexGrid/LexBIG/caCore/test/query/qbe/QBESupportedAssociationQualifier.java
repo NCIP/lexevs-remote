@@ -84,31 +84,7 @@ public class QBESupportedAssociationQualifier extends ServiceTestCase
 		assertTrue(sourceList.size() >= 2);	
 		
 	}
-		
-	public void testSearchCodingSchemeBySupportedAssociationQualifier() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		CodingScheme cs = new CodingScheme();
-		cs.setCodingSchemeName(ServiceTestCase.META_SCHEME);
-		cs.setRepresentsVersion(ServiceTestCase.META_VERSION);
-		
-		Mappings mappings = new Mappings();
-		SupportedAssociationQualifier saq = new SupportedAssociationQualifier();
-		saq.setLocalId("HCD");
-		
-		mappings.addSupportedAssociationQualifier(saq);
-		cs.setMappings(mappings);
 
-		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
-	
-		assertTrue(sourceList != null);	
-		assertTrue(sourceList.size() == 1);
-				
-		CodingScheme scheme = sourceList.get(0);
-		assertTrue(scheme.getCodingSchemeName().equals(ServiceTestCase.META_SCHEME));
-		assertTrue(scheme.getRepresentsVersion().equals(ServiceTestCase.META_VERSION));
-	}
-	
 	public void testSearchCodingSchemeBySupportedAssociationQualifierWrongName() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
@@ -127,29 +103,5 @@ public class QBESupportedAssociationQualifier extends ServiceTestCase
 	
 		assertTrue(sourceList != null);	
 		assertTrue(sourceList.size() == 0);				
-	}
-	
-	public void testSearchCodingSchemeBySupportedAssociationQualifierWildCard() throws Exception {
-		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
-		
-		CodingScheme cs = new CodingScheme();
-		cs.setCodingSchemeName(ServiceTestCase.META_SCHEME);
-		cs.setRepresentsVersion(ServiceTestCase.META_VERSION);
-		
-		Mappings mappings = new Mappings();
-		SupportedAssociationQualifier saq = new SupportedAssociationQualifier();
-		saq.setLocalId("H*D");
-		
-		mappings.addSupportedAssociationQualifier(saq);
-		cs.setMappings(mappings);
-
-		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
-	
-		assertTrue(sourceList != null);	
-		assertTrue(sourceList.size() == 1);
-				
-		CodingScheme scheme = sourceList.get(0);
-		assertTrue(scheme.getCodingSchemeName().equals(ServiceTestCase.META_SCHEME));
-		assertTrue(scheme.getRepresentsVersion().equals(ServiceTestCase.META_VERSION));
 	}
 }
