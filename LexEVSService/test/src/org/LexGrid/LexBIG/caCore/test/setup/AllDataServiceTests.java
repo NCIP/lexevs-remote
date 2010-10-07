@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 import org.LexGrid.LexBIG.caCore.test.bugs.BugsTestSuite;
 import org.LexGrid.LexBIG.caCore.test.exampleUseCases.ExampleUseCasesTestSuite;
-import org.LexGrid.LexBIG.caCore.test.history.HistoryTestSuite;
 import org.LexGrid.LexBIG.caCore.test.infrastructure.InfrastructureTestSuite;
 import org.LexGrid.LexBIG.caCore.test.lazyLoading.LazyLoadTestSuite;
 import org.LexGrid.LexBIG.caCore.test.pagination.PaginationTestSuite;
@@ -41,7 +40,6 @@ public class AllDataServiceTests {
 		//$JUnit-BEGIN$
 
 		suite.addTest(BugsTestSuite.suite());
-		suite.addTest(HistoryTestSuite.suite());
 		suite.addTest(ExampleUseCasesTestSuite.suite());
 		suite.addTest(RESTTestSuite.suite());
 		suite.addTest(QueryTestSuite.suite());
