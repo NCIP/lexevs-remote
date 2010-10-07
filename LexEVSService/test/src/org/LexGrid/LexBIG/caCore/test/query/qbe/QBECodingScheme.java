@@ -75,10 +75,8 @@ public class QBECodingScheme extends ServiceTestCase
 		assertTrue(nciThes.getDefaultLanguage().equals(ServiceTestCase.THES_DEFAULT_LANG));
 		assertTrue("Value: " + nciThes.getApproxNumConcepts(),String.valueOf(nciThes.getApproxNumConcepts()).equals(
 				ServiceTestCase.THES_APPROX_NUM_CONCEPTS));
-		assertTrue(nciThes.getCopyright().getContent().equals(ServiceTestCase.THES_COPYRIGHT));
-		assertTrue(nciThes.getEntityDescription().getContent().equals(ServiceTestCase.THES_ENT_DESC));
-		assertTrue(nciThes.isIsActive() == true);
-			
+	
+		assertTrue(nciThes.getEntityDescription().getContent().equals(ServiceTestCase.THES_ENT_DESC));		
 	}	
 	
 	/*
@@ -108,7 +106,6 @@ public class QBECodingScheme extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedCodingScheme scs = new SupportedCodingScheme();
-		scs.setIsImported(false);
 		scs.setLocalId("Zebrafish");
 		
 		mappings.addSupportedCodingScheme(scs);
@@ -117,7 +114,7 @@ public class QBECodingScheme extends ServiceTestCase
 		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
 	
 		assertTrue(sourceList != null);	
-		assertTrue(sourceList.size() == 1);
+		assertEquals(1,sourceList.size());
 				
 		CodingScheme zebrafish = sourceList.get(0);
 		assertTrue(zebrafish.getCodingSchemeName().equals(ServiceTestCase.ZEBRAFISH_SCHEME));
@@ -150,7 +147,6 @@ public class QBECodingScheme extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedCodingScheme scs = new SupportedCodingScheme();
-		scs.setIsImported(false);
 		scs.setLocalId("Zeb*ish");
 		
 		mappings.addSupportedCodingScheme(scs);
