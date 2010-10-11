@@ -42,6 +42,9 @@ public class LexEVSClassCache extends ClassCache {
 	private List<LexEVSDAO> daoList = new ArrayList<LexEVSDAO>();
 
 	private List<DAOSelectionStrategy> selectionStrategies;
+	
+	private final static String ENTITY_CLASS_NAME = "Entity";
+	private final static String CONCEPT_CLASS_NAME = "Concept";
 
 	/**
 	 * Constructs a Cache of Class and Hibernate information given.
@@ -141,6 +144,20 @@ public class LexEVSClassCache extends ClassCache {
 		{
 			throw new QueryException("Could not determine type of attribute "+attribName+" in class "+className,e);
 		}
+	}
+	
+	public Class getClassFromCache(String className) throws ClassNotFoundException {
+		if(className.toLowerCase().equals(CONCEPT_CLASS_NAME.toLowerCase())){
+			className = ENTITY_CLASS_NAME;
+		}
+		return super.getClassFromCache(className);
+	}
+	
+	public String getPkgNameForClass(String className) {
+		if(className.toLowerCase().equals(CONCEPT_CLASS_NAME.toLowerCase())){
+			className = ENTITY_CLASS_NAME;
+		}
+		return super.getPkgNameForClass(className);
 	}
 	
 	/*
