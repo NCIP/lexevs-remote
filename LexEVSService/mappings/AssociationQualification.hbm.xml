@@ -5,7 +5,7 @@
 <hibernate-mapping>  
      <class name="org.LexGrid.relations.AssociationQualification" table="entityAssnQuals" lazy="false">        
        		
-       	<id column="entityAssnQualsGuid">
+       	<id type="string" length="36" column="entityAssnQualsGuid">
 			<generator class="uuid" />
 		</id>    
       	    
