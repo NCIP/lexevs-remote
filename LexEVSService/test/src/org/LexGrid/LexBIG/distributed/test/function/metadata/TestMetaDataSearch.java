@@ -52,7 +52,7 @@ public class TestMetaDataSearch extends ServiceTestCase
                 .getAbsoluteCodingSchemeVersionReference();
 
         assertTrue(acsvrl.length >= 1);
-        assertTrue(contains(acsvrl, Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL, THES_METADATA_VERSION)));
+        assertTrue(contains(acsvrl, Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN, THES_METADATA_VERSION)));
     }
 
     private boolean contains(AbsoluteCodingSchemeVersionReference[] acsvr, AbsoluteCodingSchemeVersionReference acsvr2)
@@ -93,11 +93,11 @@ public class TestMetaDataSearch extends ServiceTestCase
         LexBIGServiceMetadata md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
         
         md = md.restrictToValue("OWL-FULL", "LuceneQuery");
-        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL, THES_METADATA_VERSION));
+        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN, THES_METADATA_VERSION));
 
         MetadataProperty[] result = md.resolve().getMetadataProperty();
         assertTrue(result.length >= 1);
-        assertTrue(contains(result, THES_LOCAL, THES_METADATA_VERSION, "format", "OWL-FULL"));
+        assertTrue(contains(result, THES_URN, THES_METADATA_VERSION, "format", "OWL-FULL"));
     }
     
     /**
@@ -109,19 +109,19 @@ public class TestMetaDataSearch extends ServiceTestCase
     {
         LexBIGServiceMetadata md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
         md = md.restrictToValue("OWL-FULL", "LuceneQuery");
-        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL, THES_METADATA_VERSION));
+        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN, THES_METADATA_VERSION));
 
         MetadataProperty[] result = md.resolve().getMetadataProperty();
         assertTrue(result.length >= 1);
-        assertTrue(contains(result, THES_LOCAL, THES_METADATA_VERSION, "format", "OWL-FULL"));
+        assertTrue(contains(result, THES_URN, THES_METADATA_VERSION, "format", "OWL-FULL"));
 
         md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
-        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL, THES_METADATA_VERSION));
+        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN, THES_METADATA_VERSION));
         md = md.restrictToProperties(new String[]{"format"});
         md = md.restrictToValue("OWL-FULL", "LuceneQuery");
         result = md.resolve().getMetadataProperty();
         assertTrue(result.length >= 1);
-        assertTrue(contains(result, THES_LOCAL, THES_METADATA_VERSION, "format", "OWL-FULL"));
+        assertTrue(contains(result, THES_URN, THES_METADATA_VERSION, "format", "OWL-FULL"));
     }
     
     /**
@@ -140,18 +140,15 @@ public class TestMetaDataSearch extends ServiceTestCase
         {
             temp.add(result[i].getCodingSchemeURI() + ":" + result[i].getCodingSchemeVersion());
         }
-        
-        //should be more than 1 unique code system.
-        assertTrue(temp.size() >= 2);
-        
+
         //should contain this
-        assertTrue(temp.contains(THES_LOCAL + ":" + THES_METADATA_VERSION));
+        assertTrue(temp.contains(THES_URN + ":" + THES_METADATA_VERSION));
         
         //now do the restriction, and retest.
         
         md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
         md = md.restrictToValue("English", "LuceneQuery");
-        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL , THES_METADATA_VERSION));
+        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN , THES_METADATA_VERSION));
         result = md.resolve().getMetadataProperty();
         
         temp = new HashSet<String>();
@@ -164,7 +161,7 @@ public class TestMetaDataSearch extends ServiceTestCase
         assertTrue(temp.size() >= 1);
         
         //should contain this
-        assertTrue(temp.contains(THES_LOCAL + ":" + THES_METADATA_VERSION));
+        assertTrue(temp.contains(THES_URN + ":" + THES_METADATA_VERSION));
     }
     
     /**
@@ -175,11 +172,11 @@ public class TestMetaDataSearch extends ServiceTestCase
     public void testValueRestriction() throws Exception
     {
         LexBIGServiceMetadata md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
-        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_LOCAL, THES_METADATA_VERSION));
+        md = md.restrictToCodingScheme(Constructors.createAbsoluteCodingSchemeVersionReference(THES_URN, THES_METADATA_VERSION));
         md = md.restrictToValue(".*core.*", "RegExp");
  
         MetadataProperty[] result = md.resolve().getMetadataProperty();
         assertTrue(result.length >= 2);
-        assertTrue(contains(result, THES_LOCAL, THES_METADATA_VERSION, "homepage", "http://ncicb.nci.nih.gov/core/EVS"));
+        assertTrue(contains(result, THES_URN, THES_METADATA_VERSION, "homepage", "http://ncicb.nci.nih.gov/core/EVS"));
     }
 }
