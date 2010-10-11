@@ -61,10 +61,10 @@ public class TestRetrieveRelationsforConcept extends ServiceTestCase
     {
 
         CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService()
-                .getCodingSchemeConcepts(THES_SCHEME, null);
+                .getCodingSchemeConcepts(THES_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(THES_VERSION));
         cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C12223"}, THES_SCHEME));
 
-        CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, null, "roles");
+        CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(THES_VERSION), "roles");
 
         cng = cng.restrictToSourceCodes(cns);
         cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Anatomic_Structure_Is_Physical_Part_Of"),
