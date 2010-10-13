@@ -11,7 +11,7 @@
 			<generator class="uuid" />
 		</id>
 		
-		<many-to-one name="_entityDescription" access="field" 
+		<many-to-one name="_entityDescription" access="field" lazy="false"
 			class="org.LexGrid.commonTypes.EntityDescription$Entity"
 			cascade="all" insert="false" update="false" column="ENTITYGUID" />
 
