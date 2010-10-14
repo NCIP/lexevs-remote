@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="org.LexGrid.commonTypes.EntityDescription"
+	<class name="org.LexGrid.commonTypes.EntityDescription" lazy="false"
 		table="entity"
 		entity-name="org.LexGrid.commonTypes.EntityDescription$Entity">
 
