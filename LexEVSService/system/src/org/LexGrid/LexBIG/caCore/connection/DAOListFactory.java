@@ -31,6 +31,7 @@ import org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAOImpl;
 import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO.DAOType;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.lexevs.locator.LexEvsServiceLocator;
@@ -90,7 +91,7 @@ public class DAOListFactory {
 		
 		String uri = connection.getResourceUri();
 		String version = connection.getResourceVersion();
-		String prefix = defaultPrefix + connection.getPrefix();
+		String prefix = defaultPrefix + adjustForNullPrefix(connection.getPrefix());
 			
 		EVSHibernateInterceptor interceptor = new EVSHibernateInterceptor();
 		interceptor.setPrefix(prefix);	
@@ -121,6 +122,14 @@ public class DAOListFactory {
 		}
 		
 		return dao;
+	}
+	
+	private String adjustForNullPrefix(String prefix){
+		if(StringUtils.isBlank(prefix)){
+			return "";
+		} else {
+			return prefix;
+		}
 	}
 	
 	public List<LexEVSDAO> getDaoList(){
