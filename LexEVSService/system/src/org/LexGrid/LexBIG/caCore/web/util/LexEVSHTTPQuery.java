@@ -311,41 +311,6 @@ public class LexEVSHTTPQuery extends HttpServlet {
 		return sb.toString();
 	}
 	
-	/**
-	 * Generates an HTML Error message based upon a given Exception
-	 * @param 	Exception The exception that should be used to generate an HTML error message
-	 * @return	A string-based HTML error message containing the Exception message.
-	 */
-	private String getXMLErrorMsg(Exception ex, String query){
-		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
-		  .append("<xlink:httpQuery xmlns:xlink=\"http://www.w3.org/1999/xlink\">")
-			.append("<queryRequest>")
-				.append("<query>")
-					.append("<queryString>" + query + "</queryString>")
-					.append("<class></class>")
-				.append("</query>")
-				.append("<criteria></criteria>")
-			.append("</queryRequest>")
-			.append("<queryResponse>");
-		
-		String msg = ex.getMessage();
-		Throwable tempEx = ex.getCause();
-		while (tempEx != null) {
-			msg += "\n\nCaused by: " + tempEx.getMessage();
-			tempEx = tempEx.getCause();
-		}
-		
-		sb.append(msg);
-		
-				sb.append("<error>" + msg + "</error>")
-			.append("</queryReponse>")
-		.append("</xlink:httpQuery>");
-
-		return sb.toString();
-	}
 
 	/**
 	 * Generates an HTML Document for a given XML document with the given stylesheet specification
