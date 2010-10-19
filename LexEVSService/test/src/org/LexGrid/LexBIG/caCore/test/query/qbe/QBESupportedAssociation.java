@@ -132,7 +132,7 @@ public class QBESupportedAssociation extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedAssociation scs = new SupportedAssociation();
-		scs.setLocalId("disjoin*_from");
+		scs.setLocalId("negatively_regulates");
 		
 		mappings.addSupportedAssociation(scs);
 		cs.setMappings(mappings);
@@ -140,7 +140,7 @@ public class QBESupportedAssociation extends ServiceTestCase
 		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
 	
 		assertTrue(sourceList != null);	
-		assertTrue(sourceList.size() == 1);
+		assertEquals(1,sourceList.size());
 				
 		CodingScheme scheme = sourceList.get(0);
 		assertTrue(scheme.getCodingSchemeName().equals(ServiceTestCase.GO_SCHEME));
@@ -176,7 +176,7 @@ public class QBESupportedAssociation extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedAssociation scs = new SupportedAssociation();
-		scs.setLocalId("disjo*t_from");
+		scs.setLocalId("negative*egulates");
 		
 		mappings.addSupportedAssociation(scs);
 		cs.setMappings(mappings);
