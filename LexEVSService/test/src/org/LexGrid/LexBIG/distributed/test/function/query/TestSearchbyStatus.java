@@ -58,7 +58,6 @@ public class TestSearchbyStatus extends ServiceTestCase
         cns = cns.restrictToStatus(ActiveOption.INACTIVE_ONLY, null);
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 400).getResolvedConceptReference();
         assertTrue("1",rcr.length == 400);
-        assertTrue("2",contains(rcr,"C10906",THES_SCHEME));
 
     }
     
