@@ -140,7 +140,7 @@ public class TestOtherMatchingTechniques extends ServiceTestCase
         CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService()
                 .getCodingSchemeConcepts(THES_SCHEME, null);
 
-        cns = cns.restrictToMatchingDesignations(".*ldenrod", null, "RegExp", null);
+        cns = cns.restrictToMatchingDesignations("go.*ldenrod", null, "RegExp", null);
 
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
 
