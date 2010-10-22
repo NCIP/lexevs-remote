@@ -197,13 +197,6 @@ public class TestOtherMatchingTechniques extends ServiceTestCase
                                            null);
         rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
         assertTrue(rcr.length == 1);
-        
-        // non-preferred should have 0 hits.
-        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(GO_SCHEME, null);
-        cns = cns.restrictToMatchingDesignations("\"delta5-delta2,4-dienoyl-CoA isomerase activity\"", SearchDesignationOption.NON_PREFERRED_ONLY,
-                                           "LuceneQuery", null);
-        rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
-        assertTrue("8",rcr.length == 0);
 
         // all should have 1 hits.
         cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
