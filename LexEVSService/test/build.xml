@@ -95,7 +95,7 @@
 		install (e.g. not via DLB).
 	-->
     <target name="dlbtests" depends="check-built,compile" if="system-built">
-		<junit printsummary="yes" fork="yes">
+		<junit printsummary="yes" fork="no">
         	<sysproperty key="test.property" value="${test.dir}" />
 	      <sysproperty key="test.xml" value="${test.xml}" />
 	      <classpath refid="libs" />
@@ -109,7 +109,7 @@
 	    <target name="dlbtests-html" depends="check-built,compile" if="system-built">
 	    	<mkdir dir="${test.reports}" />
 
-	    	<junit printsummary="yes" fork="yes">
+	    	<junit printsummary="yes" fork="no">
 	        	<sysproperty key="test.property" value="${test.dir}" />
 	    		<sysproperty key="test.xml" value="${test.xml}" />
 		      <classpath refid="libs" />
@@ -127,7 +127,7 @@
 	
 	
 	    <target name="dataservicetests"  depends="check-built,compile" if="system-built">
-			<junit printsummary="yes" fork="yes">
+			<junit printsummary="yes" fork="no">
 	        	<sysproperty key="test.property" value="${test.dir}" />
 			<sysproperty key="test.xml" value="${test.xml}" />
 		      <classpath refid="libs" />
@@ -137,7 +137,7 @@
 		</target>	
 	    <target name="dataservicetests-html"  depends="check-built,compile" if="system-built">
 	    	<mkdir dir="${test.reports}" />
-	    	<junit printsummary="yes" fork="yes">
+	    	<junit printsummary="yes" fork="no">
 	        	<sysproperty key="test.property" value="${test.dir}" />
 	    		<sysproperty key="test.xml" value="${test.xml}" />
 		      <classpath refid="libs" />
@@ -155,7 +155,7 @@
 	
     <target name="alltests" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
-    	<junit printsummary="yes" fork="yes">
+    	<junit printsummary="yes" fork="no">
         	<sysproperty key="test.property" value="${test.dir}" />
     		<sysproperty key="test.xml" value="${test.xml}" />
 	      <classpath refid="libs" />
@@ -166,7 +166,7 @@
 	
     <target name="alltests-html" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
-    	<junit printsummary="yes" fork="yes">
+    	<junit printsummary="yes" fork="no">
         	<sysproperty key="test.property" value="${test.dir}" />
     		<sysproperty key="test.xml" value="${test.xml}" />
 	      <classpath refid="libs" />
