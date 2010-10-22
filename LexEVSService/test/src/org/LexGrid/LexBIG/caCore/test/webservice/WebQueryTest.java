@@ -53,39 +53,6 @@ public class WebQueryTest extends ServiceTestCase {
 		assertTrue(results.length > 0);
 	}
 
-	public void testQueryObjectCodingScheme() throws Exception {	
-		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
-		
-		CodingScheme cs = new CodingScheme();
-		cs.setCodingSchemeName(ServiceTestCase.SNOMED_SCHEME);
-		cs.setRepresentsVersion(ServiceTestCase.SNOMED_VERSION);
-		Object[] results = query.queryObject(org.LexGrid.codingSchemes.CodingScheme.class.getName(), cs);
-		
-		assertTrue(results != null);
-		assertTrue(results.length == 1);
-		
-		CodingScheme scheme = (CodingScheme)results[0];
-		assertTrue(scheme.getCodingSchemeName().equals(ServiceTestCase.SNOMED_SCHEME));
-		assertTrue(scheme.getRepresentsVersion().equals(ServiceTestCase.SNOMED_VERSION));		
-	}
-	
-	public void testQueryWithStartIndex() throws Exception {	
-		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
-		CodingScheme cs = new CodingScheme();
-		cs.setCodingSchemeName(ServiceTestCase.SNOMED_SCHEME);
-		cs.setRepresentsVersion(ServiceTestCase.SNOMED_VERSION);
-		Object[] results = query.query(org.LexGrid.codingSchemes.CodingScheme.class.getName(), cs, 0);
-		
-		assertTrue(results != null);
-		assertTrue(results.length == 1);
-		
-		CodingScheme scheme = (CodingScheme)results[0];
-		assertTrue(scheme.getCodingSchemeName().equals(ServiceTestCase.SNOMED_SCHEME));
-		assertTrue(scheme.getRepresentsVersion().equals(ServiceTestCase.SNOMED_VERSION));
-	}
-	
 	public void testGetAssociation() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
 		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
