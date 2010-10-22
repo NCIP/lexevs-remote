@@ -130,6 +130,7 @@
 					<exclude name="commons-logging*.*"/>
 					<exclude name="log4j*.*"/>
 					<exclude name="servlet.jar"/>
+					<exclude name="jaxrpc.jar"/>
 					<exclude name="xercesImpl*.*"/>
 					<exclude name="cog*.*"/>
 				</lib>
