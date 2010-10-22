@@ -62,9 +62,6 @@ public class TestDescribeSupportedSearchCriteria extends ServiceTestCase
         {
             CodingSchemeSummary css = csr.getCodingSchemeSummary();
             assertNotNull(css);
-            assertTrue(css.getCodingSchemeDescription().toString() != null && css.getCodingSchemeDescription().toString().length() > 0);
-            RenderingDetail rd = csr.getRenderingDetail();
-            assertTrue(rd != null);
         }
     }
 
