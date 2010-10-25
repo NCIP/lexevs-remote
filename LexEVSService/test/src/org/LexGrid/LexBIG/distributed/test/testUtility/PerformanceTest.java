@@ -59,28 +59,13 @@ public class PerformanceTest {
 		"breast cancer", "disease finding", "big toe", "of the ear"};
 	
 	private long totalTime = 0;
-	
-	private static int THREADS = 1;
 
 	private static String[] matchAlgorithms = new String[]{"LuceneQuery", "exactMatch", 
 		"startsWith", "contains", "literal"
 	};
 
 	public static void main(String[] args) throws Exception {
-		for(int i=0;i<THREADS;i++){
-			Thread thread = new Thread(){
-
-				@Override
-				public void run() {
-					try {
-						new PerformanceTest().run();
-					} catch (Exception e) {
-						throw new RuntimeException(e);
-					}
-				}
-			};
-			thread.start();
-		}
+		new PerformanceTest().run();		
 	}
 	
 	private void run() throws Exception {

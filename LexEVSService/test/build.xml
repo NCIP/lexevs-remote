@@ -164,6 +164,13 @@
     	</junit>	
     </target>
 	
+	<target name="performance-tests" depends="compile" if="system-built">
+		<java classpathref="libs"
+		classname="org.LexGrid.LexBIG.distributed.test.testUtility.PerformanceTest">
+			<sysproperty key="test.property" value="${test.dir}" />
+		</java>
+	</target>
+	
     <target name="alltests-html" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
     	<junit printsummary="yes" fork="no">
