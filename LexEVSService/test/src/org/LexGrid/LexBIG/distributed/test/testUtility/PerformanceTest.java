@@ -43,38 +43,57 @@ public class PerformanceTest {
 	
 	private static LexBIGService lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
 	
-	private static int RUN_TIMES = 2;
+	private static int RUN_TIMES = 4;
 	
 	private static String META_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
 	private static String LOINC_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
 	private static String NCITHES_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
 	private static String MEDDRA_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
 	private static String SNOMED_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
+	private static String MAPPING_URN = "urn:oid:NCIt_to_ICD9CM_Mapping";
 	
-	private static String[] URIS = new String[] {META_URN, LOINC_URN, NCITHES_URN, MEDDRA_URN, SNOMED_URN};
+	private static String[] URIS = new String[] {META_URN, LOINC_URN, 
+		NCITHES_URN, MEDDRA_URN, SNOMED_URN, MAPPING_URN};
 
-	private static String[] searchTerms = new String[] {"heart", "gene", "abnormal", 
+	private static String[] searchTerms = new String[] {"heart attack", "gene abnormality", "abnormal", 
 		"breast cancer", "disease finding", "big toe", "of the ear"};
 	
 	private long totalTime = 0;
+	
+	private static int THREADS = 1;
 
 	private static String[] matchAlgorithms = new String[]{"LuceneQuery", "exactMatch", 
 		"startsWith", "contains", "literal"
 	};
 
 	public static void main(String[] args) throws Exception {
-		
-		PerformanceTest test = new PerformanceTest();
-		test.printMemoryStatistics();
+		for(int i=0;i<THREADS;i++){
+			Thread thread = new Thread(){
+
+				@Override
+				public void run() {
+					try {
+						new PerformanceTest().run();
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+				}
+			};
+			thread.start();
+		}
+	}
+	
+	private void run() throws Exception {
+		printMemoryStatistics();
 		//test.warmUp();
 					
-		test.getSingleCode(META_URN, "C1281570");
-		test.getSingleCode(META_URN, "C0006080");
+		getSingleCode(META_URN, "C1281570");
+		getSingleCode(META_URN, "C0006080");
 		
 		for(String uri : URIS){
 			for(String algorithm : matchAlgorithms){
 				for(String searchTerm : searchTerms) {
-					test.searchWithAlgorithm(uri, algorithm, searchTerm);
+					searchWithAlgorithm(uri, algorithm, searchTerm);
 				}
 			}
 		}
@@ -92,7 +111,7 @@ public class PerformanceTest {
 								itr.next(100).getResolvedConceptReference()){
 
 						String cui = ref.getCode();
-						test.getParents(uri, cui, 1);
+						getParents(uri, cui, 1);
 					}
 				}
 			}
@@ -111,7 +130,7 @@ public class PerformanceTest {
 								itr.next(100).getResolvedConceptReference()){
 
 						String cui = ref.getCode();
-						test.getChildren(uri, cui, 1);
+						getChildren(uri, cui, 1);
 					}
 				}
 			}
@@ -119,25 +138,25 @@ public class PerformanceTest {
 
 		for(String algorithm : matchAlgorithms){
 			for(String searchTerm : searchTerms) {
-				test.searchMultipleOntologies(searchTerm, algorithm);
+				searchMultipleOntologies(searchTerm, algorithm);
 			}
 		}
 
 		
 		for(String uri : URIS){
 			for(String searchTerm : searchTerms) {
-				test.advanceIterator(uri, searchTerm, false, 50);
+				advanceIterator(uri, searchTerm, false, 50);
 			}
 		}
 
 		for(String uri : URIS){
 			for(String searchTerm : searchTerms) {
-				test.advanceIterator(uri, searchTerm, true, 50);
+				advanceIterator(uri, searchTerm, true, 50);
 			}
 		}
 	
 		System.out.println("==================================");
-		System.out.println("Total Time: " + test.totalTime + " (ms)");
+		System.out.println("Total Time: " + totalTime + " (ms)");
 		System.out.println("==================================");
 	}
 	
@@ -199,8 +218,8 @@ public class PerformanceTest {
 				
 				int counter = 0;
 				while(itr.hasNext() && counter < max) {
-					itr.next();
-					counter++;
+					ResolvedConceptReferenceList list = itr.next(max);
+					counter += list.getResolvedConceptReferenceCount();
 				}
 				
 				return counter;
