@@ -98,8 +98,8 @@
 		</bag>
 
 		<component name="_properties" access="field"
-			class="org.LexGrid.commonTypes.Properties">
-			<bag name="_propertyList" table="property" access="field"
+			class="org.LexGrid.commonTypes.Properties" lazy="false">
+			<bag name="_propertyList" table="property" access="field" lazy="false"
 				cascade="all, delete-orphan" where="propertyType='property' and referenceType='codingScheme'">
 				<key not-null="true">
 					<column name="REFERENCEGUID" not-null="true" />
@@ -108,7 +108,7 @@
 			</bag>
 		</component>
 
-		<bag name="_sourceList" access="field" table="csMultiAttrib"
+		<bag name="_sourceList" access="field" table="csMultiAttrib" lazy="false"
 			where="attributeType = 'source'" cascade="all, delete-orphan">
 			<key not-null="true">
 				<column name="CODINGSCHEMEGUID" not-null="true" />
