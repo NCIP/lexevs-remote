@@ -29,6 +29,7 @@ import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Core.Association;
 import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
+import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeGraph;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
@@ -40,8 +41,10 @@ import org.springframework.util.Assert;
 
 
 public class PerformanceTest {
+
+	private LexBIGService lbs;
 	
-	private static LexBIGService lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
+	private static String LOCAL_ARG = "local";
 	
 	private static int RUN_TIMES = 4;
 	
@@ -63,9 +66,19 @@ public class PerformanceTest {
 	private static String[] matchAlgorithms = new String[]{"LuceneQuery", "exactMatch", 
 		"startsWith", "contains", "literal"
 	};
+	
+	private PerformanceTest(LexBIGService lbs){
+		this.lbs = lbs;
+	}
 
 	public static void main(String[] args) throws Exception {
-		new PerformanceTest().run();		
+		LexBIGService lbs;
+		if(args != null && args.length == 1 && args[0].equals(LOCAL_ARG)){
+			lbs = LexBIGServiceImpl.defaultInstance();
+		} else {
+			lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
+		}
+		new PerformanceTest(lbs).run();		
 	}
 	
 	private void run() throws Exception {
