@@ -114,7 +114,46 @@
 	
 	<target name="package-webapp">
 			<SDKecho message="${ant.project.name}: Packaging the webapp"/>
-		<antcall target="caCORESDK.package-webapp"></antcall>	
+		<war destfile="${package.system.dir}\${PROJECT_NAME}.war" webxml="${build.conf.web-inf.dir}\web.xml">
+					<manifest>
+						<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
+						<attribute name="Version" value="${VERSION}"/>
+					</manifest>
+					<lib dir="${system.dir}\${system.dist.dir}" includes="*.jar"/>
+					<lib dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
+						<exclude name="${read-api-exclude-list}"/>
+					</lib>
+					<lib dir="${build.jar.dir}" includes="${bean.file}" />
+					<lib dir="${build.jar.dir}" includes="${orm.file}" />
+					<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
+						<exclude name="${server-exclude-commons-logging}"/>
+						<exclude name="${server-exclude-log4j}"/>
+						<exclude name="servlet.jar"/>
+						<exclude name="jaxrpc.jar"/>
+						<exclude name="xercesImpl*.*"/>
+						<exclude name="cog*.*"/>
+					</lib>
+					<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
+					<fileset dir="${build.conf.system.web.dir}">
+						<include name="**/*"/>
+						<exclude name="**/web.xml"/>
+						<exclude name="${server-exclude-classes-list}"/>
+					</fileset>
+					<fileset dir="${system.dir}\${system.web.dir}">
+						<include name="**/*"/>
+					</fileset>
+					<fileset dir="${build.dir}">
+						<include name="docs/**/*"/>
+					</fileset>
+					<classes dir="${output.src.dir}">
+						<include name="${csm.security.config.file}"/>
+						<include name="${csm.ehcache.file}"/>
+						<include name="${clm.object.state.logger.config}"/>
+					</classes>
+					<webinf dir="${output.src.dir}">
+						<include name="server-config.wsdd"/>
+					</webinf>
+				</war>	
 			<war destfile="${package.system.dir}\${PROJECT_NAME}.jboss.war" webxml="${build.conf.web-inf.dir}\web.xml">
 				<manifest>
 					<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
@@ -169,6 +208,7 @@
 			<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
 				<exclude name="servlet.jar"/>
 				<exclude name="xercesImpl*.*"/>
+				<exclude name="jaxrpc.jar"/>
 				<exclude name="cog*.*"/>
 			</lib>
 			<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
