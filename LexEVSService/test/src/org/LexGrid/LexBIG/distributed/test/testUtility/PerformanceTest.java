@@ -112,6 +112,8 @@ public class PerformanceTest {
 						getParents(uri, cui, 1);
 					}
 				}
+				
+				itr.release();
 			}
 		}
 		
@@ -131,6 +133,8 @@ public class PerformanceTest {
 						getChildren(uri, cui, 1);
 					}
 				}
+				
+				itr.release();
 			}
 		}
 
@@ -173,7 +177,9 @@ public class PerformanceTest {
 			public int run() throws Exception {
 				CodedNodeSet cns = lbs.getNodeSet(uri, null, null);
 				cns = cns.restrictToCodes(Constructors.createConceptReferenceList(code));
-				Assert.state(code.equals(cns.resolve(null, null, null, null, false).next().getCode()));
+				ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null, null, false);
+				Assert.state(code.equals(itr.next().getCode()));
+				itr.release();
 				return 1;
 			}
 		});
@@ -196,8 +202,12 @@ public class PerformanceTest {
 					}
 				}
 				cns = cns.restrictToMatchingDesignations(searchString, SearchDesignationOption.ALL, algorithm, null);
+				ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null);
 				
-				return cns.resolve(null, null, null).numberRemaining();
+				int numRemaining = itr.numberRemaining();
+				
+				itr.release();
+				return numRemaining;
 			}
 		});
 	}
@@ -220,6 +230,7 @@ public class PerformanceTest {
 					counter += list.getResolvedConceptReferenceCount();
 				}
 				
+				itr.release();
 				return counter;
 			}
 		});
@@ -237,7 +248,10 @@ public class PerformanceTest {
 				cns = cns.restrictToMatchingDesignations(searchString, SearchDesignationOption.ALL, "contains", null);
 				ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null, null, false);
 				
-				return itr.numberRemaining();
+				int numRemaining = itr.numberRemaining();
+				
+				itr.release();
+				return numRemaining;
 			}
 		});
 	}
