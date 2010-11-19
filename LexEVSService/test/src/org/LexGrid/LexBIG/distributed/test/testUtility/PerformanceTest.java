@@ -36,7 +36,16 @@ import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
+import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
+import org.LexGrid.valueSets.DefinitionEntry;
+import org.LexGrid.valueSets.PropertyMatchValue;
+import org.LexGrid.valueSets.PropertyReference;
+import org.LexGrid.valueSets.ValueSetDefinition;
+import org.LexGrid.valueSets.types.DefinitionOperator;
+import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
+import org.lexgrid.valuesets.dto.ResolvedValueSetDefinition;
+import org.lexgrid.valuesets.impl.LexEVSValueSetDefinitionServicesImpl;
 import org.springframework.util.Assert;
 
 
@@ -49,10 +58,10 @@ public class PerformanceTest {
 	private static int RUN_TIMES = 4;
 	
 	private static String META_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
-	private static String LOINC_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
-	private static String NCITHES_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
-	private static String MEDDRA_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
-	private static String SNOMED_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
+	private static String LOINC_URN = "urn:oid:2.16.840.1.113883.6.1";
+	private static String NCITHES_URN = "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#";
+	private static String MEDDRA_URN = "urn:oid:2.16.840.1.113883.6.163";
+	private static String SNOMED_URN = "urn:oid:2.16.840.1.113883.6.96";
 	private static String MAPPING_URN = "urn:oid:NCIt_to_ICD9CM_Mapping";
 	
 	private static String[] URIS = new String[] {META_URN, LOINC_URN, 
@@ -63,28 +72,36 @@ public class PerformanceTest {
 	
 	private long totalTime = 0;
 
+	private LexEVSValueSetDefinitionServices vsds;
+
 	private static String[] matchAlgorithms = new String[]{"LuceneQuery", "exactMatch", 
 		"startsWith", "contains", "literal"
 	};
 	
-	private PerformanceTest(LexBIGService lbs){
+	private PerformanceTest(LexBIGService lbs, LexEVSValueSetDefinitionServices vsds){
 		this.lbs = lbs;
+		this.vsds = vsds;
 	}
 
 	public static void main(String[] args) throws Exception {
 		LexBIGService lbs;
+		LexEVSValueSetDefinitionServices vsds;
 		if(args != null && args.length == 1 && args[0].equals(LOCAL_ARG)){
 			lbs = LexBIGServiceImpl.defaultInstance();
+			vsds = LexEVSValueSetDefinitionServicesImpl.defaultInstance();
 		} else {
-			lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
+			LexEVSApplicationService appService = LexEVSServiceHolder.instance().getLexEVSAppService();
+			vsds = appService.getLexEVSValueSetDefinitionServices();
+			lbs = appService;
 		}
-		new PerformanceTest(lbs).run();		
+		new PerformanceTest(lbs, vsds).run();		
 	}
 	
 	private void run() throws Exception {
 		printMemoryStatistics();
+
 		//test.warmUp();
-					
+	
 		getSingleCode(META_URN, "C1281570");
 		getSingleCode(META_URN, "C0006080");
 		
@@ -92,6 +109,14 @@ public class PerformanceTest {
 			for(String algorithm : matchAlgorithms){
 				for(String searchTerm : searchTerms) {
 					searchWithAlgorithm(uri, algorithm, searchTerm);
+				}
+			}
+		}
+
+		for(String uri : URIS){
+			for(String algorithm : matchAlgorithms){
+				for(String searchTerm : searchTerms) {
+					resolvePropertyReferenceValueSet(uri, algorithm, searchTerm);
 				}
 			}
 		}
@@ -232,6 +257,39 @@ public class PerformanceTest {
 				
 				itr.release();
 				return counter;
+			}
+		});
+	}
+	
+	private void resolvePropertyReferenceValueSet(final String uri, final String algorithm, final String searchString) {
+		this.timeMethod(new TimedCallback() {
+
+			public String getName() {
+				return "Testing Property Resolution Value Set with: '" + algorithm + "' (" + searchString + ") from " + uri;
+			}
+
+			public int run() throws Exception {
+				ValueSetDefinition vsd = new ValueSetDefinition();
+				vsd.setValueSetDefinitionURI("uri");
+				vsd.setDefaultCodingScheme(uri);
+				
+				PropertyReference ref = new PropertyReference();
+				ref.setPropertyMatchValue(new PropertyMatchValue());
+				ref.getPropertyMatchValue().setContent(searchString);
+				ref.getPropertyMatchValue().setMatchAlgorithm(algorithm);
+				ref.setCodingScheme(uri);
+				
+				DefinitionEntry entry = new DefinitionEntry();
+				entry.setPropertyReference(ref);
+				entry.setOperator(DefinitionOperator.OR);
+				entry.setRuleOrder(0l);
+				
+				vsd.addDefinitionEntry(entry);
+				ResolvedValueSetDefinition rvsd = vsds.resolveValueSetDefinition(vsd, null, null, null);
+			
+				ResolvedConceptReferencesIterator itr = rvsd.getResolvedConceptReferenceIterator();
+				
+				return itr.numberRemaining();
 			}
 		});
 	}
