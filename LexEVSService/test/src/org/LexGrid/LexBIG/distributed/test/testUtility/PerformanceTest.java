@@ -56,16 +56,16 @@ public class PerformanceTest {
 	private static String LOCAL_ARG = "local";
 	
 	private static int RUN_TIMES = 4;
-	
+
 	private static String META_URN = "urn:oid:2.16.840.1.113883.3.26.1.2";
 	private static String LOINC_URN = "urn:oid:2.16.840.1.113883.6.1";
 	private static String NCITHES_URN = "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#";
 	private static String MEDDRA_URN = "urn:oid:2.16.840.1.113883.6.163";
 	private static String SNOMED_URN = "urn:oid:2.16.840.1.113883.6.96";
 	private static String MAPPING_URN = "urn:oid:NCIt_to_ICD9CM_Mapping";
-	
+
 	private static String[] URIS = new String[] {META_URN, LOINC_URN, 
-		NCITHES_URN, MEDDRA_URN, SNOMED_URN, MAPPING_URN};
+		NCITHES_URN, MEDDRA_URN, SNOMED_URN};
 
 	private static String[] searchTerms = new String[] {"heart attack", "gene abnormality", "abnormal", 
 		"breast cancer", "disease finding", "big toe", "of the ear"};
@@ -90,7 +90,7 @@ public class PerformanceTest {
 			lbs = LexBIGServiceImpl.defaultInstance();
 			vsds = LexEVSValueSetDefinitionServicesImpl.defaultInstance();
 		} else {
-			LexEVSApplicationService appService = LexEVSServiceHolder.instance().getLexEVSAppService();
+			LexEVSApplicationService appService = LexEVSServiceHolder.instance().getSecureLexEVSAppService();
 			vsds = appService.getLexEVSValueSetDefinitionServices();
 			lbs = appService;
 		}
@@ -102,8 +102,8 @@ public class PerformanceTest {
 
 		//test.warmUp();
 	
-		getSingleCode(META_URN, "C1281570");
-		getSingleCode(META_URN, "C0006080");
+		getSingleCode(NCITHES_URN, "C12727");
+		getSingleCode(NCITHES_URN, "C12709");
 		
 		for(String uri : URIS){
 			for(String algorithm : matchAlgorithms){
