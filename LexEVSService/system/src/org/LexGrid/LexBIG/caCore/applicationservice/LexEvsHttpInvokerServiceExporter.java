@@ -25,6 +25,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import org.LexGrid.LexBIG.Impl.helpers.ResolvedConceptReferencesIteratorImpl;
 import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
@@ -72,8 +73,32 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 			this.enableReplaceObject(true);
 		}
 
+		
+		
+		/**
+		 * We need to release the ResolvedConceptReferencesIteratorImpl before
+		 * we can send it to the client, because there is no way of releasing
+		 * it from the client side. It is safe to release at this point because
+		 * the client will lose reference to this particular Iterator instance.
+		 * 
+		 *  (non-Javadoc)
+		 * @see java.io.ObjectOutputStream#replaceObject(java.lang.Object)
+		 */
 		@Override
 		protected Object replaceObject(Object obj) throws IOException {
+			if(obj instanceof ResolvedConceptReferencesIteratorImpl){
+				try {
+					ResolvedConceptReferencesIteratorImpl itr = (ResolvedConceptReferencesIteratorImpl) obj;
+
+					Object clone = itr.clone();
+					
+					itr.release();
+					
+					obj = clone;
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
 			return super.replaceObject(obj);
 		}
 	}
