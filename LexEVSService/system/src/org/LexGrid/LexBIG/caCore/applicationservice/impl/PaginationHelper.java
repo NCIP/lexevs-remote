@@ -53,8 +53,8 @@ public class PaginationHelper {
 		int skippedRows = 0;
 		int returnedResults = 0;
 		
-		if(maxToReturn > 0){
-			maxResultsPerQuery = maxToReturn;
+		if(maxToReturn < 0){
+			maxToReturn = maxResultsPerQuery;
 		}
 
 		List<Response> totalResponses = new ArrayList<Response>();
@@ -63,14 +63,14 @@ public class PaginationHelper {
 
 		for (LexEVSDAO dao : daoList) {		
 			//only keep looking for more results if we haven't hit the max results per query number
-			if(returnedResults < maxResultsPerQuery){
+			if(returnedResults < maxToReturn){
 				int resultsInDao = getResultsCountInIndividualDAOForQuery(criteria, dao);
 				
 				//don't start getting results until we reach the start row
 				if(resultsInDao + skippedRows > startRow){
 					//now we're in the DAO we want to start with
 					Response daoResponse = queryIndividualDAO(criteria, dao, startRow - skippedRows, 
-							maxResultsPerQuery);
+							maxToReturn);
 					totalResponses.add(daoResponse);
 					int returnedRows = daoResponse.getRowCount();
 					returnedResults += returnedRows;		
