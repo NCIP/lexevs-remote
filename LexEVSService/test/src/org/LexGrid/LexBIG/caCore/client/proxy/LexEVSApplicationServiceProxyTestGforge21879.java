@@ -22,37 +22,29 @@
  */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSService;
+import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
 public class LexEVSApplicationServiceProxyTestGforge21879 extends ServiceTestCase
 {
 	private final String test_id = "Tests for GForge item 21879";
-	private LexEVSApplicationServiceProxy proxy;
 	private LexEVSService lexevsService;
-	private String localServiceUrl = "http://lexevsapi.nci.nih.gov/lexevsapi50";
 	
 	@Override
 	protected String getTestID() {
 		return test_id;	
 	}
 	
-	public void setUp(){
-		proxy = new LexEVSApplicationServiceProxy();	
-	}
-	
 	public void testGforge21879Adam() throws Exception {
 		
-		lexevsService = (LexEVSApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(localServiceUrl, "EvsServiceInfo");
+		lexevsService = LexEVSServiceHolder.instance().getLexEVSAppService();
 
-		CodedNodeSet cns = lexevsService.getCodingSchemeConcepts("NCI MetaThesaurus", null);
+		CodedNodeSet cns = lexevsService.getCodingSchemeConcepts("NCI Metathesaurus", null);
 		cns = cns.restrictToMatchingDesignations(".*ene.*", SearchDesignationOption.ALL, "RegExp", null);
 
 		boolean isLexEx = false;
