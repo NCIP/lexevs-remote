@@ -39,24 +39,7 @@ public class LexEVSApplicationServiceProxyTestGforge21879 extends ServiceTestCas
 	protected String getTestID() {
 		return test_id;	
 	}
-	
-	public void testGforge21879Adam() throws Exception {
-		
-		lexevsService = LexEVSServiceHolder.instance().getLexEVSAppService();
 
-		CodedNodeSet cns = lexevsService.getCodingSchemeConcepts("NCI Metathesaurus", null);
-		cns = cns.restrictToMatchingDesignations(".*ene.*", SearchDesignationOption.ALL, "RegExp", null);
-
-		boolean isLexEx = false;
-		try {
-			ResolvedConceptReference[] list = null;			
-		    list = cns.resolveToList(null, null, null, 500).getResolvedConceptReference();
-		} catch (Exception ex) {
-			isLexEx = isLexBigException(ex.getCause());
-		}		
-		assertTrue(isLexEx);
-	}
-	
 	public void testGforge21879Boy() {
 		boolean isLexEx = false;
 		try {
