@@ -11,6 +11,15 @@
 		</param-value>
 	</context-param>
 	
+	<filter>
+    	<filter-name>XSS</filter-name>
+    	<filter-class>org.LexGrid.LexBIG.caCore.web.security.xss.CrossSiteScriptingFilter</filter-class>
+    </filter>
+    
+    <filter-mapping> 
+		<filter-name>XSS</filter-name> 
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping> 
     
 	<filter> 
 		<filter-name>struts2</filter-name> 
@@ -20,7 +29,7 @@
         	<param-value>gov.nih.nci.system.struts.action</param-value>
         </init-param>
 	</filter> 
-	
+
 	<!--
 	 <filter>
         <filter-name>openSessionInViewFilter</filter-name>
