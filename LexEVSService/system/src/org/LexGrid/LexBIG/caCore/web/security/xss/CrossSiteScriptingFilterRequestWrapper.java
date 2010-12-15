@@ -18,6 +18,7 @@
  */
 package org.LexGrid.LexBIG.caCore.web.security.xss;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -37,9 +38,9 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 
 	@SuppressWarnings("unchecked")
 	public Map getParameterMap() {
-
-		Map map = super.getParameterMap();
-
+		
+		Map map = new HashMap(super.getParameterMap());
+		
 		Iterator iter = (map.keySet() != null)? map.keySet().iterator() : null;
 		
 		if(iter!=null) {
