@@ -31,6 +31,18 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	public CrossSiteScriptingFilterRequestWrapper(HttpServletRequest servletRequest) {
 		super(servletRequest);
 	}
+	
+	
+
+	@Override
+	public String getQueryString() {
+		String queryString = super.getQueryString();
+		
+		if(queryString != null){
+			queryString = this.cleanXSS(queryString);
+		}
+		return queryString;
+	}
 
 	public String[] getParameterValues(String parameter) {
 
