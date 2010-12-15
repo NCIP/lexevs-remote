@@ -69,6 +69,10 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 		return map;
 	}
 	
+	private boolean checkForScript(String string){
+		return string.toLowerCase().contains("script");
+	}
+	
 	public String[] getParameterValues(String parameter) {
 
 		String[] values = super.getParameterValues(parameter);
@@ -100,6 +104,11 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	}
 
 	private String cleanXSS(String value) {
+		
+		if(checkForScript(value)){
+			throw new RuntimeException("Values: " + value + " " +
+					"are not allowed in the URL.");
+		}
 
 		value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");
 		value = value.replaceAll("\\(", "& #40;").replaceAll("\\)", "& #41;");
