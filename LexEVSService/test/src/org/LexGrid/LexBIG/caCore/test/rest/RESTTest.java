@@ -311,6 +311,18 @@ public class RESTTest extends ServiceTestCase {
 		}	
 		fail();
 	}
+	
+	public void testXSSAttack() throws Exception {	
+		try {
+
+			callRestfulService("ShowDynamicTree.action;jsessionid=F9623CBA386D7757FD29EA965EB4AE7F/?--></script><script>alert(20787)</script>");
+		} catch (Exception e) {
+			Assert.isInstanceOf(IOException.class, e);
+			assertTrue(e.getMessage().contains("HTTP response code: 500"));
+			return;
+		}	
+		fail();
+	}
 
 	private String callRestfulService(String putString) throws Exception {
 		URL url = new URL(serviceEndPoint + putString);		   
