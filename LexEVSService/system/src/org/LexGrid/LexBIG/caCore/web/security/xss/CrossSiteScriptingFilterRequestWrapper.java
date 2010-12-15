@@ -18,6 +18,9 @@
  */
 package org.LexGrid.LexBIG.caCore.web.security.xss;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -31,19 +34,31 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	public CrossSiteScriptingFilterRequestWrapper(HttpServletRequest servletRequest) {
 		super(servletRequest);
 	}
-	
-	
 
-	@Override
-	public String getQueryString() {
-		String queryString = super.getQueryString();
+	@SuppressWarnings("unchecked")
+	public Map getParameterMap() {
+
+		Map map = super.getParameterMap();
+
+		Iterator iter = (map.keySet() != null)? map.keySet().iterator() : null;
 		
-		if(queryString != null){
-			queryString = this.cleanXSS(queryString);
+		String key = null;
+		String[] values = null;
+		
+		if(iter!=null) {
+			while(iter.hasNext()) {
+				key = (String) iter.next();
+				if(key != null) {
+					values = (String[])map.get(key);
+					for(int i=0; i<values.length; i++)
+						values[i] = cleanXSS(values[i]);
+				}
+			}
 		}
-		return queryString;
-	}
 
+		return map;
+	}
+	
 	public String[] getParameterValues(String parameter) {
 
 		String[] values = super.getParameterValues(parameter);
