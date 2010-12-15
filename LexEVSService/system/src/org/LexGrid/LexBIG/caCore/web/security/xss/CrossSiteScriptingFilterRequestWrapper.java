@@ -42,16 +42,25 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 
 		Iterator iter = (map.keySet() != null)? map.keySet().iterator() : null;
 		
-		String key = null;
-		String[] values = null;
-		
 		if(iter!=null) {
 			while(iter.hasNext()) {
+
+				String key = null;
+				String[] values = null;
+				
 				key = (String) iter.next();
+				
 				if(key != null) {
 					values = (String[])map.get(key);
+					
 					for(int i=0; i<values.length; i++)
 						values[i] = cleanXSS(values[i]);
+					
+					map.remove(key);
+					
+					key = cleanXSS(key);
+					
+					map.put(key, values);
 				}
 			}
 		}
