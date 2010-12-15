@@ -37,7 +37,7 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	public CrossSiteScriptingFilterRequestWrapper(HttpServletRequest servletRequest) {
 		super(servletRequest);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public Map getParameterMap() {
 	
@@ -72,9 +72,9 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	}
 	
 	private boolean checkForScript(String string){
-		return string.matches("<\\s*script\\s*>.*</\\s*script\\s*>")
+		return string.matches(".*<\\s*script\\s*>.*</\\s*script\\s*>.*")
 			||
-			string.matches("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']");		
+			string.matches(".*[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\'].*");		
 	}
 	
 	public String[] getParameterValues(String parameter) {
