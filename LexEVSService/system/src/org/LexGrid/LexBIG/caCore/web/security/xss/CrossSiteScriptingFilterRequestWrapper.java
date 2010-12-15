@@ -18,7 +18,8 @@
  */
 package org.LexGrid.LexBIG.caCore.web.security.xss;
 
-import java.util.HashMap;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -38,8 +39,8 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 
 	@SuppressWarnings("unchecked")
 	public Map getParameterMap() {
-		
-		Map map = new HashMap(super.getParameterMap());
+	
+		Map map = super.getParameterMap();
 		
 		Iterator iter = (map.keySet() != null)? map.keySet().iterator() : null;
 		
@@ -52,16 +53,16 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 				key = (String) iter.next();
 				
 				if(key != null) {
+					if(this.checkForScript(key)){
+						throw new RuntimeException("Text: " + key + " is not " +
+								" allowed as a parameter key string.");
+					}
+					
 					values = (String[])map.get(key);
 					
+					//clean values where possible
 					for(int i=0; i<values.length; i++)
 						values[i] = cleanXSS(values[i]);
-					
-					map.remove(key);
-					
-					key = cleanXSS(key);
-					
-					map.put(key, values);
 				}
 			}
 		}
@@ -70,7 +71,9 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	}
 	
 	private boolean checkForScript(String string){
-		return string.toLowerCase().contains("script");
+		return string.matches("<\\s*script\\s*>.*</\\s*script\\s*>")
+			||
+			string.matches("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']");		
 	}
 	
 	public String[] getParameterValues(String parameter) {
@@ -104,18 +107,40 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	}
 
 	private String cleanXSS(String value) {
-		
-		if(checkForScript(value)){
-			throw new RuntimeException("Values: " + value + " " +
-					"are not allowed in the URL.");
-		}
 
-		value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");
-		value = value.replaceAll("\\(", "& #40;").replaceAll("\\)", "& #41;");
-		value = value.replaceAll("'", "& #39;");		  
-		value = value.replaceAll("eval\\((.*)\\)", "");
-		value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
-		value = value.replaceAll("(?i)script", "");
-		return value;
-	}
+        if (value == null || value.length() < 1){
+            return value;
+        }
+
+        try {
+            value = URLDecoder.decode(value, "UTF-8");
+
+        } catch (UnsupportedEncodingException e) {
+
+            // Do nothing, just use the input
+
+        } catch (IllegalArgumentException e) {
+
+            // Do nothing, just use the input
+
+            // Note: The following exception was triggered:
+
+            // java.lang.IllegalArgumentException: URLDecoder: Illegal hex
+
+            // characters in escape (%) pattern - For input string: "^&".
+
+        }
+
+        // Remove XSS attacks
+
+        value = value.replaceAll("<\\s*script\\s*>.*</\\s*script\\s*>", "");
+        value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        value = value.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+        value = value.replaceAll("'", "&#39;");
+        value = value.replaceAll("eval\\((.*)\\)", "");
+        value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
+        value = value.replaceAll("\"", "&quot;");
+
+        return value;
+    }
 }
