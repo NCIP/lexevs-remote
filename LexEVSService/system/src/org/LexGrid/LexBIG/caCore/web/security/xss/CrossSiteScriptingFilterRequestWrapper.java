@@ -28,7 +28,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * The Class CrossSiteScriptingFilterRequestWrapper.
- * 
+ *
+ * @author NCI Browser Team
  * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
  */
 public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWrapper {
@@ -54,8 +55,8 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 				
 				if(key != null) {
 					if(this.checkForScript(key)){
-						throw new RuntimeException("Text: " + key + " is not " +
-								" allowed as a parameter key string.");
+						throw new RuntimeException("Invalid text detected in URL: " +
+								"Invalid Parameter key string.");
 					}
 					
 					values = (String[])map.get(key);
@@ -94,15 +95,18 @@ public class CrossSiteScriptingFilterRequestWrapper extends HttpServletRequestWr
 	public String getParameter(String parameter) {
 		  String value = super.getParameter(parameter);
 		  if (value == null) {
-		         return null; 
-                  }
+			  return null; 
+          }
+		  
 		  return cleanXSS(value);
 	}
 	
 	public String getHeader(String name) {
 	    String value = super.getHeader(name);
-	    if (value == null)
+	    if (value == null){
 	        return null;
+	    }
+	    
 	    return cleanXSS(value);   
 	}
 
