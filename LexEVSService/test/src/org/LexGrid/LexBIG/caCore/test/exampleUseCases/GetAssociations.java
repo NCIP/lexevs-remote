@@ -62,7 +62,7 @@ public class GetAssociations extends ServiceTestCase
 		
 		List<AssociationSource> results = service.search(AssociationSource.class, source, queryOptions);
 		
-		assertTrue(results.size() == 3);	
+		assertEquals(5,results.size());	
 		
 		String[] expectedCodes = new String[]{"C32735", "C12392", "C43612"};
 		
@@ -70,8 +70,11 @@ public class GetAssociations extends ServiceTestCase
 		
 		int i=0;
 		for(AssociationSource assocSource : results){
-			returnedCodes[i] = assocSource.getTarget()[0].getTargetEntityCode();
-			i++;
+			String targetCode = assocSource.getTarget()[0].getTargetEntityCode();
+			if(! targetCode.startsWith("@")){
+				returnedCodes[i] = targetCode;
+				i++;
+			}
 		}
 		
 		Arrays.sort(expectedCodes);
