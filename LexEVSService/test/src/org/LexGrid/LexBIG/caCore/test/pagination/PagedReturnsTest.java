@@ -161,10 +161,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		QueryOptions qo = new QueryOptions();
 		qo.setLazyLoad(true);
 		qo.setResultPageSize(50);
-		CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-		csvt.setVersion(ServiceTestCase.ZEBRAFISH_VERSION);
-		qo.setCodingSchemeVersionOrTag(csvt);
-		qo.setCodingScheme(ServiceTestCase.ZEBRAFISH_SCHEME);
+		qo.setCodingScheme(ServiceTestCase.MGED_SCHEME);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);
 		LexEVSListProxy listProxy = (LexEVSListProxy)concepts;
