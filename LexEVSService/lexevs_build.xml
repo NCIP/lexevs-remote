@@ -208,7 +208,6 @@
 			<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
 				<exclude name="servlet.jar"/>
 				<exclude name="xercesImpl*.*"/>
-				<exclude name="jaxrpc.jar"/>
 				<exclude name="cog*.*"/>
 			</lib>
 			<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
