@@ -30,6 +30,8 @@ import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeGraph;
 import org.LexGrid.LexBIG.Utility.Constructors;
+import org.LexGrid.LexBIG.distributed.test.bugs.GForge19716;
+import org.LexGrid.LexBIG.distributed.test.services.LexBIGServiceConvenienceMethodsTest;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 
@@ -45,6 +47,90 @@ public class TestDAGWalking extends ServiceTestCase
     {
         return testID;
     }
+    
+    public static void main(String[] args){
+    	
+    	Thread t1 = new Thread(){
+			@Override
+			public void run() {
+				while(true){
+					TestContentExtraction t = new TestContentExtraction();
+					try {
+						t.testContentExtraction();
+					} catch (LBException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+    	};
+    	
+    	Thread t2 = new Thread(){
+			@Override
+			public void run() {
+				while(true){
+					TestDAGWalking w = new TestDAGWalking();
+					try {
+						w.testDAGWalking();
+					} catch (LBException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+    	};
+    	
+    	Thread t3 = new Thread(){
+			@Override
+			public void run() {
+				while(true){
+					LexBIGServiceConvenienceMethodsTest t =
+						new LexBIGServiceConvenienceMethodsTest();
+
+					t.setUp();	
+					try {
+						t.testIsForwardName();
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+    	};
+    	
+    	Thread t4 = new Thread(){
+			@Override
+			public void run() {
+				while(true){
+					GForge19716 t = new GForge19716();
+					try {
+						t.testGetAllProperties();
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+    	};
+	
+    	t1.start();
+    	t2.start();	
+    	t3.start();
+    	t4.start();
+    }
+    
+    
+    private interface ThreadTest {
+    	
+    	public void runTest();
+    	
+    }
+  
+    private static void runTest(ThreadTest test){
+    	try {
+			test.runTest();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
 
     /**
      * Test dag walking.

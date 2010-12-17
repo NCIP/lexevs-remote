@@ -60,7 +60,7 @@ public class TestEnumerateConceptsbyRelationship extends ServiceTestCase
     	lbscm.setLexBIGService(LexEVSServiceHolder.instance().getLexEVSAppService());
     	
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, null, null);
-        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Concept_In_Subset"), null);
+        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("A8"), null);
         
         CodedNodeSet cns = cng.toNodeList(Constructors.createConceptReference("C12366", THES_SCHEME),
                 true, false, 1, -1);

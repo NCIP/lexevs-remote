@@ -67,7 +67,7 @@ public class TestRetrieveRelationsforConcept extends ServiceTestCase
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(THES_VERSION), "roles");
 
         cng = cng.restrictToSourceCodes(cns);
-        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Anatomic_Structure_Is_Physical_Part_Of"),
+        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("R82"),
                                    null);
 
         ResolvedConceptReference[] rcr = cng.resolveAsList(Constructors.createConceptReference("C12223", THES_SCHEME),
@@ -80,7 +80,7 @@ public class TestRetrieveRelationsforConcept extends ServiceTestCase
 
         Association[] a = rcr[0].getSourceOf().getAssociation();
         assertTrue(a.length == 1);
-        assertTrue(a[0].getAssociationName().equals("Anatomic_Structure_Is_Physical_Part_Of"));
+        assertTrue(a[0].getAssociationName().equals("R82"));
 
     }
 

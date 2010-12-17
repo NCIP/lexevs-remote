@@ -76,7 +76,7 @@ public class TestAttributePresenceMatch extends ServiceTestCase
            // if (e.getCause().getCause().getCause().getClass() == LBParameterException.class) {
            //     return false;
             //}
-            e.printStackTrace();
+            //e.printStackTrace();
             return (false);
         }
 
