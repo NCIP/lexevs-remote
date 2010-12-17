@@ -124,7 +124,7 @@ public void testIntersection() throws LBException
        List<String> rels = cng.listCodeRelationships(Constructors.createConceptReference("C32770",THES_SCHEME), Constructors.createConceptReference("C61410",THES_SCHEME), false);
        assertTrue("1",rels.size() == 1);
         //Yes, has subtype should come back with the global oid for hasSubtype.
-        assertTrue("2",rels.contains("Concept_In_Subset"));
+        assertTrue("2",rels.contains("A8"));
     }
     
     /**
