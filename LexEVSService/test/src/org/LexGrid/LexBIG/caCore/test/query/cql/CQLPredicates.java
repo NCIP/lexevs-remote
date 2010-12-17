@@ -142,6 +142,11 @@ public class CQLPredicates extends ServiceTestCase
 		at1.setName("_entityCode");
 		at1.setValue("99998006");
 		at1.setPredicate(CQLPredicate.GREATER_THAN_EQUAL_TO);
+		
+		CQLAttribute at1p = new CQLAttribute();
+		at1p.setName("_entityCode");
+		at1p.setValue("99999999");
+		at1p.setPredicate(CQLPredicate.LESS_THAN_EQUAL_TO);
 
 		CQLAttribute at2 = new CQLAttribute();
 		at2.setName("_entityCodeNamespace");
@@ -151,6 +156,7 @@ public class CQLPredicates extends ServiceTestCase
 		CQLGroup group = new CQLGroup();
 		group.setLogicOperator(CQLLogicalOperator.AND);
 		group.addAttribute(at1);
+		group.addAttribute(at1p);
 		group.addAttribute(at2);
 
 		target.setGroup(group);
@@ -159,6 +165,7 @@ public class CQLPredicates extends ServiceTestCase
 		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 2);
+		
 		String[] expectedCodes = new String[]{"99998006", "99999003"};
 		String[] returnedCodes = new String[2];
 		for (Entity concept : results){
