@@ -93,7 +93,7 @@ public class TestAttributeValueMatch extends ServiceTestCase
      */
     public void testAttributeValueMatchc() throws LBException
     {
-        assertTrue(matchAttributeValueType(PropertyType.DEFINITION, "When"));
+        assertTrue(matchAttributeValueType(PropertyType.DEFINITION, "water"));
     }
 
     /**

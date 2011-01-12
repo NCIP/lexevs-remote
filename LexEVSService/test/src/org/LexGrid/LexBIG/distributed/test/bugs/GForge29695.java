@@ -42,7 +42,7 @@ public class GForge29695 extends ServiceTestCase
 		LexBIGService lbsi = LexEVSServiceHolder.instance().getLexEVSAppService();
     	CodedNodeGraph cng = lbsi.getNodeGraph(THES_SCHEME, null, null);
     	
-    	cng = cng.restrictToAssociations(Constructors.createNameAndValueList("A8"), null);
+    	cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Concept_In_Subset"), null);
     	
     	CodedNodeSet cns = lbsi.getNodeSet(THES_SCHEME, null, null).restrictToCodes(Constructors.createConceptReferenceList("C2851"));
 
@@ -61,7 +61,7 @@ public class GForge29695 extends ServiceTestCase
     	
     	Association cis = ref.getTargetOf().getAssociation(0);
     	
-    	assertEquals("A8", cis.getAssociationName());
+    	assertEquals("Concept_In_Subset", cis.getAssociationName());
     	
     	assertEquals(1,cis.getAssociatedConcepts().getAssociatedConceptCount());
 	}		

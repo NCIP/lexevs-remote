@@ -60,13 +60,13 @@ public class TestEnumerateConceptsbyRelationship extends ServiceTestCase
     	lbscm.setLexBIGService(LexEVSServiceHolder.instance().getLexEVSAppService());
     	
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, null, null);
-        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("A8"), null);
+        cng = cng.restrictToAssociations(Constructors.createNameAndValueList(""), null);
         
         CodedNodeSet cns = cng.toNodeList(Constructors.createConceptReference("C12366", THES_SCHEME),
                 true, false, 1, -1);
         ResolvedConceptReferenceList rcrl= cns.resolveToList(null, null, null, -1);
         ResolvedConceptReference[] rcr = rcrl.getResolvedConceptReference();
 
-        assertTrue("Length : " + rcr.length, rcr.length == 5);
+        assertTrue("Length : " + rcr.length, rcr.length == 1);
     }
 }
