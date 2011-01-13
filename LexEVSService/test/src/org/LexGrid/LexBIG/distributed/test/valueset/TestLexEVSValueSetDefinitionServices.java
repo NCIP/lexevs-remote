@@ -37,7 +37,7 @@ import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
  */
 public class TestLexEVSValueSetDefinitionServices extends ServiceTestCase
 {
-    final static String testID = "testApproximateStringMatch";
+    final static String testID = "TestLexEVSValueSetDefinitionServices";
 
     @Override
     protected String getTestID()
