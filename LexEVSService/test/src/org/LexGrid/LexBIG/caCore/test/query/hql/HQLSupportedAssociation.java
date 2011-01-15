@@ -52,12 +52,12 @@ public class HQLSupportedAssociation extends ServiceTestCase
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 				
 		HQLCriteria hql = new HQLCriteria("FROM org.LexGrid.naming.SupportedAssociation" +
-				" as sa WHERE sa._localId = 'R156'");
+				" as sa WHERE sa._localId = 'Concept_In_Subset'");
 		List<SupportedAssociation> result = service.query(hql);
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().equals("R156"));
+		assertTrue(result.get(0).getLocalId().equals("Concept_In_Subset"));
 	}
 	
 	public void testGetSupportedAssociationByURN() throws Exception {
@@ -69,7 +69,7 @@ public class HQLSupportedAssociation extends ServiceTestCase
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().equals("R156"));
+		assertTrue(result.get(0).getLocalId().equals("Allele_Absent_From_Wild-type_Chromosomal_Location"));
 		assertTrue(result.get(0).getUri().equals("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#R156"));
 	}
 	
@@ -93,7 +93,7 @@ public class HQLSupportedAssociation extends ServiceTestCase
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().equals("R156"));
+		assertTrue(result.get(0).getLocalId().equals("Allele_Absent_From_Wild-type_Chromosomal_Location"));
 		assertTrue(result.get(0).getUri().equals("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#R156"));
 	}
 	
