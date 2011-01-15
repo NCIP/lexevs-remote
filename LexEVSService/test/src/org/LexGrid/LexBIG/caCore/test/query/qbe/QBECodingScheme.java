@@ -73,8 +73,7 @@ public class QBECodingScheme extends ServiceTestCase
 		assertTrue(nciThes.getFormalName().equals(ServiceTestCase.THES_FORMAL));
 		assertTrue(nciThes.getRepresentsVersion().equals(ServiceTestCase.THES_VERSION));	
 		assertTrue(nciThes.getDefaultLanguage().equals(ServiceTestCase.THES_DEFAULT_LANG));
-		assertTrue("Value: " + nciThes.getApproxNumConcepts(),String.valueOf(nciThes.getApproxNumConcepts()).equals(
-				ServiceTestCase.THES_APPROX_NUM_CONCEPTS));
+		assertNotNull(nciThes.getApproxNumConcepts());
 	
 		assertTrue(nciThes.getEntityDescription().getContent().equals(ServiceTestCase.THES_ENT_DESC));		
 	}	
