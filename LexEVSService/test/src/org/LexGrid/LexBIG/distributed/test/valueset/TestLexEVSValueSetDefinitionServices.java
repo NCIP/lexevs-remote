@@ -22,12 +22,8 @@
  */
 package org.LexGrid.LexBIG.distributed.test.valueset;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -40,7 +36,6 @@ import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.util.PrintUtility;
 import org.LexGrid.valueSets.DefinitionEntry;
 import org.LexGrid.valueSets.EntityReference;
 import org.LexGrid.valueSets.ValueSetDefinition;
@@ -48,9 +43,6 @@ import org.LexGrid.valueSets.ValueSetDefinitionReference;
 import org.LexGrid.valueSets.types.DefinitionOperator;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 import org.lexgrid.valuesets.dto.ResolvedValueSetDefinition;
-import org.lexgrid.valuesets.helper.LexEVSPipedReader;
-
-import com.healthmarketscience.rmiio.SerializableInputStream;
 
 /**
  * The Class TestLexEVSValueSetDefinitionServices.
