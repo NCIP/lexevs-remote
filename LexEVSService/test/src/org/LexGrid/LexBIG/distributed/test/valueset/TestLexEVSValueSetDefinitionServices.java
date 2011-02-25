@@ -126,6 +126,28 @@ public class TestLexEVSValueSetDefinitionServices extends ServiceTestCase
 		}
 	}
     
+    public void testExportVSDURIStreaming() throws LBException, URISyntaxException, IOException{
+    	// Start the value set resolution export
+		InputStream reader =  LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSValueSetDefinitionServices().exportValueSetResolution(new URI("SRITEST:AUTO:EveryThing"), null, null, null, false);
+		
+		if (reader != null) {
+			StringBuffer buf = new StringBuffer(); 
+	        try { 
+	            for(int c = reader.read(); c != -1; c = reader.read()) { 
+	                buf.append((char)c); 
+	            } 
+	            System.out.println(buf.toString()); 
+	        } catch(IOException e) { 
+	            throw e; 
+	        } finally { 
+	            try { 
+	                reader.close(); 
+	            } catch(Exception e) { 
+	                // ignored 
+	            } 
+	        } 
+		}
+    }
     public void testResolve() throws LBException, URISyntaxException {
 
     	LexEVSValueSetDefinitionServices vds = 
