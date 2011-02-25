@@ -31,6 +31,8 @@ import org.lexevs.locator.LexEvsServiceLocator;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.remoting.rmi.CodebaseAwareObjectInputStream;
 
+import com.healthmarketscience.rmiio.SerializableInputStream;
+
 /**
  * Ues the LexEVS Classloader (for loading extensions, SQL drivers, etc).
  * 
@@ -98,6 +100,11 @@ public class LexEvsHttpInvokerServiceExporter extends HttpInvokerServiceExporter
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
+			}
+			else if (obj instanceof InputStream){
+				final InputStream in = (InputStream) obj;
+				obj = new SerializableInputStream(in);
+//				obj = RemoteInputStreamServer.wrap(in);
 			}
 			return super.replaceObject(obj);
 		}
