@@ -28,11 +28,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.LexGrid.LexBIG.DataModel.Collections.AbsoluteCodingSchemeVersionReferenceList;
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
+import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
@@ -129,6 +131,28 @@ public class TestLexEVSValueSetDefinitionServices extends ServiceTestCase
     public void testExportVSDURIStreaming() throws LBException, URISyntaxException, IOException{
     	// Start the value set resolution export
 		InputStream reader =  LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSValueSetDefinitionServices().exportValueSetResolution(new URI("SRITEST:AUTO:EveryThing"), null, null, null, false);
+		
+		if (reader != null) {
+			StringBuffer buf = new StringBuffer(); 
+	        try { 
+	            for(int c = reader.read(); c != -1; c = reader.read()) { 
+	                buf.append((char)c); 
+	            } 
+	            System.out.println(buf.toString()); 
+	        } catch(IOException e) { 
+	            throw e; 
+	        } finally { 
+	            try { 
+	                reader.close(); 
+	            } catch(Exception e) { 
+	                // ignored 
+	            } 
+	        } 
+		}
+		
+		AbsoluteCodingSchemeVersionReferenceList csvList = new AbsoluteCodingSchemeVersionReferenceList();
+		csvList.addAbsoluteCodingSchemeVersionReference(Constructors.createAbsoluteCodingSchemeVersionReference("cell", null));
+		reader =  LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSValueSetDefinitionServices().exportValueSetResolution(new URI("SRITEST:FA:HyphaPropertyRef"), null, null, null, false);
 		
 		if (reader != null) {
 			StringBuffer buf = new StringBuffer(); 
