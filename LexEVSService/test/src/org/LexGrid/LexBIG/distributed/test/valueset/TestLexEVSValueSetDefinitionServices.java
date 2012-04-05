@@ -75,7 +75,7 @@ public class TestLexEVSValueSetDefinitionServices extends ServiceTestCase
     	}
     }
     
-    public void testExportVSResolutionByVSDObjectToWriter() throws LBException, URISyntaxException, IOException{
+    public void defertestExportVSResolutionByVSDObjectToWriter() throws LBException, URISyntaxException, IOException{
 		
 		ValueSetDefinition vsd = new ValueSetDefinition();
 		vsd.setValueSetDefinitionURI("SRITEST:AUTO:VSDREF_GM_IMMI_NODE_AND_FORD");
@@ -172,7 +172,7 @@ public class TestLexEVSValueSetDefinitionServices extends ServiceTestCase
 	        } 
 		}
     }
-    public void testResolve() throws LBException, URISyntaxException {
+    public void defertestResolve() throws LBException, URISyntaxException {
 
     	LexEVSValueSetDefinitionServices vds = 
     		LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSValueSetDefinitionServices();
