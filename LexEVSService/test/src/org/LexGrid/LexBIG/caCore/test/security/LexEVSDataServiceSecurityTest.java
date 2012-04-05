@@ -248,7 +248,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			// try to get the mappings from a secured coding scheme
 			List mappings = service.getAssociation(cs, "_mappings");
 			// should not return anything without a token
-			assertTrue(mappings.size() == 1);
+			assertTrue(mappings.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
@@ -320,7 +320,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			// try to get the mappings from a secured coding scheme
 			List cs = service.query(query);
 			// should not return anything without a token
-			assertTrue(cs.size() == 1);
+			assertTrue(cs.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
@@ -392,7 +392,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			// try to get the mappings from a secured coding scheme
 			List cs = service.query(query);
 			// should not return anything without a token
-			assertTrue(cs.size() == 1);
+			assertTrue(cs.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
@@ -446,7 +446,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			// try to get the mappings from a secured coding scheme
 			List cs = service.query(dc);
 			// should not return anything without a token
-			assertTrue(cs.size() == 1);
+			assertTrue(cs.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
@@ -504,7 +504,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			// try to get the mappings from a secured coding scheme
 			List cs = service.query(hql);
 			// should not return anything without a token
-			assertTrue(cs.size() == 1);
+			assertTrue(cs.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
@@ -701,7 +701,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 		try {
 			// try to get concepts from a secured coding scheme
 			List cs = service.search(Entity.class.getName(), meddraConcept);
-			assertTrue(cs.size() == 1);
+			assertTrue(cs.size() >= 1);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			fail("error resolving MedDRA");
