@@ -113,7 +113,7 @@ public class QBECodingScheme extends ServiceTestCase
 		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
 	
 		assertTrue(sourceList != null);	
-		assertEquals(1,sourceList.size());
+		assertTrue(sourceList.size() >=1);
 				
 		CodingScheme zebrafish = sourceList.get(0);
 		assertTrue(zebrafish.getCodingSchemeName().equals(ServiceTestCase.ZEBRAFISH_SCHEME));
@@ -154,7 +154,7 @@ public class QBECodingScheme extends ServiceTestCase
 		List<CodingScheme> sourceList = service.search(CodingScheme.class, cs);	
 	
 		assertTrue(sourceList != null);	
-		assertTrue(sourceList.size() == 1);
+		assertTrue(sourceList.size() >= 1);
 				
 		CodingScheme zebrafish = sourceList.get(0);
 		assertTrue(zebrafish.getCodingSchemeName().equals(ServiceTestCase.ZEBRAFISH_SCHEME));
