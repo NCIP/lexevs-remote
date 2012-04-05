@@ -68,7 +68,7 @@ public class TestMapSynonymtoPreferredNames extends ServiceTestCase
             if (rcr[i].getConceptCode().equals("C12788"))
             {
             	found = true;
-                assertTrue(rcr[i].getReferencedEntry().getPropertyCount() == 5);
+                assertTrue(rcr[i].getReferencedEntry().getPropertyCount() >= 4);
                 assertTrue(rcr[i].getReferencedEntry().getEntityDescription().getContent().equals("Skeletal System"));
             }
         }
