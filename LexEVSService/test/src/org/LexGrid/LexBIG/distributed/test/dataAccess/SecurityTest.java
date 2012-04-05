@@ -76,7 +76,7 @@ public class SecurityTest extends ServiceTestCase {
 		} catch (Exception e) {
 			System.out.println("Calling ResourceMananger methods failed");
 			assertTrue("Exception thrown", true);
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}	
 }
