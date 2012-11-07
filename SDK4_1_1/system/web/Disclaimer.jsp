@@ -1,8 +1,9 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
-<s:head theme="ajax" debug="true" />
+<sx:head parseContent="true"/>
 <title>Disclaimer</title>
 <link rel="stylesheet" type="text/css" href="styleSheet.css" />
 <script src="script.js" type="text/javascript"></script>

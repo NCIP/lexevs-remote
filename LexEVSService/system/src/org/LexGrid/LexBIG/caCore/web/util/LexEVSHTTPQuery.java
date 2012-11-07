@@ -292,6 +292,7 @@ public class LexEVSHTTPQuery extends HttpServlet {
 									.append("<font size=4 color=red><b><br><br>\n");
 		
 		String msg = ex.getMessage();
+		msg = org.apache.commons.lang.StringEscapeUtils.escapeHtml(msg);
 		Throwable tempEx = ex.getCause();
 		while (tempEx != null) {
 			msg += "<br><br>Caused by: " + tempEx.getMessage();

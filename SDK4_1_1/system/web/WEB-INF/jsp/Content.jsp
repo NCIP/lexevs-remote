@@ -1,4 +1,5 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="sx" uri="/struts-dojo-tags" %>
 <%@ page import="gov.nih.nci.system.web.util.JSPUtils"%>
 <%
 	JSPUtils jspUtils= JSPUtils.getJSPUtils(config.getServletContext());
@@ -9,7 +10,7 @@
 <html>
 <head>
 <title>Content</title>
-<s:head theme="ajax" debug="true" />
+<sx:head parseContent="true"/>
 <link rel="stylesheet" type="text/css" href="styleSheet.css" />
 <script src="script.js" type="text/javascript"></script>
 <script>

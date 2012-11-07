@@ -1,4 +1,5 @@
- <%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <%@ page import="org.acegisecurity.ui.AbstractProcessingFilter"%>
 <%@ page
 	import="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter"%>
@@ -268,7 +269,7 @@
 																												</td>
 																												<td class="formFieldLogin">
 																													<s:textfield name="j_username"
-																														value="<%=lastUserKey%>"
+																														value="%{lastUserKey}"
 																														cssClass="formField" size="14" />
 																												</td>
 																											</tr>

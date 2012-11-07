@@ -1,7 +1,6 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@ page import="org.acegisecurity.ui.AbstractProcessingFilter"%>
-<%@ page
-	import="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter"%>
+<%@ page import="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter"%>
 <%@ page import="org.acegisecurity.AuthenticationException"%>
 <%@ page import="org.acegisecurity.context.SecurityContextHolder"%>
 <%@ page import="org.acegisecurity.userdetails.UserDetails"%>

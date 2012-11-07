@@ -13,14 +13,14 @@ public class Criteria extends BaseActionSupport {
 
 	private static Logger log = Logger.getLogger(Criteria.class.getName());
 
-	private long nodeId;
+	private String nodeId;
 	private Category currentCategory;
 
-	public void setNodeId(long nodeId) {
+	public void setNodeId(String nodeId) {
 		this.nodeId = nodeId;
 	}
 
-	public long getNodeId() {
+	public String getNodeId() {
 		return nodeId;
 	}
 
@@ -31,10 +31,15 @@ public class Criteria extends BaseActionSupport {
 
 		HttpServletRequest request = ServletActionContext.getRequest();
 
-		// A Workaround for Criteria.jsp, which requires embedded JSP logic 
+		// A Workaround for Criteria.jsp, which requires embedded JSP logic
 		request.setAttribute("klassName", getSelectedDomain());
+		request.setAttribute("nodeId", nodeId);
 
 		return SUCCESS;
+	}
+	
+	public String getJavaDocsClassName() {
+		return (getFullyQualClassName().replace('.','/')+".html");
 	}
 
 	public String getFullyQualClassName() {
@@ -54,3 +59,4 @@ public class Criteria extends BaseActionSupport {
 	}
 	
 }
+
