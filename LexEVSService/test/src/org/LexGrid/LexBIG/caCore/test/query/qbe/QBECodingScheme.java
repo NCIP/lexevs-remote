@@ -105,7 +105,7 @@ public class QBECodingScheme extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedCodingScheme scs = new SupportedCodingScheme();
-		scs.setLocalId("Zebrafish");
+		scs.setLocalId("zebrafish_anatomical_ontology");
 		
 		mappings.addSupportedCodingScheme(scs);
 		cs.setMappings(mappings);
@@ -115,7 +115,7 @@ public class QBECodingScheme extends ServiceTestCase
 		assertTrue(sourceList != null);	
 		assertTrue(sourceList.size() >=1);
 				
-		CodingScheme zebrafish = sourceList.get(0);
+		CodingScheme zebrafish = sourceList.get(1);
 		assertTrue(zebrafish.getCodingSchemeName().equals(ServiceTestCase.ZEBRAFISH_SCHEME));
 		assertTrue(zebrafish.getRepresentsVersion().equals(ServiceTestCase.ZEBRAFISH_VERSION));
 	}
