@@ -45,6 +45,9 @@ abstract public class ServiceTestCase extends TestCase{
 	/** The Constant THES_SCHEME. */
 	public final static String THES_SCHEME =  properties.getProperty("THES_SCHEME"); //NCI_Thesaurus";
 	
+	/** The Constant THES_LOINC. */
+	public final static String LOINC_SCHEME =  properties.getProperty("LOINC_SCHEME");
+	
 	/** The Constant THES_URN. */
 	public final static String THES_URN = properties.getProperty("THES_URN"); //"urn:oid:2.16.840.1.113883.3.26.1.1";
 	
@@ -78,6 +81,8 @@ abstract public class ServiceTestCase extends TestCase{
 	/** The Constant THES_VERSION. */
 	public final static String THES_VERSION = properties.getProperty("THES_VERSION"); 
 
+	/** The Constant LOINC_VERSION. */
+	public final static String LOINC_VERSION = properties.getProperty("LOINC_VERSION");
 	
 	public final static String THES_METADATA_VERSION = properties.getProperty("THES_METADATA_VERSION"); 
 	
