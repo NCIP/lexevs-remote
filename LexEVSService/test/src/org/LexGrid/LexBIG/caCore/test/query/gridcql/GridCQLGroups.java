@@ -53,7 +53,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -72,7 +72,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("1005009"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
@@ -87,7 +87,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -117,7 +117,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -136,7 +136,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("1005009"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}
@@ -181,7 +181,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -208,7 +208,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("1005009"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
@@ -223,7 +223,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -263,7 +263,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("1005009");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		Attribute at2 = new Attribute();
@@ -291,7 +291,7 @@ public class GridCQLGroups extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("1005009"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
