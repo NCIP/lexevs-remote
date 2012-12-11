@@ -54,7 +54,7 @@ public class GridCQLConcept extends ServiceTestCase
 		
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("10000006");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 		
 		Attribute at2 = new Attribute();
@@ -75,7 +75,7 @@ public class GridCQLConcept extends ServiceTestCase
 		List<Entity> concepts = service.query(query);
 		for (Entity concept : concepts) {
 			foundResults = true;
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("10000006"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 		assertTrue(foundResults);
@@ -91,7 +91,7 @@ public class GridCQLConcept extends ServiceTestCase
 		
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("10000500%");
+		at1.setValue("1000500%");
 		at1.setPredicate(Predicate.LIKE);	
 		
 		Attribute at2 = new Attribute();
@@ -111,7 +111,7 @@ public class GridCQLConcept extends ServiceTestCase
 		List<Entity> concepts = service.query(query);
 		for (Entity concept : concepts) {
 			foundResults = true;
-			assertTrue(concept.getEntityCode().startsWith("10000500"));
+			assertTrue(concept.getEntityCode().startsWith("1000500"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 		assertTrue(foundResults);
