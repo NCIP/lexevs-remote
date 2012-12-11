@@ -53,7 +53,7 @@ public class CQLGroups extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("149164001");
+		at1.setValue("10000006");
 		at1.setPredicate(CQLPredicate.EQUAL_TO);	
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -73,7 +73,7 @@ public class CQLGroups extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("149164001"));
+			assertTrue(concept.getEntityCode().equals("10000006"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
