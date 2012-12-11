@@ -51,14 +51,14 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		QueryOptions qo = new QueryOptions();
 		qo.setLazyLoad(true);
 		qo.setResultPageSize(10);
-		qo.setCodingScheme(ServiceTestCase.THES_SCHEME);
+		qo.setCodingScheme(ServiceTestCase.META_SCHEME);
 		CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-		csvt.setVersion(ServiceTestCase.THES_VERSION);
+		csvt.setVersion(ServiceTestCase.META_VERSION);
 		qo.setCodingSchemeVersionOrTag(csvt);
 		
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		Entity e = new Entity();
-		e.setEntityCode("C53916");
+		e.setEntityCode("C0000184");
 		List<Entity> concepts = null;
 		try {
 			concepts = svc.search(Entity.class, e, qo);
@@ -72,7 +72,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 	
 	public void testLazyLoadEntity() throws Exception {
 		assertTrue(entity != null);
-		assertTrue(entity.getEntityCode().equals("C53916"));
+		assertTrue(entity.getEntityCode().equals("C0000184"));
 	}
 	
 	public void testLazyLoadPresentations(){
@@ -113,7 +113,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		Enumeration<? extends Presentation> enumeration = entity.enumeratePresentation();
 		assertTrue(enumeration.hasMoreElements() == true);
 		
-		int expectedPresentations = 3;
+		int expectedPresentations = 45;
 		
 		int counter = 0;
 		while(enumeration.hasMoreElements()){
@@ -128,7 +128,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		Iterator<? extends Presentation> itr = entity.iteratePresentation();
 		assertTrue(itr.hasNext());
 		
-		int expectedPresentations = 3;
+		int expectedPresentations = 45;
 		
 		int counter = 0;
 		while(itr.hasNext()){
