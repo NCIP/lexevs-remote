@@ -140,12 +140,12 @@ public class CQLPredicates extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("99998006");
+		at1.setValue("10000006");
 		at1.setPredicate(CQLPredicate.GREATER_THAN_EQUAL_TO);
 		
 		CQLAttribute at1p = new CQLAttribute();
 		at1p.setName("_entityCode");
-		at1p.setValue("99999999");
+		at1p.setValue("10001066");
 		at1p.setPredicate(CQLPredicate.LESS_THAN_EQUAL_TO);
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -166,7 +166,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		assertTrue(results.size() == 2);
 		
-		String[] expectedCodes = new String[]{"99998006", "99999003"};
+		String[] expectedCodes = new String[]{"10000006", "10001005"};
 		String[] returnedCodes = new String[2];
 		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
@@ -190,7 +190,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("99998006");
+		at1.setValue("10001005");
 		at1.setPredicate(CQLPredicate.EQUAL_TO);
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -209,7 +209,7 @@ public class CQLPredicates extends ServiceTestCase
 		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 1);
-		String expectedCodes[] = new String[]{"99998006"};
+		String expectedCodes[] = new String[]{"10001005"};
 		String returnedCodes[] = new String[1];
 		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
@@ -233,7 +233,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("10000006");
+		at1.setValue("10001004");
 		at1.setPredicate(CQLPredicate.LESS_THAN);
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -253,7 +253,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		assertTrue(results.size() == 1);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("100000000"));
+			assertTrue(concept.getEntityCode().equals("10000006"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
@@ -269,7 +269,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("10000006");
+		at1.setValue("10001005");
 		at1.setPredicate(CQLPredicate.LESS_THAN_EQUAL_TO);
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -288,7 +288,7 @@ public class CQLPredicates extends ServiceTestCase
 		List<Entity> results = service.query(query);
 
 		assertTrue(results.size() == 2);
-		String expectedCodes[] = new String[]{"100000000", "10000006"};
+		String expectedCodes[] = new String[]{"10000006", "10001005"};
 		String returnedCodes[] = new String[2];
 		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
