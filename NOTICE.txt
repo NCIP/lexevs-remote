@@ -12,5 +12,5 @@ In 2013, as part of the National Cancer Informatics Program (NCIP) Open Developm
 the LexEVS Remote Services source code was migrated to GitHub to allow further development by the broader
 community.
 
-LexEVS Remote Services was developed as a terminology service based on community sourced standards and designed
-to deliver a robust, interoperable API
+LexEVS Remote Services were developed as an remote method invocation service for the LexEVS terminology 
+service based on community sourced standards and designed to deliver a robust, interoperable API
