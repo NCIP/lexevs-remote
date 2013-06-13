@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="test/src"/>
 	<classpathentry kind="src" path="output/lexevsapi60/package/remote-client/conf"/>
 	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
@@ -7,117 +8,130 @@
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
 	<classpathentry kind="src" path="writable-api/src"/>
 	<classpathentry kind="src" path="system/src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/acegi-security-1.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/antlr-2.7.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/args4j-2.0.12.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/arq.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/asm-3.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/aspectjrt-1.6.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/aspectjweaver-1.6.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/axis.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/c3p0-0.9.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-data-common-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-data-utils-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-metadata-data-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-sdkQuery4-beans-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/caGrid-sdkQuery4-processor-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-1.3.1-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-1.3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-bean-serializer.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-codegen-1.3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-codegen-anttask-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/castor-xml-schema-1.3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/cglib-2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/claml-model.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/clm-4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/cog-axis.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/cog-jglobus.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-cli-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-codec-1.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-dbcp-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-discovery-0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-io-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-lang-2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/commons-pool-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/compass-2.2.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/concurrent.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/csmapi-4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/dom4j-1.6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/ehcache-core-2.0.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/ejb3-persistence-1.0.2.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/freemarker-2.3.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/GroboUtils-5-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/hibernate-annotations-3.4.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/hibernate-commons-annotations-3.3.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/hibernate-validator-3.1.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/hsqldb-1.8.0.10.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/ibatis-sqlmap-2.3.4.726.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/icu4j-3_6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/iri.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jakarta-regexp-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/javassist-3.8.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jaxen-1.1-beta-6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jaxen-core-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jaxen-jdom-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jaxrpc.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jdom-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jena-2.5.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jettison-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jsr250-api-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/jta-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/junit-4.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lexbig.jar" sourcepath="/lgValueSets"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/LexEVSSecurity.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/looks-2.1.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lucene-analyzers-2.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lucene-core-2.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lucene-queries-2.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lucene-regex-2.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/lucene-snowball-2.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/mmbase.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/MSSOUserValidator.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/mysql-connector-java-5.1.10.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/ognl-2.7.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.equinox.preferences_3.2.0.v20060601.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/org.eclipse.osgi_3.2.0.v20060601.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/orphanNodesAlg.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/persistence-api-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/prefuse-2006.07.15-mod.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/protege-owl.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/protege.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/relaxngDatatype-20030807.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/saxpath-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/servlet.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/slf4j-api-1.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-2.5.6.jar" sourcepath="C:/Documents and Settings/m005256/.m2/repository/org/springframework/spring/2.5.6/spring-2.5.6-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-aop-2.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-aspects-2.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-batch-core-2.1.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-batch-infrastructure-2.1.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-oxm-1.5.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-test-2.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-web-2.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-xml-1.5.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/struts2-api-2.0.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/struts2-core-2.0.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/velocity-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/xsdlib-20030807.jar"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/xwork-2.0-beta-1.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SDK4_1_1"/>
-	<classpathentry exported="true" kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
+	<classpathentry kind="lib" path="system/lib/acegi-security-1.0.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="system/lib/args4j-2.0.12.jar"/>
+	<classpathentry kind="lib" path="system/lib/arq.jar"/>
+	<classpathentry kind="lib" path="system/lib/asm-3.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/aspectjrt-1.6.8.jar"/>
+	<classpathentry kind="lib" path="system/lib/aspectjweaver-1.6.8.jar"/>
+	<classpathentry kind="lib" path="system/lib/axis.jar"/>
+	<classpathentry kind="lib" path="system/lib/c3p0-0.9.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-data-common-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-data-utils-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-metadata-data-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-sdkQuery4-beans-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/caGrid-sdkQuery4-processor-1.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-1.3.1-core.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-1.3.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-bean-serializer.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-codegen-1.3.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-codegen-anttask-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/castor-xml-schema-1.3.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/cglib-2.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/claml-model.jar"/>
+	<classpathentry kind="lib" path="system/lib/clm-4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/cog-axis.jar"/>
+	<classpathentry kind="lib" path="system/lib/cog-jglobus.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-discovery-0.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/commons-pool-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/compass-2.2.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/concurrent.jar"/>
+	<classpathentry kind="lib" path="system/lib/csmapi-4.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/ddlUtils-1.0-PATCHED.jar"/>
+	<classpathentry kind="lib" path="system/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/ehcache-core-2.0.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/ejb3-persistence-1.0.2.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/freemarker-2.3.8.jar"/>
+	<classpathentry kind="lib" path="system/lib/GroboUtils-5-core.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-annotations-3.4.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-commons-annotations-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-validator-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hsqldb-1.8.0.10.jar"/>
+	<classpathentry kind="lib" path="system/lib/ibatis-sqlmap-2.3.4.726.jar"/>
+	<classpathentry kind="lib" path="system/lib/icu4j-3_6.jar"/>
+	<classpathentry kind="lib" path="system/lib/iri.jar"/>
+	<classpathentry kind="lib" path="system/lib/jakarta-regexp-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="system/lib/jaxen-core-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/jaxen-jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="system/lib/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/jena-2.5.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/jettison-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig.jar"/>
+	<classpathentry kind="lib" path="system/lib/LexEVSSecurity.jar"/>
+	<classpathentry kind="lib" path="system/lib/looks-2.1.3.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-analyzers-2.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-core-2.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-queries-2.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-regex-2.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/lucene-snowball-2.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/mmbase.jar"/>
+	<classpathentry kind="lib" path="system/lib/MSSOUserValidator.jar"/>
+	<classpathentry kind="lib" path="system/lib/mysql-connector-java-5.1.10.jar"/>
+	<classpathentry kind="lib" path="system/lib/ognl-3.0.5.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.equinox.preferences_3.2.0.v20060601.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.eclipse.osgi_3.2.0.v20060601.jar"/>
+	<classpathentry kind="lib" path="system/lib/orphanNodesAlg.jar"/>
+	<classpathentry kind="lib" path="system/lib/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/prefuse-2006.07.15-mod.jar"/>
+	<classpathentry kind="lib" path="system/lib/protege-owl.jar"/>
+	<classpathentry kind="lib" path="system/lib/protege.jar"/>
+	<classpathentry kind="lib" path="system/lib/relaxngDatatype-20030807.jar"/>
+	<classpathentry kind="lib" path="system/lib/rmiio-2.0.2-License.jar"/>
 	<classpathentry kind="lib" path="system/lib/rmiio-2.0.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/saxpath-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="system/lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-batch-core-2.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-batch-infrastructure-2.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-web-2.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.4.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/velocity-1.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/xsdlib-20030807.jar"/>
+	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.4.1.jar"/>
+	<classpathentry kind="lib" path="webServiceSoapClient/dist/LexEVSWebServiceClient.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-asm-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-aspects-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-beans-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-context-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-context-support-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-core-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-expression-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-jdbc-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-orm-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-oxm-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-test-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
+	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

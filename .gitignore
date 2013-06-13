@@ -1,0 +1,4 @@
+bin/
+build/
+output/
+.DS_Store

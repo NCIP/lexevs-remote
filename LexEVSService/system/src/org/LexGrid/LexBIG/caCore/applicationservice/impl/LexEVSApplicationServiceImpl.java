@@ -137,8 +137,8 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		this.validator = validator;
 	
 		try {
-			this.lbs = new LexBIGServiceImpl();
-		} catch (LBInvocationException e) {
+			this.lbs = LexBIGServiceImpl.defaultInstance();
+		} catch (Exception e) {
 			throw new ApplicationException("Error initializing LexBIG Service.", e);
 		}	
 	}
