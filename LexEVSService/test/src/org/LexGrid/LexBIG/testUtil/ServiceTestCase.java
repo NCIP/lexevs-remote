@@ -247,6 +247,12 @@ abstract public class ServiceTestCase extends TestCase{
     
     public final static String DOMAIN_CONCEPT_NAME_INVERSE_ASSOC = properties.getProperty("DOMAIN_CONCEPT_NAME_INVERSE_ASSOC");//name of concept with inverse association
     
+    public final static String RESOLVEDVS_URI = properties.getProperty("RESOLVEDVS_URI");
+    public final static String TARGETRVS_URIA = properties.getProperty("TARGETRVS_URIA");
+    public final static String TARGETRVS_URIB = properties.getProperty("TARGETRVS_URIB");
+    public final static String RESOLVEDVS_THES_VERSION = properties.getProperty("RESOLVEDVS_THES_VERSION");
+    public final static String RESOLVEDVS_CONCEPTA = properties.getProperty("RESOLVEDVS_CONCEPTA");
+    public final static String RESOLVEDVS_CONCEPTB = properties.getProperty("RESOLVEDVS_CONCEPTB");
     
 	/**
 	 * To be implemented by each descendant testcase.

@@ -35,7 +35,7 @@ public void testgetListofResolvedValueSets() throws LBException{
 	assertTrue(schemes.size() > 0);
 	boolean pass = false;
 	for(CodingScheme cs: schemes){
-		if(cs.getCodingSchemeURI().equals("http://ncit:C81224")){
+		if(cs.getCodingSchemeURI().equals(RESOLVEDVS_URI)){
 			pass = true;
 		}
 	}
@@ -44,10 +44,10 @@ public void testgetListofResolvedValueSets() throws LBException{
 
 public void testGetEntitiesForURI(){
 	boolean pass = false;
-	ResolvedConceptReferenceList list = service.getValueSetEntitiesForURI("http://ncit:C81224");
+	ResolvedConceptReferenceList list = service.getValueSetEntitiesForURI(RESOLVEDVS_URI);
 	assertTrue(list.getResolvedConceptReferenceCount() > 0);
 	for(ResolvedConceptReference ref: list.getResolvedConceptReference()){
-		if(ref.getCode().equals("C81204")){
+		if(ref.getCode().equals(RESOLVEDVS_CONCEPTA)){
 			pass = true;
 		}
 	}
@@ -56,22 +56,35 @@ public void testGetEntitiesForURI(){
 }
 
 public void testGetVersionsInResolutions() throws URISyntaxException{
-	URI uri = new URI("http://ncit:C81224");
+	URI uri = new URI(RESOLVEDVS_URI);
 	CodingScheme cs = service.getResolvedValueSetForValueSetURI(uri);
 	assertNotNull(cs);
 	AbsoluteCodingSchemeVersionReferenceList list = service.getListOfCodingSchemeVersionsUsedInResolution(cs);
 	assertTrue(list.getAbsoluteCodingSchemeVersionReferenceCount() > 0 );
 	for(AbsoluteCodingSchemeVersionReference ref: list.getAbsoluteCodingSchemeVersionReference()){
-		assertTrue(ref.getCodingSchemeURN().equals("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#"));
-		ref.getCodingSchemeVersion().equals("13.03d");
+		assertTrue(ref.getCodingSchemeURN().equals(THES_URN));
+		ref.getCodingSchemeVersion().equals(RESOLVEDVS_THES_VERSION);
 	}
 }
 
 public void testGetResovlveValueSetsForConceptReference(){
 	ConceptReference cs = new ConceptReference();
-	cs.setCode("C81211");
-	cs.setCodingSchemeName("NCI_Thesaurus");
+	cs.setCode(RESOLVEDVS_CONCEPTB);
+	cs.setCodingSchemeName(THES_SCHEME);
 	List<CodingScheme> schemes = service.getResolvedValueSetsForConceptReference(cs );
 	assertTrue(schemes.size() > 0);
+	boolean pass1 = false;
+	boolean pass2 = false;
+	for(CodingScheme c: schemes){
+		if(c.getCodingSchemeURI().equals(TARGETRVS_URIA)){
+			pass1 = true;
+		}
+		if(c.getCodingSchemeURI().equals(TARGETRVS_URIB)){
+			pass2 = true;
+		}
+	}
+	assertTrue(pass1);
+	assertTrue(pass2);
+
 }
 }
