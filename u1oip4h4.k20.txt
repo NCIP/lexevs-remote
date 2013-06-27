@@ -1,0 +1,15 @@
+﻿Full test suite for remote resolved value sets
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#   (use "git reset HEAD^1 <file>..." to unstage)
+#
+#	modified:   LexEVSService/test/src/org/LexGrid/LexBIG/distributed/test/function/query/TestResolvedValueSets.java
+#	modified:   LexEVSService/test/src/org/LexGrid/LexBIG/distributed/test/testUtility/AllDistributedLexEVSTests.java
+#
+
