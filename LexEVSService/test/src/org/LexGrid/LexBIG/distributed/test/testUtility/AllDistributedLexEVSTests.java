@@ -60,6 +60,7 @@ import org.LexGrid.LexBIG.distributed.test.function.query.TestOtherMatchingTechn
 import org.LexGrid.LexBIG.distributed.test.function.query.TestPagedReturns;
 import org.LexGrid.LexBIG.distributed.test.function.query.TestQuerybyRelationshipDomain;
 import org.LexGrid.LexBIG.distributed.test.function.query.TestRelationshipInquiry;
+import org.LexGrid.LexBIG.distributed.test.function.query.TestResolvedValueSets;
 import org.LexGrid.LexBIG.distributed.test.function.query.TestRetrieveConceptandAttributesbyCode;
 import org.LexGrid.LexBIG.distributed.test.function.query.TestRetrieveConceptandAttributesbyPreferredName;
 import org.LexGrid.LexBIG.distributed.test.function.query.TestRetrieveMostRecentVersionofConcept;
@@ -155,12 +156,14 @@ public class AllDistributedLexEVSTests
 		mainSuite.addTest(functionalTests);
 
 		TestSuite serviceTests = new TestSuite("Service Tests");
+		serviceTests.addTestSuite(TestResolvedValueSets.class);
 		serviceTests.addTestSuite(CodedNodeGraphImplTest.class);
 		serviceTests.addTestSuite(CodedNodeSetImplTest.class);
 		serviceTests.addTestSuite(LexBIGServiceConvenienceMethodsTest.class);
 		serviceTests.addTestSuite(LexBIGServiceTest.class);
 		serviceTests.addTestSuite(ResolvedConceptReferenceIteratorTest.class);
 		serviceTests.addTestSuite(TestLexEVSValueSetDefinitionServices.class);
+		
 		mainSuite.addTest(serviceTests);
 
 		return mainSuite;
