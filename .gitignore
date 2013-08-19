@@ -2,3 +2,5 @@ bin/
 build/
 output/
 .DS_Store
+.settings
+.project
