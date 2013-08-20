@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 (MacOS X Default)"/>
 	<classpathentry kind="src" path="test/src"/>
-	<classpathentry kind="src" path="output/lexevsapi60/package/remote-client/conf"/>
+	<classpathentry kind="src" path="output/lexevsapi61/package/remote-client/conf"/>
 	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/local-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
 	<classpathentry kind="src" path="writable-api/src"/>
 	<classpathentry kind="src" path="system/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lbImpl"/>
 	<classpathentry kind="lib" path="system/lib/acegi-security-1.0.4.jar"/>
 	<classpathentry kind="lib" path="system/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="system/lib/args4j-2.0.12.jar"/>
@@ -112,11 +113,8 @@
 	<classpathentry kind="lib" path="system/lib/spring-batch-infrastructure-2.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-web-2.5.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.4.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/velocity-1.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/xsdlib-20030807.jar"/>
-	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="webServiceSoapClient/dist/LexEVSWebServiceClient.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-asm-3.1.0.RELEASE.jar"/>
@@ -133,5 +131,8 @@
 	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
 	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.15.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.15.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
