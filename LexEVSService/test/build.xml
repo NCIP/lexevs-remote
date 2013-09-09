@@ -4,8 +4,8 @@
 **************************************************************************** -->
 <project name="EVS API Unit Tests" default="alltests-html" basedir=".">
 
-    <property name="client.dir" value="../output/lexevsapi60/package/remote-client" />
-    <property name="wsclient.dir" value="../output/lexevsapi60/package/ws-client" />
+    <property name="client.dir" value="../output/lexevsapi61/package/remote-client" />
+    <property name="wsclient.dir" value="../output/lexevsapi61/package/ws-client" />
     <property name="lib.dir" value="../system/lib" />
 	<property name="testlib.dir" value="./lib"/>
     <property name="src.dir" value="src" />

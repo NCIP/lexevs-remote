@@ -13,10 +13,10 @@ import java.net.URL;
 import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImpl;
 import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImplServiceLocator;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.ws.codingSchemes.CodingScheme;
-import org.LexGrid.ws.commonTypes.EntityDescription;
-import org.LexGrid.ws.concepts.Entity;
-import org.LexGrid.ws.naming.SupportedCodingScheme;
+import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.commonTypes.EntityDescription;
+import org.LexGrid.concepts.Entity;
+
 
 public class WebQueryTest extends ServiceTestCase {
 	String testId = "LexEVS DataService Web Service Test (SOAP)";
@@ -28,12 +28,12 @@ public class WebQueryTest extends ServiceTestCase {
 
 	public void testConnectToWebService() throws Exception {
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));   
+		LexEVSWSQueryImpl query = locator.getlexevsapi61Service(new URL(ServiceTestCase.endpointUrl));   
 	}
 
 	public void testQueryObject() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi61Service(new URL(ServiceTestCase.endpointUrl));
 		
 		CodingScheme cs = new CodingScheme();
 		Object[] results = query.queryObject(org.LexGrid.naming.SupportedCodingScheme.class.getName(), cs);
@@ -44,7 +44,7 @@ public class WebQueryTest extends ServiceTestCase {
 
 	public void testGetAssociation() throws Exception {	
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi60Service(new URL(ServiceTestCase.endpointUrl));
+		LexEVSWSQueryImpl query = locator.getlexevsapi61Service(new URL(ServiceTestCase.endpointUrl));
 		
 		Entity concept = new Entity();
 		concept.setEntityCodeNamespace(ServiceTestCase.SNOMED_SCHEME);

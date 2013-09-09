@@ -2,8 +2,8 @@
 <project name="WebServiceStubs" default="all" basedir=".">
 
 	
-<property name="wsdlURL" value="http://lexevsapi60.nci.nih.gov/lexevsapi60/services/lexevsapi60Service?wsdl"/>
-<property name="webServiceNamespace" value="http://lexevsapi60.nci.nih.gov/lexevsapi60/services/lexevsapi60Service"/>
+<property name="wsdlURL" value="http://lexevsapi61-dev.nci.nih.gov/lexevsapi61/services/lexevsapi61Service?wsdl"/>
+<property name="webServiceNamespace" value="http://lexevsapi61-dev.nci.nih.gov/lexevsapi61/services/lexevsapi61Service"/>
 	
 <property name="build.dir" value="build"/>	
 <property name="build.src.dir" value="${build.dir}/src"/>
