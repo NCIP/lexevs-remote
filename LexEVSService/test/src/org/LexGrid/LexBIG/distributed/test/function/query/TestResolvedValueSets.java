@@ -75,24 +75,4 @@ public void testGetVersionsInResolutions() throws URISyntaxException{
 	}
 }
 
-public void testGetResovlveValueSetsForConceptReference(){
-	ConceptReference cs = new ConceptReference();
-	cs.setCode(RESOLVEDVS_CONCEPTB);
-	cs.setCodingSchemeName(THES_SCHEME);
-	List<CodingScheme> schemes = service.getResolvedValueSetsForConceptReference(cs );
-	assertTrue(schemes.size() > 0);
-	boolean pass1 = false;
-	boolean pass2 = false;
-	for(CodingScheme c: schemes){
-		if(c.getCodingSchemeURI().equals(TARGETRVS_URIA)){
-			pass1 = true;
-		}
-		if(c.getCodingSchemeURI().equals(TARGETRVS_URIB)){
-			pass2 = true;
-		}
-	}
-	assertTrue(pass1);
-	assertTrue(pass2);
-
-}
 }

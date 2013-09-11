@@ -16,6 +16,7 @@ import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
+import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
@@ -76,7 +77,7 @@ public class TestOtherMatchingTechniques extends ServiceTestCase
     	token.setAccessToken(ServiceTestCase.MEDDRA_TOKEN);
     	
     	svc.registerSecurityToken(ServiceTestCase.MEDDRA_SCHEME, token);
-        CodedNodeSet cns = svc.getCodingSchemeConcepts(ServiceTestCase.MEDDRA_SCHEME, null);
+        CodedNodeSet cns = svc.getCodingSchemeConcepts(ServiceTestCase.MEDDRA_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(MEDDRA_VERSION));
 
         cns = cns.restrictToMatchingDesignations("person", null, "LuceneQuery", null);
 
@@ -97,7 +98,7 @@ public class TestOtherMatchingTechniques extends ServiceTestCase
         LexEVSDistributed svc2 = LexEVSServiceHolder.instance().getLexEVSAppService();
         svc2.registerSecurityToken(ServiceTestCase.MEDDRA_SCHEME, token);
         
-        CodedNodeSet cns2 = svc2.getCodingSchemeConcepts(ServiceTestCase.MEDDRA_SCHEME, null);
+        CodedNodeSet cns2 = svc2.getCodingSchemeConcepts(ServiceTestCase.MEDDRA_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(MEDDRA_VERSION));
         
         cns2 = cns2.restrictToMatchingDesignations("person", null, "LuceneQuery", null);
 

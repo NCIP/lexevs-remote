@@ -11,6 +11,7 @@ package org.LexGrid.LexBIG.distributed.test.dataAccess;
 import gov.nih.nci.evs.security.SecurityToken;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 
+import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
@@ -53,7 +54,7 @@ public class DistributedSecurityTest extends ServiceTestCase {
 		}
 		
 		try {
-			CodingScheme scheme = lbs.resolveCodingScheme(MEDDRA_SCHEME, null);
+			CodingScheme scheme = lbs.resolveCodingScheme(MEDDRA_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(MEDDRA_VERSION));
 			assertTrue(scheme != null);
 			assertTrue(scheme.getCodingSchemeName().equals(MEDDRA_SCHEME));
 		} catch (Exception e) {
@@ -115,7 +116,7 @@ public class DistributedSecurityTest extends ServiceTestCase {
 		token.setAccessToken(MEDDRA_TOKEN);
 		try {
 			lbs.registerSecurityToken(MEDDRA_SCHEME, token);
-			CodingScheme scheme = lbs.resolveCodingScheme(MEDDRA_SCHEME, null);
+			CodingScheme scheme = lbs.resolveCodingScheme(MEDDRA_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(MEDDRA_VERSION));
 			assertTrue(scheme != null);
 			assertTrue(scheme.getCodingSchemeName().equals(MEDDRA_SCHEME));
 		} catch (Exception e) {

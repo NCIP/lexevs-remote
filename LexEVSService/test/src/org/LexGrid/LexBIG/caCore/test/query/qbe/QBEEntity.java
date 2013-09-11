@@ -53,7 +53,7 @@ public class QBEEntity extends ServiceTestCase {
 		assertTrue(list.size() > 0);
 		Entity foundConcept = (Entity)list.get(0);
 		assertTrue(foundConcept.getComment().length == 0);
-		assertTrue(foundConcept.getProperty().length == 4);
+		assertTrue(foundConcept.getProperty().length == 5);
 		assertTrue(foundConcept.getDefinition().length == 1);
 		assertTrue(foundConcept.getComment().length == 0);
 		assertTrue(foundConcept.getPresentation().length == 4);		
@@ -118,13 +118,13 @@ public class QBEEntity extends ServiceTestCase {
 		c.setEntityCodeNamespace("NCI_Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
-		text.setContent("Oxalis acetosella");
+		text.setContent("Oxalis montana");
 		pres.setValue(text);
 		pres.setIsPreferred(true);
 		c.addPresentation(pres);
 		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 
-		assertTrue(list.size() == 1);
+		assertTrue(list.size()+"", list.size() == 1);
 		Entity foundConcept = list.get(0);
 		assertTrue(foundConcept.getEntityCode().equals("C72387"));
 	}

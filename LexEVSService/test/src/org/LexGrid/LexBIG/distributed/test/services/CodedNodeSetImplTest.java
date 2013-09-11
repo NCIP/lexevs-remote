@@ -167,7 +167,7 @@ public void testRestrictPropertyTypeReturns() throws LBException
         Entity ce = rcrs[0].getReferencedEntry();
 
         assertTrue("1",ce.getCommentCount() == 0);
-        assertTrue("2",ce.getPropertyCount() == 6);
+        assertTrue("2: " + ce.getPropertyCount(),ce.getPropertyCount() == 7);
         assertTrue("3",ce.getDefinitionCount() == 1);
         assertTrue("5",ce.getPresentationCount() >= 4);
 
