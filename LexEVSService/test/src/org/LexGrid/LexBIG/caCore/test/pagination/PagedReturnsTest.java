@@ -135,8 +135,6 @@ public class PagedReturnsTest extends ServiceTestCase {
 	public void testPaginationAcrossCodingSchemes() throws Exception {
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		List<CodingScheme> codingSchemes = svc.search(CodingScheme.class, new CodingScheme());
-		LexEVSListProxy listProxy = (LexEVSListProxy)codingSchemes;
-		assertTrue(listProxy.isHasAllRecords() == true);
 		
 		assertTrue(codingSchemes.size() > 0);
 		

@@ -179,7 +179,7 @@ public class CQLPredicates extends ServiceTestCase
 
 		CQLAttribute at1 = new CQLAttribute();
 		at1.setName("_entityCode");
-		at1.setValue("10001005");
+		at1.setValue("76880004");
 		at1.setPredicate(CQLPredicate.EQUAL_TO);
 
 		CQLAttribute at2 = new CQLAttribute();
@@ -197,8 +197,8 @@ public class CQLPredicates extends ServiceTestCase
 		query.setTarget(target);
 		List<Entity> results = service.query(query);
 
-		assertTrue(results.size() == 1);
-		String expectedCodes[] = new String[]{"10001005"};
+		assertTrue(results.size()+"",results.size() == 1);
+		String expectedCodes[] = new String[]{"76880004"};
 		String returnedCodes[] = new String[1];
 		for (Entity concept : results){
 			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());

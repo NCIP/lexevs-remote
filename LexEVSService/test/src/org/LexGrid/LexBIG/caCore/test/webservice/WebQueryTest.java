@@ -42,21 +42,4 @@ public class WebQueryTest extends ServiceTestCase {
 		assertTrue(results.length > 0);
 	}
 
-	public void testGetAssociation() throws Exception {	
-		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		LexEVSWSQueryImpl query = locator.getlexevsapi61Service(new URL(ServiceTestCase.endpointUrl));
-		
-		Entity concept = new Entity();
-		concept.setEntityCodeNamespace(ServiceTestCase.SNOMED_SCHEME);
-		concept.setEntityCode("29506000");
-		
-		Object[] results = query.getAssociation(concept, "_entityDescription", 0);
-		
-		assertTrue(results != null);
-		assertTrue(results.length == 1);	
-		assertTrue(results[0] instanceof EntityDescription);
-		
-		EntityDescription ed = (EntityDescription)results[0];
-		assertTrue(ed.getContent().equals("Boxing"));		
-	}
 }

@@ -64,6 +64,7 @@ import org.LexGrid.LexBIG.distributed.test.services.CodedNodeSetImplTest;
 import org.LexGrid.LexBIG.distributed.test.services.LexBIGServiceConvenienceMethodsTest;
 import org.LexGrid.LexBIG.distributed.test.services.LexBIGServiceTest;
 import org.LexGrid.LexBIG.distributed.test.services.ResolvedConceptReferenceIteratorTest;
+import org.LexGrid.LexBIG.distributed.test.services.SearchExtensionTest;
 import org.LexGrid.LexBIG.distributed.test.valueset.TestLexEVSValueSetDefinitionServices;
 
 /**
@@ -145,6 +146,7 @@ public class AllDistributedLexEVSTests
 		serviceTests.addTestSuite(TestResolvedValueSets.class);
 		serviceTests.addTestSuite(CodedNodeGraphImplTest.class);
 		serviceTests.addTestSuite(CodedNodeSetImplTest.class);
+		serviceTests.addTestSuite(SearchExtensionTest.class);
 		serviceTests.addTestSuite(LexBIGServiceConvenienceMethodsTest.class);
 		serviceTests.addTestSuite(LexBIGServiceTest.class);
 		serviceTests.addTestSuite(ResolvedConceptReferenceIteratorTest.class);

@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="writable-api/src"/>
 	<classpathentry kind="src" path="system/src"/>
 	<classpathentry kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/axis.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/acegi-security-1.0.4.jar"/>
 	<classpathentry kind="lib" path="system/lib/antlr-2.7.7.jar"/>
@@ -17,7 +18,6 @@
 	<classpathentry kind="lib" path="system/lib/asm-3.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/aspectjrt-1.6.8.jar"/>
 	<classpathentry kind="lib" path="system/lib/aspectjweaver-1.6.8.jar"/>
-	<classpathentry kind="lib" path="system/lib/axis.jar"/>
 	<classpathentry kind="lib" path="system/lib/c3p0-0.9.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/caGrid-data-common-1.2.jar"/>

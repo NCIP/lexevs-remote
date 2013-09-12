@@ -40,7 +40,7 @@ public class GridCQLPredicates extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("10049004");
+		at1.setValue("76880004");
 		at1.setPredicate(Predicate.EQUAL_TO);	
 
 		target.setAttribute(at1);
@@ -49,7 +49,7 @@ public class GridCQLPredicates extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("10049004"));
+			assertTrue(concept.getEntityCode().equals("76880004"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	
@@ -64,7 +64,7 @@ public class GridCQLPredicates extends ServiceTestCase
 
 		Attribute at1 = new Attribute();
 		at1.setName("_entityCode");
-		at1.setValue("1004900%");
+		at1.setValue("7688000%");
 		at1.setPredicate(Predicate.LIKE);	
 
 		target.setAttribute(at1);
@@ -73,7 +73,7 @@ public class GridCQLPredicates extends ServiceTestCase
 
 		assertTrue(results.size() > 0);
 		for (Entity concept : results){
-			assertTrue(concept.getEntityCode().equals("10049004"));
+			assertTrue(concept.getEntityCode().equals("76880004"));
 			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 	}	

@@ -21,6 +21,7 @@ import gov.nih.nci.system.query.hibernate.HQLCriteria;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
@@ -701,6 +702,7 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 		//Set up some QueryOptions to make this quicker
 		QueryOptions options = new QueryOptions();
 		options.setCodingScheme(ServiceTestCase.MEDDRA_SCHEME);
+		options.setCodingSchemeVersionOrTag(Constructors.createCodingSchemeVersionOrTagFromVersion(MEDDRA_VERSION));
 		
 		LexEVSApplicationService service = null;
 		try {
