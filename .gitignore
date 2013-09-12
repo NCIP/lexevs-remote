@@ -1,6 +1,8 @@
 bin/
 build/
 output/
+LexEVSService/test/reports/
+buildtest
 .DS_Store
 .settings
 .project
