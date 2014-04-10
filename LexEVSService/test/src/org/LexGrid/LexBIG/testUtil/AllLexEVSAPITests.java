@@ -31,7 +31,7 @@ public class AllLexEVSAPITests
 		TestSuite mainSuite = new TestSuite("LexEVSAPI JUnit Tests");
 
 		mainSuite.addTest(AllDistributedLexEVSTests.suite());
-		mainSuite.addTest(AllDataServiceTests.suite());
+		//mainSuite.addTest(AllDataServiceTests.suite());
 
 		return mainSuite;
     }
