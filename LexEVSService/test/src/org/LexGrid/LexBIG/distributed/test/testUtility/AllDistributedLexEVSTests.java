@@ -83,74 +83,74 @@ public class AllDistributedLexEVSTests
 	{
 		TestSuite mainSuite = new TestSuite("LexBIG validation tests");
 
-//		TestSuite bugTests = new TestSuite("Bug Regression Tests");
-//		bugTests.addTestSuite(TestBugFixes.class);
-//		bugTests.addTestSuite(GForge19716.class);
-//		bugTests.addTestSuite(GForge17233.class);
-//		bugTests.addTestSuite(GForge29695.class);
-//		bugTests.addTestSuite(GForge27457.class);
-//		mainSuite.addTest(bugTests);
-//
-//		TestSuite securityTests = new TestSuite("Security Tests");
-//		securityTests.addTestSuite(DistributedSecurityTest.class);
-//		securityTests.addTestSuite(SecurityTest.class);
-//		securityTests.addTestSuite(ConvenienceMethodsSecurityTest.class);
-//		mainSuite.addTest(securityTests);
-//
-//		TestSuite metadataTests = new TestSuite("Metadata Tests");
-//		metadataTests.addTestSuite(TestMetaDataSearch.class);
-//		mainSuite.addTest(metadataTests);
-//
+		TestSuite bugTests = new TestSuite("Bug Regression Tests");
+		bugTests.addTestSuite(TestBugFixes.class);
+		bugTests.addTestSuite(GForge19716.class);
+		bugTests.addTestSuite(GForge17233.class);
+		bugTests.addTestSuite(GForge29695.class);
+		bugTests.addTestSuite(GForge27457.class);
+		mainSuite.addTest(bugTests);
+
+		TestSuite securityTests = new TestSuite("Security Tests");
+		securityTests.addTestSuite(DistributedSecurityTest.class);
+		securityTests.addTestSuite(SecurityTest.class);
+		securityTests.addTestSuite(ConvenienceMethodsSecurityTest.class);
+		mainSuite.addTest(securityTests);
+
+		TestSuite metadataTests = new TestSuite("Metadata Tests");
+		metadataTests.addTestSuite(TestMetaDataSearch.class);
+		mainSuite.addTest(metadataTests);
+
 		TestSuite functionalTests = new TestSuite("Functional Tests");
-//		functionalTests.addTestSuite(TestApproximateStringMatch.class);
-//		functionalTests.addTestSuite(TestAttributePresenceMatch.class);
-//		functionalTests.addTestSuite(TestAttributeValueMatch.class);
+		functionalTests.addTestSuite(TestApproximateStringMatch.class);
+		functionalTests.addTestSuite(TestAttributePresenceMatch.class);
+		functionalTests.addTestSuite(TestAttributeValueMatch.class);
 		functionalTests.addTestSuite(TestCodingSchemesWithSupportedAssociation.class);
-//		functionalTests.addTestSuite(TestContentExtraction.class);
-//		functionalTests.addTestSuite(TestDAGWalking.class);
-//		functionalTests.addTestSuite(TestDescribeSearchTechniques.class);
-//		functionalTests.addTestSuite(TestDescribeSupportedSearchCriteria.class);
-//		functionalTests.addTestSuite(TestDiscoverAvailableVocabulariesandVersions.class);
-//		functionalTests.addTestSuite(TestEnumerateAllConcepts.class);
-//		functionalTests.addTestSuite(TestEnumerateConceptsbyRelationship.class);
-//		functionalTests.addTestSuite(TestEnumerateProperties.class);
-//		functionalTests.addTestSuite(TestEnumerateRelationsbyRange.class);
-//		functionalTests.addTestSuite(TestEnumerateRelationships.class);
-//		functionalTests.addTestSuite(TestEnumerateSourceConceptsforRelationandTarget.class);
-//		functionalTests.addTestSuite(TestforCurrentOrObsoleteConcept.class);
-//		functionalTests.addTestSuite(TestGenerateDAG.class);
-//		functionalTests.addTestSuite(TestLexicalMatchingTechniques.class);
-//		functionalTests.addTestSuite(TestLimitReturnedValues.class);
-//		functionalTests.addTestSuite(TestMapAttributestoTypes.class);
-//		functionalTests.addTestSuite(TestMapPreferredNametoCode.class);
-//		functionalTests.addTestSuite(TestMapSynonymtoPreferredNames.class);
-//		functionalTests.addTestSuite(TestMembershipinVocabulary.class);
-//		functionalTests.addTestSuite(TestOtherMatchingTechniques.class);
-//		functionalTests.addTestSuite(TestPagedReturns.class);
-//		functionalTests.addTestSuite(TestQuerybyRelationshipDomain.class);
-//		functionalTests.addTestSuite(TestRelationshipInquiry.class);
-//		functionalTests.addTestSuite(TestRetrieveConceptandAttributesbyCode.class);
-//		functionalTests.addTestSuite(TestRetrieveConceptandAttributesbyPreferredName.class);
-//		functionalTests.addTestSuite(TestRetrieveMostRecentVersionofConcept.class);
-//		functionalTests.addTestSuite(TestRetrieveRelationsforConcept.class);
-//		functionalTests.addTestSuite(TestSearchbyStatus.class);
-//		functionalTests.addTestSuite(TestSetofVocabulariesforSearch.class);
-//		functionalTests.addTestSuite(TestSpecifyReturnOrder.class);
-//		functionalTests.addTestSuite(TestSubsetExtraction.class);
-//		functionalTests.addTestSuite(TestTraverseGraphviaRoleLinks.class); 
-//		functionalTests.addTestSuite(TestVersionChanges.class);
-//		functionalTests.addTestSuite(TestVersioningandAuthorityEnumeration.class);	
+		functionalTests.addTestSuite(TestContentExtraction.class);
+		functionalTests.addTestSuite(TestDAGWalking.class);
+		functionalTests.addTestSuite(TestDescribeSearchTechniques.class);
+		functionalTests.addTestSuite(TestDescribeSupportedSearchCriteria.class);
+		functionalTests.addTestSuite(TestDiscoverAvailableVocabulariesandVersions.class);
+		functionalTests.addTestSuite(TestEnumerateAllConcepts.class);
+		functionalTests.addTestSuite(TestEnumerateConceptsbyRelationship.class);
+		functionalTests.addTestSuite(TestEnumerateProperties.class);
+		functionalTests.addTestSuite(TestEnumerateRelationsbyRange.class);
+		functionalTests.addTestSuite(TestEnumerateRelationships.class);
+		functionalTests.addTestSuite(TestEnumerateSourceConceptsforRelationandTarget.class);
+		functionalTests.addTestSuite(TestforCurrentOrObsoleteConcept.class);
+		functionalTests.addTestSuite(TestGenerateDAG.class);
+		functionalTests.addTestSuite(TestLexicalMatchingTechniques.class);
+		functionalTests.addTestSuite(TestLimitReturnedValues.class);
+		functionalTests.addTestSuite(TestMapAttributestoTypes.class);
+		functionalTests.addTestSuite(TestMapPreferredNametoCode.class);
+		functionalTests.addTestSuite(TestMapSynonymtoPreferredNames.class);
+		functionalTests.addTestSuite(TestMembershipinVocabulary.class);
+		functionalTests.addTestSuite(TestOtherMatchingTechniques.class);
+		functionalTests.addTestSuite(TestPagedReturns.class);
+		functionalTests.addTestSuite(TestQuerybyRelationshipDomain.class);
+		functionalTests.addTestSuite(TestRelationshipInquiry.class);
+		functionalTests.addTestSuite(TestRetrieveConceptandAttributesbyCode.class);
+		functionalTests.addTestSuite(TestRetrieveConceptandAttributesbyPreferredName.class);
+		functionalTests.addTestSuite(TestRetrieveMostRecentVersionofConcept.class);
+		functionalTests.addTestSuite(TestRetrieveRelationsforConcept.class);
+		functionalTests.addTestSuite(TestSearchbyStatus.class);
+		functionalTests.addTestSuite(TestSetofVocabulariesforSearch.class);
+		functionalTests.addTestSuite(TestSpecifyReturnOrder.class);
+		functionalTests.addTestSuite(TestSubsetExtraction.class);
+		functionalTests.addTestSuite(TestTraverseGraphviaRoleLinks.class); 
+		functionalTests.addTestSuite(TestVersionChanges.class);
+		functionalTests.addTestSuite(TestVersioningandAuthorityEnumeration.class);	
 		mainSuite.addTest(functionalTests);
-//
+
 		TestSuite serviceTests = new TestSuite("Service Tests");
-//		serviceTests.addTestSuite(TestResolvedValueSets.class);
-//		serviceTests.addTestSuite(CodedNodeGraphImplTest.class);
-//		serviceTests.addTestSuite(CodedNodeSetImplTest.class);
-//		serviceTests.addTestSuite(SearchExtensionTest.class);
+		serviceTests.addTestSuite(TestResolvedValueSets.class);
+		serviceTests.addTestSuite(CodedNodeGraphImplTest.class);
+		serviceTests.addTestSuite(CodedNodeSetImplTest.class);
+		serviceTests.addTestSuite(SearchExtensionTest.class);
 		serviceTests.addTestSuite(LexBIGServiceConvenienceMethodsTest.class);
-//		serviceTests.addTestSuite(LexBIGServiceTest.class);
-//		serviceTests.addTestSuite(ResolvedConceptReferenceIteratorTest.class);
-//		serviceTests.addTestSuite(TestLexEVSValueSetDefinitionServices.class);
+		serviceTests.addTestSuite(LexBIGServiceTest.class);
+		serviceTests.addTestSuite(ResolvedConceptReferenceIteratorTest.class);
+		serviceTests.addTestSuite(TestLexEVSValueSetDefinitionServices.class);
 		
 		mainSuite.addTest(serviceTests);
 
