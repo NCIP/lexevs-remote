@@ -38,7 +38,7 @@ public class WSTestClient{
 	
 	public WSTestClient() throws Exception {
 		LexEVSWSQueryImplServiceLocator locator = new LexEVSWSQueryImplServiceLocator();
-		lexevsWebService = locator.getlexevsapi60Service(new URL(serviceEndPoint));
+		lexevsWebService = locator.getlexevsapi61Service(new URL(serviceEndPoint));
 	}
 	
 	public void queryLexEVSWebService() throws RemoteException {

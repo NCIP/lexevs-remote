@@ -38,11 +38,11 @@ public class GForge27457 extends ServiceTestCase
 		LexBIGService lbsi = LexEVSServiceHolder.instance().getLexEVSAppService();
     	CodedNodeSet cns = lbsi.getCodingSchemeConcepts(THES_SCHEME, null);
     	cns = cns.restrictToProperties(
-    			Constructors.createLocalNameList("Legacy_Concept_Name"), 
+    			Constructors.createLocalNameList("ALT_DEFINITION"), 
     			null, 
     			null, 
     			null, 
-    			Constructors.createNameAndValueList("label", "Legacy_Concept_Name"));
+    			Constructors.createNameAndValueList("attr", "eCTD"));
     	ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null, null, false);
     	
 		assertTrue(itr.numberRemaining() > 0);
@@ -52,11 +52,11 @@ public class GForge27457 extends ServiceTestCase
 		LexBIGService lbsi = LexEVSServiceHolder.instance().getLexEVSAppService();
     	CodedNodeSet cns = lbsi.getCodingSchemeConcepts(THES_SCHEME, null);
     	cns = cns.restrictToProperties(
-    			Constructors.createLocalNameList("Legacy_Concept_Name"), 
+    			Constructors.createLocalNameList("ALT_DEFINITION"), 
     			null, 
     			null, 
     			null, 
-    			Constructors.createNameAndValueList("label", ""));
+    			Constructors.createNameAndValueList("attr", ""));
     	ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null, null, false);
     	
 		assertTrue(itr.numberRemaining() > 0);
@@ -66,11 +66,11 @@ public class GForge27457 extends ServiceTestCase
 		LexBIGService lbsi = LexEVSServiceHolder.instance().getLexEVSAppService();
     	CodedNodeSet cns = lbsi.getCodingSchemeConcepts(THES_SCHEME, null);
     	cns = cns.restrictToProperties(
-    			Constructors.createLocalNameList("Legacy_Concept_Name"), 
+    			Constructors.createLocalNameList("ALT_DEFINITION"), 
     			null, 
     			null, 
     			null, 
-    			Constructors.createNameAndValueList("label", null));
+    			Constructors.createNameAndValueList("attr", null));
     	ResolvedConceptReferencesIterator itr = cns.resolve(null, null, null, null, false);
     	
 		assertTrue(itr.numberRemaining() > 0);

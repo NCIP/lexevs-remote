@@ -39,6 +39,7 @@ public class TestCodingSchemesWithSupportedAssociation extends ServiceTestCase
     {
     	//GForge #15437
         try {
+        	
 			ConvenienceMethods cm = new ConvenienceMethods(LexEVSServiceHolder.instance().getLexEVSAppService());
 			CodingSchemeRenderingList csrl = cm.getCodingSchemesWithSupportedAssociation("Concept_In_Subset");
 			CodingSchemeRendering csr[] = csrl.getCodingSchemeRendering();
