@@ -20,14 +20,14 @@
 import java.net.URL;
 import java.rmi.RemoteException;
 
-import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImpl;
-import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImplServiceLocator;
+import bmidev4.lexevsapi61.services.lexevsapi61Service.LexEVSWSQueryImpl;
+import bmidev4.lexevsapi61.services.lexevsapi61Service.LexEVSWSQueryImplServiceLocator;
 import org.LexGrid.codingSchemes.CodingScheme;
 
 
 public class WSTestClient{
 
-	private String serviceEndPoint = "http://localhost:8080/lexevsapi50/services/lexevsapi50Service";
+	private String serviceEndPoint = "http://localhost:7777/lexevsapi61/services/lexevsapi61Service";
 	private LexEVSWSQueryImpl lexevsWebService;
 	
 	public static void main(String args[]) throws Exception {

@@ -10,8 +10,8 @@ package org.LexGrid.LexBIG.caCore.test.webservice;
 
 import java.net.URL;
 
-import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImpl;
-import org.LexGrid.LexBIG.caCore.webservice.client.LexEVSWSQueryImplServiceLocator;
+import bmidev4.lexevsapi61.services.lexevsapi61Service.LexEVSWSQueryImpl;
+import bmidev4.lexevsapi61.services.lexevsapi61Service.LexEVSWSQueryImplServiceLocator;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.EntityDescription;

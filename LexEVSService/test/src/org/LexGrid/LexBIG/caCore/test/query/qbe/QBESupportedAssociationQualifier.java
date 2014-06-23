@@ -31,22 +31,22 @@ public class QBESupportedAssociationQualifier extends ServiceTestCase
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
 		SupportedAssociationQualifier saq = new SupportedAssociationQualifier();
-		saq.setLocalId("owl:allValuesFrom");
+		saq.setLocalId("owl:someValuesFrom");
 		
 		List<SupportedAssociationQualifier> sourceList = service.search(SupportedAssociationQualifier.class, saq);	
 		
 		assertTrue(sourceList != null);	
 		
 		SupportedAssociationQualifier value = sourceList.get(0);
-		assertTrue(value.getLocalId().equals("owl:allValuesFrom"));	
-		assertTrue(value.getUri().equals("http://www.w3.org/2002/07/owl#allValuesFrom"));	
+		assertTrue(value.getLocalId().equals("owl:someValuesFrom"));	
+		assertTrue(value.getUri().equals("http://www.w3.org/2002/07/owl#someValuesFrom"));	
 	}
 	
 	public void testGetSupportedAssociationQualifierByWrongName() throws Exception {
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
 		SupportedAssociationQualifier saq = new SupportedAssociationQualifier();
-		saq.setLocalId("allValuesFrom_WRONG_NAME");
+		saq.setLocalId("someValuesFrom_WRONG_NAME");
 		
 		List<SupportedAssociationQualifier> sourceList = service.search(SupportedAssociationQualifier.class, saq);	
 		

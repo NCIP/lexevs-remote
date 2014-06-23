@@ -307,7 +307,7 @@ public class RESTTest extends ServiceTestCase {
 			callRestfulService("ShowDynamicTree.action;jsessionid=F9623CBA386D7757FD29EA965EB4AE7F/?--></script><script>alert(20787)</script>");
 		} catch (Exception e) {
 			Assert.isInstanceOf(IOException.class, e);
-			assertTrue(e.getMessage().contains("HTTP response code: 500") || e.getMessage().contains("Connection reset"));
+			assertTrue(e.toString().contains("FileNotFoundException") || e.getMessage().contains("Connection reset"));
 			return;
 		}	
 		fail();
