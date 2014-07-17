@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="test/src"/>
 	<classpathentry kind="src" path="output/lexevsapi61/conf/system/package/remote-client/conf"/>
 	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
@@ -127,8 +127,8 @@
 	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
 	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.15.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.15.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.15.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.16.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.16.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.16.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
