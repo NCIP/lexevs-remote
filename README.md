@@ -16,7 +16,7 @@ Please see the NOTICE and LICENSE files for details.
 You will find more details about LexEVS Remote API in the following links to LexEVS documentation:
 
 * [LexEVS Home](https://wiki.nci.nih.gov/x/OJG4Aw)
-* [Public Forum](https://cabig-kc.nci.nih.gov/Vocab/forums/viewforum.php?f=13)
-* [Issues Tracker](https://tracker.nci.nih.gov/browse/LEXEVS)
+* [Public Forum](https://github.com/NCIP/lexevs-remote/issues)
+* [Issues Tracker](https://github.com/NCIP/lexevs-remote/issues)
 * [Documentation](https://wiki.nci.nih.gov/x/OJG4Aw)
 * [Source code](https://github.com/NCIP/LexEVS)
