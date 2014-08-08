@@ -47,13 +47,13 @@ public class TestVersionChanges extends ServiceTestCase
         HistoryService hs = LexEVSServiceHolder.instance().getLexEVSAppService()
                 .getHistoryService(ServiceTestCase.THES_URN);
 
-        ConceptReference cr = Constructors.createConceptReference("C1884", ServiceTestCase.THES_URN);
+        ConceptReference cr = Constructors.createConceptReference("C14221", ServiceTestCase.THES_URN);
         
-        NCIChangeEvent[] nce = hs.getEditActionList(cr, new URI("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#:03.12a"))
+        NCIChangeEvent[] nce = hs.getEditActionList(cr, new URI("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#:" + ServiceTestCase.THES_VERSION))
                 .getEntry();
         
-        assertEquals(1,nce.length);
-        assertTrue(nce[0].getConceptcode().equals("C1884"));
+        assertEquals(5,nce.length);
+        assertTrue(nce[0].getConceptcode().equals("C14221"));
         assertTrue(nce[0].getConceptName().equals(" "));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals("null"));
         assertTrue(nce[0].getEditaction().equals(ChangeType.MODIFY));

@@ -41,12 +41,12 @@ public class HQLSupportedAssociationQualifier extends ServiceTestCase
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 				
 		HQLCriteria hql = new HQLCriteria("FROM org.LexGrid.naming.SupportedAssociationQualifier" +
-				" as sa WHERE sa._localId = 'owl:allValuesFrom'");
+				" as sa WHERE sa._localId = 'owl:someValuesFrom'");
 		List<SupportedAssociationQualifier> result = service.query(hql);
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().equals("owl:allValuesFrom"));
+		assertTrue(result.get(0).getLocalId().equals("owl:someValuesFrom"));
 	}
 	
 	
@@ -54,13 +54,13 @@ public class HQLSupportedAssociationQualifier extends ServiceTestCase
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
 		HQLCriteria hql = new HQLCriteria("FROM org.LexGrid.naming.SupportedAssociationQualifier" +
-				" as sa WHERE sa._uri = 'http://www.w3.org/2002/07/owl#allValuesFrom'");
+				" as sa WHERE sa._uri = 'http://www.w3.org/2002/07/owl#someValuesFrom'");
 		List<SupportedAssociationQualifier> result = service.query(hql);
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().contains("allValuesFrom"));
-		assertTrue(result.get(0).getUri().equals("http://www.w3.org/2002/07/owl#allValuesFrom"));
+		assertTrue(result.get(0).getLocalId().contains("someValuesFrom"));
+		assertTrue(result.get(0).getUri().equals("http://www.w3.org/2002/07/owl#someValuesFrom"));
 	}
 	
 	public void testGetSupportedAssociationQualifierByWrongURN() throws Exception {
@@ -78,13 +78,13 @@ public class HQLSupportedAssociationQualifier extends ServiceTestCase
 		ApplicationService service = LexEVSServiceHolder.instance().getAppService();
 		
 		HQLCriteria hql = new HQLCriteria("FROM org.LexGrid.naming.SupportedAssociationQualifier" +
-				" as sa WHERE sa._uri LIKE '%/2002/07/owl#allValuesFrom'");
+				" as sa WHERE sa._uri LIKE '%/2002/07/owl#someValuesFrom'");
 		List<SupportedAssociationQualifier> result = service.query(hql);
 		
 		assertTrue(result != null);
 		assertTrue(result.size() > 0);
-		assertTrue(result.get(0).getLocalId().contains("allValuesFrom"));
-		assertTrue(result.get(0).getUri().equals("http://www.w3.org/2002/07/owl#allValuesFrom"));
+		assertTrue(result.get(0).getLocalId().contains("someValuesFrom"));
+		assertTrue(result.get(0).getUri().equals("http://www.w3.org/2002/07/owl#someValuesFrom"));
 	}
 	
 	public void testGetSupportedAssociationQualifierByURNByWrongWildCard() throws Exception {

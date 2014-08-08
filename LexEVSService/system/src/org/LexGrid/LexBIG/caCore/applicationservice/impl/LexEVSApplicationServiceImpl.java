@@ -348,7 +348,9 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     @DataServiceSecurityTokenRequired public List<Object> getAssociation(Object source, String associationName, QueryOptions queryOptions) throws ApplicationException {	
     	List<Object> returnList = new ArrayList();
 
-    	List<Object> searchReturnList = this.search(source.getClass(), source, associationName, queryOptions);
+    	LexEVSListProxy list = (LexEVSListProxy) this.search(source.getClass(), source, associationName, queryOptions);
+    	List<Object> searchReturnList = list.getListChunk();
+    	
     	if(searchReturnList.size() > 1){
     		log.warn("More than one association returned -- example object is ambiguous");
     	}

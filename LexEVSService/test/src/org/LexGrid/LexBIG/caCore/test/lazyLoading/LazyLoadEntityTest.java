@@ -102,7 +102,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		Enumeration<? extends Presentation> enumeration = entity.enumeratePresentation();
 		assertTrue(enumeration.hasMoreElements() == true);
 		
-		int expectedPresentations = 45;
+		int expectedPresentations = 30;
 		
 		int counter = 0;
 		while(enumeration.hasMoreElements()){
@@ -117,7 +117,7 @@ public class LazyLoadEntityTest extends ServiceTestCase {
 		Iterator<? extends Presentation> itr = entity.iteratePresentation();
 		assertTrue(itr.hasNext());
 		
-		int expectedPresentations = 45;
+		int expectedPresentations = 30;
 		
 		int counter = 0;
 		while(itr.hasNext()){

@@ -104,7 +104,7 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		Enumeration<? extends Presentation> enumeration = concept.enumeratePresentation();
 		assertTrue(enumeration.hasMoreElements() == true);
 		
-		int expectedPresentations = 45;
+		int expectedPresentations = 30;
 		
 		int counter = 0;
 		while(enumeration.hasMoreElements()){
@@ -119,7 +119,7 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		Iterator<? extends Presentation> itr = concept.iteratePresentation();
 		assertTrue(itr.hasNext());
 		
-		int expectedPresentations = 45;
+		int expectedPresentations = 30;
 		
 		int counter = 0;
 		while(itr.hasNext()){

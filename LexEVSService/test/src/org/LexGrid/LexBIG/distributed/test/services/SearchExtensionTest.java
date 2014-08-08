@@ -103,7 +103,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 			valueSets.add(ref);
 		}
 		
-		for(String term : Arrays.asList("gene", "heart attack", "cellular", "cancer", "disease")){
+		for(String term : Arrays.asList("year", "month", "day", "observation", "imputed")){
 			long start = System.currentTimeMillis();
 			ResolvedConceptReferencesIterator itr = searchExtension.search(term, valueSets, MatchAlgorithm.PRESENTATION_CONTAINS);
 			assertTrue(itr.hasNext());
