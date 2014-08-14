@@ -127,8 +127,5 @@
 	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
 	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-core-2.3.16.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/xwork-core-2.3.16.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/struts2-dojo-plugin-2.3.16.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
