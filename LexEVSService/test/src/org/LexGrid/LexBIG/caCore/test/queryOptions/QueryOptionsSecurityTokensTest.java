@@ -138,8 +138,8 @@ public class QueryOptionsSecurityTokensTest extends ServiceTestCase {
 	}
 	
 	public boolean checkForSecureVocab(List<CodingScheme> schemes){
-		for(CodingScheme cs : schemes){
-			if(cs.getCodingSchemeName().equals(secureVocab)){
+		for(int i = 0; i < schemes.size(); i++){
+			if(schemes.get(i).getCodingSchemeName().equals(secureVocab)){
 				return true;
 			}
 		}

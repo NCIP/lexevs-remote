@@ -62,10 +62,10 @@ public class GridCQLConcept extends ServiceTestCase
 		
 		boolean foundResults = false;
 		List<Entity> concepts = service.query(query);
-		for (Entity concept : concepts) {
+		for (int i = 0; i < concepts.size(); i++) {
 			foundResults = true;
-			assertTrue(concept.getEntityCode().equals("10000006"));
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+			assertTrue(concepts.get(i).getEntityCode().equals("10000006"));
+			assertTrue(concepts.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 		assertTrue(foundResults);
 	}	
@@ -98,10 +98,10 @@ public class GridCQLConcept extends ServiceTestCase
 		
 		boolean foundResults = false;
 		List<Entity> concepts = service.query(query);
-		for (Entity concept : concepts) {
+		for (int i = 0; i < concepts.size(); i++) {
 			foundResults = true;
-			assertTrue(concept.getEntityCode().startsWith("1000500"));
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+			assertTrue(concepts.get(i).getEntityCode().startsWith("1000500"));
+			assertTrue(concepts.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 		assertTrue(foundResults);
 	}	
@@ -136,10 +136,10 @@ public class GridCQLConcept extends ServiceTestCase
 			
 		boolean foundResults = false;
 		List<Entity> concepts = service.query(query);
-		for (Entity concept : concepts) {
+		for (int i = 0; i < concepts.size(); i++) {
 			foundResults = true;
-			assertTrue(concept.getEntityCode().equals("29506000"));
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+			assertTrue(concepts.get(i).getEntityCode().equals("29506000"));
+			assertTrue(concepts.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 		assertTrue(foundResults);
 	}	

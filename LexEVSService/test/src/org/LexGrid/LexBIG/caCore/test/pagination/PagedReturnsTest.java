@@ -122,7 +122,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		int size = codingSchemes.size();
 		
 		int returnedSize = 0;
-		for (CodingScheme c : codingSchemes) {
+		for (int i = 0; i < codingSchemes.size(); i++) {
 			LexEVSListProxy lp = (LexEVSListProxy)codingSchemes;
 			assertTrue(lp.isHasAllRecords() == false);
 			assertTrue(lp.getListChunk().size() == 1);

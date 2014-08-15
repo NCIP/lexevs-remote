@@ -54,7 +54,7 @@ public class QBEAssociationSource extends ServiceTestCase
 		options.setCodingSchemeVersionOrTag(csvt);
 		
 		AssociationSource as = new AssociationSource();	
-		as.setSourceEntityCode("GO:0015157");
+		as.setSourceEntityCode("GO_0015157");
 				
 		List<AssociationSource> assocList = service.search(AssociationSource.class, as, options);	
 		
@@ -64,14 +64,14 @@ public class QBEAssociationSource extends ServiceTestCase
 		assertTrue(assocList.size() > 0);
 		
 		AssociationSource i = assocList.get(0);
-		assertTrue(i.getSourceEntityCodeNamespace().equals("gene_ontology"));
-		assertTrue(i.getSourceEntityCode().equals("GO:0015157"));
+		assertTrue(i.getSourceEntityCodeNamespace().equals("obo"));
+		assertTrue(i.getSourceEntityCode().equals("GO_0015157"));
 		
 
 		AssociationTarget[] t = i.getTarget();
 		assertTrue(t.length == 1);
 		AssociationTarget target = t[0];
-		assertTrue(target.getTargetEntityCodeNamespace().equals("gene_ontology"));
-		assertTrue(target.getTargetEntityCode().equals("GO:0015144"));		
+		assertTrue(target.getTargetEntityCodeNamespace().equals("obo"));
+		assertTrue(target.getTargetEntityCode().equals("GO_0015144"));		
 	}	
 }

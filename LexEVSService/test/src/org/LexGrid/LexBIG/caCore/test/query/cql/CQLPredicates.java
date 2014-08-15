@@ -157,9 +157,9 @@ public class CQLPredicates extends ServiceTestCase
 		
 		String[] expectedCodes = new String[]{"10000006", "10001005"};
 		String[] returnedCodes = new String[2];
-		for (Entity concept : results){
-			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+		for (int i = 0; i < results.size(); i++){
+			returnedCodes = (String[])ArrayUtils.add(returnedCodes, results.get(i).getEntityCode());
+			assertTrue(results.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 
 		for(String code : expectedCodes){
@@ -200,13 +200,13 @@ public class CQLPredicates extends ServiceTestCase
 		assertTrue(results.size()+"",results.size() == 1);
 		String expectedCodes[] = new String[]{"76880004"};
 		String returnedCodes[] = new String[1];
-		for (Entity concept : results){
-			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+		for (int i = 0;i < results.size(); i++){
+			returnedCodes = (String[])ArrayUtils.add(returnedCodes, results.get(i).getEntityCode());
+			assertTrue(results.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 
-		for(String code : expectedCodes){
-			assertTrue(ArrayUtils.contains(returnedCodes, code));
+		for(int i = 0; i < expectedCodes.length; i++){
+			assertTrue(ArrayUtils.contains(returnedCodes, expectedCodes[i]));
 		}
 
 	}		
@@ -279,9 +279,9 @@ public class CQLPredicates extends ServiceTestCase
 		assertTrue(results.size() == 2);
 		String expectedCodes[] = new String[]{"10000006", "10001005"};
 		String returnedCodes[] = new String[2];
-		for (Entity concept : results){
-			returnedCodes = (String[])ArrayUtils.add(returnedCodes, concept.getEntityCode());
-			assertTrue(concept.getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
+		for (int i = 0; i < results.size(); i++){
+			returnedCodes = (String[])ArrayUtils.add(returnedCodes, results.get(i).getEntityCode());
+			assertTrue(results.get(i).getEntityCodeNamespace().equals(ServiceTestCase.SNOMED_SCHEME));
 		}
 
 		for(String code : expectedCodes){

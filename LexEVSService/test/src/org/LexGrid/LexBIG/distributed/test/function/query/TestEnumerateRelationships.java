@@ -46,12 +46,12 @@ public class TestEnumerateRelationships extends ServiceTestCase
 
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(GO_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(GO_VERSION), null);
 
-        ConceptReference ref4 = ConvenienceMethods.createConceptReference("GO:0015489", GO_SCHEME);
+        ConceptReference ref5 = ConvenienceMethods.createConceptReference("GO_0015489", GO_SCHEME);
      
-        ConceptReference ref5 = ConvenienceMethods.createConceptReference("GO:0015203", GO_SCHEME);
+        ConceptReference ref4 = ConvenienceMethods.createConceptReference("GO_0015594", GO_SCHEME);
 
         List<String> rels = cng.listCodeRelationships(ref4, ref5, true);
         
-        assertTrue("1", rels.contains("is_a"));    
+        assertTrue("1", rels.contains("subClassOf"));    
     }
 }

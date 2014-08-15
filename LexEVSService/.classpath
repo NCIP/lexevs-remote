@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="test/src"/>
-	<classpathentry kind="src" path="output/lexevsapi61/conf/system/package/remote-client/conf"/>
+	<classpathentry kind="src" path="output/lexevsapi62/conf/system/package/remote-client/conf"/>
 	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/local-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>

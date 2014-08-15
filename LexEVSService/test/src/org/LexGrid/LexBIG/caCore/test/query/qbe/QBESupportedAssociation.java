@@ -118,7 +118,7 @@ public class QBESupportedAssociation extends ServiceTestCase
 		
 		Mappings mappings = new Mappings();
 		SupportedAssociation scs = new SupportedAssociation();
-		scs.setLocalId("negatively_regulates");
+		scs.setLocalId("negatively regulates");
 		
 		mappings.addSupportedAssociation(scs);
 		cs.setMappings(mappings);

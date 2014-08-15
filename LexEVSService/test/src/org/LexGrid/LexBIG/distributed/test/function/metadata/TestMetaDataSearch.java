@@ -118,7 +118,7 @@ public class TestMetaDataSearch extends ServiceTestCase
     public void testCodingSchemeRestrictionSearch() throws Exception
     {
         LexBIGServiceMetadata md = LexEVSServiceHolder.instance().getLexEVSAppService().getServiceMetadata();
-        md = md.restrictToValue("English", "LuceneQuery");
+        md = md.restrictToValue("BioCarta", "LuceneQuery");
         MetadataProperty[] result = md.resolve().getMetadataProperty();
         
         HashSet<String> temp = new HashSet<String>();
