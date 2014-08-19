@@ -1,0 +1,7 @@
+.other_color{
+    background: lightsteelblue;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: red;
+}
