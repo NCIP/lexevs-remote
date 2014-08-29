@@ -150,7 +150,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		qo.setResultPageSize(50);
 		qo.setCodingScheme(ServiceTestCase.MGED_SCHEME);
 		CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-		csvt.setVersion("1.3.1.1");
+		csvt.setVersion("1.3.1");
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);
