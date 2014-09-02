@@ -52,7 +52,7 @@ public class TestVersionChanges extends ServiceTestCase
         NCIChangeEvent[] nce = hs.getEditActionList(cr, new URI("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#:" + ServiceTestCase.THES_VERSION))
                 .getEntry();
         
-        assertEquals(5,nce.length);
+        assertEquals(1,nce.length);
         assertTrue(nce[0].getConceptcode().equals("C14221"));
         assertTrue(nce[0].getConceptName().equals(" "));
         assertTrue(nce[0].getReferencecode() == null || nce[0].getReferencecode().equals("null"));

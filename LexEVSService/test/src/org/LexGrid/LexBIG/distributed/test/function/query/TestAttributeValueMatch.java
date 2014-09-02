@@ -59,7 +59,7 @@ public class TestAttributeValueMatch extends ServiceTestCase
      */
     public void testAttributeValueMatcha() throws LBException
     {
-        assertTrue(matchAttributeValue("DEFINITION", "When"));
+        assertTrue(matchAttributeValue("DEFINITION", "Shopping"));
     }
 
     /**

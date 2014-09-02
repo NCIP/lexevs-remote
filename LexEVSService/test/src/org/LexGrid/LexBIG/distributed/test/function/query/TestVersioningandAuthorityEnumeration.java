@@ -10,6 +10,7 @@ package org.LexGrid.LexBIG.distributed.test.function.query;
 
 // LexBIG Test ID: T1_FNC_33 TestVersioningandAuthorityEnumeration
 
+import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Utility.ConvenienceMethods;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
@@ -37,7 +38,9 @@ public class TestVersioningandAuthorityEnumeration extends ServiceTestCase
     public void testVersioningandAuthorityEnumeration() throws LBException
     {
 
-        CodingScheme cs = LexEVSServiceHolder.instance().getLexEVSAppService().resolveCodingScheme(THES_SCHEME, null);
+    	CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
+    	csvt.setVersion(THES_VERSION);
+        CodingScheme cs = LexEVSServiceHolder.instance().getLexEVSAppService().resolveCodingScheme(THES_SCHEME, csvt);
         assertTrue("1",cs.getRepresentsVersion().equals(THES_VERSION));
         assertTrue("2",cs.getSource().length == 1);
         

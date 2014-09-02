@@ -45,10 +45,10 @@ public class QBEAssociationQualification extends ServiceTestCase
 		
 		boolean found = false;
 		
-		for(AssociationSource instance : assocList){
-			if(instance.getTarget()[0].getTargetEntityCode().equals("90264002")){
+		for(int i = 0; i < assocList.size(); i++){
+			if(assocList.get(i).getTarget()[0].getTargetEntityCode().equals("90264002")){
 				found = true;
-				AssociationQualification[] quals = instance.getTarget()[0].getAssociationQualification();
+				AssociationQualification[] quals = assocList.get(i).getTarget()[0].getAssociationQualification();
 				assertTrue(quals.length == 1);
 				AssociationQualification foundQual = quals[0];
 				assertTrue(foundQual.getAssociationQualifier().equals("rela"));

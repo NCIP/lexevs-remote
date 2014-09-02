@@ -122,7 +122,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		int size = codingSchemes.size();
 		
 		int returnedSize = 0;
-		for (CodingScheme c : codingSchemes) {
+		for (int i = 0; i < codingSchemes.size(); i++) {
 			LexEVSListProxy lp = (LexEVSListProxy)codingSchemes;
 			assertTrue(lp.isHasAllRecords() == false);
 			assertTrue(lp.getListChunk().size() == 1);
@@ -150,7 +150,7 @@ public class PagedReturnsTest extends ServiceTestCase {
 		qo.setResultPageSize(50);
 		qo.setCodingScheme(ServiceTestCase.MGED_SCHEME);
 		CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-		csvt.setVersion("1.3.1.1");
+		csvt.setVersion("1.3.1");
 		qo.setCodingSchemeVersionOrTag(csvt);
 		LexEVSApplicationService svc = LexEVSServiceHolder.instance().getLexEVSAppService();
 		List<Entity> concepts = svc.search(Entity.class, new Entity(), qo);

@@ -629,9 +629,9 @@ public class LexEVSDataServiceSecurityTest extends ServiceTestCase {
 			assertTrue("Size: " + cs.size(), cs.size() >= 2);
 			
 			boolean found = false;
-			for(Entity c : cs){
-				if(c.getEntityCodeNamespace().equals(ServiceTestCase.MEDDRA_SCHEME) && 
-						c.getEntityCode().equals("10056389")){
+			for(int i = 0; i < cs.size(); i++){
+				if(cs.get(i).getEntityCodeNamespace().equals(ServiceTestCase.MEDDRA_SCHEME) && 
+						cs.get(i).getEntityCode().equals("10056389")){
 					found = true;
 				}
 			}		

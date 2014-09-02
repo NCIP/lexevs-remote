@@ -8,6 +8,7 @@
 */
 package org.LexGrid.LexBIG.caCore.test.exampleUseCases;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,22 +53,21 @@ public class GetAssociations extends ServiceTestCase
 		
 		String[] expectedCodes = new String[]{"C32735", "C12392", "C43612"};
 		
-		String[] returnedCodes = new String[3];
+		List<String> returnedCodes = new ArrayList<String>();
 		
-		int i=0;
-		for(AssociationSource assocSource : results){
-			String targetCode = assocSource.getTarget()[0].getTargetEntityCode();
+		
+		for(int i=0;i < results.size() ; i++){
+			String targetCode = results.get(i).getTarget()[0].getTargetEntityCode();
 			if(! targetCode.startsWith("@")){
-				returnedCodes[i] = targetCode;
-				i++;
+				returnedCodes.add( targetCode);
 			}
 		}
-		
+		String[] sortedCodes = Arrays.copyOf(returnedCodes.toArray(), returnedCodes.toArray().length, String[].class);
 		Arrays.sort(expectedCodes);
-		Arrays.sort(returnedCodes);
+		Arrays.sort(sortedCodes);
 		
 		for(int j=0;j<expectedCodes.length;j++){
-			assertTrue(expectedCodes[j].equals(returnedCodes[j]));
+			assertTrue(expectedCodes[j].equals(sortedCodes[j]));
 		}
 	}
 	
