@@ -35,7 +35,7 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 		lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
 		try {
 			mappingExtension = (MappingExtension)lbs.getGenericExtension("MappingExtension");
-			treeExtension = TreeServiceFactory.getInstance().getTreeService(lbs);
+		//	treeExtension = TreeServiceFactory.getInstance().getTreeService(lbs);
 		} catch (LBException e) {
 			e.printStackTrace();
 		}
@@ -43,16 +43,11 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 
 	@Test
 	public void testMappingExtension() throws Exception {
-	CodingSchemeRenderingList list = lbs.getSupportedCodingSchemes();
-	Iterator<CodingSchemeRendering> rendlist = (Iterator<CodingSchemeRendering>) list.iterateCodingSchemeRendering();
-	while(rendlist.hasNext()){
-		System.out.println(rendlist.next().getCodingSchemeSummary().getFormalName());
-	}
 	ResolvedConceptReferencesIterator itr;
 	CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
 	csvt.setVersion(MAPPING_VERSION);
 		Mapping mapping =
-				mappingExtension.getMapping(MAPPING_SCHEME, csvt, null);
+				mappingExtension.getMapping(MAPPING_SCHEME, csvt, "NCIt_to_ChEBI_Mapping");
 
 			if (mapping != null) {
 				mapping = mapping.restrictToMatchingDesignations(
@@ -64,17 +59,18 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 			}
 	}
 	
-	@Test
-	public void testTreeServiceDistributed() throws Exception{
-		 LexEvsTree tree = null;
-	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-	        csvt.setVersion("TestForMultiNamespace");
-	         tree = treeExtension.getTree("npo", csvt, "NPO_1607", "npo", "is_a");
-	            
-	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
-	            focusNode.setNamespace("npo");
-	            List<LexEvsTreeNode> nodeList = treeExtension.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
-	            assertTrue(nodeList.size() > 0);
-	}
+// Comment this in when and if the plugin extension is being tested.	
+//	@Test
+//	public void testTreeServiceDistributed() throws Exception{
+//		 LexEvsTree tree = null;
+//	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
+//	        csvt.setVersion("TestForMultiNamespace");
+//	         tree = treeExtension.getTree("npo", csvt, "NPO_1607", "npo", "is_a");
+//	            
+//	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
+//	            focusNode.setNamespace("npo");
+//	            List<LexEvsTreeNode> nodeList = treeExtension.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
+//	            assertTrue(nodeList.size() > 0);
+//	}
 }
 	
