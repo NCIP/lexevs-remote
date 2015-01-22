@@ -10,7 +10,7 @@
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">true</property>
 
-		<property name="cglib.use_reflection_optimizer">false</property>
+		<property name="bytecode.use_reflection_optimizer">false</property>
 		<property name="jdbc.batch_versioned_data">true</property>
 		<property name="jdbc.use_streams_for_binary">true</property>
 		<property name="hibernate.cache.use_query_cache">true</property>
