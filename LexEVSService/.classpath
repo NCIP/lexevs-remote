@@ -126,6 +126,5 @@
 	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
 	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="test/lib/lexevs-tree-2.1.0.jar" sourcepath="/tree/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
