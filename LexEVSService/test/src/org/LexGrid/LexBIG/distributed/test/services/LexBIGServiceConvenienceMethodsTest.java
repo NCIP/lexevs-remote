@@ -111,7 +111,7 @@ public class LexBIGServiceConvenienceMethodsTest extends ServiceTestCase {
 		assertTrue(assocs.length == 1);	
 	}
 	public void testGetHierarchyPathToRoot() throws Exception {
-		AssociationList al = lbscm.getHierarchyPathToRoot(THES_SCHEME, null, null, null, "C12907", false, HierarchyPathResolveOption.ALL , null);
+		AssociationList al = lbscm.getHierarchyPathToRoot(THES_SCHEME, null, null, "C12907", null, false, HierarchyPathResolveOption.ALL , null);
 		Association[] assocs = al.getAssociation();
 		
 		assertTrue(assocs.length == 1);
