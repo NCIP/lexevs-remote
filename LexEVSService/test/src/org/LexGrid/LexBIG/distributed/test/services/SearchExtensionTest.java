@@ -8,6 +8,7 @@
 */
 package org.LexGrid.LexBIG.distributed.test.services;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,19 +47,19 @@ public class SearchExtensionTest extends ServiceTestCase {
 		assertNotNull(searchExtension);	
 	}
 
-	public void testSimpleSearch() throws LBException {
+	public void testSimpleSearch() throws LBException, IOException {
 		ResolvedConceptReferencesIterator itr = searchExtension.search("Activity, boxing", MatchAlgorithm.LUCENE);
 		assertTrue(itr.hasNext());
 		assertTrue(StringUtils.equalsIgnoreCase("Activity, boxing", itr.next().getEntityDescription().getContent()));
 	}
 	
-	public void testSimpleSearchContains() throws LBException {
+	public void testSimpleSearchContains() throws LBException, IOException {
 		ResolvedConceptReferencesIterator itr = searchExtension.search("genome", MatchAlgorithm.PRESENTATION_CONTAINS);
 		assertTrue(itr.hasNext());
 		assertTrue(StringUtils.equalsIgnoreCase("genome", itr.next().getEntityDescription().getContent()));
 	}
 	
-	public void testSimpleSearchWithCodingSchemeRestriction() throws LBException {
+	public void testSimpleSearchWithCodingSchemeRestriction() throws LBException, IOException {
 		CodingSchemeReference ref = new CodingSchemeReference();
 		ref.setCodingScheme(SNOMED_SCHEME);
 		
@@ -71,18 +72,18 @@ public class SearchExtensionTest extends ServiceTestCase {
 		assertTrue(StringUtils.containsIgnoreCase(entity.getEntityDescription().getContent(), "boxing"));
 	}
 	
-	public void testSimpleSearchNumberRemaining() throws LBException {
+	public void testSimpleSearchNumberRemaining() throws LBException, IOException {
 		ResolvedConceptReferencesIterator itr = searchExtension.search("boxing", MatchAlgorithm.LUCENE);
 		assertTrue(itr.numberRemaining() > 0);
 	}
 	
-	public void testSimpleSearchGetMaxToReturn() throws LBException {
+	public void testSimpleSearchGetMaxToReturn() throws LBException, IOException {
 		ResolvedConceptReferencesIterator itr = searchExtension.search("boxing", MatchAlgorithm.LUCENE);
 		assertTrue(itr.hasNext());
 		assertEquals(5, itr.next(5).getResolvedConceptReferenceCount());
 	}
 	
-	public void testSimpleSearchContainsPerformance() throws LBException {
+	public void testSimpleSearchContainsPerformance() throws LBException, IOException {
 		for(String term : Arrays.asList("boxing", "gene", "heart attack", "single cell", "cancer", "cure")){
 			long start = System.currentTimeMillis();
 			ResolvedConceptReferencesIterator itr = searchExtension.search(term, MatchAlgorithm.PRESENTATION_CONTAINS);
@@ -91,7 +92,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 		}
 	}
 	
-	public void testSimpleSearchContainsPerformanceResolvedValueSets() throws LBException {
+	public void testSimpleSearchContainsPerformanceResolvedValueSets() throws LBException, IOException {
 		LexEVSResolvedValueSetService rss = new LexEVSResolvedValueSetServiceImpl(LexEVSServiceHolder.instance().getLexEVSAppService());
 		Set<CodingSchemeReference> valueSets = new HashSet<CodingSchemeReference>();
 		
