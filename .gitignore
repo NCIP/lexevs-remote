@@ -2,6 +2,9 @@ bin/
 build/
 output/
 LexEVSService/test/reports/
+SDK4_1_1/prototype/sdk-4.1-grape-framework-installer/bin/gov/nih/nci/cacoresdk/installer/
+SDK4_1_1/prototype/sdk-4.1-grape-framework-installer/bin/
+SDK4_1_1/prototype/
 buildtest
 .DS_Store
 .settings
