@@ -9,7 +9,6 @@
 	<classpathentry kind="src" path="system/src"/>
 	<classpathentry kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
 	<classpathentry kind="lib" path="system/lib/axis.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/acegi-security-1.0.4.jar"/>
 	<classpathentry kind="lib" path="system/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="system/lib/args4j-2.0.12.jar"/>
@@ -133,5 +132,6 @@
 	<classpathentry kind="lib" path="system/lib/kryo-serializers-0.37.jar"/>
 	<classpathentry kind="lib" path="system/lib/minlog-1.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/commons-codec-1.10.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
