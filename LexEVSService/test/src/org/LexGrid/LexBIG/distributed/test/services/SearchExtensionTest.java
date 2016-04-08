@@ -49,7 +49,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 	public void testSimpleSearch() throws LBException {
 		ResolvedConceptReferencesIterator itr = searchExtension.search("Activity, boxing", MatchAlgorithm.LUCENE);
 		assertTrue(itr.hasNext());
-		assertTrue(StringUtils.equalsIgnoreCase("Activity, boxing", itr.next().getEntityDescription().getContent()));
+		assertTrue(StringUtils.equalsIgnoreCase("Boxing (sports activity)", itr.next().getEntityDescription().getContent()));
 	}
 	
 	public void testSimpleSearchContains() throws LBException {
