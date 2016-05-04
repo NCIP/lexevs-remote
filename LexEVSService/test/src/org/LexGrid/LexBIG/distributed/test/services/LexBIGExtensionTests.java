@@ -35,7 +35,7 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 		lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
 		try {
 			mappingExtension = (MappingExtension)lbs.getGenericExtension("MappingExtension");
-		//	treeExtension = TreeServiceFactory.getInstance().getTreeService(lbs);
+		     treeExtension = TreeServiceFactory.getInstance().getTreeService(lbs);
 		} catch (LBException e) {
 			e.printStackTrace();
 		}
@@ -53,24 +53,24 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 				mapping = mapping.restrictToMatchingDesignations(
 							MAPPING_TEXT, SearchDesignationOption.ALL, "LuceneQuery", null, SearchContext.SOURCE_OR_TARGET_CODES);
 				itr = mapping.resolveMapping();
-		
-					assertTrue(itr.numberRemaining() > 0);
+		System.out.println(itr.next());
+				assertTrue(itr.numberRemaining() > 0);
 
 			}
 	}
 	
 // Comment this in when and if the plugin extension is being tested.	
-//	@Test
-//	public void testTreeServiceDistributed() throws Exception{
-//		 LexEvsTree tree = null;
-//	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-//	        csvt.setVersion("TestForMultiNamespace");
-//	         tree = treeExtension.getTree("npo", csvt, "NPO_1607", "npo", "is_a");
-//	            
-//	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
-//	            focusNode.setNamespace("npo");
-//	            List<LexEvsTreeNode> nodeList = treeExtension.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
-//	            assertTrue(nodeList.size() > 0);
-//	}
+	@Test
+	public void testTreeServiceDistributed() throws Exception{
+		 LexEvsTree tree = null;
+	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
+	        csvt.setVersion("TestForMultiNamespace");
+	         tree = treeExtension.getTree("npo", csvt, "NPO_1607", "npo", "is_a");
+	            
+	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
+	            focusNode.setNamespace("npo");
+	            List<LexEvsTreeNode> nodeList = treeExtension.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
+	            assertTrue(nodeList.size() > 0);
+	}
 }
 	
