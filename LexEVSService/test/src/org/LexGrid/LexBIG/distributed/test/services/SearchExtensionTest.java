@@ -47,7 +47,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 	}
 
 	public void testSimpleSearch() throws LBException {
-		ResolvedConceptReferencesIterator itr = searchExtension.search("Activity, boxing", MatchAlgorithm.LUCENE);
+		ResolvedConceptReferencesIterator itr = searchExtension.search("boxing", MatchAlgorithm.LUCENE);
 		assertTrue(itr.hasNext());
 		assertTrue(StringUtils.equalsIgnoreCase("Boxing (sports activity)", itr.next().getEntityDescription().getContent()));
 	}
