@@ -10,9 +10,7 @@ package org.LexGrid.LexBIG.testUtil;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
-import org.LexGrid.LexBIG.caCore.test.setup.AllDataServiceTests;
-import org.LexGrid.LexBIG.distributed.test.testUtility.AllDistributedLexEVSTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedLexBigTests;
 
 /**
  * The Class AllTestsRemoteConfig.
@@ -30,8 +28,14 @@ public class AllLexEVSAPITests
 	{
 		TestSuite mainSuite = new TestSuite("LexEVSAPI JUnit Tests");
 
-		mainSuite.addTest(AllDistributedLexEVSTests.suite());
-		mainSuite.addTest(AllDataServiceTests.suite());
+		// Only run tests scanned from the LexBIG Local API Test suite.
+		mainSuite.addTest(ScannedLexBigTests.suite());
+
+		// These are the old tests.
+		//mainSuite.addTest(AllDistributedLexEVSTests.suite());
+
+		// Disable Data Service tests.
+		//mainSuite.addTest(AllDataServiceTests.suite());
 
 		return mainSuite;
     }
