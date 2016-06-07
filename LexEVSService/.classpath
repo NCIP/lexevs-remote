@@ -132,6 +132,9 @@
 	<classpathentry kind="lib" path="system/lib/kryo-serializers-0.37.jar" sourcepath="/kryo-serializers"/>
 	<classpathentry kind="lib" path="system/lib/minlog-1.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-6.4.0.SNAPSHOT.6-tests.jar" sourcepath="/lbTest/src"/>
+	<classpathentry kind="lib" path="system/lib/reflections-0.9.10.jar"/>
+	<classpathentry kind="lib" path="system/lib/guava-19.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
