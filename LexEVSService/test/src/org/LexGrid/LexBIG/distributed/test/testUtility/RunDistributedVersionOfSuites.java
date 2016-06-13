@@ -9,6 +9,7 @@
 package org.LexGrid.LexBIG.distributed.test.testUtility;
 
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.LexBIGServiceConvenienceMethodsImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.MappingExtensionImplTest;
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.SearchExtensionImplTest;
 import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
 import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
@@ -33,10 +34,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Categories.class)
 @ExcludeCategory(RemoveFromDistributedTests.class)
 @SuiteClasses({
-	ScannedLexBigTests.class, 
-	LexBIGServiceConvenienceMethodsImplTest.class, 
-	SearchExtensionImplTest.class,
-	ResolveToListTest.class})
+//	ScannedLexBigTests.class, 
+//	LexBIGServiceConvenienceMethodsImplTest.class, 
+//	SearchExtensionImplTest.class,
+//	ResolveToListTest.class,
+	MappingExtensionImplTest.class})
 public class RunDistributedVersionOfSuites {
 
     @ClassRule
