@@ -9,6 +9,7 @@
 package org.LexGrid.LexBIG.distributed.test.testUtility;
 
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.LexBIGServiceConvenienceMethodsImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.SearchExtensionImplTest;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
 import org.junit.experimental.categories.Categories;
 import org.junit.experimental.categories.Categories.ExcludeCategory;
@@ -23,7 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Categories.class)
 @ExcludeCategory(RemoveFromDistributedTests.class)
-@SuiteClasses({ScannedLexBigTests.class, LexBIGServiceConvenienceMethodsImplTest.class})
+@SuiteClasses({ScannedLexBigTests.class, LexBIGServiceConvenienceMethodsImplTest.class, SearchExtensionImplTest.class})
 public class RunDistributedVersionOfSuites {
 
 }
