@@ -28,8 +28,6 @@ public class ScannedLexBigTests {
 	public static Test suite() throws Exception {
 		TestSuite mainSuite = new TestSuite("LexBIG validation tests");
 
-		System.setProperty(LexBIGServiceTestFactory.LBS_TEST_FACTORY_ENV, RemoteLexBIGServiceTestFactory.class.getName());
-
 		Reflections reflections = new Reflections("org.LexGrid.LexBIG",
 				new TypeAnnotationsScanner(),
 				new SubTypesScanner(false));
