@@ -34,10 +34,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Categories.class)
 @ExcludeCategory(RemoveFromDistributedTests.class)
 @SuiteClasses({
-//	ScannedLexBigTests.class, 
-//	LexBIGServiceConvenienceMethodsImplTest.class, 
-//	SearchExtensionImplTest.class,
-//	ResolveToListTest.class,
+	ScannedLexBigTests.class, 
+	LexBIGServiceConvenienceMethodsImplTest.class, 
+	SearchExtensionImplTest.class,
+	ResolveToListTest.class,
 	MappingExtensionImplTest.class})
 public class RunDistributedVersionOfSuites {
 
