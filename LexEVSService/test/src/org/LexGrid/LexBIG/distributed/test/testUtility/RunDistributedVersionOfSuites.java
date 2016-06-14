@@ -11,17 +11,16 @@ package org.LexGrid.LexBIG.distributed.test.testUtility;
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.LexBIGServiceConvenienceMethodsImplTest;
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.MappingExtensionImplTest;
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.SearchExtensionImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.MultipleNamspaceErrorLEXEVS_598_Test;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.PathToRootTreeServiceImplTest;
 import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
 import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
 import org.LexGrid.LexBIG.testUtil.RemoteLexBIGServiceTestFactory;
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.experimental.categories.Categories;
 import org.junit.experimental.categories.Categories.ExcludeCategory;
-import org.junit.internal.TextListener;
 import org.junit.rules.ExternalResource;
-import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
@@ -38,7 +37,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	LexBIGServiceConvenienceMethodsImplTest.class, 
 	SearchExtensionImplTest.class,
 	ResolveToListTest.class,
-	MappingExtensionImplTest.class})
+	MappingExtensionImplTest.class,
+	MultipleNamspaceErrorLEXEVS_598_Test.class,
+	PathToRootTreeServiceImplTest.class})
 public class RunDistributedVersionOfSuites {
 
     @ClassRule
