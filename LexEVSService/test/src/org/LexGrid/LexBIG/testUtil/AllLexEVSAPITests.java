@@ -8,35 +8,55 @@
 */
 package org.LexGrid.LexBIG.testUtil;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.LexBIGServiceConvenienceMethodsImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.MappingExtensionImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.SearchExtensionImplTest;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.MultipleNamspaceErrorLEXEVS_598_Test;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.PathToRootTreeServiceImplTest;
+import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
+import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
+import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedValueSetDefinitionTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedLexBigTests;
+import org.LexGrid.LexBIG.distributed.test.valueset.TestLexEVSValueSetDefinitionServices;
+import org.junit.ClassRule;
+import org.junit.experimental.categories.Categories;
+import org.junit.experimental.categories.Categories.ExcludeCategory;
+import org.junit.rules.ExternalResource;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite.SuiteClasses;
+
 
 /**
- * The Class AllTestsRemoteConfig.
+ * An implementation of a JUnit 4 level Categorical test execution suite allowing the inclusion
+ * and exclusion of test classes and methods. 
+ *
  */
-public class AllLexEVSAPITests
-{
-	/**
-	 * Suite.
-	 * 
-	 * @return the test
-	 * 
-	 * @throws Exception the exception
-	 */
-	public static Test suite() throws Exception
-	{
-		TestSuite mainSuite = new TestSuite("LexEVSAPI JUnit Tests");
 
-		// Only run tests scanned from the LexBIG Local API Test suite.
-		mainSuite.addTest(ScannedLexBigTests.suite());
+@RunWith(Categories.class)
+@ExcludeCategory(RemoveFromDistributedTests.class)
+@SuiteClasses({
+	ScannedLexBigTests.class, 
+	LexBIGServiceConvenienceMethodsImplTest.class, 
+	SearchExtensionImplTest.class,
+	ResolveToListTest.class,
+	MappingExtensionImplTest.class,
+	MultipleNamspaceErrorLEXEVS_598_Test.class,
+	PathToRootTreeServiceImplTest.class,
+	DistributedValueSetDefinitionTests.class,
+	TestLexEVSValueSetDefinitionServices.class})
+public class AllLexEVSAPITests{
 
-		// These are the old tests.
-		//mainSuite.addTest(AllDistributedLexEVSTests.suite());
+    @ClassRule
+    public static ExternalResource testRule = new ExternalResource(){
+            @Override
+            protected void before() throws Throwable{
+         	   System.setProperty(LexBIGServiceTestFactory.LBS_TEST_FACTORY_ENV, RemoteLexBIGServiceTestFactory.class.getName());
+            };
 
-		// Disable Data Service tests.
-		//mainSuite.addTest(AllDataServiceTests.suite());
+            @Override
+            protected void after(){
 
-		return mainSuite;
-    }
+            };
+        };
 }
