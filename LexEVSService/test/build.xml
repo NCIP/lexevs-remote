@@ -155,7 +155,7 @@
 	
     <target name="alltests" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
-    	<junit printsummary="yes" fork="no">
+    	<junit printsummary="yes" fork="yes">
         	<sysproperty key="test.property" value="${test.dir}" />
     		<sysproperty key="test.xml" value="${test.xml}" />
 	      <classpath refid="libs" />

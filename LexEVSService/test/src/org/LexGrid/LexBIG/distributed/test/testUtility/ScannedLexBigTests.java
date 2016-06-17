@@ -8,21 +8,21 @@
 */
 package org.LexGrid.LexBIG.distributed.test.testUtility;
 
+import java.util.Set;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
+
 import org.LexGrid.LexBIG.Utility.RemoteApiSafeTest;
-import org.LexGrid.LexBIG.testUtil.RemoteLexBIGServiceTestFactory;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
-
-import java.util.Set;
 
 /**
  * A programmatic Test builder that scans the LexBIG local tests for the {@link RemoteApiSafeTest} annotation
  * and adds them to the suite.
  */
+
 public class ScannedLexBigTests {
 
 	public static Test suite() throws Exception {

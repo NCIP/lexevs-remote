@@ -17,7 +17,8 @@ import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
 import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedValueSetDefinitionTests;
-import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedLexBigTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedGraphTestSuite;
+import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedNodeTestSuite;
 import org.LexGrid.LexBIG.distributed.test.valueset.TestLexEVSValueSetDefinitionServices;
 import org.junit.ClassRule;
 import org.junit.experimental.categories.Categories;
@@ -36,7 +37,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Categories.class)
 @ExcludeCategory(RemoveFromDistributedTests.class)
 @SuiteClasses({
-	ScannedLexBigTests.class, 
+	ScannedCodedGraphTestSuite.class, 
+	ScannedCodedNodeTestSuite.class,
+	ScannedQueryLuceneSuite.class,
+	ScannedQueryUtilityTestSuite.class,
 	LexBIGServiceConvenienceMethodsImplTest.class, 
 	SearchExtensionImplTest.class,
 	ResolveToListTest.class,
