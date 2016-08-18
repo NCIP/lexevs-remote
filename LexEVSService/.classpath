@@ -134,6 +134,7 @@
 	<classpathentry kind="lib" path="system/lib/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="system/lib/reflections-0.9.10.jar"/>
 	<classpathentry kind="lib" path="system/lib/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/com.springsource.org.apache.commons.httpclient-3.1.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
