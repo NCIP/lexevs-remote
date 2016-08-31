@@ -42,12 +42,12 @@ public class TestRelationshipInquiry extends ServiceTestCase
         
         ConceptReference cr1 = new ConceptReference();
         cr1.setCode("C33231");
-        cr1.setCodeNamespace("NCI_Thesaurus");
+        cr1.setCodeNamespace("Thesaurus");
         cr1.setCodingSchemeName(THES_SCHEME);
         
         ConceptReference cr2 = new ConceptReference();
         cr2.setCode("C33090");
-        cr2.setCodeNamespace("NCI_Thesaurus");
+        cr2.setCodeNamespace("Thesaurus");
         cr2.setCodingSchemeName(THES_SCHEME);
         
         assertTrue(cng.areCodesRelated(Constructors.createNameAndValue("Anatomic_Structure_Has_Location", null),

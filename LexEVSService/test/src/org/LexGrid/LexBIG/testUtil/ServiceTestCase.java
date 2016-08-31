@@ -103,9 +103,11 @@ abstract public class ServiceTestCase extends TestCase{
 	/** Concept with both parent and child */
 	public final static String THES_PARENT_CHILD_TEST_CONCEPT = properties.getProperty("THES_PARENT_CHILD_TEST_CONCEPT");
 	
+	public final static String MAPPING_SCHEME = properties.getProperty("MAPPING_SCHEME");
 	
+	public final static String MAPPING_VERSION = properties.getProperty("MAPPING_VERSION");
 	
-	
+	public final static String MAPPING_TEXT = properties.getProperty("MAPPING_TEXT");
 	
 	
 	/** The Constant META_SCHEME. */

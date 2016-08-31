@@ -15,6 +15,7 @@ import gov.nih.nci.system.client.proxy.ProxyHelper;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import net.sf.cglib.proxy.Enhancer;
 
 import org.LexGrid.LexBIG.Exceptions.LBException;
+import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceLazyLoadable;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.aopalliance.intercept.MethodInvocation;
@@ -177,8 +179,19 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 		}
 		Exception returnException = null;
 		if(lexBigExceptionFound == true) {
-			returnException = new LBException(lbiEx.getMessage());
-			returnException.setStackTrace(lbiEx.getStackTrace());
+			
+			// if this is an LBParameterException, recreate it.
+			if (isLBParameterException(lbiEx)){
+				returnException = new LBParameterException(lbiEx.getMessage());
+				returnException.setStackTrace(lbiEx.getStackTrace());
+			}
+			
+			// just create the more generic LBException.
+			else {
+				returnException = new LBException(lbiEx.getMessage());
+				returnException.setStackTrace(lbiEx.getStackTrace());
+			}
+			
 		} else {
 			returnException = e;
 		}
@@ -187,6 +200,14 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 	
 	private static boolean isLexBigException(Throwable th) {
 		if(th.toString().indexOf("org.LexGrid.LexBIG.Exceptions") != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private static boolean isLBParameterException(Throwable th) {
+		if(th.toString().indexOf("org.LexGrid.LexBIG.Exceptions.LBParameterException") != -1) {
 			return true;
 		} else {
 			return false;

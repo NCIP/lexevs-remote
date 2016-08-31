@@ -114,7 +114,7 @@
 	
 	<target name="package-webapp">
 			<SDKecho message="${ant.project.name}: Packaging the webapp"/>
-		<war destfile="${package.system.dir}\${PROJECT_NAME}.war" webxml="${build.conf.web-inf.dir}\web.xml">
+		<war destfile="${package.system.dir}\${PROJECT_NAME}.${PROJECT_VERSION}.war" webxml="${build.conf.web-inf.dir}\web.xml">
 					<manifest>
 						<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
 						<attribute name="Version" value="${VERSION}"/>
@@ -126,10 +126,7 @@
 					<lib dir="${build.jar.dir}" includes="${bean.file}" />
 					<lib dir="${build.jar.dir}" includes="${orm.file}" />
 					<lib dir="${system.dir}\${system.lib.dir}" includes="*.jar">
-						<exclude name="${server-exclude-commons-logging}"/>
-						<exclude name="${server-exclude-log4j}"/>
-						<exclude name="servlet.jar"/>
-						<exclude name="jaxrpc.jar"/>
+						<exclude name="servlet.jar"/>						
 						<exclude name="xercesImpl*.*"/>
 						<exclude name="cog*.*"/>
 					</lib>
@@ -154,7 +151,7 @@
 						<include name="server-config.wsdd"/>
 					</webinf>
 				</war>	
-			<war destfile="${package.system.dir}\${PROJECT_NAME}.jboss.war" webxml="${build.conf.web-inf.dir}\web.xml">
+			<war destfile="${package.system.dir}\${PROJECT_NAME}.${PROJECT_VERSION}.jboss.war" webxml="${build.conf.web-inf.dir}\web.xml">
 				<manifest>
 					<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
 					<attribute name="Version" value="${VERSION}"/>
@@ -194,7 +191,7 @@
 					<include name="server-config.wsdd"/>
 				</webinf>
 			</war>
-		<war destfile="${package.system.dir}\${PROJECT_NAME}.tomcat.war" webxml="${build.conf.web-inf.dir}\web.xml">
+		<war destfile="${package.system.dir}\${PROJECT_NAME}.${PROJECT_VERSION}.tomcat.war" webxml="${build.conf.web-inf.dir}\web.xml">
 			<manifest>
 				<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
 				<attribute name="Version" value="${VERSION}"/>

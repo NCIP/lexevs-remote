@@ -10,6 +10,8 @@ package org.LexGrid.LexBIG.caCore.client.proxy;
 
 import java.lang.annotation.Annotation;
 
+import org.LexGrid.LexBIG.Exceptions.LBException;
+import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDataService;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
@@ -50,6 +52,26 @@ public class LexEVSApplicationServiceProxyTest extends ServiceTestCase
 	public void testIsDataServiceLazyLoadable4() throws Exception {
 		Annotation[] annotations = LexEVSDataService.class.getMethod("query", new Class[]{DetachedCriteria.class, QueryOptions.class}).getAnnotations();
 		assertTrue(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
+	}
+	
+	public void testFindLBParameterException() throws Exception {
+		
+		LBParameterException lbParameterException = new LBParameterException("This is an LBParameterException test");
+		Exception exception = new Exception("Exception with embedded LBParameterException", lbParameterException);
+		
+		Exception returnException = LexEVSApplicationServiceProxy.digOutRealExceptionAndThrowIt(exception);
+		
+		assertTrue(returnException instanceof LBParameterException);
+	}
+	
+	public void testFindLBException() throws Exception {
+		
+		LBException lbException = new LBException("This is an LBException test");
+		Exception exception = new Exception("Exception with embedded LBException", lbException);
+		
+		Exception returnException = LexEVSApplicationServiceProxy.digOutRealExceptionAndThrowIt(exception);
+		
+		assertTrue(returnException instanceof LBException);
 	}
 
 }

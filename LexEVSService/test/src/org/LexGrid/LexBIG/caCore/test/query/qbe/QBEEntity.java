@@ -48,7 +48,7 @@ public class QBEEntity extends ServiceTestCase {
 		
 		Entity c = new Entity();
 		c.setEntityCode("C43856");
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() > 0);
 		Entity foundConcept = (Entity)list.get(0);
@@ -64,7 +64,7 @@ public class QBEEntity extends ServiceTestCase {
 		
 		Entity c = new Entity();
 		c.setEntityCode("C4385*");
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		List<Entity> list = service.search(Entity.class, c, thesQueryOptions);
 		assertTrue(list.size() == 11);
 	}
@@ -73,7 +73,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish");
 		c.setEntityDescription(ed);
@@ -87,7 +87,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		EntityDescription ed = new EntityDescription();
 		ed.setContent("Irish_WRONG");
 		c.setEntityDescription(ed);
@@ -99,7 +99,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Irish Water Spaniel");
@@ -115,7 +115,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Oxalis montana");
@@ -133,7 +133,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Cuckoo-bread");
@@ -150,7 +150,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Presentation pres = new Presentation();
 		Text text = new Text();
 		text.setContent("Cuckoo-bread");
@@ -166,7 +166,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Definition def = new Definition();
 		Text text = new Text();
 		text.setContent("A mechanical device that sometimes resembles a living animal and is capable of performing a variety of often complex human tasks on command or by being programmed in advance.");
@@ -183,7 +183,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Definition def = new Definition();
 		Text text = new Text();
 		text.setContent("*A mechanical device that sometimes resembles a living animal and is capable of performing " +
@@ -201,7 +201,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
 		text.setContent("C0336537");
@@ -219,7 +219,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
 		text.setContent("C20678_WRONG");
@@ -235,7 +235,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Property cp = new Property();
 		Text text = new Text();
 		
@@ -254,7 +254,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.");
@@ -271,7 +271,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();		
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints, etc.WRONG");
@@ -286,7 +286,7 @@ public class QBEEntity extends ServiceTestCase {
 		LexEVSApplicationService service = LexEVSServiceHolder.instance().getLexEVSAppService();
 		
 		Entity c = new Entity();
-		c.setEntityCodeNamespace("NCI_Thesaurus");
+		c.setEntityCodeNamespace("Thesaurus");
 		Comment comment = new Comment();
 		Text text = new Text();
 		text.setContent("Frequently used in persons with heart disease, prosthetic heart valves, joints*");

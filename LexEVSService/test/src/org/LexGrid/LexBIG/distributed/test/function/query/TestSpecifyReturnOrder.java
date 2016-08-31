@@ -44,15 +44,16 @@ public class TestSpecifyReturnOrder extends ServiceTestCase
         ResolvedConceptReference[] rcr = cns.resolveToList(Constructors.createSortOptionList(new String[] {"code"}, new Boolean[] {null}), null, null, -1)
                 .getResolvedConceptReference();
         assertTrue("1",rcr[0].getConceptCode().equals("C103178"));
-        assertTrue("2",rcr[1].getConceptCode().equals("C21031"));
-        assertTrue("3",rcr[2].getConceptCode().equals("C25611"));
-        assertTrue("4",rcr[3].getConceptCode().equals("C33284"));
+        assertTrue("2",rcr[1].getConceptCode().equals("C120322"));
+        assertTrue("3",rcr[2].getConceptCode().equals("C21031"));
+        assertTrue("4",rcr[3].getConceptCode().equals("C25611"));
+        assertTrue("5",rcr[4].getConceptCode().equals("C33284"));
 
         rcr = cns.resolveToList(Constructors.createSortOptionList(new String[] {"entityDescription"}, new Boolean[] {null}), null, null, -1)
                 .getResolvedConceptReference();
-        assertTrue("5",rcr[0].getConceptCode().equals("C34107"));
-        assertTrue("6",rcr[1].getConceptCode().equals("C82601"));
-        assertTrue("7",rcr[2].getConceptCode().equals("C103178"));
+        assertTrue("6",rcr[0].getConceptCode().equals("C34107"));
+        assertTrue("7",rcr[1].getConceptCode().equals("C82601"));
+        assertTrue("8",rcr[2].getConceptCode().equals("C103178"));
         
         //reverse sort 1.
         rcr = cns.resolveToList(Constructors.createSortOptionList(new String[]{"code"}, new Boolean[]{new Boolean(false)}), null, null, -1)
