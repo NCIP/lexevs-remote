@@ -4,8 +4,8 @@
 **************************************************************************** -->
 <project name="EVS API Unit Tests" default="alltests-html" basedir=".">
 
-    <property name="client.dir" value="../output/lexevsapi63/package/remote-client" />
-    <property name="wsclient.dir" value="../output/lexevsapi63/package/ws-client" />
+    <property name="client.dir" value="../output/lexevsapi64/package/remote-client" />
+    <property name="wsclient.dir" value="../output/lexevsapi64/package/ws-client" />
     <property name="lib.dir" value="../system/lib" />
 	<property name="testlib.dir" value="./lib"/>
     <property name="src.dir" value="src" />
@@ -155,7 +155,7 @@
 	
     <target name="alltests" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
-    	<junit printsummary="yes" fork="no">
+    	<junit printsummary="yes" fork="yes">
         	<sysproperty key="test.property" value="${test.dir}" />
     		<sysproperty key="test.xml" value="${test.xml}" />
 	      <classpath refid="libs" />

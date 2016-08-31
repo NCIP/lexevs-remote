@@ -17,20 +17,28 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
 
 import net.sf.cglib.proxy.Enhancer;
 
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.annotations.LgProxyClass;
+import org.acegisecurity.Authentication;
+import org.acegisecurity.AuthenticationCredentialsNotFoundException;
+import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.context.httpinvoker.AuthenticationSimpleHttpInvokerRequestExecutor;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor;
 import org.springframework.remoting.rmi.CodebaseAwareObjectInputStream;
 import org.springframework.remoting.support.RemoteInvocation;
 
-public class ProxyUnwrappingHttpInvokerRequestExecutor extends AuthenticationSimpleHttpInvokerRequestExecutor implements ApplicationContextAware {
+public class ProxyUnwrappingHttpInvokerRequestExecutor extends CommonsHttpInvokerRequestExecutor implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 	private ProxyHelper proxyHelper;
@@ -134,4 +142,6 @@ public class ProxyUnwrappingHttpInvokerRequestExecutor extends AuthenticationSim
 		ApplicationService appService = (ApplicationService)applicationContext.getBean("LexEVSApplicationService");
 		return appService;
 	}
+	
+
 }

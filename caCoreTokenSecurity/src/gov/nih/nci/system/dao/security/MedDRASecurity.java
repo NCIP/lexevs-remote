@@ -24,10 +24,12 @@ public class MedDRASecurity implements DAOSecurity {
     private static Logger log = Logger.getLogger(MedDRASecurity.class.getName());
 
     private static HashSet validTokenCollection = new HashSet();
+    static {
+        resetCache(7200000, 7200000);
+    }
 
     public MedDRASecurity() {
         // Clear cache every two hours
-        resetCache(7200000, 7200000);
     }
 
     public SecurityKey getSecurityKey(UserCredentials credentials)
@@ -83,7 +85,7 @@ public class MedDRASecurity implements DAOSecurity {
         return found;
     }
 
-    private void resetCache(int delay, int interval) {
+    private static void resetCache(int delay, int interval) {
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
