@@ -61,6 +61,7 @@ import org.LexGrid.LexBIG.distributed.test.function.query.TestVersioningandAutho
 import org.LexGrid.LexBIG.distributed.test.function.query.TestforCurrentOrObsoleteConcept;
 import org.LexGrid.LexBIG.distributed.test.services.CodedNodeGraphImplTest;
 import org.LexGrid.LexBIG.distributed.test.services.CodedNodeSetImplTest;
+import org.LexGrid.LexBIG.distributed.test.services.LexBIGExtensionTests;
 import org.LexGrid.LexBIG.distributed.test.services.LexBIGServiceConvenienceMethodsTest;
 import org.LexGrid.LexBIG.distributed.test.services.LexBIGServiceTest;
 import org.LexGrid.LexBIG.distributed.test.services.ResolvedConceptReferenceIteratorTest;
@@ -147,6 +148,7 @@ public class AllDistributedLexEVSTests
 		serviceTests.addTestSuite(CodedNodeGraphImplTest.class);
 		serviceTests.addTestSuite(CodedNodeSetImplTest.class);
 		serviceTests.addTestSuite(SearchExtensionTest.class);
+		serviceTests.addTestSuite(LexBIGExtensionTests.class);
 		serviceTests.addTestSuite(LexBIGServiceConvenienceMethodsTest.class);
 		serviceTests.addTestSuite(LexBIGServiceTest.class);
 		serviceTests.addTestSuite(ResolvedConceptReferenceIteratorTest.class);
