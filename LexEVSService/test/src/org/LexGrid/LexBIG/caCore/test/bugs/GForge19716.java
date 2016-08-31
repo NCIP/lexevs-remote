@@ -37,7 +37,7 @@ public class GForge19716 extends ServiceTestCase
 		qo.setCodingSchemeVersionOrTag(csvt);
 		
 		Entity entity = new Entity();
-		entity.setEntityCodeNamespace("NCI_Thesaurus");
+		entity.setEntityCodeNamespace("Thesaurus");
 		entity.setEntityCode("C26040");
 				
 		List<Entity> results = service.search(Entity.class, entity, qo);
