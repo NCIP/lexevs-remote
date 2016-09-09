@@ -43,34 +43,34 @@ public class LexEVSListProxy extends ListProxy {
 	 * 
 	 * @return size of the List
 	 */
-	public int size() {
-		if (getRealSize() == -1) {
-			if (this.isHasAllRecords()) {
-				this.setRealSize(this.getListChunk().size());
-			} else {
-				int rowCount = this.getListChunk().size();
-				//System.out.println("rowCount: " + rowCount);
-// TODO ::				ApplicationService appService = ApplicationServiceProvider.getApplicationService();
-				try {
-					// Data larger than the max query size.  Must determine the 
-					// actual size
-					//System.out.println("rowCount: " + rowCount + "; " + "maxRecordsPerQuery_: " + maxRecordsPerQuery_);
-					if (rowCount == this.getMaxRecordsPerQuery())
-						rowCount = lexevsappService.getQueryRowCount(this.getOriginalCriteria(),
-								this.getTargetClassName(), queryOptions);
-				} catch (Exception ex) {
-					log.error("Exception: ", ex);
-					ex.printStackTrace();
-				}
-				this.setRealSize(rowCount);
-				if (rowCount < this.getMaxRecordsPerQuery())
-					this.setHasAllRecords(true);
-				else
-					this.setHasAllRecords(false);
-			}
-		}
-		return this.getRealSize();
-	}
+//	public int size() {
+//		if (getRealSize() == -1) {
+//			if (this.isHasAllRecords()) {
+//				this.setRealSize(this.getListChunk().size());
+//			} else {
+//				int rowCount = this.getListChunk().size();
+//				//System.out.println("rowCount: " + rowCount);
+//// TODO ::				ApplicationService appService = ApplicationServiceProvider.getApplicationService();
+//				try {
+//					// Data larger than the max query size.  Must determine the 
+//					// actual size
+//					//System.out.println("rowCount: " + rowCount + "; " + "maxRecordsPerQuery_: " + maxRecordsPerQuery_);
+//					if (rowCount == this.getMaxRecordsPerQuery())
+//						rowCount = lexevsappService.getQueryRowCount(this.getOriginalCriteria(),
+//								this.getTargetClassName(), queryOptions);
+//				} catch (Exception ex) {
+//					log.error("Exception: ", ex);
+//					ex.printStackTrace();
+//				}
+//				this.setRealSize(rowCount);
+//				if (rowCount < this.getMaxRecordsPerQuery())
+//					this.setHasAllRecords(true);
+//				else
+//					this.setHasAllRecords(false);
+//			}
+//		}
+//		return this.getRealSize();
+//	}
 
 	/**
 	 * @see java.util.#isEmpty()
@@ -82,40 +82,40 @@ public class LexEVSListProxy extends ListProxy {
 	/**
 	 * @see java.util.#contains(java.lang.Object)
 	 */
-	public boolean contains(Object o) {
-		if (this.isHasAllRecords()) {
-			return this.getListChunk().contains(o);
-		} else {
-			// step through the entire set of list chunks from
-			// the appservice looking for the result.
-			boolean computedResult = false;
-			computedResult = this.getListChunk().contains(o);
-			if (computedResult)
-				return computedResult;
-			else {
-				int firstResult = 0;
-//	TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
-
-				for (;;) {
-					List ls = new ArrayList();
-					try {
-						ls = lexevsappService.query(this.getOriginalCriteria(), firstResult, this.getTargetClassName(), queryOptions);
-						if (ls.size() <= 0) // there are no more records in
-											// database
-							break;
-						computedResult = ls.contains(o);
-						if (computedResult)
-							break;
-						else
-							firstResult += this.getMaxRecordsPerQuery();
-					} catch (Exception ex) {
-						log.error("Exception: " + ex.getMessage());
-					}
-				}
-			}
-			return computedResult;
-		}
-	}
+//	public boolean contains(Object o) {
+//		if (this.isHasAllRecords()) {
+//			return this.getListChunk().contains(o);
+//		} else {
+//			// step through the entire set of list chunks from
+//			// the appservice looking for the result.
+//			boolean computedResult = false;
+//			computedResult = this.getListChunk().contains(o);
+//			if (computedResult)
+//				return computedResult;
+//			else {
+//				int firstResult = 0;
+////	TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
+//
+//				for (;;) {
+//					List ls = new ArrayList();
+//					try {
+//						ls = lexevsappService.query(this.getOriginalCriteria(), firstResult, this.getTargetClassName(), queryOptions);
+//						if (ls.size() <= 0) // there are no more records in
+//											// database
+//							break;
+//						computedResult = ls.contains(o);
+//						if (computedResult)
+//							break;
+//						else
+//							firstResult += this.getMaxRecordsPerQuery();
+//					} catch (Exception ex) {
+//						log.error("Exception: " + ex.getMessage());
+//					}
+//				}
+//			}
+//			return computedResult;
+//		}
+//	}
 
 	/**
 	 * @see java.util.#toArray()
@@ -140,95 +140,95 @@ public class LexEVSListProxy extends ListProxy {
 	/**
 	 * @see java.util.List#containsAll(java.util.Collection)
 	 */
-	public boolean containsAll(Collection c) {
-		if (this.isHasAllRecords()) {
-			return this.getListChunk().containsAll(c);
-		} else {
-			// find if the entire collection is there via appservice and then
-			boolean computedResult = false;
-			int recordsCount = 0;
-			computedResult = this.getListChunk().containsAll(c);
-
-			if (computedResult)
-				return computedResult;
-			else {
-				int collectionSize = c.size();
-				if (collectionSize > this.getMaxRecordsPerQuery())
-					recordsCount = collectionSize;
-				else
-					recordsCount = this.getMaxRecordsPerQuery();
-				int firstResult = 0;
-//	TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
-				for (;;) {
-					List ls = new ArrayList();
-					try {
-						ls = lexevsappService.query(this.getOriginalCriteria(), firstResult,this.getTargetClassName(), queryOptions);
-						if (ls.size() <= 0) // there are no more records in database
-							break;
-						computedResult = ls.contains(c);
-						if (computedResult)
-							break;
-						else
-							firstResult += recordsCount;
-					} catch (Exception ex) {
-						log.error("Exception: " + ex.getMessage());
-					}
-				}
-			}
-			return computedResult;
-		}
-	}
+//	public boolean containsAll(Collection c) {
+//		if (this.isHasAllRecords()) {
+//			return this.getListChunk().containsAll(c);
+//		} else {
+//			// find if the entire collection is there via appservice and then
+//			boolean computedResult = false;
+//			int recordsCount = 0;
+//			computedResult = this.getListChunk().containsAll(c);
+//
+//			if (computedResult)
+//				return computedResult;
+//			else {
+//				int collectionSize = c.size();
+//				if (collectionSize > this.getMaxRecordsPerQuery())
+//					recordsCount = collectionSize;
+//				else
+//					recordsCount = this.getMaxRecordsPerQuery();
+//				int firstResult = 0;
+////	TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
+//				for (;;) {
+//					List ls = new ArrayList();
+//					try {
+//						ls = lexevsappService.query(this.getOriginalCriteria(), firstResult,this.getTargetClassName(), queryOptions);
+//						if (ls.size() <= 0) // there are no more records in database
+//							break;
+//						computedResult = ls.contains(c);
+//						if (computedResult)
+//							break;
+//						else
+//							firstResult += recordsCount;
+//					} catch (Exception ex) {
+//						log.error("Exception: " + ex.getMessage());
+//					}
+//				}
+//			}
+//			return computedResult;
+//		}
+//	}
 
 	/**
 	 * @param index
 	 * @return Object at this index
 	 * 
 	 */
-	public Object get(int index) {
-		if (this.getRealSize() == -1) {
-			size();
-		}
-		if (this.isHasAllRecords()) {
-			return this.getListChunk().get(index);
-		} else {
-			// go through entire list from appservice taking into account
-			// removed objects and added objects and get that object
-			// log.debug("listChunk_ size is " + currentSize);
-			int firstRow = this.getOriginalStart();
-//TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
-
-			if ((index >= (firstRow + this.getMaxRecordsPerQuery()))
-					&& (index < this.getRealSize())) {
-				this.setOriginalStart(index);
-				try {
-
-					List ls = lexevsappService.query(this.getOriginalCriteria(), this.getOriginalStart(), this.getTargetClassName(), queryOptions);
-					this.getListChunk().clear();
-
-					this.getListChunk().addAll(ls);
-					return this.getListChunk().get(index - this.getOriginalStart());
-
-				} catch (Exception ex) {
-					log.error("Exception: " + ex.getMessage());
-				}
-			} else if (index < firstRow) {// first row is at 2003, index is 4
-				this.setOriginalStart(index);
-				try {
-					List ls1 = lexevsappService.query(this.getOriginalCriteria(), this.getOriginalStart(),this.getTargetClassName(), queryOptions);
-					this.getListChunk().clear();
-					this.getListChunk().addAll(ls1);
-					return this.getListChunk().get(index - this.getOriginalStart());
-
-				} catch (Exception ex) {
-					log.error("Exception: " + ex.getMessage());
-				}
-			} else // within the currentwindow
-			{
-				return this.getListChunk().get(index - this.getOriginalStart());
-			}
-			return new Object();
-		}
-	}
+//	public Object get(int index) {
+//		if (this.getRealSize() == -1) {
+//			size();
+//		}
+//		if (this.isHasAllRecords()) {
+//			return this.getListChunk().get(index);
+//		} else {
+//			// go through entire list from appservice taking into account
+//			// removed objects and added objects and get that object
+//			// log.debug("listChunk_ size is " + currentSize);
+//			int firstRow = this.getOriginalStart();
+////TODO ::			ApplicationService appService = ApplicationServiceProvider.getApplicationService();
+//
+//			if ((index >= (firstRow + this.getMaxRecordsPerQuery()))
+//					&& (index < this.getRealSize())) {
+//				this.setOriginalStart(index);
+//				try {
+//
+//					List ls = lexevsappService.query(this.getOriginalCriteria(), this.getOriginalStart(), this.getTargetClassName(), queryOptions);
+//					this.getListChunk().clear();
+//
+//					this.getListChunk().addAll(ls);
+//					return this.getListChunk().get(index - this.getOriginalStart());
+//
+//				} catch (Exception ex) {
+//					log.error("Exception: " + ex.getMessage());
+//				}
+//			} else if (index < firstRow) {// first row is at 2003, index is 4
+//				this.setOriginalStart(index);
+//				try {
+//					List ls1 = lexevsappService.query(this.getOriginalCriteria(), this.getOriginalStart(),this.getTargetClassName(), queryOptions);
+//					this.getListChunk().clear();
+//					this.getListChunk().addAll(ls1);
+//					return this.getListChunk().get(index - this.getOriginalStart());
+//
+//				} catch (Exception ex) {
+//					log.error("Exception: " + ex.getMessage());
+//				}
+//			} else // within the currentwindow
+//			{
+//				return this.getListChunk().get(index - this.getOriginalStart());
+//			}
+//			return new Object();
+//		}
+//	}
 
 	public QueryOptions getQueryOptions() {
 		return queryOptions;

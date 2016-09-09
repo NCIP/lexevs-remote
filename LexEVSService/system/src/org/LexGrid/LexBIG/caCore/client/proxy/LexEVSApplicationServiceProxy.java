@@ -106,9 +106,9 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 		 * whether the coding scheme itself requires a security token (determined by configuration file)
  		 */
 		if(methodName.equals("executeSecurely")) {
-			if(isDataServiceLazyLoadable(args)){
-				return invokeDataService(invocation);
-			}
+//			if(isDataServiceLazyLoadable(args)){
+//				return invokeDataService(invocation);
+//			}
 			return super.invoke(invocation);
 		}
 		else {
@@ -230,27 +230,27 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
          return paramClasses;
      }
 
- 	public Object invokeDataService(MethodInvocation invocation) throws Throwable {
-		Object value = invocation.proceed();
-		value = dataServiceProxyHelper.convertToProxy(eas, value);
-		return value;
-	}
+// 	public Object invokeDataService(MethodInvocation invocation) throws Throwable {
+//		Object value = invocation.proceed();
+//		value = dataServiceProxyHelper.convertToProxy(eas, value);
+//		return value;
+//	}
  	
  	/*
  	 * Determine if the method had any Annotations
  	 */
-    protected boolean isDataServiceLazyLoadable(Object[] args) {
-    	for(Object arg : args){
-    		if(arg instanceof Annotation[]){
-    			for(Annotation annotation : (Annotation[])arg){
-    				if(annotation instanceof DataServiceLazyLoadable){
-    					return true;
-    				}
-    			}
-    		}
-    	}
-      return false;
-    }
+//    protected boolean isDataServiceLazyLoadable(Object[] args) {
+//    	for(Object arg : args){
+//    		if(arg instanceof Annotation[]){
+//    			for(Annotation annotation : (Annotation[])arg){
+//    				if(annotation instanceof DataServiceLazyLoadable){
+//    					return true;
+//    				}
+//    			}
+//    		}
+//    	}
+//      return false;
+//    }
 
    /**
     * Returns the underlying object that the specified proxy is advising.

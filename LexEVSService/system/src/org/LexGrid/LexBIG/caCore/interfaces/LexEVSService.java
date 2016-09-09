@@ -14,4 +14,4 @@ package org.LexGrid.LexBIG.caCore.interfaces;
  * 
  * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
  */
-public interface LexEVSService extends LexEVSDistributed, LexEVSDataService {}
+public interface LexEVSService extends LexEVSDistributed {}

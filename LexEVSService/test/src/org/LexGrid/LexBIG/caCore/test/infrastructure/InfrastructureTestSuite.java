@@ -8,11 +8,10 @@
 */
 package org.LexGrid.LexBIG.caCore.test.infrastructure;
 
+import org.LexGrid.LexBIG.caCore.client.proxy.ProxyTestSuite;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
-import org.LexGrid.LexBIG.caCore.client.proxy.DataServiceProxyHelperImplTest1;
-import org.LexGrid.LexBIG.caCore.client.proxy.ProxyTestSuite;
 
 public class InfrastructureTestSuite {
     
@@ -27,7 +26,6 @@ public class InfrastructureTestSuite {
     {
         TestSuite mainSuite = new TestSuite("Tests for non-query internal classes.");
         mainSuite.addTestSuite(EVSHibernateInterceptorTest.class);
-        mainSuite.addTestSuite(DataServiceProxyHelperImplTest1.class);
         mainSuite.addTest(ProxyTestSuite.suite());
 
         return mainSuite;

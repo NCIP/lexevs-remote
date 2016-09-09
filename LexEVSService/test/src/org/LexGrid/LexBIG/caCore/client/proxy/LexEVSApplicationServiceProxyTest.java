@@ -8,17 +8,9 @@
 */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import java.lang.annotation.Annotation;
-
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
-import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDataService;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSService;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.hibernate.criterion.DetachedCriteria;
 
 public class LexEVSApplicationServiceProxyTest extends ServiceTestCase
 {
@@ -34,25 +26,25 @@ public class LexEVSApplicationServiceProxyTest extends ServiceTestCase
 		proxy = new LexEVSApplicationServiceProxy();	
 	}
 	
-	public void testIsDataServiceLazyLoadableString1() throws Exception {
-		Annotation[] annotations = CodingScheme.class.getMethod("getMappings", null).getAnnotations();
-		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-	}
-	
-	public void testIsDataServiceLazyLoadable2() throws Exception {
-		Annotation[] annotations = LexEVSDistributed.class.getMethod("getSupportedCodingSchemes", null).getAnnotations();
-		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-	}
-	
-	public void testIsDataServiceLazyLoadable3() throws Exception {
-		Annotation[] annotations = LexEVSService.class.getMethod("query", new Class[]{DetachedCriteria.class}).getAnnotations();
-		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-	}
-	
-	public void testIsDataServiceLazyLoadable4() throws Exception {
-		Annotation[] annotations = LexEVSDataService.class.getMethod("query", new Class[]{DetachedCriteria.class, QueryOptions.class}).getAnnotations();
-		assertTrue(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-	}
+//	public void testIsDataServiceLazyLoadableString1() throws Exception {
+//		Annotation[] annotations = CodingScheme.class.getMethod("getMappings", null).getAnnotations();
+//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
+//	}
+//	
+//	public void testIsDataServiceLazyLoadable2() throws Exception {
+//		Annotation[] annotations = LexEVSDistributed.class.getMethod("getSupportedCodingSchemes", null).getAnnotations();
+//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
+//	}
+//	
+//	public void testIsDataServiceLazyLoadable3() throws Exception {
+//		Annotation[] annotations = LexEVSService.class.getMethod("query", new Class[]{DetachedCriteria.class}).getAnnotations();
+//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
+//	}
+//	
+//	public void testIsDataServiceLazyLoadable4() throws Exception {
+//		Annotation[] annotations = LexEVSDataService.class.getMethod("query", new Class[]{DetachedCriteria.class, QueryOptions.class}).getAnnotations();
+//		assertTrue(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
+//	}
 	
 	public void testFindLBParameterException() throws Exception {
 		
