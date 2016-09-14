@@ -24,18 +24,18 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Categories.class)
 @IncludeCategory(IncludeForDistributedTests.class)
 @SuiteClasses({
-//	CodingSchemeExtensionResolveTest.class,
-//	CrossOntologyResolveTest.class,
-//	FocusTest.class,
-//	IntersectionTest.class,
-//	ResolveToListTest.class,
-//	RestrictToAnonymousTest.class,
-//	RestrictToAssociationsTest.class,
-//	RestrictToDirectionalNamesTest.class,
-//	RestrictToSourceCodesTest.class,
-//	RestrictToTargetCodesTest.class,
-//	RootsTest.class,
-//	SearchByRelationshipTest.class,
+	CodingSchemeExtensionResolveTest.class,
+	CrossOntologyResolveTest.class,
+	FocusTest.class,
+	IntersectionTest.class,
+	ResolveToListTest.class,
+	RestrictToAnonymousTest.class,
+	RestrictToAssociationsTest.class,
+	RestrictToDirectionalNamesTest.class,
+	RestrictToSourceCodesTest.class,
+	RestrictToTargetCodesTest.class,
+	RootsTest.class,
+	SearchByRelationshipTest.class,
 	SortGraphTest.class,
 	UnionTest.class
 	})

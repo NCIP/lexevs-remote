@@ -26,26 +26,6 @@ public class LexEVSApplicationServiceProxyTest extends ServiceTestCase
 		proxy = new LexEVSApplicationServiceProxy();	
 	}
 	
-//	public void testIsDataServiceLazyLoadableString1() throws Exception {
-//		Annotation[] annotations = CodingScheme.class.getMethod("getMappings", null).getAnnotations();
-//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-//	}
-//	
-//	public void testIsDataServiceLazyLoadable2() throws Exception {
-//		Annotation[] annotations = LexEVSDistributed.class.getMethod("getSupportedCodingSchemes", null).getAnnotations();
-//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-//	}
-//	
-//	public void testIsDataServiceLazyLoadable3() throws Exception {
-//		Annotation[] annotations = LexEVSService.class.getMethod("query", new Class[]{DetachedCriteria.class}).getAnnotations();
-//		assertFalse(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-//	}
-//	
-//	public void testIsDataServiceLazyLoadable4() throws Exception {
-//		Annotation[] annotations = LexEVSDataService.class.getMethod("query", new Class[]{DetachedCriteria.class, QueryOptions.class}).getAnnotations();
-//		assertTrue(proxy.isDataServiceLazyLoadable(new Object[]{annotations}));
-//	}
-	
 	public void testFindLBParameterException() throws Exception {
 		
 		LBParameterException lbParameterException = new LBParameterException("This is an LBParameterException test");

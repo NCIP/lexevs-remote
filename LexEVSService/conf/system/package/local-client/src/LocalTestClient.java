@@ -34,7 +34,6 @@ public class LocalTestClient {
 		LocalTestClient client = new LocalTestClient();
 	
 		client.queryLexEVSDistributed();
-//		client.queryLexEVSDataService();
 	}
 	
 	public LocalTestClient() throws Exception {
@@ -54,15 +53,4 @@ public class LocalTestClient {
 		}
 	}
 	
-//	public void queryLexEVSDataService() throws ApplicationException {
-//		LexEVSDataService dataSvc = lexevsService;
-//		CodingScheme codingScheme = new CodingScheme();		
-//		List<CodingScheme> results = dataSvc.search(CodingScheme.class, codingScheme);
-//		
-//		for(CodingScheme cs : results){
-//			System.out.println("\t\tOutput: " + "Coding Scheme: " + cs.getLocalName());
-//			System.out.println("\t\tOutput: " + "  -- Version: " + cs.getRepresentsVersion());
-//			System.out.println("\t\tOutput: " + "  -- URI: " + cs.getCodingSchemeURI());		
-//		}
-//	}
 }
