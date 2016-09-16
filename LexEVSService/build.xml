@@ -18,8 +18,8 @@
 	<property name="models.dir" value="${build.dir}/models"/>
 	<property name="scripts.dir" value="${build.dir}/build-scripts"/>
 	<property name="output.dir" value="${build.dir}/output"/>
-	<property name="writable.dir" value="${build.dir}/writable-api"/>
-	<property name="grid.dir" value="${build.dir}/grid"/>
+<!--	<property name="writable.dir" value="${build.dir}/writable-api"/>
+	<property name="grid.dir" value="${build.dir}/grid"/> -->
 	<property name="mappings.dir" value="${build.dir}/mappings"/>
 	
 	<!-- *****************************************************************
@@ -93,17 +93,17 @@
 
 		<copy tofile="output/${PROJECT_NAME}/package/remote-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
 		</copy>
-		<copy tofile="output/${PROJECT_NAME}/package/local-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
+<!--		<copy tofile="output/${PROJECT_NAME}/package/local-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
 		</copy>
 		<copy tofile="output/${PROJECT_NAME}/package/ws-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
-		</copy>	
+		</copy>	-->
 
 		<copy todir="output/${PROJECT_NAME}/package/remote-client/lib" overwrite="true">
 			<fileset dir="${basedir}/system/lib">
 				<exclude name="MSSOUserValidator.jar" />
 			</fileset>
 		</copy>
-		<copy todir="output/${PROJECT_NAME}/package/local-client/lib" overwrite="true">
+<!--		<copy todir="output/${PROJECT_NAME}/package/local-client/lib" overwrite="true">
 			<fileset dir="${basedir}/system/lib">
 				<exclude name="MSSOUserValidator.jar" />
 			</fileset>
@@ -111,8 +111,8 @@
 		<copy todir="output/${PROJECT_NAME}/package/ws-client/lib" overwrite="true">
 			<fileset dir="${basedir}/system/lib">
 				<exclude name="MSSOUserValidator.jar" />
-			</fileset>
-		</copy>
+			</fileset> 
+		</copy>-->
 			<zip destfile="output/${PROJECT_NAME}/package/client/${PROJECT_NAME}-client.zip">
 				<zipfileset dir="output/${PROJECT_NAME}/package/remote-client" prefix="${PROJECT_NAME}-client">
 					<include name="**/*" />
@@ -141,12 +141,12 @@
 					<exclude name="**/xml/**"/>
 				</fileset>
 			</copy>
-			<copy todir="${writable.dir}" overwrite="true">
+<!--			<copy todir="${writable.dir}" overwrite="true">
 				<fileset dir="${sdk_dir}/writable-api"/>
 			</copy>
 			<copy todir="${grid.dir}" overwrite="true">
 				<fileset dir="${sdk_dir}/grid"/>
-			</copy>
+			</copy> -->
 			<copy todir="${scripts.dir}" overwrite="true">
 				<fileset dir="${sdk_dir}/build-scripts"/>
 			</copy>

@@ -4,7 +4,7 @@ import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.query.cql.CQLQuery;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 import gov.nih.nci.system.query.nestedcriteria.NestedCriteriaPath;
-import gov.nih.nci.system.security.SecurityConstants;
+//import gov.nih.nci.system.security.SecurityConstants;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,7 +24,7 @@ public class ApplicationServiceMethodHelper {
 	@SuppressWarnings("unchecked")
 	public Map<String,Collection<String>> getDomainObjectName(MethodInvocation invocation) throws ApplicationException{
 
-		String methodRole=SecurityConstants.READ;
+////		String methodRole=SecurityConstants.READ;
 		String domainObjectName = "*";
 		Method method = invocation.getMethod();
 		Object[] arguments = invocation.getArguments();
@@ -83,7 +83,7 @@ public class ApplicationServiceMethodHelper {
 		}
 		Map<String, Collection<String>> securityMap = new HashMap<String, Collection<String>>();
 		Collection<String> methodRoles=new ArrayList<String>();
-		methodRoles.add(methodRole);
+//		methodRoles.add(methodRole);
 		securityMap.put(domainObjectName, methodRoles);
 		return securityMap;	
 	}

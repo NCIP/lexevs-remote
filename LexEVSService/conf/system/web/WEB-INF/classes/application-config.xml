@@ -104,16 +104,16 @@
 		<property name="connector" ref="DBConnector" />
 	</bean>
 
-	<bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
+	<!-- <bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
 		<property name="securityEnabled" value="false"/>
 		<property name="instanceLevelSecurityEnabled" value="false"/>
-		<property name="attributeLevelSecurityEnabled" value="false"/>
+		<property name="attributeLevelSecurityEnabled" value="false"/> -->
 		<!--
 		<property name="authorizationManager">
 			<bean factory-bean="userDetailsService" factory-method="authorizationManagerInstance" />
 		</property>
 		-->
-	</bean>
+<!-- 	</bean> -->
 
 	<bean id="ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="ApplicationServiceImpl" />

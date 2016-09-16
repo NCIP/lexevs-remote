@@ -47,7 +47,7 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 
 	protected HashMap<String, SecurityToken> securityToken_map = new HashMap<String, SecurityToken>();
 	
-	private ProxyHelper dataServiceProxyHelper;
+//	private ProxyHelper dataServiceProxyHelper;
   
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -257,14 +257,14 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
        return realObject;
    }
    
-   public ProxyHelper getDataServiceProxyHelper() {
-		return dataServiceProxyHelper;
-	}
-
-
-	public void setDataServiceProxyHelper(ProxyHelper dataServiceProxyHelper) {
-		this.dataServiceProxyHelper = dataServiceProxyHelper;
-	}
+//   public ProxyHelper getDataServiceProxyHelper() {
+//		return dataServiceProxyHelper;
+//	}
+//
+//
+//	public void setDataServiceProxyHelper(ProxyHelper dataServiceProxyHelper) {
+//		this.dataServiceProxyHelper = dataServiceProxyHelper;
+//	}
 
 	@Override
 	public void setApplicationService(ApplicationService as) {
