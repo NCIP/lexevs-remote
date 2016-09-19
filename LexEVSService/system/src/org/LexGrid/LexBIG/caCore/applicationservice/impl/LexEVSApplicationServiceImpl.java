@@ -8,19 +8,8 @@
 */
 package org.LexGrid.LexBIG.caCore.applicationservice.impl;
 
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.applicationservice.ApplicationException;
-import gov.nih.nci.system.applicationservice.impl.ApplicationServiceImpl;
-import gov.nih.nci.system.dao.DAO;
-import gov.nih.nci.system.dao.Request;
-import gov.nih.nci.system.dao.Response;
-import gov.nih.nci.system.query.cql.CQLQuery;
-import gov.nih.nci.system.query.hibernate.HQLCriteria;
-
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,27 +36,18 @@ import org.LexGrid.LexBIG.LexBIGService.LexBIGServiceManager;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGServiceMetadata;
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
-import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceSecurityTokenRequired;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequired;
 import org.LexGrid.LexBIG.caCore.applicationservice.annotations.LexEVSSecurityTokenRequiredForParameter;
 import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteResourceManager;
 import org.LexGrid.LexBIG.caCore.client.proxy.LexEVSListProxy;
-import org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache;
-import org.LexGrid.LexBIG.caCore.dao.orm.LexEVSDAO;
-import org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.exceptions.SelectionStrategyException;
-import org.LexGrid.LexBIG.caCore.dao.orm.translators.GridCQLToDetachedCriteria;
-import org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriteria;
-import org.LexGrid.LexBIG.caCore.dao.orm.translators.QBEPathToDetachedCriteria;
-import org.LexGrid.LexBIG.caCore.dao.orm.translators.SDKCQLToDetachedCriteria;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.security.Validator;
+import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.codingSchemes.CodingScheme;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.impl.CriteriaImpl;
 import org.lexevs.locator.LexEvsServiceLocator;
+import org.lexevs.system.service.SystemResourceService;
 import org.lexevs.system.utility.MyClassLoader;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
 import org.lexgrid.conceptdomain.impl.LexEVSConceptDomainServicesImpl;
@@ -77,6 +57,11 @@ import org.lexgrid.valuesets.impl.LexEVSPickListDefinitionServicesImpl;
 import org.lexgrid.valuesets.impl.LexEVSValueSetDefinitionServicesImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ClassUtils;
+
+import gov.nih.nci.evs.security.SecurityToken;
+import gov.nih.nci.system.applicationservice.ApplicationException;
+import gov.nih.nci.system.applicationservice.impl.ApplicationServiceImpl;
+import gov.nih.nci.system.util.ClassCache;
 
 /**
  * Main implementation class of LexEVSAPI. This class implements but the DataService
@@ -90,7 +75,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	
 	private RemoteResourceManager remoteResourceManager;
 	
-	private LexEVSClassCache classCache;
 	private static Logger log = Logger.getLogger(LexEVSApplicationServiceImpl.class.getName());
 	protected ApplicationContext appContext;
 
@@ -100,11 +84,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     private final LexBIGService lbs;
     
     private boolean updateClientProxyTarget = false;
-    
-    private NestedObjectToCriteria nestedObjectToCriteriaTranslator;
-    private GridCQLToDetachedCriteria gridCQLToDetachedCriteriaTranslator;
-    private QBEPathToDetachedCriteria qbePathToDetachedCriteriaTranslator;
-    private SDKCQLToDetachedCriteria sdkCQLToDetachedCriteriaTranslator;
 	
     private PaginationHelper paginationHelper;
     
@@ -114,16 +93,14 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
      * requiring security token for execution on a client without the LexBig environment.
      */
     private static final Class TOKEN_REQUIRED = LexEVSSecurityTokenRequired.class;
+
+    private static final String LEXBIG_SYSPROPERTY = "LG_CONFIG_FILE";
     
-    /**
-     * Annotation to indicate that this Data Service method requires a Security Token
-     */
-    private static final Class DATA_SERVICE_TOKEN_REQUIRED = DataServiceSecurityTokenRequired.class;
 	  
-	public LexEVSApplicationServiceImpl(LexEVSClassCache classCache, Validator validator) throws ApplicationException {		
+	public LexEVSApplicationServiceImpl(ClassCache classCache, Validator validator, LexEVSProperties properties) throws Exception {		
 		super(classCache);
-		this.classCache = classCache;
 		this.validator = validator;
+		System.setProperty(LEXBIG_SYSPROPERTY, properties.getLexBigConfigFileLocation());
 	
 		try {
 			this.lbs = LexBIGServiceImpl.defaultInstance();
@@ -132,8 +109,8 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		}	
 	}
 	
-	public LexEVSApplicationServiceImpl(Validator validator) throws ApplicationException {	
-		this(new LexEVSClassCache(), validator);
+	public LexEVSApplicationServiceImpl(Validator validator, LexEVSProperties properties) throws Exception {	
+		this(new ClassCache() , validator, properties);
 		log.warn("LexEVSAPI has been started without the caCORE SDK Data Services.");	
 	}
 	
@@ -216,37 +193,38 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 
     		//First check if this is a Data Service method -- if so
     		//process it with the SecurityToken map.
-    		if(isMethodDataServiceSecured(objMethod)){
-    			//If there were no QueryOptions passed in, but there are SecurityTokens
-    			//in the HashMap, we want to account for those.
-    			boolean foundQueryOptions = false;
-    			for(int j=0; j<parameterClasses.length; j++){
-    				String param = parameterClasses[j];
-    				if(param.equals(QueryOptions.class.getName())){
-    					foundQueryOptions = true;
-    					//We found the QueryOptions -- see if the SecurityTokens are null
-    					QueryOptions queryOptions = (QueryOptions)args[j];
-    					if(queryOptions.getSecurityTokens() == null){
-    						queryOptions.setSecurityTokens(tokens);
-    						args[j] = queryOptions;
-    					}
-    				}
-    			}
-    			//If there were no QueryOptions -- we can build some with the Tokens passed
-    			//in from the client, and adjust the Method that will be called.
-    			if(!foundQueryOptions){
-    				QueryOptions queryOptions = new QueryOptions();
-    				queryOptions.setSecurityTokens(tokens);
-    				Class[] adjustedParameters = (Class[])ArrayUtils.add(parameterTypes, QueryOptions.class);
-    				
-    				//adjust the method to be called
-    				objMethod = this.getClass().getMethod(methodName, adjustedParameters);
-    				
-    				//adjust the args of the method to include the QueryOptions
-    				args = ArrayUtils.add(args, queryOptions);
-    			}
-    			
-    		} else if(isMethodSecured(objMethod)) {        
+//    		if(isMethodDataServiceSecured(objMethod)){
+//    			//If there were no QueryOptions passed in, but there are SecurityTokens
+//    			//in the HashMap, we want to account for those.
+//    			boolean foundQueryOptions = false;
+//    			for(int j=0; j<parameterClasses.length; j++){
+//    				String param = parameterClasses[j];
+//    				if(param.equals(QueryOptions.class.getName())){
+//    					foundQueryOptions = true;
+//    					//We found the QueryOptions -- see if the SecurityTokens are null
+//    					QueryOptions queryOptions = (QueryOptions)args[j];
+//    					if(queryOptions.getSecurityTokens() == null){
+//    						queryOptions.setSecurityTokens(tokens);
+//    						args[j] = queryOptions;
+//    					}
+//    				}
+//    			}
+//    			//If there were no QueryOptions -- we can build some with the Tokens passed
+//    			//in from the client, and adjust the Method that will be called.
+//    			if(!foundQueryOptions){
+//    				QueryOptions queryOptions = new QueryOptions();
+//    				queryOptions.setSecurityTokens(tokens);
+//    				Class[] adjustedParameters = (Class[])ArrayUtils.add(parameterTypes, QueryOptions.class);
+//    				
+//    				//adjust the method to be called
+//    				objMethod = this.getClass().getMethod(methodName, adjustedParameters);
+//    				
+//    				//adjust the args of the method to include the QueryOptions
+//    				args = ArrayUtils.add(args, queryOptions);
+//    			}
+//    			
+//    		} else 
+    		if(isMethodSecured(objMethod)) {        
     			int index = -1;
     			index = isMethodArgumentSecured(objMethod);	          
     			if(index >= 0) {
@@ -292,21 +270,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
         }
     }
      
-     /**
-      * Returns true if the given method or class is marked TOKEN_REQUIRED.
-      *
-      * @param object the object
-      *
-      * @return true, if checks if is client safe
-      */@SuppressWarnings("unchecked")
-     private boolean isMethodDataServiceSecured(Object object) {
-         if (object instanceof Method) {
-             return ((Method)object).isAnnotationPresent(DATA_SERVICE_TOKEN_REQUIRED);
-         }
-         else {
-             return ((Class)object).isAnnotationPresent(DATA_SERVICE_TOKEN_REQUIRED);
-         }
-     }
      
      /**
       * Returns true if the given method or class is marked TOKEN_REQUIRED.
@@ -345,197 +308,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     	throw new IllegalStateException();
 	}
     
-    @DataServiceSecurityTokenRequired public List<Object> getAssociation(Object source, String associationName, QueryOptions queryOptions) throws ApplicationException {	
-    	List<Object> returnList = new ArrayList();
 
-    	LexEVSListProxy list = (LexEVSListProxy) this.search(source.getClass(), source, associationName, queryOptions);
-    	List<Object> searchReturnList = list.getListChunk();
-    	
-    	if(searchReturnList.size() > 1){
-    		log.warn("More than one association returned -- example object is ambiguous");
-    	}
-
-    	for (Object obj : searchReturnList){
-    		Class searchClass = obj.getClass();
-
-    		while(searchClass != null){
-    			try {
-    				Field[] fields = searchClass.getDeclaredFields();
-    				for(Field field : fields){
-    					if(field.getName().equals(associationName)){
-    						field.setAccessible(true); 
-    						Object fieldValue = field.get(obj);
-    						returnList.add(fieldValue);
-    					}
-    				}
-    			} catch (Exception e) {
-    				throw new ApplicationException(e);
-    			}			
-    			searchClass = searchClass.getSuperclass();
-    		}
-    	}   	   	
-    	return returnList;
-    }
-	
-    @DataServiceSecurityTokenRequired public List<Object> getAssociation(Object source, String associationName) throws ApplicationException {		
-    	return getAssociation(source, associationName, new QueryOptions());
-    }
-
-    @DataServiceSecurityTokenRequired public <E> List<E> search(Class targetClass, Object obj, String eagerFetchAssociation, QueryOptions queryOptions) throws ApplicationException {
-    	DetachedCriteria crit = nestedObjectToCriteriaTranslator.translate(targetClass, obj, eagerFetchAssociation);
-		return query(crit, queryOptions);
-    }   
-       
-    @DataServiceSecurityTokenRequired public <E> List<E> search(Class targetClass, Object obj) throws ApplicationException {
-		return search(targetClass, obj, null);
-	}
-    
-    @DataServiceSecurityTokenRequired public <E> List<E> search(Class targetClass, Object obj, QueryOptions queryOptions) throws ApplicationException {
-    	DetachedCriteria crit = nestedObjectToCriteriaTranslator.translate(targetClass, obj);
-    	return query(crit, queryOptions);
-	}
-    
-    @DataServiceSecurityTokenRequired public <E> List<E> search(Class targetClass, List objList) throws ApplicationException {
-    	return search(targetClass, objList, null);
-    }
-    
-    @DataServiceSecurityTokenRequired public <E> List<E> search(Class targetClass, List objList, QueryOptions queryOptions) throws ApplicationException {
-    	DetachedCriteria crit = nestedObjectToCriteriaTranslator.translate(targetClass, objList);
-    	return query(crit, queryOptions);
-    }
-
-    @DataServiceSecurityTokenRequired public <E> List<E> search(String path, Object obj, QueryOptions queryOptions) throws ApplicationException {
-		DetachedCriteria crit = qbePathToDetachedCriteriaTranslator.translate(path, obj);
-		return query(crit, queryOptions);
-	}
-		
-	@DataServiceSecurityTokenRequired public <E> List<E> search(String path, Object obj) throws ApplicationException {
-		return search(path, obj, new QueryOptions());
-	}
-
-	@DataServiceSecurityTokenRequired public <E> List<E> query(CQLQuery cqlQuery, String targetClassName, QueryOptions queryOptions)
-			throws ApplicationException {
-		//NOTE: 'targetClassName' is NOT USED!!!!
-		return query(cqlQuery, queryOptions);		
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(CQLQuery cqlQuery, String targetClassName)
-			throws ApplicationException {
-		//NOTE: 'targetClassName' is NOT USED!!!!
-		return query(cqlQuery);
-		
-	}
-
-	@DataServiceSecurityTokenRequired public <E> List<E> query(CQLQuery cqlQuery, QueryOptions queryOptions) throws ApplicationException {
-		DetachedCriteria crit = sdkCQLToDetachedCriteriaTranslator.translate(cqlQuery);
-		return query(crit, queryOptions);
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(CQLQuery cqlQuery) throws ApplicationException {
-		return query(cqlQuery, new QueryOptions());
-	}
-
-	@DataServiceSecurityTokenRequired public <E> List<E> query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery)
-			throws ApplicationException {
-		return query(cqlQuery, new QueryOptions());	
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery, QueryOptions queryOptions)
-			throws ApplicationException {
-		DetachedCriteria crit = gridCQLToDetachedCriteriaTranslator.translate(cqlQuery);	
-		return query(crit, queryOptions);	
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(DetachedCriteria detachedCriteria, String targetClassName) throws ApplicationException {
-		return query(detachedCriteria, targetClassName, new QueryOptions());
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(DetachedCriteria detachedCriteria, String targetClassName, QueryOptions queryOptions) throws ApplicationException {
-		return privateQuery(detachedCriteria, targetClassName, queryOptions);
-	}
-	
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(DetachedCriteria detachedCriteria) throws ApplicationException {
-		return query(detachedCriteria, new QueryOptions());
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(DetachedCriteria detachedCriteria, QueryOptions queryOptions) throws ApplicationException {
-		CriteriaImpl crit = (CriteriaImpl)detachedCriteria.getExecutableCriteria(null);
-		String targetClassName = crit.getEntityOrClassName();
-		return privateQuery(detachedCriteria, targetClassName, queryOptions);
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(HQLCriteria hqlCriteria, String targetClassName) throws ApplicationException {
-		return query(hqlCriteria, targetClassName, new QueryOptions());
-	}	
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(HQLCriteria hqlCriteria, String targetClassName, QueryOptions queryOptions) throws ApplicationException {
-		return privateQuery(hqlCriteria, targetClassName, queryOptions);
-	}	
-
-	@DataServiceSecurityTokenRequired public <E> List<E> query(HQLCriteria hqlCriteria) throws ApplicationException {
-		return query(hqlCriteria, new QueryOptions());
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(HQLCriteria hqlCriteria, QueryOptions queryOptions) throws ApplicationException {
-		String hql = hqlCriteria.getHqlString();
-		
-		String upperHQL = hql.toUpperCase();
-		int index = upperHQL.indexOf(" FROM ");
-		
-		hql = hql.substring(index + " FROM ".length()).trim()+" ";
-		String targetClassName = hql.substring(0,hql.indexOf(' ')).trim();
-		return privateQuery(hqlCriteria, targetClassName, queryOptions);
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(Object criteria, Integer firstRow, String targetClassName) throws ApplicationException {
-		return query(criteria, firstRow, targetClassName, new QueryOptions());
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> query(Object criteria, Integer firstRow, String targetClassName, QueryOptions queryOptions) throws ApplicationException {
-		Request request = new Request(criteria);
-		
-		request.setIsCount(Boolean.valueOf(false));
-		request.setFirstRow(firstRow);
-		request.setDomainObjectName(targetClassName);
-
-		Response response = query(request, queryOptions);
-		List results = (List) response.getResponse();
-
-		return results;
-	}
-	
-	@DataServiceSecurityTokenRequired public <E> List<E> search(String path, List objList) throws ApplicationException {
-		return search(path, objList, new QueryOptions());
-	}
-
-	@DataServiceSecurityTokenRequired public <E> List<E> search(String path, List objList, QueryOptions queryOptions) throws ApplicationException {
-		DetachedCriteria crit = qbePathToDetachedCriteriaTranslator.translate(path, objList);
-		return query(crit, queryOptions);
-	}
-	
-	@DataServiceSecurityTokenRequired public Integer getQueryRowCount(Object criteria, String targetClassName) throws ApplicationException {
-		return getQueryRowCount(criteria, targetClassName, new QueryOptions());
-	}
-
-	@DataServiceSecurityTokenRequired public Integer getQueryRowCount(Object criteria, String targetClassName, QueryOptions queryOptions) throws ApplicationException {
-		Request request = new Request(criteria);
-		request.setIsCount(Boolean.TRUE);
-		request.setDomainObjectName(targetClassName);
-
-		try {
-			int totalCount = 0;
-			
-			List<LexEVSDAO> daoList = getDOAListForQuery(request, queryOptions);
-			for (LexEVSDAO dao : daoList) {
-				Response queryResponse = query(request, dao);
-				totalCount += queryResponse.getRowCount();
-			}
-			return totalCount;
-		} catch (Exception e) {
-			throw new ApplicationException(e);
-		} 
-	}	
 	
 	protected <E> List<E> convertToListProxy(Collection originalList, Object query, String classname, Integer start, QueryOptions options)
 	{
@@ -561,72 +334,9 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		
 		return resultList;
 	}
-	
-	protected <E> List<E> privateQuery(Object criteria, String targetClassName, QueryOptions queryOptions) throws ApplicationException 
-	{
-			Request request = new Request(criteria);
-			request.setIsCount(Boolean.FALSE);
-			request.setFirstRow(0);
-			request.setDomainObjectName(targetClassName);
-
-			Response response = query(request, queryOptions);
-			List results = (List) response.getResponse();
-
-			List resultList = convertToListProxy(results,criteria, targetClassName, 0, queryOptions);
-			log.debug("response.getRowCount(): " + response.getRowCount());
-
-			return resultList;		
-	}	
 		
-	protected Response query(Request request, QueryOptions options) throws ApplicationException {
-		List<LexEVSDAO> daoList;
-		try {
-			daoList = getDOAListForQuery(request, options);
-		} catch (SelectionStrategyException e) {
-			throw new ApplicationException(e);
-		}
-		if(daoList == null || daoList.size() == 0){
-			throw new ApplicationException("No information could be retrieved. Either the information you" +
-					" have requested is not available in any loaded Coding Scheme on the system, or you have" +
-					" restricted your query to a Coding Scheme that is not applicable for this query.");
-		}
-		//If this was narrowed to one CodingScheme -- we can set this up the normal way
-		if(daoList.size() == 1){
-			try {
-				return query(request, daoList.get(0), options.isLazyLoad(), options.getResultPageSize());
-			} catch (Exception e) {
-				throw new ApplicationException("Error querying DAO.", e);
-			}
-		} else {
-			//We can't Lazy Load from Multiple Coding Schemes -- throw an error if trying to.
-			if(options !=  null && options.isLazyLoad()){
-				throw new ApplicationException("Cannot Lazy Load without narrowing down to a single Coding Scheme. " +
-						"Please either set Lazy Load to 'false' or specify a Coding Scheme and Version in the Query Options");
-			}
-			try {		
-				return paginationHelper.getResponseFromMultipleCodingSchemeQuery(request, daoList, options.getResultPageSize());
-			} catch (Exception e) {
-				throw new ApplicationException(e);
-			}
-		}
-	}
+		
 
-
-	private List<LexEVSDAO> getDOAListForQuery(Request request, QueryOptions queryOptions) throws SelectionStrategyException {
-		List<LexEVSDAO> daoList = classCache.getDaoList(request, queryOptions);
-		return daoList;
-	}
-	
-	protected Response query(Request request, LexEVSDAO dao) throws Exception {
-		return query(request, dao, true, -1);
-	}
-	
-	protected Response query(Request request, LexEVSDAO dao, boolean lazyLoad, int resultPageSize) throws Exception {
-		LexEVSClassCache classCache = this.getClassCache();
-		request.setClassCache(classCache);	
-		Response response = dao.query(request, lazyLoad, resultPageSize);		
-		return response;
-	}
 	
 	  /**
      * Gets the coding scheme concepts.
@@ -795,52 +505,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		return LexEVSPickListDefinitionServicesImpl.defaultInstance();
 	}
 
-	@Override
-	protected LexEVSClassCache getClassCache() {
-		return this.classCache;
-	}
-
-	@Override
-	protected DAO getDAO(String classname) throws ApplicationException {
-		throw new RuntimeException("Not supported for LexEVS DataService");
-	}
-
-	public NestedObjectToCriteria getNestedObjectToCriteriaTranslator() {
-		return nestedObjectToCriteriaTranslator;
-	}
-
-	public void setNestedObjectToCriteriaTranslator(
-			NestedObjectToCriteria nestedObjectToCriteriaTranslator) {
-		this.nestedObjectToCriteriaTranslator = nestedObjectToCriteriaTranslator;
-	}
-
-	public GridCQLToDetachedCriteria getGridCQLToDetachedCriteriaTranslator() {
-		return gridCQLToDetachedCriteriaTranslator;
-	}
-
-	public void setGridCQLToDetachedCriteriaTranslator(
-			GridCQLToDetachedCriteria gridCQLToDetachedCriteriaTranslator) {
-		this.gridCQLToDetachedCriteriaTranslator = gridCQLToDetachedCriteriaTranslator;
-	}
-
-	public QBEPathToDetachedCriteria getQbePathToDetachedCriteriaTranslator() {
-		return qbePathToDetachedCriteriaTranslator;
-	}
-
-	public void setQbePathToDetachedCriteriaTranslator(
-			QBEPathToDetachedCriteria qbePathToDetachedCriteriaTranslator) {
-		this.qbePathToDetachedCriteriaTranslator = qbePathToDetachedCriteriaTranslator;
-	}
-
-	public SDKCQLToDetachedCriteria getSdkCQLToDetachedCriteriaTranslator() {
-		return sdkCQLToDetachedCriteriaTranslator;
-	}
-
-	public void setSdkCQLToDetachedCriteriaTranslator(
-			SDKCQLToDetachedCriteria sdkCQLToDetachedCriteriaTranslator) {
-		this.sdkCQLToDetachedCriteriaTranslator = sdkCQLToDetachedCriteriaTranslator;
-	}
-
+	
 	public PaginationHelper getPaginationHelper() {
 		return paginationHelper;
 	}

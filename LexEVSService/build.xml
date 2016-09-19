@@ -190,9 +190,9 @@
 				<fileset dir="${basedir}/system"/>
 			</copy>
 			
-			<copy todir="${mappings.dir}" overwrite="true">
+<!--			<copy todir="${mappings.dir}" overwrite="true">
 				<fileset dir="${basedir}/mappings"/>
-			</copy>
+			</copy>  -->
 			
 		</target>
 		<!--**************************************************

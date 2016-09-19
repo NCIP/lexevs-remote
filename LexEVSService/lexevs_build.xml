@@ -45,9 +45,9 @@
 	*** Compiles the generated beans 
 	*********************************************************************** -->
 	<target name="compile-beans" description="Compiles the generated beans" >
-		<copy todir="${output.src.dir}" overwrite="true"> 
+		<!-- <copy todir="${output.src.dir}" overwrite="true"> 
 			<fileset dir="${basedir}/mappings"/>	
-		</copy>
+		</copy> -->
 		<replace dir="${output.src.dir}">
 		  <include name="*.hbm.xml"/>
 		  	 <replacetoken>table="</replacetoken>

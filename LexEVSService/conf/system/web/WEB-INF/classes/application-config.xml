@@ -5,7 +5,7 @@
 
 	
 	<!-- Bean Definitions -->
-	<bean name="ClassCache" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache" singleton="true">
+	<!-- <bean name="ClassCache" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.LexEVSClassCache" singleton="true">
 		<constructor-arg ref="DAOListFactory" index="0"/>
 		<property name="selectionStrategies">
 			<list>				
@@ -15,12 +15,12 @@
 			</list>
 		</property>		
 	</bean>
-	
-	<bean name="TokenSecurityStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.TokenSecurityStrategy">
+	 -->
+	<!-- <bean name="TokenSecurityStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.TokenSecurityStrategy">
 		<property name="validator" ref="SecurityValidator"/>
-	</bean>
+	</bean> -->
 	
-	<bean name="HistoryOrCodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.HistoryOrCodingSchemeStrategy">
+	<!-- <bean name="HistoryOrCodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.HistoryOrCodingSchemeStrategy">
 		<property name="historyClasses">
 			<list>
 				<value>org.LexGrid.versions.EditHistory</value>
@@ -30,11 +30,11 @@
 				<value>org.LexGrid.versions.SystemRelease</value>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 	
-	<bean name="CodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.CodingSchemeSelectionStrategy">
+	<!-- <bean name="CodingSchemeSelectionStrategy" class="org.LexGrid.LexBIG.caCore.dao.orm.selectionStrategy.CodingSchemeSelectionStrategy">
 		<property name="dbConnector" ref="DBConnector"/>
-	</bean>
+	</bean> -->
 	
 	<bean name="LexEVSProperties" class="org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties"/>
 	
@@ -42,13 +42,14 @@
 			<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
 	</bean>
 
-	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" singleton="true">
-		<constructor-arg ref="ClassCache" index="0"></constructor-arg>
-		<constructor-arg ref="SecurityValidator" index="1"></constructor-arg>
-		<property name="nestedObjectToCriteriaTranslator" ref="NestedObjectToCriteria"/>
+	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" singleton="true" depends-on="LexEVSProperties">
+	<!-- 	<constructor-arg ref="ClassCache" index="0"></constructor-arg> -->
+		<constructor-arg ref="SecurityValidator" index="0" ></constructor-arg>
+		<constructor-arg ref="LexEVSProperties" index="1"></constructor-arg>
+		<!-- <property name="nestedObjectToCriteriaTranslator" ref="NestedObjectToCriteria"/>
 		<property name="gridCQLToDetachedCriteriaTranslator" ref="GridCQLToDetachedCriteria"/>
 		<property name="qbePathToDetachedCriteriaTranslator" ref="QBEPathToDetachedCriteria"/>
-		<property name="sdkCQLToDetachedCriteriaTranslator" ref="SDKCQLToDetachedCriteria"/>
+		<property name="sdkCQLToDetachedCriteriaTranslator" ref="SDKCQLToDetachedCriteria"/> -->
 		<property name="paginationHelper" ref="PaginationHelper"/>
 		<property name="remoteResourceManager" ref="remoteResourceManager"/>
 	</bean>
@@ -58,9 +59,9 @@
 		<property name="enableRemoteShell" value="false"/>
 	</bean>
 
-	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
+	<!-- <bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
 		<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
-	</bean>
+	</bean> -->
 
 	<bean name="WebSystemProperties" class="java.util.Properties">
 		<constructor-arg>
@@ -83,11 +84,11 @@
 		<property name="maxResultsPerQuery" ref="maxResultsPerQuery"/>
 	</bean>
 
-	<bean name="GridCQLToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.GridCQLToDetachedCriteria" singleton="true">
+	<!-- <bean name="GridCQLToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.GridCQLToDetachedCriteria" singleton="true">
 		<property name="prefixCastorUnderscore" value="true"/>
-	</bean>
+	</bean> -->
 	
-	<bean name="NestedObjectToCriterion" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriterion" singleton="true"/>
+	<!-- <bean name="NestedObjectToCriterion" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriterion" singleton="true"/>
 	<bean name="SDKCQLToDetachedCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.SDKCQLToDetachedCriteria" singleton="true"/>
 	
 	<bean name="NestedObjectToCriteria" class="org.LexGrid.LexBIG.caCore.dao.orm.translators.NestedObjectToCriteria" singleton="true">
@@ -102,7 +103,7 @@
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 		<property name="resultCountPerQuery" ref="maxResultsPerQuery" />
 		<property name="connector" ref="DBConnector" />
-	</bean>
+	</bean> -->
 
 	<!-- <bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
 		<property name="securityEnabled" value="false"/>

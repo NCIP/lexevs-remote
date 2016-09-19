@@ -8,27 +8,21 @@
 */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.client.proxy.ApplicationServiceProxy;
-import gov.nih.nci.system.client.proxy.ProxyHelper;
-
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import net.sf.cglib.proxy.Enhancer;
-
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
-import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceLazyLoadable;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.log4j.Logger;
 import org.springframework.aop.framework.Advised;
+
+import gov.nih.nci.evs.security.SecurityToken;
+import gov.nih.nci.system.applicationservice.ApplicationService;
+import gov.nih.nci.system.client.proxy.ApplicationServiceProxy;
+import net.sf.cglib.proxy.Enhancer;
 
 /**
  * Application Service proxy for LexEVS.
