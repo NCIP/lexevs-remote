@@ -13,10 +13,7 @@
 	<property file="${codegen.dir}/build.properties" prefix="codegen"  />
 	<property file="${codegen.validator.dir}/build.properties" prefix="validator"  />
 	<property file="${system.dir}/build.properties" prefix="system"  />
-<!--	<property file="${writable-api.dir}/build.properties" prefix="writable-api"  /> -->
 	<property file="${security.dir}/build.properties" prefix="security"  />
-<!--	<property file="${grid-remoting.dir}/build.properties" prefix="grid-remoting"  />
-	<property file="${grid-jaas.dir}/build.properties" prefix="grid-jaas"  /> -->
 	<!--***********************************************************************
 	*** Import utility script
 	*********************************************************************** -->
@@ -427,15 +424,7 @@
 		<mkdir dir="${package.client.remote.dir}"/>
 		<mkdir dir="${package.client.remote.lib.dir}"/>
 		<mkdir dir="${package.client.remote.conf.dir}"/>
-<!--		<mkdir dir="${package.client.local.dir}"/>
-		<mkdir dir="${package.client.local.lib.dir}"/>-->
 		<mkdir dir="${package.system.dir}"/>
-<!--		<mkdir dir="${package.client.ws.dir}"/>
-		<mkdir dir="${package.client.ws.lib.dir}"/>
-		<mkdir dir="${package.client.ws.conf.dir}"/>
-		<mkdir dir="${package.client.grid-jaas.dir}"/>
-		<mkdir dir="${package.client.grid-jaas.lib.dir}"/>
-		<mkdir dir="${package.client.grid-jaas.conf.dir}"/> -->
 	
 		<copy todir="${output.conf.dir}" overwrite="true">
 			<fileset dir="${conf.dir}">
@@ -575,10 +564,6 @@
 		<ant antfile="${codegen.dir}\build.xml" target="clean-all" inheritall="false" inheritrefs="false" />
 		<ant antfile="${codegen.validator.dir}\build.xml" target="clean-all" inheritall="false" inheritrefs="false" />
 		<ant antfile="${system.dir}\build.xml"  target="clean-all" inheritall="false" inheritrefs="false" />
-<!--		<ant antfile="${security.dir}\build.xml"  target="clean-all" inheritall="false" inheritrefs="false" />
-		<ant antfile="${writable-api.dir}\build.xml"  target="clean-all" inheritall="false" inheritrefs="false" />
-		<ant antfile="${grid-remoting.dir}\build.xml"  target="clean-all" inheritall="false" inheritrefs="false" />
-		<ant antfile="${grid-jaas.dir}\build.xml"  target="clean-all" inheritall="false" inheritrefs="false" /> -->
 	</target>
 	
 	<target name="clean-junit" depends="prepare-condition-clean-junit" if="prepare-required-clean-junit">	
@@ -642,53 +627,7 @@
 		<ant antfile="${system.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
 	</target>
 
-	<!--	<target name="prepare-condition-writable-api" >
-		<SDKecho message="${ant.project.name}: Checking the condition for writable api project build"/>
-		<condition property="prepare-required-writable-api">
-			<and>
-				<not><available file="${writable-api.dir}/${writable-api.dist.dir}/${writable-api.file.output.core.writable.name}"/></not>
-				<not><available file="${writable-api.dir}/${writable-api.dist.dir}/${writable-api.file.output.client.writable.name}"/></not>
-			</and>
-		</condition>
-	</target>
-
-	<target name="prepare-writable-api" depends="prepare-condition-writable-api" if="prepare-required-writable-api">
-		<SDKecho message="${ant.project.name}: Preparing the writable api project"/>
-		<ant antfile="${writable-api.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
-	</target>
-	
-	<target name="prepare-condition-grid-remoting" >
-		<SDKecho message="${ant.project.name}: Checking the condition for grid-remoting project build"/>
-		<condition property="prepare-required-grid-remoting">
-			<and>
-				<not><available file="${grid-remoting.dir}/${grid-remoting.dist.dir}/${grid-remoting.file.output.remoting.name}"/></not>
-			</and>
-		</condition>
-	</target>
-
-	<target name="prepare-grid-remoting" depends="prepare-condition-grid-remoting" if="prepare-required-grid-remoting">
-		<SDKecho message="${ant.project.name}: Preparing the grid-remoting project"/>
-		<ant antfile="${grid-remoting.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
-	</target>
-
-	<target name="prepare-condition-grid-jaas" >
-		<SDKecho message="${ant.project.name}: Checking the condition for grid-jaas project build"/>
-		<condition property="prepare-required-grid-jaas">
-			<and>
-				<not><available file="${grid-jaas.dir}/${grid-jaas.dist.dir}/${grid-jaas.file.output.jaas.name}"/></not>
-				<not><available file="${grid-jaas.dir}/${grid-jaas.dist.dir}/${grid-jaas.file.output.jaas.executor.name}"/></not>
-				<not><available file="${grid-jaas.dir}/${grid-jaas.dist.dir}/${grid-jaas.file.output.jaas.jndibinder.name}"/></not>
-			</and>
-		</condition>
-	</target>
-
-	<target name="prepare-grid-jaas" depends="prepare-condition-grid-jaas" if="prepare-required-grid-jaas">
-		<SDKecho message="${ant.project.name}: Preparing the grid-jaas project"/>
-		<ant antfile="${grid-jaas.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
-	</target> -->
-
 	<target name="prepare" depends="prepare-codegen,prepare-system	"/>
-	<!--,prepare-writable-api,prepare-grid-remoting,prepare-grid-jaas -->
 
 
 	<!--***********************************************************************
@@ -770,10 +709,6 @@
 				<include name="${system.file.output.client.name}"/>
 				<include name="${security.file.output.security.name}"/>
 			</fileset>
-<!--			<fileset dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
-				<exclude name="${read-api-exclude-list-remote-client}"/>
-			</fileset>
-			<fileset dir="${grid-remoting.dir}\${grid-remoting.dist.dir}" includes="*.jar"/>-->
 			
 			<fileset dir="${system.dir}\${system.lib.dir}">
 				<include name="${system.file.output.client.name}"/>
@@ -802,64 +737,6 @@
 		</copy>
 	</target>
 
-<!--	<target name="package-local-client" depends="prepare,package-codegen-artifacts">
-		<SDKecho message="${ant.project.name}: Packaging the local client"/>
-		<copy todir="${package.client.local.lib.dir}">
-			<fileset dir="${system.dir}\${system.dist.dir}">
-				<include name="${system.file.output.client.name}"/>
-				<include name="${system.file.output.core.name}"/>
-				<include name="${security.file.output.security.name}"/>
-			</fileset>
-			<fileset dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
-				<exclude name="${read-api-exclude-list}"/>
-			</fileset>
-			<fileset dir="${system.dir}\${system.lib.dir}">
-				<include name="${system.file.output.client.name}"/>
-				<include name="acegi*.*"/>
-				<include name="asm*.*"/>
-				<include name="antlr*.*"/>
-				<include name="c3p0*.*"/>
-				<include name="cglib*.*"/>
-				<include name="commons-codec*.*"/>
-				<include name="commons-collection*.*"/>
-				<include name="commons-logging*.*"/>
-				<include name="csmapi*.*"/>
-				<include name="clm*.*"/>
-				<include name="dom4j*.*"/>
-				<include name="ehcache*.*"/>
-				<include name="hibernate*.*"/>
-				<include name="jta*.*"/>	
-				<include name="jdom*.*"/>	
-				<include name="log4j*.*"/>
-				<include name="mysql*.*"/>
-				<include name="ojdbc*.*"/>
-				<include name="spring*.*"/>
-				<include name="cog-jglobus*.*"/>
-				<include name="cog-axis*.*"/>
-				<include name="caGrid*.*"/>
-				<include name="axis*.*"/>
-				<include name="jaxrpc*.*"/>
-				<include name="commons-discovery*.*"/>
-			</fileset>
-			<fileset dir="${build.jar.dir}" includes="${bean.file}" />
-			<fileset dir="${build.jar.dir}" includes="${orm.file}" />
-		</copy>
-		<copy todir="${package.client.local.dir}">
-			<fileset dir="${system.config.client.local.dir}"/>
-		</copy>
-		<copy todir="${package.client.local.conf.dir}">
-			<fileset dir="${system.config.web.classes.dir}">
-				<include name="${application.config.file}"/>
-				<include name="${application.config.security.file}"/>
-			</fileset>
-			<fileset dir="${output.src.dir}">
-				<include name="${csm.security.config.file}"/>
-				<include name="${csm.ehcache.file}"/>
-				<include name="${clm.object.state.logger.config}"/>
-			</fileset>
-		</copy>
-	</target>	-->
-
 	<target name="package-webapp" depends="prepare,package-codegen-artifacts">
 		<SDKecho message="${ant.project.name}: Packaging the webapp"/>
 		<war destfile="${package.system.dir}\${PROJECT_NAME}.war" webxml="${build.conf.web-inf.dir}\web.xml">
@@ -880,7 +757,6 @@
 				<exclude name="xercesImpl*.*"/>
 				<exclude name="cog*.*"/>
 			</lib>
-	<!--		<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.*" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/> -->
 			<fileset dir="${build.conf.system.web.dir}">
 				<include name="**/*"/>
 				<exclude name="**/web.xml"/>
@@ -902,84 +778,12 @@
 			</webinf>
 		</war>
 	</target>	
-
-<!--	<target name="package-grid-login-service" depends="prepare">
-		<SDKecho message="${ant.project.name}: Packaging the Grid Login Service application"/>
-		<war destfile="${package.system.dir}\${SDK_GRID_LOGIN_SERVICE_NAME}.war" webxml="${system.config.grid.loginService.webinf.dir}\web.xml">
-			<manifest>
-				<attribute name="Generated-By" value="caCORE SDK Code Generator"/>
-				<attribute name="Version" value="${VERSION}"/>
-			</manifest>
-			<lib dir="${grid-jaas.dir}\${grid-jaas.lib.dir}" includes="*.jar">
-				<exclude name="${server-exclude-commons-logging}"/>		
-				<exclude name="${server-exclude-log4j}"/>
-				<exclude name="cog-jglobus*.*"/>				
-				<exclude name="cog-tomcat*.*"/>				
-				<exclude name="cryptix*.*"/>				
-				<exclude name="jce-jdk*.*"/>				
-				<exclude name="puretls*.*"/>
-				<exclude name="xml-api*.*"/>
-				<exclude name="xercesImpl*.*"/>
-				<exclude name="jgss*.*"/>
-			</lib>
-			<lib dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" includes="*.jar" excludes="${grid-jaas.file.output.jaas.jndibinder.name}"/>
-			<fileset dir="${system.config.grid.loginService.dir}">
-				<include name="**/*"/>
-				<exclude name="**/web.xml"/>
-			</fileset>
-		</war>
-	</target>	
-	
-	<target name="package-ws-client" depends="prepare,package-codegen-artifacts">
-		<SDKecho message="${ant.project.name}: Packaging the Web Service client"/>
-		<copy todir="${package.client.ws.lib.dir}">
-			<fileset dir="${system.dir}\${system.lib.dir}">
-				<include name="axis*.*"/>
-				<include name="commons-discovery*.*"/>
-				<include name="commons-logging*.*"/>
-				<include name="jaxrpc*.*"/>
-				<include name="saaj*.*"/>
-				<include name="wsdl4j*.*"/>
-			</fileset>
-			<fileset dir="${build.jar.dir}" includes="${bean.file}" />
-		</copy>
-		<copy todir="${package.client.ws.dir}">
-			<fileset dir="${system.config.client.ws.dir}"/>
-		</copy>
-	</target>	
-
-	<target name="package-grid-jaas-client" depends="prepare">
-		<SDKecho message="${ant.project.name}: Packaging the Grid JAAS Module"/>
-		<copy todir="${package.client.grid-jaas.lib.dir}">
-			<fileset dir="${grid-jaas.dir}\${grid-jaas.lib.dir}"/>
-			<fileset dir="${grid-jaas.dir}\${grid-jaas.dist.dir}" >
-				<include name="**/*.jar" />
-				<exclude name="${grid-jaas.file.output.jaas.jndibinder.name}"/>
-				<exclude name="xercesImpl*.*"/>
-			</fileset>
-		</copy>
-		<copy todir="${package.client.grid-jaas.dir}">
-			<fileset dir="${system.config.client.grid-jaas.dir}"/>
-		</copy>
-		<copy todir="${package.client.grid-jaas.conf.dir}">
-			<fileset dir="${system.config.grid.loginService.web.classes.dir}" includes="*.*" excludes="grid-remote*.*"/>
-		</copy>
-	</target>	-->
 		
 	<target name="package-server" depends="init">
 		<SDKecho message="${ant.project.name}: Packaging the server libraries"/>
 		<mkdir dir="${package.client.jboss.dir}/server/default/lib"/>
 		
 		<copy todir="${package.client.jboss.dir}/server/default/lib">
-<!--			<fileset dir="${grid-jaas.dir}\${grid-jaas.lib.dir}">
-				<include name="cog-jglobus*.*"/>
-				<include name="cog-tomcat*.*"/>
-				<include name="cog-axis*.*"/>
-				<include name="cryptix*.*"/>
-				<include name="jce-jdk*.*"/>
-				<include name="puretls*.*"/>
-				<include name="xml-apis*.*"/>
-			</fileset> -->
 			<fileset dir="${system.dir}\${system.lib.dir}">
 				<include name="ojdbc*.*"/>
 				<include name="mysql*.*"/>
@@ -994,45 +798,11 @@
 		<mkdir dir="${package.client.tomcat.dir}/conf/Catalina/localhost"/>
 		
 		<copy todir="${package.client.tomcat.dir}/common/endorsed">
-			<!--			<fileset dir="${grid-jaas.dir}\${grid-jaas.lib.dir}">
-				<include name="xalan*.*"/>
-				<include name="xml-apis*.*"/>
-				<include name="xercesImpl*.*"/>
-			</fileset> 
-		</copy>
-		<copy todir="${package.client.tomcat.dir}/common/lib">
-			<fileset dir="${grid-jaas.dir}\${grid-jaas.lib.dir}">
-				<include name="cog-jglobus*.*"/>
-				<include name="cog-axis*.*"/>
-				<include name="cryptix*.*"/>
-				<include name="jce-jdk*.*"/>
-				<include name="puretls*.*"/>
-				<include name="xml-apis*.*"/>
-				<include name="jgss*.*"/>
-				<include name="log4j*.*"/>
-			</fileset>-->
 			<fileset dir="${system.dir}\${system.lib.dir}">
 				<include name="ojdbc*.*"/>
 				<include name="mysql*.*"/>
 			</fileset>
-	<!--		<fileset dir="${grid-jaas.dir}\${grid-jaas.dist.dir}">
-				<include name="${grid-jaas.file.output.jaas.jndibinder.name}"/>
-			</fileset> -->
 		</copy>
-<!--	<copy todir="${package.client.tomcat.dir}/server/lib">
-		<fileset dir="${grid-jaas.dir}\${grid-jaas.lib.dir}">
-			<include name="cog-tomcat*.*"/>
-		</fileset> 
-	</copy>-->
-	
-<!--	<copy tofile="${package.client.tomcat.context.dir}/${PROJECT_NAME}.xml" file="${system.config.server.context.dir}/${file.project.Context}"/>
-	<copy tofile="${package.client.tomcat.context.dir}/${SDK_GRID_LOGIN_SERVICE_NAME}.xml" file="${system.config.server.context.dir}/${file.grid.loginService.Context}"/>
-	<copy todir="${package.client.tomcat.serverxml.dir}" >
-		<fileset dir="${system.config.server.serverxml.dir}">
-			<include name="**/server.xml"/>
-			<include name="**/login.config"/>
-		</fileset>
-	</copy> -->
 		
 	</target>	
 	
@@ -1062,10 +832,6 @@
 			<classpath refid="system.lib.class.path" />
 		    <bottom><![CDATA[<i>This System API was generated by the <a href='http://ncicb.nci.nih.gov/NCICB/infrastructure/cacoresdk'>caCORE Software Development Kit</a>.</i>]]></bottom>
 			<fileset dir="${system.dir}/${system.src.dir}" includes="**/*.java"/>
-<!--			<fileset dir="${writable-api.dir}/${writable-api.src.dir}" includes="**/*.java"/>
-			<fileset dir="${grid-jaas.dir}/${grid-jaas.src.dir}" includes="**/*.java"/>
-			<fileset dir="${grid-remoting.dir}/${grid-remoting.src.dir}" includes="**/*.java"/>
-			<fileset dir="${security.dir}/${security.src.dir}" includes="**/*.java"/> -->
 		</javadoc>
 		<zip destfile="${release.systemdoc.file}" whenempty="skip">
 			<zipfileset dir="${build.systemdoc.dir}"/>
@@ -1105,10 +871,7 @@
 
 		<zip destfile="${release.binary.file}" whenempty="skip">
 			<zipfileset dir="${basedir}">
-				<include name="/${writable-api.dir}/**/*"/>
 				<include name="/${system.dir}/**/*"/>
-<!--				<include name="/${grid-remoting.dir}/**/*"/>
-				<include name="/${grid-jaas.dir}/**/*"/> -->
 				<include name="/${conf.dir}/**/*"/>
 				<include name="/${models.dir}/**/*"/>
 				<include name="/build-scripts/**/*"/>
@@ -1132,10 +895,7 @@
 			
 		<zip destfile="${release.src.file}" whenempty="skip">
 			<zipfileset dir="${basedir}">
-				<include name="/${writable-api.dir}/**/*"/>
 				<include name="/${system.dir}/**/*"/>
-<!--				<include name="/${grid-remoting.dir}/**/*"/>
-				<include name="/${grid-jaas.dir}/**/*"/> -->
 				<include name="/${conf.dir}/**/*"/>
 				<include name="/${models.dir}/**/*"/>
 				<include name="/build-scripts/**/*"/>
@@ -1158,10 +918,7 @@
 
 		<tar destfile="${release.binary.tar.file}">
 			<tarfileset dir="${basedir}">
-				<include name="/${writable-api.dir}/**/*"/>
 				<include name="/${system.dir}/**/*"/>
-<!--				<include name="/${grid-remoting.dir}/**/*"/>
-				<include name="/${grid-jaas.dir}/**/*"/> -->
 				<include name="/${conf.dir}/**/*"/>
 				<include name="/${models.dir}/**/*"/>
 				<include name="/build-scripts/**/*"/>
@@ -1184,10 +941,7 @@
 		</tar>
 		<tar destfile="${release.src.tar.file}">
 			<tarfileset dir="${basedir}">
-				<include name="/${writable-api.dir}/**/*"/>
 				<include name="/${system.dir}/**/*"/>
-<!--				<include name="/${grid-remoting.dir}/**/*"/>
-				<include name="/${grid-jaas.dir}/**/*"/> -->
 				<include name="/${conf.dir}/**/*"/>
 				<include name="/${models.dir}/**/*"/>
 				<include name="/build-scripts/**/*"/>

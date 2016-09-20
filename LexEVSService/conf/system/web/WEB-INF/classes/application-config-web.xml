@@ -2,6 +2,4 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-lazy-init="false" default-dependency-check="all" default-autowire="no">
 
-	<!-- <bean name="@WEBSERVICE_NAME@" class="org.LexGrid.LexBIG.caCore.webservice.LexEVSWSQueryImpl" singleton="true"/> -->
-
 </beans>

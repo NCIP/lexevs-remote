@@ -93,26 +93,13 @@
 
 		<copy tofile="output/${PROJECT_NAME}/package/remote-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
 		</copy>
-<!--		<copy tofile="output/${PROJECT_NAME}/package/local-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
-		</copy>
-		<copy tofile="output/${PROJECT_NAME}/package/ws-client/lib/${PROJECT_NAME}-framework.jar" file="${system.dir}/dist/lexevs-client-framework.jar">
-		</copy>	-->
 
 		<copy todir="output/${PROJECT_NAME}/package/remote-client/lib" overwrite="true">
 			<fileset dir="${basedir}/system/lib">
 				<exclude name="MSSOUserValidator.jar" />
 			</fileset>
 		</copy>
-<!--		<copy todir="output/${PROJECT_NAME}/package/local-client/lib" overwrite="true">
-			<fileset dir="${basedir}/system/lib">
-				<exclude name="MSSOUserValidator.jar" />
-			</fileset>
-		</copy>
-		<copy todir="output/${PROJECT_NAME}/package/ws-client/lib" overwrite="true">
-			<fileset dir="${basedir}/system/lib">
-				<exclude name="MSSOUserValidator.jar" />
-			</fileset> 
-		</copy>-->
+
 			<zip destfile="output/${PROJECT_NAME}/package/client/${PROJECT_NAME}-client.zip">
 				<zipfileset dir="output/${PROJECT_NAME}/package/remote-client" prefix="${PROJECT_NAME}-client">
 					<include name="**/*" />
@@ -141,12 +128,6 @@
 					<exclude name="**/xml/**"/>
 				</fileset>
 			</copy>
-<!--			<copy todir="${writable.dir}" overwrite="true">
-				<fileset dir="${sdk_dir}/writable-api"/>
-			</copy>
-			<copy todir="${grid.dir}" overwrite="true">
-				<fileset dir="${sdk_dir}/grid"/>
-			</copy> -->
 			<copy todir="${scripts.dir}" overwrite="true">
 				<fileset dir="${sdk_dir}/build-scripts"/>
 			</copy>
@@ -189,10 +170,6 @@
 			<copy todir="${system.dir}" overwrite="true">
 				<fileset dir="${basedir}/system"/>
 			</copy>
-			
-<!--			<copy todir="${mappings.dir}" overwrite="true">
-				<fileset dir="${basedir}/mappings"/>
-			</copy>  -->
 			
 		</target>
 		<!--**************************************************

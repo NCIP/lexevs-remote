@@ -8,24 +8,10 @@
 			<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
 	</bean>
 
-	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" depends-on="DBConnector" singleton="true">
-		<constructor-arg ref="SecurityValidator" index="0"></constructor-arg>	
+	<bean name="ApplicationServiceImpl" class="org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl" singleton="true">
+		<constructor-arg ref="SecurityValidator" index="0"></constructor-arg>
+		<constructor-arg ref="LexEVSProperties" index="1"></constructor-arg>	
 	</bean>
-
-	<bean name="DBConnector" class="org.LexGrid.LexBIG.caCore.connection.orm.utils.DBConnector" singleton="true">
-		<constructor-arg ref="LexEVSProperties" index="0"></constructor-arg>
-	</bean>
-
-	<!-- <bean name="SecurityInitializationHelper" class="gov.nih.nci.system.security.helper.SecurityInitializationHelper">
-		<property name="securityEnabled" value="false"/>
-		<property name="instanceLevelSecurityEnabled" value="false"/>
-		<property name="attributeLevelSecurityEnabled" value="false"/> -->
-		<!--
-		<property name="authorizationManager">
-			<bean factory-bean="userDetailsService" factory-method="authorizationManagerInstance" />
-		</property>
-		-->
-<!-- 	</bean> -->
 
 	<bean id="ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="ApplicationServiceImpl" />

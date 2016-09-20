@@ -42,7 +42,6 @@ public class ORMDAOImpl extends HibernateDaoSupport implements DAO
 	protected static Logger log = Logger.getLogger(DAO.class.getName());
 
 	private Configuration config;
-//	private SecurityInitializationHelper securityHelper;
 
 	private boolean caseSensitive;
 	private int resultCountPerQuery;
@@ -50,9 +49,6 @@ public class ORMDAOImpl extends HibernateDaoSupport implements DAO
 	
 	protected HibernateTemplate createHibernateTemplate(SessionFactory sessionFactory)
 	{
-//		if(securityHelper!=null && securityHelper.isSecurityEnabled() && securityHelper.getAuthorizationManager()!=null && (securityHelper.isInstanceLevelSecurityEnabled() || securityHelper.isAttributeLevelSecurityEnabled()))
-//			return new FilterableHibernateTemplate(sessionFactory,securityHelper);
-//		else
 			return super.createHibernateTemplate(sessionFactory);
 	}
 
@@ -242,11 +238,4 @@ public class ORMDAOImpl extends HibernateDaoSupport implements DAO
 		this.resultCountPerQuery = resultCountPerQuery;
 	}
 
-//	public SecurityInitializationHelper getSecurityHelper() {
-//		return securityHelper;
-//	}
-//
-//	public void setSecurityHelper(SecurityInitializationHelper securityHelper) {
-//		this.securityHelper = securityHelper;
-//	}
 }

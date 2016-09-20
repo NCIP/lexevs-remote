@@ -47,7 +47,6 @@ import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.apache.log4j.Logger;
 import org.lexevs.locator.LexEvsServiceLocator;
-import org.lexevs.system.service.SystemResourceService;
 import org.lexevs.system.utility.MyClassLoader;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
 import org.lexgrid.conceptdomain.impl.LexEVSConceptDomainServicesImpl;
@@ -84,8 +83,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     private final LexBIGService lbs;
     
     private boolean updateClientProxyTarget = false;
-	
-    private PaginationHelper paginationHelper;
     
 	
     /**
@@ -191,39 +188,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     		}
     		Method objMethod = this.getClass().getMethod(methodName, parameterTypes);
 
-    		//First check if this is a Data Service method -- if so
-    		//process it with the SecurityToken map.
-//    		if(isMethodDataServiceSecured(objMethod)){
-//    			//If there were no QueryOptions passed in, but there are SecurityTokens
-//    			//in the HashMap, we want to account for those.
-//    			boolean foundQueryOptions = false;
-//    			for(int j=0; j<parameterClasses.length; j++){
-//    				String param = parameterClasses[j];
-//    				if(param.equals(QueryOptions.class.getName())){
-//    					foundQueryOptions = true;
-//    					//We found the QueryOptions -- see if the SecurityTokens are null
-//    					QueryOptions queryOptions = (QueryOptions)args[j];
-//    					if(queryOptions.getSecurityTokens() == null){
-//    						queryOptions.setSecurityTokens(tokens);
-//    						args[j] = queryOptions;
-//    					}
-//    				}
-//    			}
-//    			//If there were no QueryOptions -- we can build some with the Tokens passed
-//    			//in from the client, and adjust the Method that will be called.
-//    			if(!foundQueryOptions){
-//    				QueryOptions queryOptions = new QueryOptions();
-//    				queryOptions.setSecurityTokens(tokens);
-//    				Class[] adjustedParameters = (Class[])ArrayUtils.add(parameterTypes, QueryOptions.class);
-//    				
-//    				//adjust the method to be called
-//    				objMethod = this.getClass().getMethod(methodName, adjustedParameters);
-//    				
-//    				//adjust the args of the method to include the QueryOptions
-//    				args = ArrayUtils.add(args, queryOptions);
-//    			}
-//    			
-//    		} else 
     		if(isMethodSecured(objMethod)) {        
     			int index = -1;
     			index = isMethodArgumentSecured(objMethod);	          
@@ -503,15 +467,6 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	@Override
 	public LexEVSPickListDefinitionServices getLexEVSPickListDefinitionServices() {
 		return LexEVSPickListDefinitionServicesImpl.defaultInstance();
-	}
-
-	
-	public PaginationHelper getPaginationHelper() {
-		return paginationHelper;
-	}
-
-	public void setPaginationHelper(PaginationHelper paginationHelper) {
-		this.paginationHelper = paginationHelper;
 	}
 
 	public boolean isUpdateClientProxyTarget() {
