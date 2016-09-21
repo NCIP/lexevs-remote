@@ -2,10 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="test/src"/>
-	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
-	<classpathentry kind="src" path="conf/system/package/local-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
-	<classpathentry kind="src" path="writable-api/src"/>
 	<classpathentry kind="src" path="system/src"/>
 	<classpathentry kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
 	<classpathentry kind="lib" path="system/lib/axis.jar"/>
@@ -103,7 +100,6 @@
 	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/velocity-1.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/xsdlib-20030807.jar"/>
-	<classpathentry kind="lib" path="webServiceSoapClient/dist/LexEVSWebServiceClient.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-asm-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-aspects-3.1.0.RELEASE.jar"/>
@@ -138,6 +134,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-6.4.1.FINAL-tests.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-6.4.1.FINAL-tests.jar" sourcepath="/lbTest"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

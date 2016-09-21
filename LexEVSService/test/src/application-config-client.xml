@@ -5,8 +5,7 @@
             <constructor-arg>
                   <map>
                         <entry key="APPLICATION_SERVICE_BEAN" value-ref="LexEVSApplicationService"/>
-                        <entry key="AUTHENTICATION_SERVICE_BEAN" value-ref="EvsAuthenticationProvider"/>
-                        <entry key="APPLICATION_SERVICE_URL" value="http://localhost:8080/lexevsapi63/http/applicationService"/>
+                        <entry key="APPLICATION_SERVICE_URL" value="http://localhost:8080/lexevsapi64/http/applicationService"/>
                         <entry key="APPLICATION_SERVICE_CONFIG" value-ref="LexEVSApplicationServiceConfig"/>
                   </map>
             </constructor-arg>
@@ -43,14 +42,14 @@
              </property>
        </bean>
       
-      <bean id="EvsAuthenticationProvider" class="org.acegisecurity.providers.rcp.RemoteAuthenticationProvider">
+      <!-- <bean id="EvsAuthenticationProvider" class="org.acegisecurity.providers.rcp.RemoteAuthenticationProvider">
             <property name="remoteAuthenticationManager">
                   <bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
                       <property name="serviceUrl" value="http://localhost:8080/lexevsapi63/http/applicationService"/>
                       <property name="serviceInterface" value="org.acegisecurity.providers.rcp.RemoteAuthenticationManager"/>
                   </bean>
             </property>
-      </bean>
+      </bean> -->
       
       <!-- Dont touch this unless you know what you are doing -->
       <bean id="LexEVSApplicationServiceConfig" class="java.lang.String">
@@ -96,7 +95,6 @@
                               &lt;/property&gt;
                         &lt;/bean&gt;
                 &lt;alias alias=&quot;LexEVSApplicationService&quot; name=&quot;applicationService&quot;/&gt;
-                &lt;alias alias=&quot;EvsAuthenticationProvider&quot; name=&quot;authenticationProvider&quot;/&gt;
                   </value>
             </constructor-arg>
       </bean>
