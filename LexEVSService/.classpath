@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_60]"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="test/src"/>
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
 	<classpathentry kind="src" path="system/src"/>
@@ -133,7 +133,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4_1_1"/>
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-6.4.1.FINAL-tests.jar"/>
 	<classpathentry kind="lib" path="system/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-6.4.2.SNAPSHOT-tests.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
