@@ -51,11 +51,6 @@ public class LazyLoadConceptTest extends ServiceTestCase {
 		Entity c = new Entity();
 		c.setEntityCode("C0000184");
 		List<Entity> concepts = null;
-		try {
-			concepts = svc.search(Entity.class, c, qo);
-		} catch (ApplicationException e) {
-			fail(e.getMessage());
-		}
 		
 		assertTrue(concepts.size() == 1);
 		concept = concepts.get(0);

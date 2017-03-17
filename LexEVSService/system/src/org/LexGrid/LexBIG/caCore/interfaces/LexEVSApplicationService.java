@@ -11,7 +11,11 @@ package org.LexGrid.LexBIG.caCore.interfaces;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 
-public interface LexEVSApplicationService extends LexEVSService {
+import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationService;
+
+import gov.nih.nci.system.applicationservice.ApplicationService;
+
+public interface LexEVSApplicationService extends LexEVSService, ApplicationService, TokenSecurableApplicationService {
 
     /**
      * Execute securely. Used for internal remote method calls. Not to be called directly.
