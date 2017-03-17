@@ -19,17 +19,16 @@
  *******************************************************************************/
 import java.util.List;
 
-import gov.nih.nci.system.applicationservice.ApplicationException;
-import gov.nih.nci.system.client.ApplicationServiceProvider;
-
 import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDataService;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSService;
 import org.LexGrid.codingSchemes.CodingScheme;
+
+import gov.nih.nci.system.applicationservice.ApplicationException;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 
 
@@ -42,7 +41,6 @@ public class RemoteTestClient {
 		RemoteTestClient client = new RemoteTestClient();
 	
 		client.queryLexEVSDistributed();
-		client.queryLexEVSDataService();
 	}
 	
 	public RemoteTestClient() throws Exception {
@@ -62,15 +60,4 @@ public class RemoteTestClient {
 		}
 	}
 	
-	public void queryLexEVSDataService() throws ApplicationException {
-		LexEVSDataService dataSvc = lexevsService;
-		CodingScheme codingScheme = new CodingScheme();		
-		List<CodingScheme> results = dataSvc.search(CodingScheme.class, codingScheme);
-		
-		for(CodingScheme cs : results){
-			System.out.println("\t\tOutput: " + "Coding Scheme: " + cs.getLocalName());
-			System.out.println("\t\tOutput: " + "  -- Version: " + cs.getRepresentsVersion());
-			System.out.println("\t\tOutput: " + "  -- URI: " + cs.getCodingSchemeURI());		
-		}
-	}
 }

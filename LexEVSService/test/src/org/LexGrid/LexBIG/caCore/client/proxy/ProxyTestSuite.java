@@ -17,9 +17,7 @@ public class ProxyTestSuite {
 	    {
 	        TestSuite mainSuite = new TestSuite("LexEVS caCORE Proxy Tests");
 	  
-	        mainSuite.addTestSuite(DataServiceProxyHelperImplTest1.class);
-	        mainSuite.addTestSuite(DataServiceProxyHelperImplTest2.class);
-	        mainSuite.addTestSuite(DataServiceProxyHelperImplTest3.class);
+
 	        mainSuite.addTestSuite(LexEVSApplicationServiceProxyTest.class);
 	        mainSuite.addTestSuite(LexEVSApplicationServiceProxyTestGforge21879.class);
 	        

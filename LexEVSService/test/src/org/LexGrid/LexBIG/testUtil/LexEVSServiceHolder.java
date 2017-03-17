@@ -18,7 +18,7 @@ import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 public class LexEVSServiceHolder {
     private static LexEVSServiceHolder sh_;
-    private ApplicationService appService = null;
+//    private ApplicationService appService = null;
 	private static final String serviceUrl = ServiceTestCase.serviceUrl;
 	private LexEVSApplicationService lexevsAppService;
 	public static final String _service = "EvsServiceInfo";
@@ -60,7 +60,7 @@ public class LexEVSServiceHolder {
 	private LexEVSServiceHolder()
 	{
 		try{
-			appService = (ApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");	
+//			appService = (ApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");	
 			lexevsAppService = (LexEVSApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
 			goodToken = new SecurityToken();
 			goodToken.setAccessToken(ServiceTestCase.MEDDRA_TOKEN);
@@ -88,11 +88,11 @@ public class LexEVSServiceHolder {
 	 * 
 	 * @return an instance of the app service
 	 */
-	public ApplicationService getAppService()
-	{
-		return appService;
-	}
-	
+//	public ApplicationService getAppService()
+//	{
+//		return appService;
+//	}
+//	
 	/**
 	 * Gets the app service.
 	 * 

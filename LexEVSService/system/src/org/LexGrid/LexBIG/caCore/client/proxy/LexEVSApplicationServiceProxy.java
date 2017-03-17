@@ -8,27 +8,21 @@
 */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import gov.nih.nci.evs.security.SecurityToken;
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.client.proxy.ApplicationServiceProxy;
-import gov.nih.nci.system.client.proxy.ProxyHelper;
-
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import net.sf.cglib.proxy.Enhancer;
-
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
-import org.LexGrid.LexBIG.caCore.applicationservice.annotations.DataServiceLazyLoadable;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.log4j.Logger;
 import org.springframework.aop.framework.Advised;
+
+import gov.nih.nci.evs.security.SecurityToken;
+import gov.nih.nci.system.applicationservice.ApplicationService;
+import gov.nih.nci.system.client.proxy.ApplicationServiceProxy;
+import net.sf.cglib.proxy.Enhancer;
 
 /**
  * Application Service proxy for LexEVS.
@@ -46,8 +40,6 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
     private LexEVSApplicationService eas;
 
 	protected HashMap<String, SecurityToken> securityToken_map = new HashMap<String, SecurityToken>();
-	
-	private ProxyHelper dataServiceProxyHelper;
   
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -106,9 +98,6 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 		 * whether the coding scheme itself requires a security token (determined by configuration file)
  		 */
 		if(methodName.equals("executeSecurely")) {
-			if(isDataServiceLazyLoadable(args)){
-				return invokeDataService(invocation);
-			}
 			return super.invoke(invocation);
 		}
 		else {
@@ -130,8 +119,6 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
 			} catch (Exception e) {
 				// throw e;
 				throw digOutRealExceptionAndThrowIt(e);
-				// throw new LBException("Something went wrong.");
-				// digOutRealExceptionAndThrowIt();
 			}
 		}
 	}
@@ -230,27 +217,7 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
          return paramClasses;
      }
 
- 	public Object invokeDataService(MethodInvocation invocation) throws Throwable {
-		Object value = invocation.proceed();
-		value = dataServiceProxyHelper.convertToProxy(eas, value);
-		return value;
-	}
- 	
- 	/*
- 	 * Determine if the method had any Annotations
- 	 */
-    protected boolean isDataServiceLazyLoadable(Object[] args) {
-    	for(Object arg : args){
-    		if(arg instanceof Annotation[]){
-    			for(Annotation annotation : (Annotation[])arg){
-    				if(annotation instanceof DataServiceLazyLoadable){
-    					return true;
-    				}
-    			}
-    		}
-    	}
-      return false;
-    }
+
 
    /**
     * Returns the underlying object that the specified proxy is advising.
@@ -281,15 +248,6 @@ public class LexEVSApplicationServiceProxy extends ApplicationServiceProxy {
        Object realObject = advised.getTargetSource().getTarget();
        return realObject;
    }
-   
-   public ProxyHelper getDataServiceProxyHelper() {
-		return dataServiceProxyHelper;
-	}
-
-
-	public void setDataServiceProxyHelper(ProxyHelper dataServiceProxyHelper) {
-		this.dataServiceProxyHelper = dataServiceProxyHelper;
-	}
 
 	@Override
 	public void setApplicationService(ApplicationService as) {
