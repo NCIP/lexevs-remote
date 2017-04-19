@@ -5,7 +5,7 @@
             <constructor-arg>
                   <map>
                         <entry key="APPLICATION_SERVICE_BEAN" value-ref="LexEVSApplicationService"/>
-                        <entry key="APPLICATION_SERVICE_URL" value="http://localhost:8080/lexevsapi64/http/applicationService"/>
+                        <entry key="APPLICATION_SERVICE_URL" value="http://localhost:8080/lexevsapi65/http/applicationService"/>
                         <entry key="APPLICATION_SERVICE_CONFIG" value-ref="LexEVSApplicationServiceConfig"/>
                   </map>
             </constructor-arg>
