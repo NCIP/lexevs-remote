@@ -4,8 +4,7 @@
 **************************************************************************** -->
 <project name="EVS API Unit Tests" default="alltests-html" basedir=".">
 
-    <property name="client.dir" value="../output/lexevsapi64/package/remote-client" />
-    <property name="wsclient.dir" value="../output/lexevsapi64/package/ws-client" />
+    <property name="client.dir" value="../output/lexevsapi65/package/remote-client" />
     <property name="lib.dir" value="../system/lib" />
 	<property name="testlib.dir" value="./lib"/>
     <property name="src.dir" value="src" />
@@ -32,9 +31,6 @@
     	    <include name="**/*.jar"/>
     	</fileset>
         <fileset dir="${client.dir}/lib">
-            <include name="**/*.jar"/>
-        </fileset>
-        <fileset dir="${wsclient.dir}/lib">
             <include name="**/*.jar"/>
         </fileset>
     </path>
@@ -124,34 +120,7 @@
 		    <report format="frames" todir="${test.reports}" />
 		  </junitreport>
 		</target>
-	
-	
-	    <target name="dataservicetests"  depends="check-built,compile" if="system-built">
-			<junit printsummary="yes" fork="no">
-	        	<sysproperty key="test.property" value="${test.dir}" />
-			<sysproperty key="test.xml" value="${test.xml}" />
-		      <classpath refid="libs" />
-			  <formatter type="plain"/>
-			  <test name="org.LexGrid.LexBIG.caCore.test.setup.AllDataServiceTests"/>
-			</junit>
-		</target>	
-	    <target name="dataservicetests-html"  depends="check-built,compile" if="system-built">
-	    	<mkdir dir="${test.reports}" />
-	    	<junit printsummary="yes" fork="no">
-	        	<sysproperty key="test.property" value="${test.dir}" />
-	    		<sysproperty key="test.xml" value="${test.xml}" />
-		      <classpath refid="libs" />
-			  <formatter type="xml"/>
-			  <test name="org.LexGrid.LexBIG.caCore.test.setup.AllDataServiceTests" todir="${test.reports}"/>  	
-	    	</junit>
 	    	
-		  <junitreport todir="${test.reports}">
-		    <fileset dir="${test.reports}">
-		      <include name="TEST-*.xml" />
-		    </fileset>
-		    <report format="frames" todir="${test.reports}" />
-		  </junitreport>
-		</target>
 	
     <target name="alltests" depends="compile" if="system-built">
     	<mkdir dir="${test.reports}" />
