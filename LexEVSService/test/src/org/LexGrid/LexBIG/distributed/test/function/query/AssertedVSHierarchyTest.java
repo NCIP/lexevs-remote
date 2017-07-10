@@ -29,7 +29,6 @@ public class AssertedVSHierarchyTest extends ServiceTestCase {
 		HashMap<String, LexEVSTreeItem> items = service.getHierarchyValueSetRoots("C54443");
 		assertNotNull(items);
 		assertTrue(items.size() > 0);
-		
 	}
 
 }

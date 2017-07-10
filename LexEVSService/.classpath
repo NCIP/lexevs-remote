@@ -67,8 +67,8 @@
 	<classpathentry kind="lib" path="system/lib/jettison-1.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="lib" path="system/lib/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig.jar" sourcepath="/lbImpl"/>
-	<classpathentry kind="lib" path="system/lib/LexEVSSecurity.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig.jar" sourcepath="/lgValueSets"/>
+	<classpathentry kind="lib" path="system/lib/LexEVSSecurity.jar" sourcepath="/caCoreTokenSecurity"/>
 	<classpathentry kind="lib" path="system/lib/looks-2.1.4.jar"/>
 	<classpathentry kind="lib" path="system/lib/mmbase.jar"/>
 	<classpathentry kind="lib" path="system/lib/MSSOUserValidator.jar"/>
