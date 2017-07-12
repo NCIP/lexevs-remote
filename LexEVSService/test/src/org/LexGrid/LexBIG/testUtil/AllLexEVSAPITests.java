@@ -19,6 +19,7 @@ import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedValueSetDefinitionTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedGraphTestSuite;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedNodeTestSuite;
+import org.LexGrid.LexBIG.distributed.test.valueset.AssertedVSHierarchyTest;
 import org.LexGrid.LexBIG.distributed.test.valueset.TestLexEVSValueSetDefinitionServices;
 import org.junit.ClassRule;
 import org.junit.experimental.categories.Categories;
@@ -48,7 +49,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	MultipleNamspaceErrorLEXEVS_598_Test.class,
 	PathToRootTreeServiceImplTest.class,
 	DistributedValueSetDefinitionTests.class,
-	TestLexEVSValueSetDefinitionServices.class})
+	TestLexEVSValueSetDefinitionServices.class,
+	AssertedVSHierarchyTest.class
+	})
 public class AllLexEVSAPITests{
 
     @ClassRule
