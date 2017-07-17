@@ -54,6 +54,8 @@ import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 import org.lexgrid.valuesets.impl.LexEVSPickListDefinitionServicesImpl;
 import org.lexgrid.valuesets.impl.LexEVSValueSetDefinitionServicesImpl;
+import org.lexgrid.valuesets.sourceasserted.SourceAssertedValueSetHierarchyServices;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetHierarchyServicesImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ClassUtils;
 
@@ -469,6 +471,11 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		return LexEVSPickListDefinitionServicesImpl.defaultInstance();
 	}
 
+	@Override
+	public SourceAssertedValueSetHierarchyServicesImpl getLexEVSSourceAssertedValueSetHierarchyServices() {
+		return (SourceAssertedValueSetHierarchyServicesImpl)SourceAssertedValueSetHierarchyServicesImpl.defaultInstance();
+	}
+
 	public boolean isUpdateClientProxyTarget() {
 		return updateClientProxyTarget;
 	}
@@ -484,4 +491,5 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	public void setRemoteResourceManager(RemoteResourceManager remoteResourceManager) {
 		this.remoteResourceManager = remoteResourceManager;
 	}
+
 }
