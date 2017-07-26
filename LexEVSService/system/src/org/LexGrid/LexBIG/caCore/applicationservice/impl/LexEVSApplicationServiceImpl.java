@@ -484,4 +484,9 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	public void setRemoteResourceManager(RemoteResourceManager remoteResourceManager) {
 		this.remoteResourceManager = remoteResourceManager;
 	}
+
+	@Override
+	public List<CodingScheme> getMinimalResolvedCodingSchemes() throws LBInvocationException {
+		return lbs.getMinimalResolvedCodingSchemes();
+	}
 }
