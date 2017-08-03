@@ -13,6 +13,7 @@ import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationSe
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
 import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetHierarchyServicesImpl;
 
 /**
  * The Distributed LexEVS Portion of LexEVSAPI. This interface is a framework for calling
@@ -27,4 +28,6 @@ public interface LexEVSDistributed extends TokenSecurableApplicationService, Lex
 	public LexEVSConceptDomainServices getLexEVSConceptDomainServices();
 	
 	public LexEVSPickListDefinitionServices getLexEVSPickListDefinitionServices();
+	
+	public SourceAssertedValueSetHierarchyServicesImpl getLexEVSSourceAssertedValueSetHierarchyServices();
 }
