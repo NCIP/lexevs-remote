@@ -16,6 +16,7 @@ import org.LexGrid.LexBIG.Impl.Extensions.tree.service.PathToRootTreeServiceImpl
 import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
 import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedResolvedValueSetTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedValueSetDefinitionTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedGraphTestSuite;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedNodeTestSuite;
@@ -49,6 +50,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	MultipleNamspaceErrorLEXEVS_598_Test.class,
 	PathToRootTreeServiceImplTest.class,
 	DistributedValueSetDefinitionTests.class,
+	DistributedResolvedValueSetTests.class,
 	TestLexEVSValueSetDefinitionServices.class,
 	AssertedVSHierarchyTest.class
 	})
