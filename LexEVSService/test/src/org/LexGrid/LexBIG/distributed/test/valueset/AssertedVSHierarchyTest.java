@@ -24,6 +24,8 @@ public class AssertedVSHierarchyTest extends ServiceTestCase {
 	public void setUp(){
 		service = LexEVSServiceHolder.instance().
 				getLexEVSAppService().getLexEVSSourceAssertedValueSetHierarchyServices();
+		service.setLexBIGService(LexEVSServiceHolder.instance().
+				getLexEVSAppService());
 		service.preprocessSourceHierarchyData("http://ncicb.nci.nih.gov/xml/owl/EVS/owl2lexevs.owl",  "0.1.5", "Concept_In_Subset", "Contributing_Source","Publish_Value_Set", "C54453");
  		//Comment this in instead for direct to NCIt testing
 //		service.preprocessSourceHierarchyData();
