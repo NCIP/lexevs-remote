@@ -83,19 +83,8 @@ public class AssertedVSHierarchyTest extends ServiceTestCase {
 		assertTrue(items.size() > 0);
 		List<LexEVSTreeItem> roots =  item._assocToChildMap.get(ValueSetHierarchyServiceImpl.INVERSE_IS_A);
 		assertTrue(roots.size() > 0);
-		assertTrue(roots.stream().anyMatch(x -> x.get_text().equals("autosV2")));
-		assertTrue(roots.stream().filter(x -> x.get_text().equals("autosV2")).findAny().get().is_expandable());
 		assertTrue(roots.stream().anyMatch(x -> x.get_text().equals("owl2lexevs")));
 		assertTrue(roots.stream().filter(x -> x.get_text().equals("owl2lexevs")).findAny().get().is_expandable());
-		assertTrue(roots.stream().filter(x -> x.get_text().equals("autosV2")).findAny().get().
-				_assocToChildMap.get(ValueSetHierarchyService.INVERSE_IS_A).stream().anyMatch(y ->
-				y.get_text().equals("All Domestic Autos But GM")));
-		assertTrue(roots.stream().filter(x -> x.get_text().equals("autosV2")).findAny().get().
-				_assocToChildMap.get(ValueSetHierarchyService.INVERSE_IS_A).stream().anyMatch(y ->
-				y.get_text().equals("All Domestic Autos But GM  and as many characters")));
-		assertTrue(roots.stream().filter(x -> x.get_text().equals("autosV2")).findAny().get().
-				_assocToChildMap.get(ValueSetHierarchyService.INVERSE_IS_A).stream().anyMatch(y ->
-				y.get_text().equals("One Child Value Set")));
 		assertTrue(roots.stream().filter(x -> x.get_text().equals("owl2lexevs")).findAny().get().
 				_assocToChildMap.get(ValueSetHierarchyService.INVERSE_IS_A).stream().anyMatch(y ->
 				y.get_text().equals("Black")));
@@ -109,6 +98,7 @@ public class AssertedVSHierarchyTest extends ServiceTestCase {
 				_assocToChildMap.get(ValueSetHierarchyService.INVERSE_IS_A).stream().filter(y ->
 				y.get_text().equals("White")).findAny().get().is_expandable());
 	}
+	
 	@Test
 	public void testBuildTree() throws LBException{
 		Map<String, LexEVSTreeItem> items  = service.getSourceValueSetTree();
