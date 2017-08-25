@@ -493,7 +493,17 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	}
 
 	@Override
-	public List<CodingScheme> getMinimalResolvedCodingSchemes() throws LBInvocationException {
-		return lbs.getMinimalResolvedCodingSchemes();
+	public List<CodingScheme> getMinimalResolvedVSCodingSchemes() throws LBInvocationException {
+		return lbs.getMinimalResolvedVSCodingSchemes();
+	}
+
+	@Override
+	public List<CodingScheme> getRegularResolvedVSCodingSchemes() {
+		return lbs.getRegularResolvedVSCodingSchemes();
+	}
+
+	@Override
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
+		return lbs.getSourceAssertedResolvedVSCodingSchemes();
 	}
 }
