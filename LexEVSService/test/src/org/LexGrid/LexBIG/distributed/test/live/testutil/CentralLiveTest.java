@@ -37,6 +37,9 @@ public class CentralLiveTest {
 	private static TestNamespaceResolution treeNamespace = null;
 	private static TestTreeExtension testTE = null;
 	
+	private static final String NCIT_SEARCH = "Blood";
+	private static final String SYN_SEARCH = "Blue";
+	
 	CodedNodeSet cns = null;
 	private String[] conceptNames = {"C12434", "C41234", "C2300"};
 	@BeforeClass
@@ -80,9 +83,9 @@ public class CentralLiveTest {
 
 	@Test
 	public void testFindConceptsByPreferredNameStringBooleanString() throws EVSException {
-		List<EVSConcept> concepts = service.findConceptsByPreferredName("Sex",false);
-		assertTrue(concepts.size() > 1);
-		assertEquals(concepts.get(0).getPreferredName(), "Sex");
+		List<EVSConcept> concepts = service.findConceptsByPreferredName(NCIT_SEARCH,false);
+		assertTrue(concepts.size() > 0);
+		assertEquals(concepts.get(0).getPreferredName(), NCIT_SEARCH);
 		concepts.forEach(x -> System.out.println(x.getPreferredName()));
 		concepts.forEach(x -> System.out.println(x.getCode()));
 	}
@@ -90,9 +93,9 @@ public class CentralLiveTest {
 
 	@Test
 	public void testFindConceptsBySynonymStringBooleanIntString() throws EVSException {
-		List<EVSConcept> concepts = service.findConceptsBySynonym("Blue", true, 5);
+		List<EVSConcept> concepts = service.findConceptsBySynonym(SYN_SEARCH, true, 5);
 		assertTrue(concepts.size() > 0);
-		assertEquals(concepts.get(0).getPreferredName(), "Blue");
+		assertEquals(concepts.get(0).getPreferredName(), SYN_SEARCH);
 		concepts.forEach(x -> System.out.println(x.getPreferredName()));
 		concepts.forEach(x -> System.out.println(x.getCode()));
 	}
@@ -103,8 +106,8 @@ public class CentralLiveTest {
 	
 	@Test
 	public void testdo_getEVSCode(){
-		String result = search.do_getEVSCode("Sex");
-		assertEquals(result, "C1522384");
+		String result = search.do_getEVSCode(NCIT_SEARCH);
+		assertEquals(result, "C0005767");
 	}
 	
 	@Test
@@ -147,7 +150,7 @@ public class CentralLiveTest {
 	@Test
 	public void testsearchPrefTerm() throws Exception{
 		ResolvedConceptReferenceList list = search.searchPrefTerm((LexEVSApplicationService)RemoteServerUtil.createLexBIGService(), 
-				RemoteServerUtil.NCIM_SCHEME_NAME, "Sex", 5, MatchAlgorithms.exactMatch.name(), null);
+				RemoteServerUtil.NCIM_SCHEME_NAME, NCIT_SEARCH, 5, MatchAlgorithms.exactMatch.name(), null);
 		Arrays.asList(list.getResolvedConceptReference()).stream().forEach(x -> System.out.println(x.getCode()));
 	}
 	
@@ -158,11 +161,18 @@ public class CentralLiveTest {
 		assertTrue(hasConcept > 0);
 	}
 	
+	//****************************************************************
+	//Iterator Test methods
+	//****************************************************************
+	
 	@Test
 	public void runIteratorTest() throws Exception{
 		itertest.run();
 	}
 	
+	//****************************************************************
+	//LEXEVS Compare methods
+	//****************************************************************
 	//Fixed for LexEVS 6.5.1
 	@Test
 	public void runCompareTest(){
@@ -170,16 +180,25 @@ public class CentralLiveTest {
 		assertTrue(compareNo > 0);
 	}
 	
+	//****************************************************************
+	//MetaBrowser Test methods
+	//****************************************************************
 	@Test
 	public void runDistMetaThesTest() throws LBException, Exception{
 		assertTrue(metaTest.run() > 1);
 	}
 	
+	//****************************************************************
+	//Tree Namespace methods
+	//****************************************************************
 	@Test
 	public void testTestNamespaceResolution(){
 		assertTrue(treeNamespace.run() > 0);
 	}
 	
+	//****************************************************************
+	//Tree Extension test methods
+	//****************************************************************
 	@Test
 	public void testTestTreeExtension(){
 		List<LexEvsTreeNode> nodes = testTE.getChildren(RemoteServerUtil.NCIT_SCHEME_NAME, 
