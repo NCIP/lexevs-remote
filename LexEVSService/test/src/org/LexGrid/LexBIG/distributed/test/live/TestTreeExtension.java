@@ -74,8 +74,10 @@ public class TestTreeExtension {
 		String code = "C1404";
 		String namespace = "NCI_Thesaurus";
 		List<LexEvsTreeNode> list = new TestTreeExtension(lbSvc).getChildren(codingScheme, version, code, namespace);
+		int counter = 0;
 		for(LexEvsTreeNode node: list){
-			System.out.println(node.getEntityDescription());
+			counter++;
+			System.out.println("" + counter + ". " + node.getEntityDescription());
 		}
 	}
 }

@@ -202,8 +202,10 @@ public class CentralLiveTest {
 	@Test
 	public void testTestTreeExtension(){
 		List<LexEvsTreeNode> nodes = testTE.getChildren(RemoteServerUtil.NCIT_SCHEME_NAME, 
-				null, "C1404", RemoteServerUtil.NCIT_SCHEME_NAMESPACE);
+				"17.02d", "C1404", "Thesaurus");
 		assertTrue(nodes.size() > 0);
-		nodes.forEach(x -> System.out.println(x.getEntityDescription()));
+		int count[] = {0};
+		nodes.forEach(x -> {count[0]++; System.out.println("" + count[0] + ". " + x.getEntityDescription());});
+		assertEquals(count[0], 91);
 	}
 }
