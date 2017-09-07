@@ -22,10 +22,10 @@ public class TestTreeExtensionFullServiceTest extends ServiceTestCase {
         List<LexEvsTreeNode> list = new ArrayList<LexEvsTreeNode>();
 
 			CodingSchemeVersionOrTag versionOrTag = new CodingSchemeVersionOrTag();
-	        versionOrTag.setVersion(AUTOMOBILES_VERSION);
+	        versionOrTag.setVersion("1.0");
 			TreeService treeService = TreeServiceFactory.getInstance().getTreeService(RemoteServerUtil.createLexBIGService());
-			LexEvsTree lexEvsTree =  treeService.getTree(AUTOMOBILES_SCHEME, versionOrTag, AUTOMOBILES_CODE);
-			LexEvsTreeNode focus_node = lexEvsTree.findNodeInTree(AUTOMOBILES_CODE);
+			LexEvsTree lexEvsTree =  treeService.getTree("Automobiles", versionOrTag, "A0001");
+			LexEvsTreeNode focus_node = lexEvsTree.findNodeInTree("A0001");
 			assertNotNull(focus_node);
 			LexEvsTreeNode.ExpandableStatus focus_node_status = focus_node.getExpandableStatus();
 			if (focus_node_status == LexEvsTreeNode.ExpandableStatus.IS_EXPANDABLE) {
