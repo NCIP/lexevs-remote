@@ -52,7 +52,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	DistributedValueSetDefinitionTests.class,
 	DistributedResolvedValueSetTests.class,
 	TestLexEVSValueSetDefinitionServices.class,
-	AssertedVSHierarchyTest.class
+	AssertedVSHierarchyTest.class,
+	TestTreeExtensionFullServiceTest.class
 	})
 public class AllLexEVSAPITests{
 
