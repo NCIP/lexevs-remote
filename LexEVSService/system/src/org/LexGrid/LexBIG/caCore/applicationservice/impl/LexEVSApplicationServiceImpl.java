@@ -45,11 +45,14 @@ import org.LexGrid.LexBIG.caCore.security.Validator;
 import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.apache.log4j.Logger;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.lexevs.system.utility.MyClassLoader;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
 import org.lexgrid.conceptdomain.impl.LexEVSConceptDomainServicesImpl;
+import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
+import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
 import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 import org.lexgrid.valuesets.impl.LexEVSPickListDefinitionServicesImpl;
@@ -505,5 +508,10 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	@Override
 	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
 		return lbs.getSourceAssertedResolvedVSCodingSchemes();
+	}
+	
+	@Override
+	public LexEVSResolvedValueSetService getLexEVSResolvedVSService(AssertedValueSetParameters params) {
+		return new LexEVSResolvedValueSetServiceImpl(params);
 	}
 }
