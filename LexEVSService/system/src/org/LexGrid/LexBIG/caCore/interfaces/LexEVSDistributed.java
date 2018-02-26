@@ -19,6 +19,7 @@ import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetHierarchyServicesImpl;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetServiceImpl;
 
 /**
  * The Distributed LexEVS Portion of LexEVSAPI. This interface is a framework for calling
@@ -36,5 +37,7 @@ public interface LexEVSDistributed extends TokenSecurableApplicationService, Lex
 	
 	public SourceAssertedValueSetHierarchyServicesImpl getLexEVSSourceAssertedValueSetHierarchyServices();
 
-	public LexEVSResolvedValueSetService getLexEVSResolvedVSService(AssertedValueSetParameters params);
+	public LexEVSResolvedValueSetService getLexEVSResolvedVSService();
+
+	SourceAssertedValueSetServiceImpl getLexEVSSourceAssertedValueSetServices(AssertedValueSetParameters params);
 }

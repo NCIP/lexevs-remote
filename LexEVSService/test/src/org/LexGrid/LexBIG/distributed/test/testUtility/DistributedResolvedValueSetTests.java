@@ -47,7 +47,9 @@ public class DistributedResolvedValueSetTests {
 		codingSchemeName("owl2lexevs").
 		codingSchemeURI("http://ncicb.nci.nih.gov/xml/owl/EVS/owl2lexevs.owl")
 		.build();
-		service = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(params);
+		service = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService();
+		((LexEVSResolvedValueSetServiceImpl)service).initSourceAssertedValueSet(params);
+		((LexEVSResolvedValueSetServiceImpl)service).setLexBIGService(lbs);
 	}
 
 	@Test
