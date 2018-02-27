@@ -512,12 +512,18 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	}
 
 	@Override
-	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes(AssertedValueSetParameters params) {
+		((LexBIGServiceImpl)lbs).setAssertedValueSetConfiguration(params);
 		return lbs.getSourceAssertedResolvedVSCodingSchemes();
 	}
 	
 	@Override
-	public LexEVSResolvedValueSetService getLexEVSResolvedVSService() {
-		return new LexEVSResolvedValueSetServiceImpl();
+	public LexEVSResolvedValueSetService getLexEVSResolvedVSService(AssertedValueSetParameters params) {
+		return new LexEVSResolvedValueSetServiceImpl(params);
+	}
+
+	@Override
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
+		return getSourceAssertedResolvedVSCodingSchemes(null);
 	}
 }

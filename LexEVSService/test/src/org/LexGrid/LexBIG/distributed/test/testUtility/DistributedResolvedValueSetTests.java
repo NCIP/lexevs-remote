@@ -17,7 +17,6 @@ import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
-import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
@@ -25,7 +24,6 @@ import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Property;
 import org.LexGrid.commonTypes.PropertyQualifier;
 import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -47,9 +45,8 @@ public class DistributedResolvedValueSetTests {
 		codingSchemeName("owl2lexevs").
 		codingSchemeURI("http://ncicb.nci.nih.gov/xml/owl/EVS/owl2lexevs.owl")
 		.build();
-		service = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService();
-		((LexEVSResolvedValueSetServiceImpl)service).initSourceAssertedValueSet(params);
-		((LexEVSResolvedValueSetServiceImpl)service).setLexBIGService(lbs);
+		service = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(params);
+		((LexEVSResolvedValueSetServiceImpl)service).initParams(params);
 	}
 
 	@Test
@@ -87,7 +84,7 @@ public class DistributedResolvedValueSetTests {
 	@Test
 	public void testListAllResolvedValueSetsWithNoAssertedScheme() throws Exception {
 		long start = System.currentTimeMillis();
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		List<CodingScheme> list = nullVsService .listAllResolvedValueSets();
 		long end = System.currentTimeMillis();
 		System.out.println("Retrieving full scheme value sets: " + (end - start) + " mseconds");
@@ -138,7 +135,7 @@ public class DistributedResolvedValueSetTests {
 	@Test
 	public void testListAllResolvedValueSetsWithMiniSchemeAndNoAssertedScheme() throws Exception {
 		long start = System.currentTimeMillis();
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		List<CodingScheme> schemes = nullVsService.getMinimalResolvedValueSetSchemes();
 		long end = System.currentTimeMillis();
 		System.out.println("Retrieving mini scheme value sets: " + (end - start) + " mseconds");
@@ -193,9 +190,9 @@ public class DistributedResolvedValueSetTests {
 		assertTrue(refs.getResolvedConceptReferenceCount() > 0);
 	}
 	
-	@Test(expected=RuntimeException.class)
+	@Test(expected = RuntimeException.class)
 	public void getValueSetEntitiesWithNoAssertedScheme() throws Exception {
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
 		ResolvedConceptReferenceList refs = nullVsService.getValueSetEntitiesForURI(uri.toString());
 		assertNotNull(refs);
@@ -224,7 +221,7 @@ public class DistributedResolvedValueSetTests {
 	@Test
 	public void testGetResolvedValueSetsforConceptReferenceWithNoAssertedScheme() {
 		
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		//Resolved value set coding scheme
 		ConceptReference ref = new ConceptReference();
 		ref.setCode("005");
@@ -253,7 +250,7 @@ public class DistributedResolvedValueSetTests {
 			if (prop.getPropertyName().equals(LexEVSValueSetDefinitionServices.RESOLVED_AGAINST_CODING_SCHEME_VERSION)) {
 				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.CS_NAME, prop).equals(
 						"Automobiles"));
-				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.VERSION, prop).equals("1.1"));
+				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.VERSION, prop).equals("1.0"));
 			}
 		}
 		
@@ -271,14 +268,14 @@ public class DistributedResolvedValueSetTests {
 	@Test(expected = RuntimeException.class)
     @Category(RemoveFromDistributedTests.class)
 	public void testGetValueSEtForResolvedValueSetURIWithNoAssertedScheme() throws URISyntaxException {
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		URI uri = new URI("SRITEST:AUTO:AllDomesticButGM");
 		CodingScheme scheme = nullVsService.getResolvedValueSetForValueSetURI(uri);
 		for (Property prop : scheme.getProperties().getPropertyAsReference()) {
 			if (prop.getPropertyName().equals(LexEVSValueSetDefinitionServices.RESOLVED_AGAINST_CODING_SCHEME_VERSION)) {
 				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.CS_NAME, prop).equals(
 						"Automobiles"));
-				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.VERSION, prop).equals("1.1"));
+				assertTrue(getPropertyQualifierValue(LexEVSValueSetDefinitionServices.VERSION, prop).equals("1.0"));
 			}
 		}
 		
@@ -324,7 +321,7 @@ public class DistributedResolvedValueSetTests {
 	
 	@Test
 	public void testGetValueSetURIAndVersionForCodeWithNoAssertedSource() throws LBException{
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		List<AbsoluteCodingSchemeVersionReference> refs = nullVsService.getResolvedValueSetsforEntityCode("C0011(5564)");
 		assertNotNull(refs);
 		assertTrue(refs.size() > 0);
@@ -424,7 +421,7 @@ public class DistributedResolvedValueSetTests {
 	
 	@Test
 	public void testGetValueSetURIAndVersionForTextContainsWithNoAssertedSource() throws LBException{
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl(lbs);
+		LexEVSResolvedValueSetService nullVsService = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 		long start = System.currentTimeMillis();
 		List<AbsoluteCodingSchemeVersionReference> refs = 
 				nullVsService.getResolvedValueSetsforTextSearch("Domestic", 
@@ -464,15 +461,15 @@ public class DistributedResolvedValueSetTests {
 		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
 	}
 	
-	@Test
-	public void testGetSourceAssertedResolvedValueSets(){
-		((LexBIGServiceImpl)lbs).setAssertedValueSetConfiguration(params);
-		List<CodingScheme> schemes = lbs.getSourceAssertedResolvedVSCodingSchemes();
-		assertTrue(schemes.size() > 0);
-		assertTrue(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
-		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("SRITEST:AUTO:AllDomesticButGM")));
-	}
-	
+//	@Test
+//	public void testGetSourceAssertedResolvedValueSets(){
+// 	//	((LexBIGServiceImpl)lbs).setAssertedValueSetConfiguration(params);
+//		List<CodingScheme> schemes = ((LexEVSApplicationServiceImpl)lbs).getSourceAssertedResolvedVSCodingSchemes(params);
+//		assertTrue(schemes.size() > 0);
+//		assertTrue(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
+//		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("SRITEST:AUTO:AllDomesticButGM")));
+//	}
+//	
 	private String getPropertyQualifierValue(String qualifierName, Property prop) {
 		for (PropertyQualifier pq : prop.getPropertyQualifier()) {
 			if (pq.getPropertyQualifierName().equals(qualifierName)) {
@@ -480,31 +477,6 @@ public class DistributedResolvedValueSetTests {
 			}
 		}
 		return "";
-	}
-	
-	public static LexBIGService getLexBIGService(){
-		if(lbs == null){
-			lbs = LexBIGServiceImpl.defaultInstance();
-		}
-		return lbs;
-	}
-	
-	public void setLexBIGService(LexBIGService lbsvc){
-		lbs = lbsvc;
-	}
-
-	/**
-	 * @return the service
-	 */
-	public LexEVSResolvedValueSetService getService() {
-		return service;
-	}
-
-	/**
-	 * @param service the service to set
-	 */
-	public void setService(LexEVSResolvedValueSetService service) {
-		this.service = service;
 	}
 	
 

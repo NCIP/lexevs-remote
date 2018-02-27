@@ -35,8 +35,7 @@ protected String getTestID()
 }
 
 public void setUp(){
-	service  = new LexEVSResolvedValueSetServiceImpl(
-			LexEVSServiceHolder.instance().getLexEVSAppService());
+	service  = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 }
 public void testgetListofResolvedValueSets() throws LBException{
 	List<CodingScheme> schemes = service.listAllResolvedValueSets();

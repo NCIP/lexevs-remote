@@ -92,7 +92,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 	}
 	
 	public void testSimpleSearchContainsPerformanceResolvedValueSets() throws LBException {
-		LexEVSResolvedValueSetService rss = new LexEVSResolvedValueSetServiceImpl(LexEVSServiceHolder.instance().getLexEVSAppService());
+		LexEVSResolvedValueSetService rss = new LexEVSResolvedValueSetServiceImpl();
 		Set<CodingSchemeReference> valueSets = new HashSet<CodingSchemeReference>();
 		
 		for(CodingScheme cs : rss.listAllResolvedValueSets()){
