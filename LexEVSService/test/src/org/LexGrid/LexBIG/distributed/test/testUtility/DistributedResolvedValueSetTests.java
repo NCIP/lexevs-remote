@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
@@ -19,6 +20,7 @@ import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
+import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.commonTypes.Property;
@@ -156,7 +158,6 @@ public class DistributedResolvedValueSetTests {
 		
 		assertFalse(schemes.stream().anyMatch(x -> x.getFormalName().equals("Black")));
 		assertFalse(schemes.stream().anyMatch(x -> x.getRepresentsVersion().equals("0.1.5")));
-//		assertTrue(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C48323")));
 		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/TEST/C48323")));
 		final int count[] = {0};
 		schemes.forEach(x ->{ count[0]++; System.out.println(x.getFormalName() + " count: " +  count[0]);});
@@ -197,6 +198,25 @@ public class DistributedResolvedValueSetTests {
 		ResolvedConceptReferenceList refs = nullVsService.getValueSetEntitiesForURI(uri.toString());
 		assertNotNull(refs);
 		assertTrue(refs.getResolvedConceptReferenceCount() == 0);
+	}
+	
+	@Test
+	public void getValueSetEntitiesFromIterator() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator refs = service.getValueSetIteratorForURI(uri.toString());
+		assertNotNull(refs);
+		assertTrue(refs.numberRemaining() > 0);
+		assertNotNull(refs.next());
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void getValueSetEntitiesWithNoAssertedSchemeFromIterator() throws Exception {
+		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl();
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator refs = nullVsService.getValueSetIteratorForURI(uri.toString());
+		assertNotNull(refs);
+		assertTrue(refs.numberRemaining() == 0);
+		assertNull(refs.next());
 	}
 
 	@Test
@@ -461,15 +481,6 @@ public class DistributedResolvedValueSetTests {
 		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
 	}
 	
-//	@Test
-//	public void testGetSourceAssertedResolvedValueSets(){
-// 	//	((LexBIGServiceImpl)lbs).setAssertedValueSetConfiguration(params);
-//		List<CodingScheme> schemes = ((LexEVSApplicationServiceImpl)lbs).getSourceAssertedResolvedVSCodingSchemes(params);
-//		assertTrue(schemes.size() > 0);
-//		assertTrue(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
-//		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("SRITEST:AUTO:AllDomesticButGM")));
-//	}
-//	
 	private String getPropertyQualifierValue(String qualifierName, Property prop) {
 		for (PropertyQualifier pq : prop.getPropertyQualifier()) {
 			if (pq.getPropertyQualifierName().equals(qualifierName)) {

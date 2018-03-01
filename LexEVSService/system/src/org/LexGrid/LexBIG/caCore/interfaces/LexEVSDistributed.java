@@ -41,5 +41,5 @@ public interface LexEVSDistributed extends TokenSecurableApplicationService, Lex
 
 	public SourceAssertedValueSetServiceImpl getLexEVSSourceAssertedValueSetServices(AssertedValueSetParameters params);
 
-	List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes(AssertedValueSetParameters params);
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes(AssertedValueSetParameters params);
 }

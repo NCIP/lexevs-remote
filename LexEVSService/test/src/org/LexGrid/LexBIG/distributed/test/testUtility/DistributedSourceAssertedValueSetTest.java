@@ -35,7 +35,6 @@ public class DistributedSourceAssertedValueSetTest {
 
 	@Before
 	public void setUp() throws Exception {
-//	lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
 		AssertedValueSetParameters params = new AssertedValueSetParameters.Builder("0.1.5").
 				assertedDefaultHierarchyVSRelation("Concept_In_Subset").
 				codingSchemeName("owl2lexevs").
@@ -53,7 +52,6 @@ public class DistributedSourceAssertedValueSetTest {
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 	
-	//TODO:  Needs addtl non asserted value sets loaded
 	@Test
 	public void testListAllValueSets() throws LBException {
 		List<CodingScheme> schemes = svc.getMinimalSourceAssertedValueSetSchemes();
