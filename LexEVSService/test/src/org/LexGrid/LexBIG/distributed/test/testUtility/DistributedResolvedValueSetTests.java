@@ -200,24 +200,24 @@ public class DistributedResolvedValueSetTests {
 		assertTrue(refs.getResolvedConceptReferenceCount() == 0);
 	}
 	
-	@Test
-	public void getValueSetEntitiesFromIterator() throws Exception {
-		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
-		ResolvedConceptReferencesIterator refs = service.getValueSetIteratorForURI(uri.toString());
-		assertNotNull(refs);
-		assertTrue(refs.numberRemaining() > 0);
-		assertNotNull(refs.next());
-	}
-	
-	@Test(expected=RuntimeException.class)
-	public void getValueSetEntitiesWithNoAssertedSchemeFromIterator() throws Exception {
-		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl();
-		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
-		ResolvedConceptReferencesIterator refs = nullVsService.getValueSetIteratorForURI(uri.toString());
-		assertNotNull(refs);
-		assertTrue(refs.numberRemaining() == 0);
-		assertNull(refs.next());
-	}
+//	@Test
+//	public void getValueSetEntitiesFromIterator() throws Exception {
+//		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+//		ResolvedConceptReferencesIterator refs = service.getValueSetIteratorForURI(uri.toString());
+//		assertNotNull(refs);
+//		assertTrue(refs.numberRemaining() > 0);
+//		assertNotNull(refs.next());
+//	}
+//	
+//	@Test(expected=RuntimeException.class)
+//	public void getValueSetEntitiesWithNoAssertedSchemeFromIterator() throws Exception {
+//		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl();
+//		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+//		ResolvedConceptReferencesIterator refs = nullVsService.getValueSetIteratorForURI(uri.toString());
+//		assertNotNull(refs);
+//		assertTrue(refs.numberRemaining() == 0);
+//		assertNull(refs.next());
+//	}
 
 	@Test
 	public void testGetResolvedValueSetsforConceptReference() {
