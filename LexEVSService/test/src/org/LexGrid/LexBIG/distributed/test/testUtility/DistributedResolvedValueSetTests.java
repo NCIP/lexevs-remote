@@ -266,6 +266,20 @@ public class DistributedResolvedValueSetTests {
 		assertEquals(0, list3.getResolvedConceptReferenceCount());
 		assertEquals(0, itr.numberRemaining());
 	}
+	
+	@Test
+	public void testPageByNone() throws Exception {
+
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+		
+		ResolvedConceptReferenceList list = itr.next(0);
+		assertNotNull(list);
+		assertEquals(0, list.getResolvedConceptReferenceCount());
+		assertEquals(2, itr.numberRemaining());
+	
+	}
 
 	@Test
 	public void testGetResolvedValueSetsforConceptReference() {
