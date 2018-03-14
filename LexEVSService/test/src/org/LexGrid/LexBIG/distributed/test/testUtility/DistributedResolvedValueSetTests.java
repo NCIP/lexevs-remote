@@ -283,13 +283,37 @@ public class DistributedResolvedValueSetTests {
 	@Test
 	public void testNext() throws Exception {
 		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
-
-		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
-		
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());		
 		ResolvedConceptReference ref = itr.next();
 		assertNotNull(ref);
-		assertEquals(1, itr.numberRemaining());
+		assertEquals(1, itr.numberRemaining());		
+	}
+	
+	@Test
+	public void testNextAndPage() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());		
+		ResolvedConceptReferenceList ref = itr.next(1);
+		assertNotNull(ref);
+		assertEquals(1, itr.numberRemaining());		
 		
+		ResolvedConceptReference ref1 = itr.next();
+		assertNotNull(ref1);
+		assertEquals(0, itr.numberRemaining());		
+	}
+	
+	@Test
+	public void testPageAndNext() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());			
+		
+		ResolvedConceptReference ref1 = itr.next();
+		assertNotNull(ref1);
+		assertEquals(1, itr.numberRemaining());	
+		
+		ResolvedConceptReferenceList ref = itr.next(1);
+		assertNotNull(ref);
+		assertEquals(0, itr.numberRemaining());	
 	}
 
 	@Test
