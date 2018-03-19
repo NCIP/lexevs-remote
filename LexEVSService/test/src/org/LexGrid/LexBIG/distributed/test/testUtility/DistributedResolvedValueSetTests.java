@@ -17,6 +17,8 @@ import org.LexGrid.LexBIG.DataModel.Core.AbsoluteCodingSchemeVersionReference;
 import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
+import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
+import org.LexGrid.LexBIG.Exceptions.LBResourceUnavailableException;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
@@ -32,6 +34,7 @@ import org.junit.experimental.categories.Category;
 import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
+import org.lexgrid.valuesets.sourceasserted.impl.AssertedValueSetResolvedConceptReferenceIterator;
 
 public class DistributedResolvedValueSetTests {
 	static AssertedValueSetParameters params;
@@ -200,24 +203,118 @@ public class DistributedResolvedValueSetTests {
 		assertTrue(refs.getResolvedConceptReferenceCount() == 0);
 	}
 	
-//	@Test
-//	public void getValueSetEntitiesFromIterator() throws Exception {
-//		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
-//		ResolvedConceptReferencesIterator refs = service.getValueSetIteratorForURI(uri.toString());
-//		assertNotNull(refs);
-//		assertTrue(refs.numberRemaining() > 0);
-//		assertNotNull(refs.next());
-//	}
-//	
-//	@Test(expected=RuntimeException.class)
-//	public void getValueSetEntitiesWithNoAssertedSchemeFromIterator() throws Exception {
-//		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl();
-//		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
-//		ResolvedConceptReferencesIterator refs = nullVsService.getValueSetIteratorForURI(uri.toString());
-//		assertNotNull(refs);
-//		assertTrue(refs.numberRemaining() == 0);
-//		assertNull(refs.next());
-//	}
+	@Test
+	public void getValueSetEntitiesFromIterator() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator refs = service.getValueSetIteratorForURI(uri.toString());
+		assertNotNull(refs);
+		assertTrue(refs.numberRemaining() > 0);
+		assertNotNull(refs.next());
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void getValueSetEntitiesWithNoAssertedSchemeFromIterator() throws Exception {
+		LexEVSResolvedValueSetServiceImpl nullVsService = new LexEVSResolvedValueSetServiceImpl();
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator refs = nullVsService.getValueSetIteratorForURI(uri.toString());
+		assertNotNull(refs);
+		assertTrue(refs.numberRemaining() == 0);
+		assertNull(refs.next());
+	}
+	
+	@Test
+	public void testPage() throws Exception {
+
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+		
+		ResolvedConceptReferenceList list = itr.next(2);
+		assertNotNull(list);
+		assertTrue(list.getResolvedConceptReferenceCount() > 0);
+		assertNotNull(list.getResolvedConceptReference()[0]);
+		assertEquals(2, list.getResolvedConceptReferenceCount());
+		assertEquals(0, itr.numberRemaining());
+		
+		ResolvedConceptReferenceList list2 = itr.next(1);
+		assertNotNull(list2);
+		assertEquals(0, list2.getResolvedConceptReferenceCount());
+		assertEquals(0, itr.numberRemaining());
+	}
+	
+	@Test
+	public void testPageByOne() throws Exception {
+
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+		
+		ResolvedConceptReferenceList list = itr.next(1);
+		assertNotNull(list);
+		assertTrue(list.getResolvedConceptReferenceCount() > 0);
+		assertNotNull(list.getResolvedConceptReference()[0]);
+		assertEquals(1, list.getResolvedConceptReferenceCount());
+		assertEquals(1, itr.numberRemaining());
+		
+		ResolvedConceptReferenceList list2 = itr.next(1);
+		assertNotNull(list2);
+		assertEquals(1, list2.getResolvedConceptReferenceCount());
+		assertEquals(0, itr.numberRemaining());
+		
+		ResolvedConceptReferenceList list3 = itr.next(1);
+		assertNotNull(list3);
+		assertEquals(0, list3.getResolvedConceptReferenceCount());
+		assertEquals(0, itr.numberRemaining());
+	}
+	
+	@Test
+	public void testPageByNone() throws Exception {
+
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+		
+		ResolvedConceptReferenceList list = itr.next(0);
+		assertNotNull(list);
+		assertEquals(0, list.getResolvedConceptReferenceCount());
+		assertEquals(2, itr.numberRemaining());
+	}
+	
+	@Test
+	public void testNext() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());		
+		ResolvedConceptReference ref = itr.next();
+		assertNotNull(ref);
+		assertEquals(1, itr.numberRemaining());		
+	}
+	
+	@Test
+	public void testNextAndPage() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());		
+		ResolvedConceptReferenceList ref = itr.next(1);
+		assertNotNull(ref);
+		assertEquals(1, itr.numberRemaining());		
+		
+		ResolvedConceptReference ref1 = itr.next();
+		assertNotNull(ref1);
+		assertEquals(0, itr.numberRemaining());		
+	}
+	
+	@Test
+	public void testPageAndNext() throws Exception {
+		URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());			
+		
+		ResolvedConceptReference ref1 = itr.next();
+		assertNotNull(ref1);
+		assertEquals(1, itr.numberRemaining());	
+		
+		ResolvedConceptReferenceList ref = itr.next(1);
+		assertNotNull(ref);
+		assertEquals(0, itr.numberRemaining());	
+	}
 
 	@Test
 	public void testGetResolvedValueSetsforConceptReference() {
