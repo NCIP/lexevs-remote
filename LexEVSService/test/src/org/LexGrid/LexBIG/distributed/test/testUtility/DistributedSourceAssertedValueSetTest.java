@@ -48,7 +48,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.listAllSourceAssertedValueSets();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 8L);
+		assertEquals(count, 4L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 	
@@ -57,7 +57,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getMinimalSourceAssertedValueSetSchemes();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 11L);
+		assertEquals(count, 7L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 
@@ -93,14 +93,9 @@ public class DistributedSourceAssertedValueSetTest {
 		assertNotNull(roots);
 		assertTrue(roots.size() > 0);
 		assertTrue(roots.stream().filter(x -> x.equals("C99999")).findAny().isPresent());
-		assertTrue(roots.stream().filter(x -> x.equals("C99998")).findAny().isPresent());
-		assertTrue(roots.stream().filter(x -> x.equals("C99997")).findAny().isPresent());
-		assertTrue(roots.stream().filter(x -> x.equals("C99996")).findAny().isPresent());
-		assertTrue(roots.stream().filter(x -> x.equals("C99989")).findAny().isPresent());
-		assertTrue(roots.stream().filter(x -> x.equals("C99988")).findAny().isPresent());
+		assertTrue(roots.stream().filter(x -> x.equals("C54453")).findAny().isPresent());
 		assertTrue(roots.stream().filter(x -> x.equals("C48323")).findAny().isPresent());
 		assertTrue(roots.stream().filter(x -> x.equals("C48325")).findAny().isPresent());
-		assertFalse(roots.stream().filter(x -> x.equals("C37927")).findAny().isPresent());
 	}
 	
 	@Test
@@ -169,7 +164,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<Entity> entities = (List<Entity>) svc.getAllSourceAssertedValueSetEntities();
 		assertNotNull(entities);
 		assertTrue(entities.size() > 0);
-		assertEquals(entities.size(), 6);
+		assertEquals(entities.size(), 8);
 	}
 	
 	@Test
