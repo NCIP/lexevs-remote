@@ -38,7 +38,6 @@
             <property name="httpInvokerRequestExecutor">
                  <bean class="org.LexGrid.LexBIG.caCore.client.proxy.ProxyUnwrappingHttpInvokerRequestExecutor">
                 	<property name="proxyHelper" ref="DistributedProxyHelper"/>
-                	<property name="connectionTimeout" value="0"/>
                 </bean>
              </property>
        </bean>
@@ -71,7 +70,6 @@
                                           &lt;property name=&quot;httpInvokerRequestExecutor&quot;&gt;
                                                 &lt;bean class=&quot;org.LexGrid.LexBIG.caCore.client.proxy.ProxyUnwrappingHttpInvokerRequestExecutor&quot;&gt;
                 									&lt;property name=&quot;proxyHelper&quot; ref=&quot;DistributedProxyHelper&quot;/&gt;
-                									&lt;property name=&quot;connectionTimeout&quot; ref=&quot;0&quot;/&gt;
                                           		&lt;/bean&gt;
                                           &lt;/property&gt;
                                     &lt;/bean&gt;
