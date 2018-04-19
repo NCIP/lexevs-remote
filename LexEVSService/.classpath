@@ -134,6 +134,6 @@
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.1.SNAPSHOT.9-tests.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.1.SNAPSHOT.10-tests.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
