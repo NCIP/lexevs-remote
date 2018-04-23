@@ -1,10 +1,13 @@
 package org.LexGrid.LexBIG.distributed.test.testUtility;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
@@ -95,5 +98,27 @@ public class DistributedAssertedVSSearchExtensionTest {
 		assertEquals(ref.getCode(), "C48323");
 		assertEquals(ref.getEntityDescription().getContent(), "Black");
 	}
+	
+	@Test
+	public void testParams4() throws LBParameterException, LBResourceUnavailableException, LBInvocationException {
+		CodingSchemeReference csRef = new CodingSchemeReference();
+		csRef.setCodingScheme("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		csRef.setVersionOrTag(Constructors.createCodingSchemeVersionOrTagFromVersion("0.1.5"));
+		Set<CodingSchemeReference> csRefs = new HashSet<CodingSchemeReference>();
+		csRefs.add(csRef);
+		ResolvedConceptReferencesIterator itr = service.search(
+				"Color", null, csRefs, MatchAlgorithm.PROPERTY_CONTAINS, true, false);
+		List<ResolvedConceptReference> refs = new ArrayList<ResolvedConceptReference>();
+		assertNotNull(itr);
+		while(itr.hasNext()) {
+		refs.add(itr.next());
+		}
+		assertTrue(refs.size() > 0);
+		assertEquals(refs.size(), 8);
+		assertFalse(refs.stream().anyMatch(x -> x.getCode().equals("C54453")));
+		assertTrue(refs.stream().anyMatch(x -> x.getCode().equals("C99996")));
+	}
+	
+	
 
 }

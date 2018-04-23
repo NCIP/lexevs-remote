@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
+import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.Exceptions.LBResourceUnavailableException;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
@@ -316,6 +319,70 @@ public class DistributedResolvedValueSetTests {
 		assertEquals(0, itr.numberRemaining());	
 	}
 
+
+@Test
+public void testHasNext() 
+		throws LBException, URISyntaxException {
+	URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+	ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+	List<ResolvedConceptReference> list = new ArrayList<ResolvedConceptReference>();
+	while(itr.hasNext()) {
+		list.add(itr.next());
+	}
+	assertTrue(list.size() > 0);
+	assertEquals(list.size(), 2);
+}
+
+@Test
+public void testHasNextPage()
+		throws LBException, URISyntaxException {
+	URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+	ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+	List<ResolvedConceptReference> list = new ArrayList<ResolvedConceptReference>();
+	while(itr.hasNext()) {
+		list.addAll(Arrays.asList(itr.next(2).getResolvedConceptReference()));
+	}
+	assertTrue(list.size() > 0);
+	assertEquals(list.size(), 2);
+}
+
+@Test
+public void testHasNextPageLowerBoundary() 
+		throws LBException, URISyntaxException {
+	URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+	ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+	List<ResolvedConceptReference> list = new ArrayList<ResolvedConceptReference>();
+	while(itr.hasNext()) {
+		list.addAll(Arrays.asList(itr.next(1).getResolvedConceptReference()));
+	}
+	assertTrue(list.size() > 0);
+	assertEquals(list.size(), 2);
+}
+
+@Test
+public void testHasNextPageLowerBoundaryBadRequest()
+		throws LBException, URISyntaxException{
+	URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+	ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+	List<ResolvedConceptReference> list = new ArrayList<ResolvedConceptReference>();
+	while(itr.hasNext()) {
+		list.addAll(Arrays.asList(itr.next(0).getResolvedConceptReference()));
+	}
+	assertEquals(list.size(), 0);
+}
+
+@Test
+public void testHasNextPageUpperBoundaryOverFlow()
+		throws LBException, URISyntaxException {
+	URI uri = new URI("http://evs.nci.nih.gov/valueset/TEST/C48323");
+	ResolvedConceptReferencesIterator itr = service.getValueSetIteratorForURI(uri.toString());
+	List<ResolvedConceptReference> list = new ArrayList<ResolvedConceptReference>();
+	while(itr.hasNext()) {
+		list.addAll(Arrays.asList(itr.next(6).getResolvedConceptReference()));
+	}
+	assertTrue(list.size() > 0);
+	assertEquals(list.size(), 2);
+}
 	@Test
 	public void testGetResolvedValueSetsforConceptReference() {
 		//Resolved value set coding scheme
