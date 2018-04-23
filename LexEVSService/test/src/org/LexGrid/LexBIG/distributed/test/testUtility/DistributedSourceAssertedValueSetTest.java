@@ -13,6 +13,7 @@ import org.LexGrid.LexBIG.DataModel.Core.AbsoluteCodingSchemeVersionReference;
 import org.LexGrid.LexBIG.DataModel.Core.ConceptReference;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
+import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Exceptions.LBResourceUnavailableException;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
@@ -119,11 +120,22 @@ public class DistributedSourceAssertedValueSetTest {
 	}
 	
 	@Test
-	public void testGetSourceAssertedValueSetIteratorForURI() throws LBResourceUnavailableException {
+	public void testGetSourceAssertedValueSetIteratorForURI() throws LBResourceUnavailableException, LBInvocationException {
 		ResolvedConceptReferencesIterator itr = svc.getSourceAssertedValueSetIteratorForURI(AssertedValueSetServices.BASE + "FDA/" + "C54453");
 		assertTrue(itr.hasNext());
 		assertTrue(itr.numberRemaining() > 0);
 		assertEquals(itr.numberRemaining(), 2);
+		assertNotNull(itr.next());
+	}
+	
+	@Test
+	public void testGetSourceAssertedValueSetIteratorForURIForPagedNext() throws LBResourceUnavailableException, LBInvocationException {
+		ResolvedConceptReferencesIterator itr = svc.getSourceAssertedValueSetIteratorForURI(AssertedValueSetServices.BASE + "FDA/" + "C54453");
+		while(itr.hasNext()) {
+			itr.next(2);
+		}
+		assertFalse(itr.hasNext());
+		assertEquals(itr.numberRemaining(), 0);
 	}
 	
 	@Test
