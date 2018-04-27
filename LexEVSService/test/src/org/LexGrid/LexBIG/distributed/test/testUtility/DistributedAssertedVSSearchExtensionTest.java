@@ -54,7 +54,7 @@ public class DistributedAssertedVSSearchExtensionTest {
 	@Test
 	public void testParams1() throws LBParameterException, LBResourceUnavailableException, LBInvocationException {
 		CodingSchemeReference csRef = new CodingSchemeReference();
-		csRef.setCodingScheme("http://evs.nci.nih.gov/valueset/TEST/C48323");
+		csRef.setCodingScheme("http://evs.nci.nih.gov/valueset/FDA/C54453");
 		csRef.setVersionOrTag(Constructors.createCodingSchemeVersionOrTagFromVersion("0.1.5"));
 		ResolvedConceptReferencesIterator itr = service.search("Black", csRef,  MatchAlgorithm.PROPERTY_EXACT);
 		assertNotNull(itr);
@@ -63,6 +63,7 @@ public class DistributedAssertedVSSearchExtensionTest {
 		assertNotNull(ref);
 		assertEquals(ref.getCode(), "C48323");
 		assertEquals(ref.getEntityDescription().getContent(), "Black");
+		assertEquals(ref.getCodingSchemeName(), "owl2lexevs");
 	}
 	
 	@Test
