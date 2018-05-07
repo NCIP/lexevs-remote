@@ -39,7 +39,8 @@ public class DistributedSourceAssertedValueSetTest {
 		AssertedValueSetParameters params = new AssertedValueSetParameters.Builder("0.1.5").
 				assertedDefaultHierarchyVSRelation("Concept_In_Subset").
 				codingSchemeName("owl2lexevs").
-				codingSchemeURI("http://ncicb.nci.nih.gov/xml/owl/EVS/owl2lexevs.owl")
+				codingSchemeURI("http://ncicb.nci.nih.gov/xml/owl/EVS/owl2lexevs.owl").
+				rootConcept("C54453")
 				.build();
 		svc = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSSourceAssertedValueSetServices(params);
 	}
