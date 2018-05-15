@@ -646,6 +646,13 @@ public void testHasNextPageUpperBoundaryOverFlow()
 		assertFalse(schemes.stream().anyMatch(x -> x.getCodingSchemeURI().equals("http://evs.nci.nih.gov/valueset/FDA/C99999")));
 	}
 	
+	@Test
+	public void doesAssertValueSetSystemExist() {
+		assertTrue(service.doesServiceContainAssertedValueSetTerminology(params));
+		assertFalse(service.doesServiceContainAssertedValueSetTerminology(new AssertedValueSetParameters.Builder().build()));
+		assertFalse(service.doesServiceContainAssertedValueSetTerminology(null));
+	}
+	
 	private String getPropertyQualifierValue(String qualifierName, Property prop) {
 		for (PropertyQualifier pq : prop.getPropertyQualifier()) {
 			if (pq.getPropertyQualifierName().equals(qualifierName)) {
