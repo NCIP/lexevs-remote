@@ -35,8 +35,7 @@ protected String getTestID()
 }
 
 public void setUp(){
-	service  = new LexEVSResolvedValueSetServiceImpl(
-			LexEVSServiceHolder.instance().getLexEVSAppService());
+	service  = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
 }
 public void testgetListofResolvedValueSets() throws LBException{
 	List<CodingScheme> schemes = service.listAllResolvedValueSets();
@@ -73,6 +72,16 @@ public void testGetVersionsInResolutions() throws URISyntaxException{
 		assertTrue(ref.getCodingSchemeURN().equals(THES_URN));
 		ref.getCodingSchemeVersion().equals(RESOLVEDVS_THES_VERSION);
 	}
+}
+
+public void testGetMinimalResolvedValueSetSchemes() throws URISyntaxException, LBException{
+	List<CodingScheme> list = service.getMinimalResolvedValueSetSchemes();
+	assertTrue(list.size() > 0 );
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("All Domestic Autos But GM")));
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("All Domestic Autos But GM  and "
+			+ "as many characters as it takes to exceed 50 chars "
+			+ "but not 250 chars and that should about do it")));
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("One Child Value Set")));
 }
 
 }
