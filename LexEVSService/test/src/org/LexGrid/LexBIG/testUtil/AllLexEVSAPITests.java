@@ -16,9 +16,13 @@ import org.LexGrid.LexBIG.Impl.Extensions.tree.service.PathToRootTreeServiceImpl
 import org.LexGrid.LexBIG.Impl.function.codednodeset.ResolveToListTest;
 import org.LexGrid.LexBIG.Impl.testUtility.LexBIGServiceTestFactory;
 import org.LexGrid.LexBIG.Utility.RemoveFromDistributedTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedAssertedVSSearchExtensionTest;
+import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedResolvedValueSetTests;
+import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedSourceAssertedValueSetTest;
 import org.LexGrid.LexBIG.distributed.test.testUtility.DistributedValueSetDefinitionTests;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedGraphTestSuite;
 import org.LexGrid.LexBIG.distributed.test.testUtility.ScannedCodedNodeTestSuite;
+import org.LexGrid.LexBIG.distributed.test.valueset.AssertedVSHierarchyTest;
 import org.LexGrid.LexBIG.distributed.test.valueset.TestLexEVSValueSetDefinitionServices;
 import org.junit.ClassRule;
 import org.junit.experimental.categories.Categories;
@@ -48,7 +52,13 @@ import org.junit.runners.Suite.SuiteClasses;
 	MultipleNamspaceErrorLEXEVS_598_Test.class,
 	PathToRootTreeServiceImplTest.class,
 	DistributedValueSetDefinitionTests.class,
-	TestLexEVSValueSetDefinitionServices.class})
+	DistributedResolvedValueSetTests.class,
+	DistributedSourceAssertedValueSetTest.class,
+	DistributedAssertedVSSearchExtensionTest.class,
+	TestLexEVSValueSetDefinitionServices.class,
+	AssertedVSHierarchyTest.class,
+	TestTreeExtensionFullServiceTest.class
+	})
 public class AllLexEVSAPITests{
 
     @ClassRule

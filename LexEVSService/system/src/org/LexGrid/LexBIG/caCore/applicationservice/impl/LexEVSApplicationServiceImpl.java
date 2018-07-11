@@ -45,15 +45,21 @@ import org.LexGrid.LexBIG.caCore.security.Validator;
 import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.apache.log4j.Logger;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.lexevs.system.utility.MyClassLoader;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
 import org.lexgrid.conceptdomain.impl.LexEVSConceptDomainServicesImpl;
+import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
+import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
 import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
 import org.lexgrid.valuesets.impl.LexEVSPickListDefinitionServicesImpl;
 import org.lexgrid.valuesets.impl.LexEVSValueSetDefinitionServicesImpl;
+import org.lexgrid.valuesets.sourceasserted.SourceAssertedValueSetHierarchyServices;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetHierarchyServicesImpl;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ClassUtils;
 
@@ -469,6 +475,16 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 		return LexEVSPickListDefinitionServicesImpl.defaultInstance();
 	}
 
+	@Override
+	public SourceAssertedValueSetHierarchyServicesImpl getLexEVSSourceAssertedValueSetHierarchyServices() {
+		return (SourceAssertedValueSetHierarchyServicesImpl)SourceAssertedValueSetHierarchyServicesImpl.defaultInstance();
+	}
+	
+	@Override
+	public SourceAssertedValueSetServiceImpl getLexEVSSourceAssertedValueSetServices(AssertedValueSetParameters params) {
+		return (SourceAssertedValueSetServiceImpl) SourceAssertedValueSetServiceImpl.getDefaultValueSetServiceForVersion(params);
+	}
+
 	public boolean isUpdateClientProxyTarget() {
 		return updateClientProxyTarget;
 	}
@@ -483,5 +499,31 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 
 	public void setRemoteResourceManager(RemoteResourceManager remoteResourceManager) {
 		this.remoteResourceManager = remoteResourceManager;
+	}
+
+	@Override
+	public List<CodingScheme> getMinimalResolvedVSCodingSchemes() throws LBInvocationException {
+		return lbs.getMinimalResolvedVSCodingSchemes();
+	}
+
+	@Override
+	public List<CodingScheme> getRegularResolvedVSCodingSchemes() {
+		return lbs.getRegularResolvedVSCodingSchemes();
+	}
+
+	@Override
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes(AssertedValueSetParameters params) {
+		((LexBIGServiceImpl)lbs).setAssertedValueSetConfiguration(params);
+		return lbs.getSourceAssertedResolvedVSCodingSchemes();
+	}
+	
+	@Override
+	public LexEVSResolvedValueSetService getLexEVSResolvedVSService(AssertedValueSetParameters params) {
+		return new LexEVSResolvedValueSetServiceImpl(params);
+	}
+
+	@Override
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
+		return getSourceAssertedResolvedVSCodingSchemes(null);
 	}
 }
