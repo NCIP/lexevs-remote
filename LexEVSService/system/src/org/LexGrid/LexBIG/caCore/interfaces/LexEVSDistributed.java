@@ -8,11 +8,18 @@
 */
 package org.LexGrid.LexBIG.caCore.interfaces;
 
+import java.util.List;
+
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationService;
+import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
+import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.valuesets.LexEVSPickListDefinitionServices;
 import org.lexgrid.valuesets.LexEVSValueSetDefinitionServices;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetHierarchyServicesImpl;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetServiceImpl;
 
 /**
  * The Distributed LexEVS Portion of LexEVSAPI. This interface is a framework for calling
@@ -27,4 +34,12 @@ public interface LexEVSDistributed extends TokenSecurableApplicationService, Lex
 	public LexEVSConceptDomainServices getLexEVSConceptDomainServices();
 	
 	public LexEVSPickListDefinitionServices getLexEVSPickListDefinitionServices();
+	
+	public SourceAssertedValueSetHierarchyServicesImpl getLexEVSSourceAssertedValueSetHierarchyServices();
+
+	public LexEVSResolvedValueSetService getLexEVSResolvedVSService(AssertedValueSetParameters params);
+
+	public SourceAssertedValueSetServiceImpl getLexEVSSourceAssertedValueSetServices(AssertedValueSetParameters params);
+
+	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes(AssertedValueSetParameters params);
 }
