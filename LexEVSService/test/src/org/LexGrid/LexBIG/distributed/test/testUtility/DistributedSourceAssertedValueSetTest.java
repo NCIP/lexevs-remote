@@ -50,7 +50,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.listAllSourceAssertedValueSets();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 4L);
+		assertEquals(count, 5L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 	
@@ -59,7 +59,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getMinimalSourceAssertedValueSetSchemes();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 7L);
+		assertEquals(count, 8L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 
