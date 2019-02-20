@@ -526,4 +526,14 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	public List<CodingScheme> getSourceAssertedResolvedVSCodingSchemes() {
 		return getSourceAssertedResolvedVSCodingSchemes(null);
 	}
+
+	@Override
+	public String getLexEVSBuildTimestamp() {
+		return lbs.getLexEVSBuildTimestamp();
+	}
+
+	@Override
+	public String getLexEVSBuildVersion() {
+		return lbs.getLexEVSBuildVersion();
+	}
 }
