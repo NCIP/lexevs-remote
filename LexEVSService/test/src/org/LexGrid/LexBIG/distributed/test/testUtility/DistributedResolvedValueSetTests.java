@@ -540,9 +540,11 @@ public void testHasNextPageUpperBoundaryOverFlow()
 		long end1 = System.currentTimeMillis();
 		System.out.println("Exact Match: " + (end1 - start1) + " mseconds");
 		assertNotNull(asVSrefs);
-		assertTrue(asVSrefs.size() > 0);
-		AbsoluteCodingSchemeVersionReference asVSref = asVSrefs.get(0);
-		assertEquals(asVSref.getCodingSchemeURN(), "http://evs.nci.nih.gov/valueset/C54453");
+		assertTrue(asVSrefs.stream().
+				filter( vsRef -> vsRef.getCodingSchemeURN().equals("http://evs.nci.nih.gov/valueset/C54453") ||
+						vsRef.getCodingSchemeURN().equals("http://evs.nci.nih.gov/valueset/C117743"))
+				.findAny()
+				.isPresent());
 	}
 	
 	@Test
@@ -566,10 +568,11 @@ public void testHasNextPageUpperBoundaryOverFlow()
 		long end1 = System.currentTimeMillis();
 		System.out.println("Lucene Search: " + (end1 - start1) + " mseconds");
 		assertNotNull(asVSrefs);
-		assertTrue(asVSrefs.size() > 0);
-		AbsoluteCodingSchemeVersionReference asVsref = asVSrefs .get(0);
-		assertTrue(asVsref.getCodingSchemeURN().equals( "http://evs.nci.nih.gov/valueset/C54453"));
-
+		assertTrue(asVSrefs.stream().
+				filter( vsRef -> vsRef.getCodingSchemeURN().equals("http://evs.nci.nih.gov/valueset/C54453") ||
+						vsRef.getCodingSchemeURN().equals("http://evs.nci.nih.gov/valueset/C117743"))
+				.findAny()
+				.isPresent());
 	}
 	
 	@Test

@@ -69,8 +69,17 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getSourceAssertedValueSetsForConceptReference(reference );
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology")).findAny().isPresent());
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology")).findAny().isPresent());
+ 		assertTrue(schemes.stream()
+ 				.filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology") ||
+ 						x.getCodingSchemeName().equals("SPL Color Terminology")
+ 				).findAny().isPresent());
+ 		// Could be any presentation
+ 		assertTrue(schemes.stream().filter(x -> 
+ 		x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology") || 
+ 		x.getCodingSchemeName().equals("SDTM-OETESTCD") ||
+ 		x.getCodingSchemeName().equals("Ophthalmic Exam Test Code") ||
+ 		x.getCodingSchemeName().equals("OETESTCD") 
+ 		).findAny().isPresent());
 	}
 	
 	
@@ -159,8 +168,17 @@ public class DistributedSourceAssertedValueSetTest {
 		schemes = svc.getSourceAssertedValueSetforValueSetMemberEntityCode("C48323");
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology")).findAny().isPresent());
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology")).findAny().isPresent());
+ 		assertTrue(schemes.stream()
+ 				.filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology") ||
+ 						x.getCodingSchemeName().equals("SPL Color Terminology")
+ 				).findAny().isPresent());
+ 		// Could be any presentation
+ 		assertTrue(schemes.stream().filter(x -> 
+ 		x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology") || 
+ 		x.getCodingSchemeName().equals("SDTM-OETESTCD") ||
+ 		x.getCodingSchemeName().equals("Ophthalmic Exam Test Code") ||
+ 		x.getCodingSchemeName().equals("OETESTCD") 
+ 		).findAny().isPresent());
 	}
 	
 	@Test
