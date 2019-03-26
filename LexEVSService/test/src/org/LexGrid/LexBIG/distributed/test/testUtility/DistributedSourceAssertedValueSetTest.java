@@ -86,14 +86,14 @@ public class DistributedSourceAssertedValueSetTest {
 	@Test
 	public void testSchemeData() throws LBException, URISyntaxException {
 		CodingScheme scheme = svc.getSourceAssertedValueSetForValueSetURI(new URI(AssertedValueSetServices.BASE + "C54453"));
-		assertNotNull(scheme);
-		assertNotNull(scheme.getCodingSchemeName());
+		assertEquals(scheme, null);
+		
+		scheme = svc.getSourceAssertedValueSetForValueSetURI(new URI(AssertedValueSetServices.BASE + "FDA/" + "C54453"));
 		assertEquals("Structured Product Labeling Color Terminology",scheme.getCodingSchemeName());
 		assertEquals(AssertedValueSetServices.BASE + "FDA/" + "C54453", scheme.getCodingSchemeURI());
 		assertTrue(scheme.getIsActive());
 		assertEquals("C48323", scheme.getEntities().getEntityAsReference().stream().filter(x -> x.getEntityDescription().
 				getContent().equals("Black")).findAny().get().getEntityCode());
-		
 	}
 	
 	
