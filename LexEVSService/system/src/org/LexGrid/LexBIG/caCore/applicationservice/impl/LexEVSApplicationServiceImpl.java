@@ -25,6 +25,7 @@ import org.LexGrid.LexBIG.DataModel.InterfaceElements.types.SortContext;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Extensions.Generic.GenericExtension;
+import org.LexGrid.LexBIG.Extensions.Generic.LexBIGServiceConvenienceMethods.TerminologyServiceDesignation;
 import org.LexGrid.LexBIG.Extensions.Query.Filter;
 import org.LexGrid.LexBIG.Extensions.Query.Sort;
 import org.LexGrid.LexBIG.History.HistoryService;
@@ -535,5 +536,10 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	@Override
 	public String getLexEVSBuildVersion() {
 		return lbs.getLexEVSBuildVersion();
+	}
+
+	@Override
+	public TerminologyServiceDesignation getTerminologyServiceObjectType(String uri) {
+		return lbs.getTerminologyServiceObjectType(uri);
 	}
 }
