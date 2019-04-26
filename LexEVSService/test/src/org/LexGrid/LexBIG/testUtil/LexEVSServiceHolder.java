@@ -8,9 +8,11 @@
 */
 package org.LexGrid.LexBIG.testUtil;
 
+import org.LexGrid.LexBIG.caCore.applicationservice.impl.LexEVSApplicationServiceImpl;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSDistributed;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSService;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 
 import gov.nih.nci.evs.security.SecurityToken;
 import gov.nih.nci.system.applicationservice.ApplicationService;
@@ -119,6 +121,18 @@ public class LexEVSServiceHolder {
 			LexEVSApplicationService svc = (LexEVSApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
 			svc.registerSecurityToken(ServiceTestCase.MEDDRA_SCHEME, goodToken);
 			svc.registerSecurityToken(ServiceTestCase.MEDDRA_URN, goodToken);
+			return svc;
+		} catch (Exception e) {	
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public LexEVSApplicationService getAssertedValueSetConfiguredLexEVSAppService(AssertedValueSetParameters params)
+	{
+		try {
+			LexEVSApplicationService svc = (LexEVSApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(serviceUrl, "EvsServiceInfo");
+			svc.setAssertedValueSetConfiguration(params);
 			return svc;
 		} catch (Exception e) {	
 			e.printStackTrace();

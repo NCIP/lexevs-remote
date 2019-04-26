@@ -12,6 +12,7 @@ import java.lang.annotation.Annotation;
 import java.util.HashMap;
 
 import org.LexGrid.LexBIG.caCore.security.interfaces.TokenSecurableApplicationService;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 
 import gov.nih.nci.system.applicationservice.ApplicationService;
 
@@ -50,5 +51,8 @@ public interface LexEVSApplicationService extends LexEVSService, ApplicationServ
     public Object executeRemotely(Object object, String methodName,
                     String[] parameterClasses, Object[] args)
                     throws Exception;
+    
+    
+    public void setAssertedValueSetConfiguration(AssertedValueSetParameters params);
       
 }
