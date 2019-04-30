@@ -33,9 +33,7 @@ import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
-import org.LexGrid.LexBIG.Extensions.Generic.LexBIGServiceConvenienceMethods;
 import org.LexGrid.LexBIG.Extensions.Generic.TerminologyServiceDesignation;
-import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
 import org.LexGrid.LexBIG.Impl.Extensions.GenericExtensions.LexBIGServiceConvenienceMethodsImpl;
 import org.LexGrid.LexBIG.Impl.function.LexBIGServiceTestCase;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeGraph;
@@ -590,10 +588,17 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
 		.build());
         lbscm = (LexBIGServiceConvenienceMethodsImpl)lbs.getGenericExtension("LexBIGServiceConvenienceMethods");
         lbscm.setLexBIGService(lbs);
-    	assertEquals(lbscm.getTerminologyServiceObjectType(AUTO_URN), TerminologyServiceDesignation.REGULAR_CODING_SCHEME.name());
-    	assertEquals(lbscm.getTerminologyServiceObjectType(MAPPING_SCHEME_URI), TerminologyServiceDesignation.MAPPING_CODING_SCHEME.name());
-    	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:CL413321.MDR.CST"), TerminologyServiceDesignation.MAPPING_CODING_SCHEME.name());
-    	assertEquals(lbscm.getTerminologyServiceObjectType("SRITEST:AUTO:AllDomesticButGM"), TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME.name());
-    	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453"), TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME.name());
+    	assertEquals(lbscm.getTerminologyServiceObjectType(AUTO_URN).getDesignation(), 
+    			new TerminologyServiceDesignation(
+    			TerminologyServiceDesignation.REGULAR_CODING_SCHEME).getDesignation());
+    	assertEquals(lbscm.getTerminologyServiceObjectType(MAPPING_SCHEME_URI).getDesignation(), 
+    			new TerminologyServiceDesignation(
+    					TerminologyServiceDesignation.MAPPING_CODING_SCHEME).getDesignation());
+    	assertEquals(lbscm.getTerminologyServiceObjectType("SRITEST:AUTO:AllDomesticButGM").getDesignation(), 
+    			new TerminologyServiceDesignation(
+    					TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME).getDesignation());
+    	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453").getDesignation(), 
+    			new TerminologyServiceDesignation(
+    					TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME).getDesignation());
     }
 }

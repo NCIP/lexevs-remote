@@ -539,7 +539,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	}
 
 	@Override
-	public String getTerminologyServiceObjectType(String uri) {
+	public TerminologyServiceDesignation getTerminologyServiceObjectType(String uri) {
 		return lbs.getTerminologyServiceObjectType(uri);
 	}
 	
