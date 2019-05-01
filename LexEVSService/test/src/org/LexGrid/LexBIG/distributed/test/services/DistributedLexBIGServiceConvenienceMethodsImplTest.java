@@ -70,7 +70,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
 		rootConcept("C54453")
 		.build());
         lbscm = (LexBIGServiceConvenienceMethodsImpl)lbs.getGenericExtension("LexBIGServiceConvenienceMethods");
-    //    lbscm.setLexBIGService(lbs);
+        lbscm.setLexBIGService(lbs);
     }
 
     
@@ -293,6 +293,8 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     @Test
     @Category(RemoveFromDistributedTests.class)
 	public void testGetAllIncomingConcepts() throws LBInvocationException, LBParameterException, LBException{
+        lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
+        lbscm = (LexBIGServiceConvenienceMethodsImpl)lbs.getGenericExtension("LexBIGServiceConvenienceMethods");
     	AssociatedConceptList refs = lbscm.getallIncomingConceptsForAssociation(AUTO_SCHEME, null, "B", "hasSubtype", 10);
     	assertTrue(refs.getAssociatedConceptCount() > 0);
     	assertTrue(refs.getAssociatedConcept(0).getCode().equals("A"));
