@@ -73,19 +73,6 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
         lbscm.setLexBIGService(lbs);
     }
 
-    
-//	public static LexBIGService getLexBIGService(){
-//		if(lbs == null){
-//			lbs = LexBIGServiceImpl.defaultInstance();
-//		}
-//		return lbs;
-//	}
-//	
-//	public void setLexBIGService(LexBIGService lbsvc){
-//		lbs = lbsvc;
-//	}
-
-
 	@Override
     protected String getTestID() {
         return testID;
@@ -291,7 +278,6 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     }
     
     @Test
-    @Category(RemoveFromDistributedTests.class)
 	public void testGetAllIncomingConcepts() throws LBInvocationException, LBParameterException, LBException{
         lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
         lbscm = (LexBIGServiceConvenienceMethodsImpl)lbs.getGenericExtension("LexBIGServiceConvenienceMethods");
