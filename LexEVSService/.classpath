@@ -95,15 +95,15 @@
 	<classpathentry kind="lib" path="system/lib/slf4j-log4j12-1.5.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-batch-core-2.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-batch-infrastructure-2.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-web-2.5.6.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-web-2.5.6.jar" sourcepath="/Users/bauerhs/.m2/repository/org/springframework/spring-web/2.5.6/spring-web-2.5.6-sources.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar" sourcepath="/Users/bauerhs/.m2/repository/org/springframework/spring-webmvc/2.5.6/spring-webmvc-2.5.6-sources.jar"/>
 	<classpathentry kind="lib" path="system/lib/velocity-1.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/xsdlib-20030807.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar" sourcepath="/Users/bauerhs/.m2/repository/org/springframework/spring-aop/3.1.0.RELEASE/spring-aop-3.1.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-asm-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-aspects-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-beans-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-context-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-context-3.1.0.RELEASE.jar" sourcepath="system/src"/>
 	<classpathentry kind="lib" path="system/lib/spring-context-support-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-core-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-expression-3.1.0.RELEASE.jar"/>
