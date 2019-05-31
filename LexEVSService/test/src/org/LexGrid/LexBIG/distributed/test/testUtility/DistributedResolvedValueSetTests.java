@@ -71,7 +71,7 @@ public class DistributedResolvedValueSetTests {
 			stream().filter(
 			prop -> prop.getPropertyName().
 			equals(LexEVSValueSetDefinitionServices.RESOLVED_AGAINST_CODING_SCHEME_VERSION)).
-				findAny().isPresent()).count(), 8);
+				findAny().isPresent()).count(), 9);
 		//Source asserted value set
 		assertTrue(list.stream().filter(scheme -> scheme.getCodingSchemeName().equals("Black")).findAny().isPresent());
 		//Resolved value set coding scheme

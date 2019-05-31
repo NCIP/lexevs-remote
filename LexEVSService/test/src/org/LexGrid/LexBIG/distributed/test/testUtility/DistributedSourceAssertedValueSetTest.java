@@ -195,7 +195,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<Entity> entities = (List<Entity>) svc.getAllSourceAssertedValueSetEntities();
 		assertNotNull(entities);
 		assertTrue(entities.size() > 0);
-		assertEquals(entities.size(), 9);
+		assertEquals(entities.size(), 10);
 	}
 	
 	@Test
