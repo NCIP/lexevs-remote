@@ -50,7 +50,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.listAllSourceAssertedValueSets();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 5L);
+		assertEquals(count, 6L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 	
@@ -59,7 +59,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getMinimalSourceAssertedValueSetSchemes();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 8L);
+		assertEquals(count, 9L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 
@@ -134,7 +134,7 @@ public class DistributedSourceAssertedValueSetTest {
 		ResolvedConceptReferencesIterator itr = svc.getSourceAssertedValueSetIteratorForURI(AssertedValueSetServices.BASE + "FDA/" + "C54453");
 		assertTrue(itr.hasNext());
 		assertTrue(itr.numberRemaining() > 0);
-		assertEquals(itr.numberRemaining(), 2);
+		assertEquals(itr.numberRemaining(), 3);
 		assertNotNull(itr.next());
 	}
 	
@@ -195,7 +195,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<Entity> entities = (List<Entity>) svc.getAllSourceAssertedValueSetEntities();
 		assertNotNull(entities);
 		assertTrue(entities.size() > 0);
-		assertEquals(entities.size(), 8);
+		assertEquals(entities.size(), 10);
 	}
 	
 	@Test
