@@ -267,7 +267,7 @@ abstract public class ServiceTestCase extends TestCase{
     public final static String AUTOMOBILES_SCHEME =  properties.getProperty("AUTOMOBILES_SCHEME");
     public final static String AUTOMOBILES_VERSION =  properties.getProperty("AUTOMOBILES_VERSION");
     public final static String AUTOMOBILES_CODE =  properties.getProperty("AUTOMOBILES_CODE");
-    
+    public final static String ASSERTED_VALUE_SET_CONCEPT =  properties.getProperty("ASSERTED_VALUE_SET_CONCEPT");
 	/**
 	 * To be implemented by each descendant testcase.
 	 * 
