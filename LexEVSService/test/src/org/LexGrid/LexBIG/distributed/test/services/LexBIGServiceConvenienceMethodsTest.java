@@ -91,8 +91,10 @@ public class LexBIGServiceConvenienceMethodsTest extends ServiceTestCase {
 	
 	public void testGetHierarchyIDs() throws Exception {
 		String[] ids = lbscm.getHierarchyIDs(THES_SCHEME, csvt);
-		assertTrue(ids.length == 1);
-		assertTrue(ids[0].equals("is_a"));
+		assertTrue(ids.length == 3);
+		Arrays.asList(ids).stream().anyMatch(x -> x.equals("is_a"));
+		Arrays.asList(ids).stream().anyMatch(x -> x.equals("Anatomic_Structure_Has_Location"));
+				Arrays.asList(ids).stream().anyMatch(x -> x.equals("Anatomic_Structure_Is_Physical_Part_Of"));
 	}
 	public void testGetHierarchyLevelNext() throws Exception {
 		AssociationList al = lbscm.getHierarchyLevelNext(THES_SCHEME, csvt, "is_a", "C64489", false, null);
@@ -102,7 +104,7 @@ public class LexBIGServiceConvenienceMethodsTest extends ServiceTestCase {
 	
 	public void testGetHierarchyLevelNextCount() throws Exception {
 		int count = lbscm.getHierarchyLevelNextCount(THES_SCHEME, csvt, "is_a", Constructors.createConceptReference("C64489", THES_SCHEME));
-		assertTrue(count == 3);
+		assertEquals(count,5);
 	}
 	
 	public void testGetHierarchyLevelPrev() throws Exception {

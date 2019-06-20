@@ -122,7 +122,7 @@ public class TestBugFixes extends ServiceTestCase
     public void testAssociationQualifiers() throws LBException
     {
         CodedNodeGraph cng = LexEVSServiceHolder.instance().getLexEVSAppService().getNodeGraph(THES_SCHEME, null, null);
-        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Anatomic_Structure_Is_Physical_Part_Of"), Constructors.createNameAndValueList("owl:someValuesFrom"));
+        cng = cng.restrictToAssociations(Constructors.createNameAndValueList("Anatomic_Structure_Is_Physical_Part_Of"), Constructors.createNameAndValueList("some"));
         ResolvedConceptReference[] rcr = cng.resolveAsList(Constructors.createConceptReference("C12366", null), 
                                                                      true, false, 1, 1, null, null, null, -1).getResolvedConceptReference();
 
@@ -135,7 +135,7 @@ public class TestBugFixes extends ServiceTestCase
         		.getAssociationQualifiers()
         		.getNameAndValue(0)
         		.getName()
-        		.equals("owl:someValuesFrom"));
+        		.equals("some"));
     }
     
     private boolean contains(SupportedAssociation[] sa, String association)

@@ -169,7 +169,7 @@ public void testRestrictPropertyTypeReturns() throws LBException
         assertTrue("1",ce.getCommentCount() == 0);
         assertTrue("2: " + ce.getPropertyCount(),ce.getPropertyCount() == 7);
         assertTrue("3",ce.getDefinitionCount() == 1);
-        assertTrue("5",ce.getPresentationCount() >= 4);
+        assertTrue("5",ce.getPresentationCount() >= 3);
 
         // restrict to a couple of presentation types
         rcrs = cns.resolveToList(
@@ -183,7 +183,7 @@ public void testRestrictPropertyTypeReturns() throws LBException
         assertTrue("7",ce.getCommentCount() == 0);
         assertTrue("8",ce.getPropertyCount() == 0);
         assertTrue("9",ce.getDefinitionCount() == 1);
-        assertTrue("11",ce.getPresentationCount() >= 4);
+        assertTrue("11",ce.getPresentationCount() >= 3);
         
         assertTrue("12",ce.getPresentation()[0].getValue().getContent().equals("PURPLE"));
         assertTrue("13",ce.getDefinition()[0].getValue().getContent().contains("Any of a group of colors with a hue between that of violet and red."));  
