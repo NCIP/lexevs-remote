@@ -109,6 +109,21 @@ abstract public class ServiceTestCase extends TestCase{
 	
 	public final static String MAPPING_TEXT = properties.getProperty("MAPPING_TEXT");
 	
+	public final static String ITERATOR_MAPPING_SCHEME = properties.getProperty("ITERATOR_MAPPING_SCHEME");
+	
+	public final static String ITERATOR_MAPPING_SCHEME_VERSION = properties.getProperty("ITERATOR_MAPPING_SCHEME_VERSION");
+	
+	public final static String ITERATOR_MAPPING_SCHEME_CODE = properties.getProperty("ITERATOR_MAPPING_SCHEME_CODE");
+	
+	public final static String PDQ_SCHEME = properties.getProperty("PDQ_SCHEME");
+	
+	public final static String PDQ_VERSION = properties.getProperty("PDQ_VERSION");
+	
+	public final static String OBIB_SCHEME = properties.getProperty("OBIB_SCHEME");
+	
+	public final static String OBIB_VERSION = properties.getProperty("OBIB_VERSION");
+	
+	
 	
 	/** The Constant META_SCHEME. */
 	public final static String META_SCHEME = properties.getProperty("META_SCHEME"); //"NCI MetaThesaurus";
