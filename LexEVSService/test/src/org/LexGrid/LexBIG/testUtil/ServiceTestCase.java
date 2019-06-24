@@ -175,6 +175,8 @@ abstract public class ServiceTestCase extends TestCase{
 	/** The Constant MEDDRA_TOKEN. */
 	public final static String MEDDRA_TOKEN = properties.getProperty("MEDDRA_TOKEN");
 
+	public final static String RESOLVED_NEOPLASM_SCHEME = properties.getProperty("RESOLVED_NEOPLASM_SCHEME");
+
 	//The following are all source names in Meta
 	/** The Constant meddraMeta. */
 	public final static String meddraMeta = properties.getProperty("meddraMeta"); //"MDR";
