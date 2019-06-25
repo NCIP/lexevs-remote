@@ -79,5 +79,28 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Cavernous Lymphangioma"))); 
 	    }
+	    
+	    @Test
+	    public void testsearchAllAscendentsInTransitiveClosureDomainVerySickCancerPatientSourceSpecific( ) throws LBException{
+	    	LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
+	    	long start = System.currentTimeMillis();
+	    	List<String> codes = new ArrayList<String>();
+	    	codes.add("C3262");
+	    	ResolvedConceptReferenceList refs = lbscm.searchDescendentsInTransitiveClosure(
+	    			THES_SCHEME,
+	    			Constructors.createCodingSchemeVersionOrTagFromVersion(THES_VERSION),
+	    			codes, 
+	    			"subClassOf", 
+	    			"Lymphangioma",
+	    			LBConstants.MatchAlgorithms.LuceneQuery.name(),
+	    			SearchDesignationOption.PREFERRED_ONLY, 
+	    			Constructors.createLocalNameList("NCI"));
+	    	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
+	    	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
+	    	assertTrue(list.size() > 0);
+	    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C60435")));
+	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C3203")));
+//	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs"))); }
+	    }
 	
 }
