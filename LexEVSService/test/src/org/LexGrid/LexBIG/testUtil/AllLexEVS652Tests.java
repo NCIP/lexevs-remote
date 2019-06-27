@@ -10,6 +10,7 @@ import org.LexGrid.LexBIG.distributed.test.bugs.TestLEXEVS_4376;
 import org.LexGrid.LexBIG.distributed.test.bugs.TestLEXEVS_4508;
 import org.LexGrid.LexBIG.distributed.test.bugs.TestLEXEVS_4535;
 import org.LexGrid.LexBIG.distributed.test.bugs.TestLEXEVS_4570;
+import org.LexGrid.LexBIG.distributed.test.features.TestLEXEVS_2707;
 import org.LexGrid.LexBIG.distributed.test.features.TestLEXEVS_3628;
 import org.LexGrid.LexBIG.distributed.test.features.TestLEXEVS_3732;
 import org.LexGrid.LexBIG.distributed.test.features.TestLEXEVS_3947;
@@ -29,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
+	TestLEXEVS_2707.class,
 	TestLEXEVS_3465.class,
 	TestLEXEVS_3994.class,
 	TestLEXEVS_4178.class,
