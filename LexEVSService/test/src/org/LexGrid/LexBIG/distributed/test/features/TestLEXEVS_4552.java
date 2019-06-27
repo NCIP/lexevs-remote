@@ -31,7 +31,7 @@ public class TestLEXEVS_4552 extends ServiceTestCase {
 		service.setLexBIGService(LexEVSServiceHolder.instance().
 				getLexEVSAppService());
 
-			service.preprocessSourceHierarchyData(THES_SCHEME,  
+			service.preprocessSourceHierarchyData(THES_URN,  
 					THES_VERSION, 
 					"subClassOf", 
 					"Contributing_Source",
