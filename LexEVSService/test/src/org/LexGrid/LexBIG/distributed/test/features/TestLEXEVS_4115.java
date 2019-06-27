@@ -7,7 +7,6 @@ import java.util.List;
 import org.LexGrid.LexBIG.DataModel.Collections.ResolvedConceptReferenceList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
 import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.Extensions.Generic.LexBIGServiceConvenienceMethods;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.Utility.Constructors;
@@ -81,7 +80,7 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    }
 	    
 	    @Test
-	    public void testsearchAllAscendentsInTransitiveClosureDomainVerySickCancerPatientSourceSpecific( ) throws LBException{
+	    public void testsearchAllDescendentsInTransitiveClosureDomainVerySickCancerPatientSourceSpecific( ) throws LBException{
 	    	LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 	    	long start = System.currentTimeMillis();
 	    	List<String> codes = new ArrayList<String>();
@@ -100,6 +99,30 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(list.size() > 0);
 	    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C60435")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C3203")));
+//	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs"))); }
+	    }
+	
+	    
+	    @Test
+	    public void testsearchAllDescendentsInTransitiveClosureDomainExactmatch( ) throws LBException{
+	    	LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
+	    	long start = System.currentTimeMillis();
+	    	List<String> codes = new ArrayList<String>();
+	    	codes.add("C3262");
+	    	ResolvedConceptReferenceList refs = lbscm.searchDescendentsInTransitiveClosure(
+	    			THES_SCHEME,
+	    			Constructors.createCodingSchemeVersionOrTagFromVersion(THES_VERSION),
+	    			codes, 
+	    			"subClassOf", 
+	    			"Cavernous Lymphangioma",
+	    			LBConstants.MatchAlgorithms.exactMatch.name(),
+	    			SearchDesignationOption.PREFERRED_ONLY, 
+	    			Constructors.createLocalNameList("NCI"));
+	    	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
+	    	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
+	    	assertTrue(list.size() > 0);
+	    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C60435")));
+	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53316")));
 //	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs"))); }
 	    }
 	

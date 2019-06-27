@@ -42,9 +42,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestLEXEVS_4093.class,
 	TestLEXEVS_4115.class,
 	TestLEXEVS_4143.class,
-	TestLEXEVS_4240.class,
 	TestLEXEVS_4345.class,
-	TestLEXEVS_4349.class,
 	TestLEXEVS_4444.class,
 	TestLEXEVS_4552.class
 	})
