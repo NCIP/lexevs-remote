@@ -36,14 +36,14 @@ public class TestLEXEVS_3465 extends ServiceTestCase {
 		mapping.restrictToCodes(Constructors.createConceptReferenceList(ITERATOR_MAPPING_SCHEME_CODE), SearchContext.TARGET_CODES);
 		ResolvedConceptReferencesIterator itr = mapping.resolveMapping();
 		
-		int count = 0;
-		while(itr.hasNext()) {
-			ResolvedConceptReference next = itr.next();
-			assertNotNull(next);
-			count++;
-		}
-		
-		assertEquals(2,count);
+//		int count = 0;
+//		while(itr.hasNext()) {
+//			ResolvedConceptReference next = itr.next();
+//			assertNotNull(next);
+//			count++;
+//		}
+		fail("when the code is commented in");
+//		assertEquals(2,count);
 	}
 
 }

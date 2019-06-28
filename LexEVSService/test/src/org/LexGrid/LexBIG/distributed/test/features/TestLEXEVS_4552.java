@@ -26,8 +26,6 @@ public class TestLEXEVS_4552 extends ServiceTestCase {
 		
 		service = LexEVSServiceHolder.instance().
 				getLexEVSAppService().getLexEVSSourceAssertedValueSetHierarchyServices();
-		//svc = LexEVSServiceHolder.instance().getAssertedValueSetConfiguredLexEVSAppService(new AssertedValueSetParameters.Builder(THES_VERSION).build());
-		//service = svc.getLexEVSSourceAssertedValueSetHierarchyServices();
 		service.setLexBIGService(LexEVSServiceHolder.instance().
 				getLexEVSAppService());
 

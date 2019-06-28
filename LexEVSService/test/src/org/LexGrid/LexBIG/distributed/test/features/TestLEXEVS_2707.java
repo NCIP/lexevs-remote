@@ -25,7 +25,7 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         TreeService service = TreeServiceFactory.getInstance().getTreeService(lbsi);
         LexEvsTree tree = null;
         CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-        csvt.setVersion("19.04F");
+        csvt.setVersion(THES_VERSION);
         tree = service.getTree(THES_SCHEME, csvt, "C35741", "ncit", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             List<LexEvsTreeNode> listForTree = service.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
@@ -116,7 +116,7 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         TreeService service = TreeServiceFactory.getInstance().getTreeService(lbsi);
         LexEvsTree tree = null;
         CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-        csvt.setVersion("19.04F");
+        csvt.setVersion(THES_VERSION);
         tree = service.getTree(THES_SCHEME, csvt, "C35741", "ncit", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             List<LexEvsTreeNode> listForTree = service.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
@@ -152,8 +152,8 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         TreeService service = TreeServiceFactory.getInstance().getTreeService(lbsi);
         LexEvsTree tree = null;
         CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-        csvt.setVersion("TestForMultiNamespace");
-        tree = service.getTree("npo", csvt, "NPO_1607", "npo", "is_a");	            
+        csvt.setVersion(THES_VERSION);
+        tree = service.getTree(THES_SCHEME, csvt, "NPO_1607", "npo", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             String json = service.getJsonConverter(6).buildJsonPathFromRootTree(focusNode);	        
             Gson gson = new Gson();

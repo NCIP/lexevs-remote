@@ -44,9 +44,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
     	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
     	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
     	assertTrue(list.size() > 0);
-    	//assertEquals(list.get(0).getCode(),"C3810");
     	System.out.println(list.size());
-    	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C3810")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
@@ -72,9 +70,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
     	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
     	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
     	assertTrue(list.size() > 0);
-    	//assertEquals(list.get(0).getCode(),"C3810");
     	System.out.println(list.size());
-    	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C3810")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
@@ -99,9 +95,9 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
     	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
     	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
     	assertTrue(list.size() > 0);
-    	//assertEquals(list.get(0).getCode(),"C3810");
+
     	System.out.println(list.size());
-    	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
+
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C3810")));
     	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
