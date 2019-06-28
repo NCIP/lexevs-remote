@@ -1,23 +1,19 @@
 package org.LexGrid.LexBIG.distributed.test.features;
 
+import static org.junit.Assert.*;
+
 import org.LexGrid.LexBIG.DataModel.Collections.NameAndValueList;
 import org.LexGrid.LexBIG.DataModel.Core.AssociatedConcept;
-import org.LexGrid.LexBIG.Impl.function.LexBIGServiceTestCase;
-import org.LexGrid.LexBIG.Impl.load.umls.EntityAssnsToEntityQualsDataTestIT;
 import org.LexGrid.LexBIG.Impl.testUtility.DataTestUtils;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeGraph;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
-import org.LexGrid.codingSchemes.CodingScheme;
-import org.LexGrid.naming.Mappings;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.JUnit4TestAdapter;
-
-public class TestLEXEVS_3947 extends ServiceTestCase {
+public class TestLEXEVS_3464 extends ServiceTestCase {
 
 	LexEVSApplicationService svc;
 	private AssociatedConcept[] associatedConcept;
@@ -37,21 +33,21 @@ public class TestLEXEVS_3947 extends ServiceTestCase {
 				.getAssociatedConcept();
 	}
 	
-	
 	@Test
-	public void testSupportedQualifierLoad() throws Exception {
-		CodingScheme scheme = svc.resolveCodingScheme(LexBIGServiceTestCase.AIR_URN, 
-				Constructors.createCodingSchemeVersionOrTagFromVersion(LexBIGServiceTestCase.AIR_VERSION));
-		Mappings mappings = scheme.getMappings();
-		assertTrue(mappings.getSupportedAssociationQualifierAsReference().stream().
-		anyMatch(x -> x.getContent().equals("MODIFIER_ID")));
-		assertTrue(mappings.getSupportedAssociationQualifierAsReference().stream().
-				anyMatch(x -> x.getContent().equals("CHARACTERISTIC_TYPE_ID")));
-		
+	public void testQualsNotNull() throws Exception {	
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		assertNotNull(quals);
 	}
-	
-	public static junit.framework.Test suite() {  
-		return new JUnit4TestAdapter(EntityAssnsToEntityQualsDataTestIT.class);  
-	} 
 
+	@Test
+	public void testRelaQualMODID() throws Exception {	
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		assertTrue(DataTestUtils.isQualifierNameAndValuePresent("MODIFIER_ID", "900000000000451002", quals));
+	}
+
+	@Test
+	public void testRelaQualCHARTYPEID() throws Exception {	
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		assertTrue(DataTestUtils.isQualifierNameAndValuePresent("CHARACTERISTIC_TYPE_ID", "900000000000011006", quals));
+	}
 }
