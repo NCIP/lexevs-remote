@@ -76,7 +76,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
     	System.out.println(list.size());
     	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C3810")));
-    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Connective and Soft Tissue Neoplasm"))); 
     }
@@ -103,7 +103,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
     	System.out.println(list.size());
     	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C3810")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
+    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53684")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Connective and Soft Tissue Neoplasm"))); 
     }

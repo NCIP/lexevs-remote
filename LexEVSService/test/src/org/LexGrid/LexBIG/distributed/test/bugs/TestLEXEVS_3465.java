@@ -33,7 +33,7 @@ public class TestLEXEVS_3465 extends ServiceTestCase {
 				Constructors.createCodingSchemeVersionOrTagFromVersion(ITERATOR_MAPPING_SCHEME_VERSION), 
 				null);
 		
-		mapping.restrictToCodes(Constructors.createConceptReferenceList(ITERATOR_MAPPING_SCHEME_CODE), SearchContext.TARGET_CODES);
+		mapping.restrictToCodes(Constructors.createConceptReferenceList(ITERATOR_MAPPING_SCHEME_CODE), SearchContext.SOURCE_CODES);
 		ResolvedConceptReferencesIterator itr = mapping.resolveMapping();
 		
 		int count = 0;
@@ -43,7 +43,7 @@ public class TestLEXEVS_3465 extends ServiceTestCase {
 			count++;
 		}
 		
-		assertEquals(4,count);
+		assertEquals(2,count);
 	}
 
 }

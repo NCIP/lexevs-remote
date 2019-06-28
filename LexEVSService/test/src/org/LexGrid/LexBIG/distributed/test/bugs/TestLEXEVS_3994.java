@@ -25,7 +25,7 @@ public class TestLEXEVS_3994 extends ServiceTestCase {
 	public void test() throws LBException {
 		LexEVSApplicationService svc;
 		SourceAssertedValueSetService vsSvc;
-		 AssertedValueSetParameters params = new AssertedValueSetParameters.Builder("19.04f")
+		 AssertedValueSetParameters params = new AssertedValueSetParameters.Builder(THES_VERSION)
 					.build();
 		svc = LexEVSServiceHolder.instance().getFreshLexEVSAppService();
 

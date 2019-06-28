@@ -51,7 +51,7 @@ public class TestLEXEVS_3947 extends ServiceTestCase {
 	}
 	
 	public static junit.framework.Test suite() {  
-		return new JUnit4TestAdapter(EntityAssnsToEntityQualsDataTestIT.class);  
+		return new JUnit4TestAdapter(TestLEXEVS_3947.class);  
 	} 
 
 }

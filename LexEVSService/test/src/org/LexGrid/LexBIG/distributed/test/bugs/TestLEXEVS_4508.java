@@ -16,18 +16,15 @@ import org.junit.Test;
 
 public class TestLEXEVS_4508 extends ServiceTestCase{
 	LexEVSApplicationService svs;
-	
-	@Before
-	public void setUp() throws Exception {
-		 svs = LexEVSServiceHolder.instance().getLexEVSAppService();
-	}
+
 
 	@Test
 	public void test() throws LBException {
-
+		 svs = LexEVSServiceHolder.instance().getLexEVSAppService();
         
         LexBIGServiceConvenienceMethods lbscm = (LexBIGServiceConvenienceMethods) svs
                     .getGenericExtension("LexBIGServiceConvenienceMethods");
+        lbscm.setLexBIGService(svs);
         
             ResolvedConceptReferenceList list = lbscm.getHierarchyRoots(OBIB_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(OBIB_VERSION),
                     null);
