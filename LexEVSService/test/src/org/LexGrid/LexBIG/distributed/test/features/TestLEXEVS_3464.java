@@ -23,11 +23,11 @@ public class TestLEXEVS_3464 extends ServiceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		svc = LexEVSServiceHolder.instance().getLexEVSAppService();
-		cng =	svc.getNodeGraph(META_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(META_VERSION), null);
+		cng =	svc.getNodeGraph(SNOMED_SCHEME, Constructors.createCodingSchemeVersionOrTagFromVersion(SNOMED_VERSION), null);
 		
-		associatedConcept = cng.resolveAsList(Constructors.createConceptReference("DIABT", "NCI Metathesaurus"), true, true, 1, 1, null, null, null, -1)
+		associatedConcept = cng.resolveAsList(Constructors.createConceptReference("372709008", "SNOMED Clinical Terms US Edition"), true, true, 1, 1, null, null, null, -1)
 				.getResolvedConceptReference(0)
-				.getSourceOf()
+				.getTargetOf()
 				.getAssociation()[0]
 				.getAssociatedConcepts()
 				.getAssociatedConcept();
@@ -35,19 +35,19 @@ public class TestLEXEVS_3464 extends ServiceTestCase {
 	
 	@Test
 	public void testQualsNotNull() throws Exception {	
-		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "33664007").getAssociationQualifiers();
 		assertNotNull(quals);
 	}
 
 	@Test
 	public void testRelaQualMODID() throws Exception {	
-		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "33664007").getAssociationQualifiers();
 		assertTrue(DataTestUtils.isQualifierNameAndValuePresent("MODIFIER_ID", "900000000000451002", quals));
 	}
 
 	@Test
 	public void testRelaQualCHARTYPEID() throws Exception {	
-		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "U000010").getAssociationQualifiers();
+		NameAndValueList quals = DataTestUtils.getConceptReference(associatedConcept, "33664007").getAssociationQualifiers();
 		assertTrue(DataTestUtils.isQualifierNameAndValuePresent("CHARACTERISTIC_TYPE_ID", "900000000000011006", quals));
 	}
 }
