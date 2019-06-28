@@ -28,7 +28,7 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	}
 
 	   @Test
-	    public void testsearchAllDecendentsInTransitiveClosureDomainMildlySickPatientSourceSpecificPreferred( ) throws LBException{
+	    public void testsearchAllDecendentsInTransitiveClosureDomainSourceSpecificPreferred( ) throws LBException{
 		   LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 		   long start = System.currentTimeMillis();
 	    	List<String> codes = new ArrayList<String>();
@@ -47,15 +47,13 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(list.size() > 0);
 	    	assertEquals(list.get(0).getCode(),"C53316");
 	    	System.out.println(list.size());
-	    	//assertFalse(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C53316")));
-	    	//assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Cavernous Lymphangioma"))); 
 	    }
 
 	    @Test
-	    public void testsearchAllDecendentsInTransitiveClosureDomainMildlySickPatientContainsPreferred( ) throws LBException{
+	    public void testsearchAllDecendentsInTransitiveClosureDomainContainsPreferred( ) throws LBException{
 	    	LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 	    	long start = System.currentTimeMillis();
 	    	List<String> codes = new ArrayList<String>();
@@ -74,13 +72,12 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(list.size() > 0);
 	    	assertTrue(list.stream().anyMatch(x -> x.getCode().equals("C53316")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C8965")));
-	    	//assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("Lymphangioma")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("ncit")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Cavernous Lymphangioma"))); 
 	    }
 	    
 	    @Test
-	    public void testsearchAllDescendentsInTransitiveClosureDomainVerySickCancerPatientSourceSpecific( ) throws LBException{
+	    public void testsearchAllDescendentsInTransitiveClosureDomainSourceSpecific( ) throws LBException{
 	    	LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 	    	long start = System.currentTimeMillis();
 	    	List<String> codes = new ArrayList<String>();
@@ -99,7 +96,7 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(list.size() > 0);
 	    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C60435")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C3203")));
-//	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs"))); }
+
 	    }
 	
 	    
@@ -123,7 +120,7 @@ public class TestLEXEVS_4115 extends ServiceTestCase {
 	    	assertTrue(list.size() > 0);
 	    	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("C60435")));
 	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("C53316")));
-//	    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs"))); }
+
 	    }
 	
 }

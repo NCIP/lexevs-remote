@@ -27,7 +27,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
 	}
 	
 	@Test
-    public void testsearchAllAscendentsInTransitiveClosureDomainMildlySickPatientSourceSpecificPreferred( ) throws LBException{
+    public void testsearchAllAscendentsInTransitiveClosureDomainSourceSpecificPreferred( ) throws LBException{
 	   LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 	   long start = System.currentTimeMillis();
     	List<String> codes = new ArrayList<String>();
@@ -53,7 +53,7 @@ public class TestLEXEVS_4143 extends ServiceTestCase {
 	
 	
 	@Test
-    public void testsearchAllAscendentsInTransitiveClosureDomainMildlySickPatientContainsPreferred( ) throws LBException{
+    public void testsearchAllAscendentsInTransitiveClosureDomainContainsPreferred( ) throws LBException{
 	   LexBIGServiceConvenienceMethods lbscm =(LexBIGServiceConvenienceMethods) svc.getGenericExtension("LexBIGServiceConvenienceMethods");
 	   long start = System.currentTimeMillis();
     	List<String> codes = new ArrayList<String>();
