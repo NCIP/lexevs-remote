@@ -439,7 +439,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     			null);
     	System.out.println("Execution time: " + (System.currentTimeMillis() - start));
     	List<ResolvedConceptReference> list = Arrays.asList(refs.getResolvedConceptReference());
-    	assertFalse(list.size() > 0);
+    	assertTrue(list.size() > 0);
     }
     
     @Test
@@ -463,7 +463,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("MildlySickCancerPatient")));
     	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("VerySickCancerPatient")));    	
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("very sick cancer patient")));    	
     }
     
     @Test
@@ -520,7 +520,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     			Constructors.createCodingSchemeVersionOrTagFromVersion(OWL2_SNIPPET_SPECIAL_CASE_INDIVIDUAL_VERSION),
     			codes, 
     			"subClassOf", 
-    			"sick",
+    			"with",
     			LBConstants.MatchAlgorithms.LuceneQuery.name(),
     			SearchDesignationOption.PREFERRED_ONLY, 
     			null);
@@ -531,7 +531,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(y -> y.getCode().equals("MildlySickCancerPatient")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("slightly sick patient"))); 
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Patient With Cold"))); 
     }
     
     @Test
@@ -554,7 +554,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     	assertTrue(list.stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("slightly sick patient"))); 
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Patient With Cold"))); 
     }
     
     @Test
@@ -568,7 +568,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     			Constructors.createCodingSchemeVersionOrTagFromVersion(OWL2_SNIPPET_SPECIAL_CASE_INDIVIDUAL_VERSION), 
     			codes, 
     			"subClassOf", 
-    			"slightly sick patient",
+    			"Patient With Cold",
     			LBConstants.MatchAlgorithms.exactMatch.name(),
     			SearchDesignationOption.PREFERRED_ONLY, 
     			null);
@@ -578,7 +578,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
        	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
        	assertFalse(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("VerySickCancerPatient")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("slightly sick patient")));    	
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Patient With Cold")));    	
     }   
     
     @Test
@@ -600,7 +600,7 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).size() > 0);
        	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCode().equals("PatientWithCold")));
     	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getCodeNamespace().equals("owl2lexevs")));
-    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("slightly sick patient")));    	
+    	assertTrue(Arrays.asList(refs.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Patient With Cold")));    	
     }   
     
     @Test
