@@ -12,8 +12,8 @@ import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 public class RemoteServerUtil {
 
-//	public static final String SERVICEURL = "https://lexevsapi65.nci.nih.gov";
-	public static final String SERVICEURL = "http://localhost:8080/lexevsapi65";
+	public static final String SERVICEURL = "https://lexevsapi65-qa.nci.nih.gov";
+//	public static final String SERVICEURL = "https://localhost:8080/lexevsapi65";
 	public static String NCIT_SCHEME_NAME = "NCI Thesaurus";
 	public static String NCIT_SCHEME_NAMESPACE = "NCI Thesaurus";
 	public static String NCIM_SCHEME_NAME = "NCI Metathesaurus";
