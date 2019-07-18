@@ -43,11 +43,12 @@ public class TestSpecifyReturnOrder extends ServiceTestCase
         cns = cns.restrictToMatchingDesignations("Pect", SearchDesignationOption.ALL, "startsWith", null);
         ResolvedConceptReference[] rcr = cns.resolveToList(Constructors.createSortOptionList(new String[] {"code"}, new Boolean[] {null}), null, null, -1)
                 .getResolvedConceptReference();
-        assertTrue("1",rcr[0].getConceptCode().equals("C103178"));
-        assertTrue("2",rcr[1].getConceptCode().equals("C120322"));
-        assertTrue("3",rcr[2].getConceptCode().equals("C21031"));
-        assertTrue("4",rcr[3].getConceptCode().equals("C25611"));
-        assertTrue("5",rcr[4].getConceptCode().equals("C33284"));
+        assertTrue("1",rcr[0].getConceptCode().equals("C103178"));System.out.println(rcr[0].getEntityDescription().getContent());
+        assertTrue("2",rcr[1].getConceptCode().equals("C120322"));System.out.println(rcr[1].getEntityDescription().getContent());
+        assertTrue("3",rcr[2].getConceptCode().equals("C154224"));System.out.println(rcr[2].getEntityDescription().getContent());
+        assertTrue("4",rcr[3].getConceptCode().equals("C21031"));System.out.println(rcr[3].getEntityDescription().getContent());
+        assertTrue("5",rcr[4].getConceptCode().equals("C25611"));System.out.println(rcr[4].getEntityDescription().getContent());
+        assertTrue("6",rcr[5].getConceptCode().equals("C33284"));System.out.println(rcr[5].getEntityDescription().getContent());
 
         rcr = cns.resolveToList(Constructors.createSortOptionList(new String[] {"entityDescription"}, new Boolean[] {null}), null, null, -1)
                 .getResolvedConceptReference();

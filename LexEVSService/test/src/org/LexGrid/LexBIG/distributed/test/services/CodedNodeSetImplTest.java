@@ -9,6 +9,8 @@
 package org.LexGrid.LexBIG.distributed.test.services;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 import org.LexGrid.LexBIG.DataModel.Collections.ModuleDescriptionList;
 import org.LexGrid.LexBIG.DataModel.Core.ResolvedConceptReference;
@@ -21,7 +23,9 @@ import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.PropertyType;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
+import org.LexGrid.concepts.Definition;
 import org.LexGrid.concepts.Entity;
+import org.LexGrid.concepts.Presentation;
 import org.springframework.aop.framework.Advised;
 
 /**
@@ -169,7 +173,7 @@ public void testRestrictPropertyTypeReturns() throws LBException
         assertTrue("1",ce.getCommentCount() == 0);
         assertTrue("2: " + ce.getPropertyCount(),ce.getPropertyCount() == 7);
         assertTrue("3",ce.getDefinitionCount() == 1);
-        assertTrue("5",ce.getPresentationCount() >= 4);
+        assertTrue("5",ce.getPresentationCount() >= 3);
 
         // restrict to a couple of presentation types
         rcrs = cns.resolveToList(
@@ -183,10 +187,11 @@ public void testRestrictPropertyTypeReturns() throws LBException
         assertTrue("7",ce.getCommentCount() == 0);
         assertTrue("8",ce.getPropertyCount() == 0);
         assertTrue("9",ce.getDefinitionCount() == 1);
-        assertTrue("11",ce.getPresentationCount() >= 4);
-        
-        assertTrue("12",ce.getPresentation()[0].getValue().getContent().equals("PURPLE"));
-        assertTrue("13",ce.getDefinition()[0].getValue().getContent().contains("Any of a group of colors with a hue between that of violet and red."));  
+        assertTrue("11",ce.getPresentationCount() >= 3);
+        List<Presentation> pres = Arrays.asList(ce.getPresentation());
+        List<Definition> defs	= Arrays.asList(ce.getDefinition());
+        assertTrue("12",pres.stream().anyMatch(x -> x.getValue().getContent().equals("PURPLE")));
+        assertTrue("13",defs.stream().anyMatch(x -> x.getValue().getContent().contains("Any of a group of colors with a hue between that of violet and red.")));  
         
         // restrict to one presentation type and one property name (which don't line up)
         rcrs = cns.resolveToList(

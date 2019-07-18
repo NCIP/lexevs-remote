@@ -1,28 +1,23 @@
 package org.LexGrid.LexBIG.distributed.test.services;
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.LexGrid.LexBIG.DataModel.Collections.CodingSchemeRenderingList;
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
-import org.LexGrid.LexBIG.DataModel.InterfaceElements.CodingSchemeRendering;
 import org.LexGrid.LexBIG.Exceptions.LBException;
-import org.LexGrid.LexBIG.Extensions.Generic.LexBIGServiceConvenienceMethods;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping.SearchContext;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.model.LexEvsTree;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.model.LexEvsTreeNode;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.TreeService;
+import org.LexGrid.LexBIG.Impl.Extensions.tree.service.TreeServiceFactory;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.junit.Before;
 import org.junit.Test;
-import org.lexevs.tree.model.LexEvsTree;
-import org.lexevs.tree.model.LexEvsTreeNode;
-import org.lexevs.tree.service.TreeService;
-import org.lexevs.tree.service.TreeServiceFactory;
 
 public class LexBIGExtensionTests extends ServiceTestCase {
 
@@ -59,13 +54,13 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 			}
 	}
 	
-// Comment this in when and if the plugin extension is being tested.	
+	
 	@Test
 	public void testTreeServiceDistributed() throws Exception{
 		 LexEvsTree tree = null;
 	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-	        csvt.setVersion("TestForMultiNamespace");
-	         tree = treeExtension.getTree("npo", csvt, "NPO_1607", "npo", "is_a");
+	        csvt.setVersion("2011-12-08");
+	         tree = treeExtension.getTree("Nanoparticle Ontology", csvt, "NPO_1607", "npo", "is_a");
 	            
 	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
 	            focusNode.setNamespace("npo");

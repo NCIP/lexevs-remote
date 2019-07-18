@@ -23,6 +23,7 @@ import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.apache.commons.lang.StringUtils;
 import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
@@ -92,7 +93,8 @@ public class SearchExtensionTest extends ServiceTestCase {
 	}
 	
 	public void testSimpleSearchContainsPerformanceResolvedValueSets() throws LBException {
-		LexEVSResolvedValueSetService rss = new LexEVSResolvedValueSetServiceImpl();
+		LexEVSResolvedValueSetService rss = LexEVSServiceHolder.instance().getLexEVSAppService().
+				getLexEVSResolvedVSService(new AssertedValueSetParameters.Builder(THES_VERSION).build());
 		Set<CodingSchemeReference> valueSets = new HashSet<CodingSchemeReference>();
 		
 		for(CodingScheme cs : rss.listAllResolvedValueSets()){
