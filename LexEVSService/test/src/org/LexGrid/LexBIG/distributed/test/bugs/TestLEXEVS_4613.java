@@ -1,26 +1,24 @@
-package org.LexGrid.LexBIG.distributed.test.services;
+package org.LexGrid.LexBIG.distributed.test.bugs;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
 import org.LexGrid.LexBIG.DataModel.Core.CodingSchemeVersionOrTag;
 import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping.SearchContext;
-import org.LexGrid.LexBIG.Impl.Extensions.tree.model.LexEvsTree;
-import org.LexGrid.LexBIG.Impl.Extensions.tree.model.LexEvsTreeNode;
 import org.LexGrid.LexBIG.Impl.Extensions.tree.service.TreeService;
 import org.LexGrid.LexBIG.Impl.Extensions.tree.service.TreeServiceFactory;
-import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
+import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LexBIGExtensionTests extends ServiceTestCase {
-
+public class TestLEXEVS_4613 extends ServiceTestCase {
+	
 	private LexBIGService lbs;
 	private MappingExtension mappingExtension;
 	private TreeService treeExtension;
@@ -53,19 +51,5 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 
 			}
 	}
-	
-	
-	@Test
-	public void testTreeServiceDistributed() throws Exception{
-		 LexEvsTree tree = null;
-	        CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
-	        csvt.setVersion("2011-12-08");
-	         tree = treeExtension.getTree("Nanoparticle Ontology", csvt, "NPO_1607", "npo", "is_a");
-	            
-	            LexEvsTreeNode focusNode = tree.getCurrentFocus();
-	            focusNode.setNamespace("npo");
-	            List<LexEvsTreeNode> nodeList = treeExtension.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
-	            assertTrue(nodeList.size() > 0);
-	}
+
 }
-	
