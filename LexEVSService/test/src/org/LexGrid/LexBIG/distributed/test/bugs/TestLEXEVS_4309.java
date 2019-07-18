@@ -13,7 +13,7 @@ public class TestLEXEVS_4309 extends ServiceTestCase {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+
 	}
 
 }
