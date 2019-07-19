@@ -149,7 +149,7 @@ public class LexBIGServiceConvenienceMethodsTest extends ServiceTestCase {
 		boolean badReverseName = lbscm.isReverseName(THES_SCHEME, csvt, "instance");
 		assertFalse(badReverseName);
 		
-		boolean goodReverseName = lbscm.isReverseName(THES_SCHEME, csvt, "AllDifferent");
+		boolean goodReverseName = lbscm.isReverseName(THES_SCHEME, csvt, "equivalentProperty");
 		assertTrue(goodReverseName);
 	}
 }
