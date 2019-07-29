@@ -42,7 +42,7 @@ public class LexBIGExtensionTests extends ServiceTestCase {
 	CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
 	csvt.setVersion(MAPPING_VERSION);
 		Mapping mapping =
-				mappingExtension.getMapping(MAPPING_SCHEME, csvt, "NCIt_to_ChEBI_Mapping");
+				mappingExtension.getMapping(MAPPING_SCHEME, csvt, "NCIt_to_ChEBI_Mappings");
 
 			if (mapping != null) {
 				mapping = mapping.restrictToMatchingDesignations(

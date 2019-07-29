@@ -25,7 +25,7 @@ public class TestLEXEVS_3628 extends ServiceTestCase {
 	@Test
 	public void test() {
 		
-		assertEquals(map.values().size(), 1065);
+		assertEquals(map.values().size(), 1066);
 		Iterator<Entry<String, ValueSetDefinition>> itr = map.entrySet().iterator();
 		assertTrue(itr.hasNext());
 		Entry<String, ValueSetDefinition> entry = (Entry<String, ValueSetDefinition>)itr.next();

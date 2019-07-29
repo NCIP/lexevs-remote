@@ -6,6 +6,8 @@ import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping;
 import org.LexGrid.LexBIG.Extensions.Generic.MappingExtension.Mapping.SearchContext;
+import org.LexGrid.LexBIG.Impl.LexBIGServiceImpl;
+import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
@@ -30,8 +32,8 @@ public class TestLEXEVS_3465 extends ServiceTestCase {
 		LexEVSApplicationService lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
 		MappingExtension mappingExtension = (MappingExtension) lbs.getGenericExtension("MappingExtension");
 		Mapping mapping = mappingExtension.getMapping(
-				"SNOMEDCT_US_2018_09_01_TO_ICD10_2016", 
-				Constructors.createCodingSchemeVersionOrTagFromVersion("20180901"), null);
+				ITERATOR_MAPPING_SCHEME, 
+				Constructors.createCodingSchemeVersionOrTagFromVersion(ITERATOR_MAPPING_SCHEME_VERSION), null);
 		
 		mapping = mapping.restrictToMatchingDesignations("Cholera, unspecified", SearchDesignationOption.PREFERRED_ONLY,"LuceneQuery", null, SearchContext.TARGET_CODES);
 
@@ -48,6 +50,31 @@ public class TestLEXEVS_3465 extends ServiceTestCase {
 		}
 		
 		assertEquals(count, numberRemaining);
+	}
+	
+	@Test
+	public void test2() throws LBException {
+		LexEVSApplicationService lbs = LexEVSServiceHolder.instance().getLexEVSAppService();
+
+		MappingExtension mappingExtension = (MappingExtension) lbs.getGenericExtension("MappingExtension");
+		
+		Mapping mapping = mappingExtension.getMapping(
+				ITERATOR_MAPPING_SCHEME, 
+				Constructors.createCodingSchemeVersionOrTagFromVersion(ITERATOR_MAPPING_SCHEME_VERSION), 
+				null);
+		
+		mapping = mapping.restrictToCodes(Constructors.createConceptReferenceList(ITERATOR_MAPPING_SCHEME_CODE), SearchContext.TARGET_CODES);
+		long start = System.currentTimeMillis();
+		ResolvedConceptReferencesIterator itr = mapping.resolveMapping();
+		long stop = System.currentTimeMillis() - start;
+		System.out.println(stop/1000);
+		int count = 0;
+		while(itr.hasNext()) {
+			ResolvedConceptReference next = itr.next();
+			assertNotNull(next);
+			count++;
+		}
+		assertEquals(5,count);
 	}
 
 }
