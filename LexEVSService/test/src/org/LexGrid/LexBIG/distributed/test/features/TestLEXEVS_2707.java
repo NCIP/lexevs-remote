@@ -62,7 +62,7 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         LexEvsTree tree = null;
         CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
         csvt.setVersion(THES_VERSION);
-        tree = service.getTree(THES_SCHEME, csvt, "C34831", "ncit", "is_a");	            
+        tree = service.getTree(THES_SCHEME, csvt, "C1000", "ncit", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             List<LexEvsTreeNode> listForTree = service.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
             String json = service.getJsonConverter().buildJsonPathFromRootTree(focusNode);	        ;
@@ -76,10 +76,10 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
             OntologyNode[] nodes = gson.fromJson(json, OntologyNode[].class);
             assertTrue(nodes.length > 0);
             //Drilling down to the "process" node which could have more than the default 5 children
-            OntologyNode myocardNode = Arrays.asList(nodes).stream().filter(x -> x.getOntology_node_name().equals("Acute Myocarditis")).findFirst().get();
+            OntologyNode myocardNode = Arrays.asList(nodes).stream().filter(x -> x.getOntology_node_name().equals("Drug, Food, Chemical or Biomedical Material")).findFirst().get();
             assertTrue(myocardNode.getChildren_nodes() != null);
             assertTrue(myocardNode.getChildren_nodes().size() > 0);
-            assertEquals(myocardNode.getChildren_nodes().size(), 5);
+            assertEquals(myocardNode.getChildren_nodes().size(), 6);
           
 	}
 	
@@ -153,7 +153,7 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         LexEvsTree tree = null;
         CodingSchemeVersionOrTag csvt = new CodingSchemeVersionOrTag();
         csvt.setVersion(THES_VERSION);
-        tree = service.getTree(THES_SCHEME, csvt, "NPO_1607", "npo", "is_a");	            
+        tree = service.getTree(THES_SCHEME, csvt, "C1000", "npo", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             String json = service.getJsonConverter(6).buildJsonPathFromRootTree(focusNode);	        
             Gson gson = new Gson();

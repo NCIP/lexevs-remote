@@ -27,12 +27,12 @@ public class TestLEXEVS_4570 extends ServiceTestCase {
 	@Test
 	public void test() {
 
-    	assertEquals(lbscm.getTerminologyServiceObjectType(ZEBRAFISH_SCHEME).getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
-    	assertEquals(lbscm.getTerminologyServiceObjectType(ITERATOR_MAPPING_SCHEME).getDesignation(), TerminologyServiceDesignation.MAPPING_CODING_SCHEME);
-    	assertEquals(lbscm.getTerminologyServiceObjectType(RESOLVED_NEOPLASM_SCHEME).getDesignation(), TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME);
+    	assertEquals(lbscm.getTerminologyServiceObjectType(ZEBRAFISH_URI).getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
+    	assertEquals(lbscm.getTerminologyServiceObjectType(ITERATOR_MAPPING_URI).getDesignation(), TerminologyServiceDesignation.MAPPING_CODING_SCHEME);
     	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453").getDesignation(), TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME);
     	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.16.840.1.113883.3.26.1.2").getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
     	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.NON.SENSE.URI.2").getDesignation(), TerminologyServiceDesignation.UNIDENTIFIABLE);
+    	assertEquals(lbscm.getTerminologyServiceObjectType(RESOLVED_NEOPLASM_SCHEME).getDesignation(), TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME);
 		
 	}
 

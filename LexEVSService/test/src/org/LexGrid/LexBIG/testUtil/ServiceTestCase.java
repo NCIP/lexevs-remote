@@ -115,6 +115,8 @@ abstract public class ServiceTestCase extends TestCase{
 	
 	public final static String ITERATOR_MAPPING_SCHEME_CODE = properties.getProperty("ITERATOR_MAPPING_SCHEME_CODE");
 	
+	public final static String ITERATOR_MAPPING_URI = properties.getProperty("ITERATOR_MAPPING_URI");
+	
 	public final static String PDQ_SCHEME = properties.getProperty("PDQ_SCHEME");
 	
 	public final static String PDQ_VERSION = properties.getProperty("PDQ_VERSION");
@@ -147,6 +149,9 @@ abstract public class ServiceTestCase extends TestCase{
 
 	/** The Constant ZEBRAFISH_VERSION. */
 	public final static String ZEBRAFISH_VERSION = properties.getProperty("ZEBRAFISH_VERSION"); //"1";
+	
+	/** The Constant ZEBRAFISH_URI. */
+	public final static String ZEBRAFISH_URI = properties.getProperty("ZEBRAFISH_URI"); //"1";
 
 	/** The Constant SNOMED_SCHEME. */
 	public final static String SNOMED_SCHEME = properties.getProperty("SNOMED_SCHEME"); //"SNOMED Clinical Terms";
