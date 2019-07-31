@@ -17,6 +17,7 @@ import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.Extensions.Generic.CodingSchemeReference;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension;
 import org.LexGrid.LexBIG.Extensions.Generic.SearchExtension.MatchAlgorithm;
+import org.LexGrid.LexBIG.Extensions.Generic.SourceAssertedValueSetSearchExtension;
 import org.LexGrid.LexBIG.LexBIGService.LexBIGService;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.Utility.Iterators.ResolvedConceptReferencesIterator;
@@ -27,6 +28,7 @@ import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.apache.commons.lang.StringUtils;
 import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
+import org.lexgrid.valuesets.sourceasserted.impl.SourceAssertedValueSetServiceImpl;
 
 public class SearchExtensionTest extends ServiceTestCase {
 	
@@ -91,13 +93,17 @@ public class SearchExtensionTest extends ServiceTestCase {
 			System.out.println(System.currentTimeMillis() - start);
 		}
 	}
-	
+
+// No longer a valid test.  TODO: enable the asserted value set search in the Remote API
 	public void testSimpleSearchContainsPerformanceResolvedValueSets() throws LBException {
-		LexEVSResolvedValueSetService rss = LexEVSServiceHolder.instance().getLexEVSAppService().
-				getLexEVSResolvedVSService(new AssertedValueSetParameters.Builder(THES_VERSION).build());
+		SourceAssertedValueSetServiceImpl asvss = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSSourceAssertedValueSetServices(new AssertedValueSetParameters.Builder(THES_VERSION).build());
+		SourceAssertedValueSetSearchExtension savss = 
+				(SourceAssertedValueSetSearchExtension) LexEVSServiceHolder.
+				instance().getLexEVSAppService().getGenericExtension(
+						"AssertedValueSetSearchExtension");
 		Set<CodingSchemeReference> valueSets = new HashSet<CodingSchemeReference>();
 		
-		for(CodingScheme cs : rss.listAllResolvedValueSets()){
+		for(CodingScheme cs : asvss.getMinimalSourceAssertedValueSetSchemes()){
 			CodingSchemeReference ref = new CodingSchemeReference();
 			ref.setCodingScheme(cs.getCodingSchemeURI());
 			ref.setVersionOrTag(Constructors.createCodingSchemeVersionOrTagFromVersion(cs.getRepresentsVersion()));
@@ -107,7 +113,7 @@ public class SearchExtensionTest extends ServiceTestCase {
 		
 		for(String term : Arrays.asList("year", "month", "day", "observation", "imputed")){
 			long start = System.currentTimeMillis();
-			ResolvedConceptReferencesIterator itr = searchExtension.search(term, valueSets, MatchAlgorithm.PRESENTATION_CONTAINS);
+			ResolvedConceptReferencesIterator itr = savss.search(term, valueSets, MatchAlgorithm.PRESENTATION_CONTAINS);
 			assertTrue(itr.hasNext());
 			System.out.println(System.currentTimeMillis() - start);
 		}
