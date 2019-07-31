@@ -33,7 +33,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	TestLEXEVS_2707.class,
-	TestLEXEVS_3465.class,
 	TestLEXEVS_3464.class,
 	TestLEXEVS_3994.class,
 	TestLEXEVS_4178.class,
@@ -50,6 +49,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestLEXEVS_4345.class,
 	TestLEXEVS_4444.class,
 	TestLEXEVS_4552.class,
+	TestLEXEVS_3465.class,
 	TestLEXEVS_4634.class
 	})
 public class AllLexEVS652Tests{
