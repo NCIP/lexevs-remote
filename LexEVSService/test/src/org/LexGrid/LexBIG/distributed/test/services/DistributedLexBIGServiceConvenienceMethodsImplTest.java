@@ -626,14 +626,5 @@ public class DistributedLexBIGServiceConvenienceMethodsImplTest extends LexBIGSe
     	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453").getDesignation(), 
     			new TerminologyServiceDesignation(
     					TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME).getDesignation());
-
-        	assertEquals(lbscm.getTerminologyServiceObjectType(AUTO_URN).getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
-        	assertEquals(lbscm.getTerminologyServiceObjectType(MAPPING_SCHEME_URI).getDesignation(), TerminologyServiceDesignation.MAPPING_CODING_SCHEME);
-        	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:C3645687.SNOMEDCT_US.ICD10").getDesignation(), TerminologyServiceDesignation.MAPPING_CODING_SCHEME);
-        	assertEquals(lbscm.getTerminologyServiceObjectType("SRITEST:AUTO:AllDomesticButGM").getDesignation(), TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME);
-        	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453").getDesignation(), TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME);
-        	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.NON.SENSE.URI.2").getDesignation(), TerminologyServiceDesignation.UNIDENTIFIABLE);
-        	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.16.840.1.113883.6.3").getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
-    	
     }
 }
