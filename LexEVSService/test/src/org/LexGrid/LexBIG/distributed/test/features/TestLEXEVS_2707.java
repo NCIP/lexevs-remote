@@ -39,6 +39,7 @@ public class TestLEXEVS_2707 extends ServiceTestCase{
         tree = service.getTree(THES_SCHEME, csvt, "C1000", "ncit", "is_a");	            
             LexEvsTreeNode focusNode = tree.getCurrentFocus();
             List<LexEvsTreeNode> listForTree = service.getEvsTreeConverter().buildEvsTreePathFromRootTree(focusNode);
+            //Testing a requirement to return all values when the value is -1
             String json = service.getJsonConverter(-1).buildJsonPathFromRootTree(focusNode);	        
             List <LexEvsTreeNode> listOfone = new ArrayList<LexEvsTreeNode>();
             listOfone.add(focusNode);
