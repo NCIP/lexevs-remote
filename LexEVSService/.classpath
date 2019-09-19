@@ -136,6 +136,6 @@
 	<classpathentry kind="lib" path="system/lib/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="system/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="system/lib/json-20080701.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.3.RC.3-tests.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.3.FINAL-tests.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
