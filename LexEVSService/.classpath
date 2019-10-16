@@ -134,8 +134,11 @@
 	<classpathentry kind="lib" path="system/lib/sqlbuilder-2.0.11.jar"/>
 	<classpathentry kind="lib" path="system/lib/common-util-1.0.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.3.RC.1-tests.jar"/>
 	<classpathentry kind="lib" path="system/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="system/lib/json-20080701.jar"/>
+	<classpathentry kind="lib" path="system/lib/arangodb-java-driver-6.1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/velocypack-1.4.2.jar"/>
+	<classpathentry kind="lib" path="system/lib/jackson-core-2.10.0.pr2.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-SNAPSHOT.DEV.SPRINT119.2019.10.17-tests.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
