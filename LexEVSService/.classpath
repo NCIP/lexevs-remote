@@ -139,6 +139,6 @@
 	<classpathentry kind="lib" path="system/lib/arangodb-java-driver-6.1.0.jar"/>
 	<classpathentry kind="lib" path="system/lib/velocypack-1.4.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/jackson-core-2.10.0.pr2.jar"/>
-	<classpathentry kind="lib" path="system/lib/lexbig-test-SNAPSHOT.DEV.SPRINT123.2019.12.05-tests.jar"/>
+	<classpathentry kind="lib" path="system/lib/lexbig-test-SNAPSHOT.DEV.SPRINT131.2020.03.31-tests.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
