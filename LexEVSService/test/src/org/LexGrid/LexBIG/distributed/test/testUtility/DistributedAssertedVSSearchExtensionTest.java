@@ -115,7 +115,7 @@ public class DistributedAssertedVSSearchExtensionTest {
 		refs.add(itr.next());
 		}
 		assertTrue(refs.size() > 0);
-		assertEquals(refs.size(), 8);
+		assertEquals(refs.size(), 12);
 		assertFalse(refs.stream().anyMatch(x -> x.getCode().equals("C54453")));
 		assertTrue(refs.stream().anyMatch(x -> x.getCode().equals("C99996")));
 	}
