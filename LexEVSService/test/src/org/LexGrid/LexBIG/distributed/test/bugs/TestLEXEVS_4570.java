@@ -32,7 +32,7 @@ public class TestLEXEVS_4570 extends ServiceTestCase {
     	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/FDA/C54453").getDesignation(), TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME);
     	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.16.840.1.113883.3.26.1.2").getDesignation(), TerminologyServiceDesignation.REGULAR_CODING_SCHEME);
     	assertEquals(lbscm.getTerminologyServiceObjectType("urn:oid:2.NON.SENSE.URI.2").getDesignation(), TerminologyServiceDesignation.UNIDENTIFIABLE);
-    	assertEquals(lbscm.getTerminologyServiceObjectType(RESOLVED_NEOPLASM_SCHEME).getDesignation(), TerminologyServiceDesignation.RESOLVED_VALUESET_CODING_SCHEME);
+    	assertEquals(lbscm.getTerminologyServiceObjectType("http://evs.nci.nih.gov/valueset/C126659").getDesignation(), TerminologyServiceDesignation.ASSERTED_VALUE_SET_SCHEME);
 		
 	}
 
