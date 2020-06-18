@@ -9,6 +9,7 @@ import org.LexGrid.LexBIG.Exceptions.LBInvocationException;
 import org.LexGrid.LexBIG.Exceptions.LBParameterException;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet;
 import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.PropertyType;
+import org.LexGrid.LexBIG.LexBIGService.CodedNodeSet.SearchDesignationOption;
 import org.LexGrid.LexBIG.Utility.Constructors;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
@@ -35,17 +36,18 @@ public class TestLEXEVS_4178 extends ServiceTestCase {
 	@Test
 	public void test() throws LBInvocationException, LBParameterException {
 
-		        cns = cns.restrictToProperties(
+		cns = cns.restrictToMatchingDesignations("Adrenergic Agonist", SearchDesignationOption.ALL, "contains", null);     
+		cns = cns.restrictToProperties(
 		        		null, 
 		        		new PropertyType[]{PropertyType.PRESENTATION}, 
 		        		Constructors.createLocalNameList("MED-RT"), 
 		        		null, 
 		        		null);
 		        
-		        ResolvedConceptReferenceList rcrl = cns.resolveToList(null, null, null, -1);
+		        ResolvedConceptReferenceList rcrl = cns.resolveToList(null, null, null, 10);
 		        assertTrue(rcrl != null);
 		        assertTrue(rcrl.getResolvedConceptReferenceCount() > 0);
-		        assertTrue(Arrays.asList(rcrl.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Adrenergic Agonists")));
+		        assertTrue(Arrays.asList(rcrl.getResolvedConceptReference()).stream().anyMatch(x -> x.getEntityDescription().getContent().equals("Adrenergic Agonist")));
 	}
 
 }
