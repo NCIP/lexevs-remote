@@ -105,7 +105,7 @@ public class TestEnumerateProperties extends ServiceTestCase
      */
     public void testEnumeratePropertiesa() throws LBException
     {
-        enumerateProps("C12366", new String[] {"primitive", "Contributing_Source"});
+        enumerateProps("C12366", new String[] {"label", "Contributing_Source"});
     }
 
     /**

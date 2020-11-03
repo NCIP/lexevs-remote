@@ -109,6 +109,23 @@ abstract public class ServiceTestCase extends TestCase{
 	
 	public final static String MAPPING_TEXT = properties.getProperty("MAPPING_TEXT");
 	
+	public final static String ITERATOR_MAPPING_SCHEME = properties.getProperty("ITERATOR_MAPPING_SCHEME");
+	
+	public final static String ITERATOR_MAPPING_SCHEME_VERSION = properties.getProperty("ITERATOR_MAPPING_SCHEME_VERSION");
+	
+	public final static String ITERATOR_MAPPING_SCHEME_CODE = properties.getProperty("ITERATOR_MAPPING_SCHEME_CODE");
+	
+	public final static String ITERATOR_MAPPING_URI = properties.getProperty("ITERATOR_MAPPING_URI");
+	
+	public final static String PDQ_SCHEME = properties.getProperty("PDQ_SCHEME");
+	
+	public final static String PDQ_VERSION = properties.getProperty("PDQ_VERSION");
+	
+	public final static String OBIB_SCHEME = properties.getProperty("OBIB_SCHEME");
+	
+	public final static String OBIB_VERSION = properties.getProperty("OBIB_VERSION");
+	
+	
 	
 	/** The Constant META_SCHEME. */
 	public final static String META_SCHEME = properties.getProperty("META_SCHEME"); //"NCI MetaThesaurus";
@@ -132,6 +149,9 @@ abstract public class ServiceTestCase extends TestCase{
 
 	/** The Constant ZEBRAFISH_VERSION. */
 	public final static String ZEBRAFISH_VERSION = properties.getProperty("ZEBRAFISH_VERSION"); //"1";
+	
+	/** The Constant ZEBRAFISH_URI. */
+	public final static String ZEBRAFISH_URI = properties.getProperty("ZEBRAFISH_URI"); //"1";
 
 	/** The Constant SNOMED_SCHEME. */
 	public final static String SNOMED_SCHEME = properties.getProperty("SNOMED_SCHEME"); //"SNOMED Clinical Terms";
@@ -159,6 +179,8 @@ abstract public class ServiceTestCase extends TestCase{
 
 	/** The Constant MEDDRA_TOKEN. */
 	public final static String MEDDRA_TOKEN = properties.getProperty("MEDDRA_TOKEN");
+
+	public final static String RESOLVED_NEOPLASM_SCHEME = properties.getProperty("RESOLVED_NEOPLASM_SCHEME");
 
 	//The following are all source names in Meta
 	/** The Constant meddraMeta. */
@@ -267,7 +289,7 @@ abstract public class ServiceTestCase extends TestCase{
     public final static String AUTOMOBILES_SCHEME =  properties.getProperty("AUTOMOBILES_SCHEME");
     public final static String AUTOMOBILES_VERSION =  properties.getProperty("AUTOMOBILES_VERSION");
     public final static String AUTOMOBILES_CODE =  properties.getProperty("AUTOMOBILES_CODE");
-    
+    public final static String ASSERTED_VALUE_SET_CONCEPT =  properties.getProperty("ASSERTED_VALUE_SET_CONCEPT");
 	/**
 	 * To be implemented by each descendant testcase.
 	 * 

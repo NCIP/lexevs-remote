@@ -50,7 +50,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.listAllSourceAssertedValueSets();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 4L);
+		assertEquals(count, 6L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 	
@@ -59,7 +59,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getMinimalSourceAssertedValueSetSchemes();
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
-		assertEquals(count, 7L);
+		assertEquals(count, 9L);
 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Black")).findAny().isPresent());
 	}
 
@@ -69,22 +69,31 @@ public class DistributedSourceAssertedValueSetTest {
 		List<CodingScheme> schemes = svc.getSourceAssertedValueSetsForConceptReference(reference );
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology")).findAny().isPresent());
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology")).findAny().isPresent());
+ 		assertTrue(schemes.stream()
+ 				.filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology") ||
+ 						x.getCodingSchemeName().equals("SPL Color Terminology")
+ 				).findAny().isPresent());
+ 		// Could be any presentation
+ 		assertTrue(schemes.stream().filter(x -> 
+ 		x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology") || 
+ 		x.getCodingSchemeName().equals("SDTM-OETESTCD") ||
+ 		x.getCodingSchemeName().equals("Ophthalmic Exam Test Code") ||
+ 		x.getCodingSchemeName().equals("OETESTCD") 
+ 		).findAny().isPresent());
 	}
 	
 	
 	@Test
 	public void testSchemeData() throws LBException, URISyntaxException {
 		CodingScheme scheme = svc.getSourceAssertedValueSetForValueSetURI(new URI(AssertedValueSetServices.BASE + "C54453"));
-		assertNotNull(scheme);
-		assertNotNull(scheme.getCodingSchemeName());
+		assertEquals(scheme, null);
+		
+		scheme = svc.getSourceAssertedValueSetForValueSetURI(new URI(AssertedValueSetServices.BASE + "FDA/" + "C54453"));
 		assertEquals("Structured Product Labeling Color Terminology",scheme.getCodingSchemeName());
 		assertEquals(AssertedValueSetServices.BASE + "FDA/" + "C54453", scheme.getCodingSchemeURI());
 		assertTrue(scheme.getIsActive());
 		assertEquals("C48323", scheme.getEntities().getEntityAsReference().stream().filter(x -> x.getEntityDescription().
 				getContent().equals("Black")).findAny().get().getEntityCode());
-		
 	}
 	
 	
@@ -125,7 +134,7 @@ public class DistributedSourceAssertedValueSetTest {
 		ResolvedConceptReferencesIterator itr = svc.getSourceAssertedValueSetIteratorForURI(AssertedValueSetServices.BASE + "FDA/" + "C54453");
 		assertTrue(itr.hasNext());
 		assertTrue(itr.numberRemaining() > 0);
-		assertEquals(itr.numberRemaining(), 2);
+		assertEquals(itr.numberRemaining(), 3);
 		assertNotNull(itr.next());
 	}
 	
@@ -159,8 +168,17 @@ public class DistributedSourceAssertedValueSetTest {
 		schemes = svc.getSourceAssertedValueSetforValueSetMemberEntityCode("C48323");
 		long count = schemes.stream().count();
 		assertTrue(count > 0L);
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology")).findAny().isPresent());
- 		assertTrue(schemes.stream().filter(x -> x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology")).findAny().isPresent());
+ 		assertTrue(schemes.stream()
+ 				.filter(x -> x.getCodingSchemeName().equals("Structured Product Labeling Color Terminology") ||
+ 						x.getCodingSchemeName().equals("SPL Color Terminology")
+ 				).findAny().isPresent());
+ 		// Could be any presentation
+ 		assertTrue(schemes.stream().filter(x -> 
+ 		x.getCodingSchemeName().equals("CDISC SDTM Ophthalmic Exam Test Code Terminology") || 
+ 		x.getCodingSchemeName().equals("SDTM-OETESTCD") ||
+ 		x.getCodingSchemeName().equals("Ophthalmic Exam Test Code") ||
+ 		x.getCodingSchemeName().equals("OETESTCD") 
+ 		).findAny().isPresent());
 	}
 	
 	@Test
@@ -177,7 +195,7 @@ public class DistributedSourceAssertedValueSetTest {
 		List<Entity> entities = (List<Entity>) svc.getAllSourceAssertedValueSetEntities();
 		assertNotNull(entities);
 		assertTrue(entities.size() > 0);
-		assertEquals(entities.size(), 8);
+		assertEquals(entities.size(), 10);
 	}
 	
 	@Test

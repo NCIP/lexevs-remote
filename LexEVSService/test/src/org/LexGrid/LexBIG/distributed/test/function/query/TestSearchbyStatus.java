@@ -39,7 +39,7 @@ public class TestSearchbyStatus extends ServiceTestCase
     {
 
         CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService()
-                .getCodingSchemeConcepts(THES_SCHEME, null);
+                .getCodingSchemeConcepts(GO_SCHEME, null);
 
         cns = cns.restrictToStatus(ActiveOption.INACTIVE_ONLY, null);
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 400).getResolvedConceptReference();
