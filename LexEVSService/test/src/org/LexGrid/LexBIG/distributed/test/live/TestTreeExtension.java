@@ -70,7 +70,7 @@ public class TestTreeExtension {
 			e.printStackTrace();
 		}
 		String codingScheme = "NCI_Thesaurus";
-		String version = "17.02d";
+		String version = "19.04f";
 		String code = "C1404";
 		String namespace = "NCI_Thesaurus";
 		List<LexEvsTreeNode> list = new TestTreeExtension(lbSvc).getChildren(codingScheme, version, code, namespace);
