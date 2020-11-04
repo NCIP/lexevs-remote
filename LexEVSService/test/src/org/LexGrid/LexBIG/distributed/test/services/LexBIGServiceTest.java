@@ -63,4 +63,18 @@ public class LexBIGServiceTest extends ServiceTestCase{
 		CodedNodeSet cns = lbs.getCodingSchemeConcepts(THES_SCHEME, null);
 		assertNotNull(cns);
 	}
+	
+	public void testLexevsVersion() 
+    {
+		LexBIGService lbSvc = LexEVSServiceHolder.instance().getLexEVSAppService();
+		
+		String version = lbSvc.getLexEVSBuildVersion();
+		String timestamp = lbSvc.getLexEVSBuildTimestamp();
+		
+		assertNotNull(version);
+		assertNotNull(timestamp);
+		
+    	System.out.println("LexEVS Build Version:   " + version);
+    	System.out.println("LexEVS Build Timestamp: " + timestamp);
+    }
 }

@@ -48,30 +48,30 @@ public class TestforCurrentOrObsoleteConcept extends ServiceTestCase
     {
 
         //same as above, but this time, using the new methods (that aren't deprecated)
-        CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
+        CodedNodeSet cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(GO_SCHEME, null);
         cns = cns.restrictToStatus(ActiveOption.ACTIVE_ONLY, null);
-        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C38389"}, THES_SCHEME));
+        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"GO:0000008"}, GO_SCHEME));
         ResolvedConceptReference[] rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
 
         assertTrue("1",rcr.length == 0);
 
-        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
+        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(GO_SCHEME, null);
         cns = cns.restrictToStatus(ActiveOption.ALL, null);
-        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C38389"}, THES_SCHEME));
+        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"GO:0000008"}, GO_SCHEME));
         rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
 
         assertTrue("2",rcr.length == 1);
         
         //same test again - no status restriction 
-        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
-        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"C38389"}, THES_SCHEME));
+        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(GO_SCHEME, null);
+        cns = cns.restrictToCodes(Constructors.createConceptReferenceList(new String[]{"GO:0000008"}, GO_SCHEME));
         rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
 
         assertTrue("3",rcr.length == 1);
 
         //add a status restriction
-        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(THES_SCHEME, null);
-        cns = cns.restrictToMatchingDesignations("Sex Not Known", SearchDesignationOption.ALL, "exactMatch", null);
+        cns = LexEVSServiceHolder.instance().getLexEVSAppService().getCodingSchemeConcepts(GO_SCHEME, null);
+        cns = cns.restrictToMatchingDesignations("obsolete thioredoxin", SearchDesignationOption.ALL, "exactMatch", null);
         cns = cns.restrictToStatus(ActiveOption.INACTIVE_ONLY, null);
         rcr = cns.resolveToList(null, null, null, 0).getResolvedConceptReference();
         assertTrue("4",rcr.length == 1);

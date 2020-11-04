@@ -21,6 +21,7 @@ import org.LexGrid.LexBIG.Exceptions.LBException;
 import org.LexGrid.LexBIG.testUtil.LexEVSServiceHolder;
 import org.LexGrid.LexBIG.testUtil.ServiceTestCase;
 import org.LexGrid.codingSchemes.CodingScheme;
+import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
 import org.lexgrid.resolvedvalueset.LexEVSResolvedValueSetService;
 import org.lexgrid.resolvedvalueset.impl.LexEVSResolvedValueSetServiceImpl;
 
@@ -35,7 +36,7 @@ protected String getTestID()
 }
 
 public void setUp(){
-	service  = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(null);
+	service  = LexEVSServiceHolder.instance().getLexEVSAppService().getLexEVSResolvedVSService(new AssertedValueSetParameters.Builder(THES_VERSION).build());
 }
 public void testgetListofResolvedValueSets() throws LBException{
 	List<CodingScheme> schemes = service.listAllResolvedValueSets();
@@ -77,11 +78,9 @@ public void testGetVersionsInResolutions() throws URISyntaxException{
 public void testGetMinimalResolvedValueSetSchemes() throws URISyntaxException, LBException{
 	List<CodingScheme> list = service.getMinimalResolvedValueSetSchemes();
 	assertTrue(list.size() > 0 );
-	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("All Domestic Autos But GM")));
-	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("All Domestic Autos But GM  and "
-			+ "as many characters as it takes to exceed 50 chars "
-			+ "but not 250 chars and that should about do it")));
-	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("One Child Value Set")));
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("CDISC SDTM Reason for Treatment Interruption Terminology")));
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("CDISC SDTM General Observation Class Terminology")));
+	assertTrue(list.stream().anyMatch(x ->x.getFormalName().equals("CDISC SDTM Malaria Findings About Test Name Terminology")));
 }
 
 }

@@ -50,7 +50,7 @@ public class NCIThesaurusHistoryServiceTest extends TestCase
         HistoryService hs = lbsi.getHistoryService("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#");
 
         SystemReleaseList srl = hs.getBaselines(null, null);
-        assertEquals(srl.getSystemReleaseCount() , 143);
+        assertEquals(srl.getSystemReleaseCount() , 183);
         assertTrue(srl.getSystemRelease(0).getReleaseURI().equals("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#:v1.0"));
         assertTrue(srl.getSystemRelease(28).getReleaseURI().equals("http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#:06.01c"));
 
