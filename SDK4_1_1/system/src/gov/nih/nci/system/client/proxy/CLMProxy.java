@@ -5,12 +5,13 @@ import gov.nih.nci.logging.api.user.UserInfoHelper;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CLMProxy implements MethodInterceptor
 {
 
-	private static Logger log = Logger.getLogger(CLMProxy.class.getName());
+	private static Logger log = LogManager.getLogger(CLMProxy.class.getName());
 	
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		

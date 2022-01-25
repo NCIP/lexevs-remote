@@ -13,6 +13,7 @@ import gov.nih.nci.system.query.example.ExampleQuery;
 import gov.nih.nci.system.query.example.SearchExampleQuery;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 import gov.nih.nci.system.query.hql.SearchHQLQuery;
+
 import gov.nih.nci.system.query.nestedcriteria.NestedCriteriaPath;
 import gov.nih.nci.system.util.ClassCache;
 
@@ -20,12 +21,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class WritableApplicationServiceImpl extends ApplicationServiceImpl implements WritableApplicationService
 {
-	private static Logger log = Logger.getLogger(WritableApplicationServiceImpl.class.getName());
+	private static Logger log = LogManager.getLogger(WritableApplicationServiceImpl.class.getName());
 	public WritableApplicationServiceImpl(ClassCache classCache) {
 		super(classCache);
 	}

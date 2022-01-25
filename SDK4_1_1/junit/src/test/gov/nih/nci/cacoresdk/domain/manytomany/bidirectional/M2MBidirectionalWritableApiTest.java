@@ -3,7 +3,8 @@ package test.gov.nih.nci.cacoresdk.domain.manytomany.bidirectional;
 import java.util.Collection;
 import java.util.HashSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.manytomany.bidirectional.Employee;
@@ -11,7 +12,7 @@ import gov.nih.nci.cacoresdk.domain.manytomany.bidirectional.Project;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class M2MBidirectionalWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(M2MBidirectionalWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(M2MBidirectionalWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Many to Many Bidirectional WritableApi Test Case";
 	}

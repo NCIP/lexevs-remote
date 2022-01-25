@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Validates security token against the MedDRA vocabulary
@@ -21,7 +22,7 @@ public class MedDRASecurity implements DAOSecurity {
      * @param securityToken - specify the securityToken value
      * @return returns an authentication code
      */
-    private static Logger log = Logger.getLogger(MedDRASecurity.class.getName());
+    private static Logger log = LogManager.getLogger(MedDRASecurity.class.getName());
 
     private static HashSet validTokenCollection = new HashSet();
     static {

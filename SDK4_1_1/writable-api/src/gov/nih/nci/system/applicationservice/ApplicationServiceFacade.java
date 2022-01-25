@@ -2,7 +2,7 @@ package gov.nih.nci.system.applicationservice;
 
 import gov.nih.nci.system.query.SDKQuery;
 import gov.nih.nci.system.query.SDKQueryResult;
-import gov.nih.nci.system.query.cql.CQLQuery;
+//import gov.nih.nci.system.query.cql.CQLQuery;
 import gov.nih.nci.system.query.example.DeleteExampleQuery;
 import gov.nih.nci.system.query.example.InsertExampleQuery;
 import gov.nih.nci.system.query.example.SearchExampleQuery;
@@ -50,10 +50,10 @@ public class ApplicationServiceFacade implements WritableApplicationService {
 	 * @throws ApplicationException
 	 * @see {@link #query(CQLQuery)}
 	 */
-	@Deprecated
-	public <E> List<E> query(CQLQuery cqlQuery, String targetClassName) throws ApplicationException{
-		return appService.query(cqlQuery, targetClassName);
-	}
+//	@Deprecated
+//	public <E> List<E> query(CQLQuery cqlQuery, String targetClassName) throws ApplicationException{
+//		return appService.query(cqlQuery, targetClassName);
+//	}
 	
 	/**
 	 * Retrieves the result from the data source using the CQL query. The CQL query structure is converted into the
@@ -71,9 +71,9 @@ public class ApplicationServiceFacade implements WritableApplicationService {
 	 * @return
 	 * @throws ApplicationException
 	 */
-	public <E> List<E> query(CQLQuery cqlQuery) throws ApplicationException {
-		return appService.query(cqlQuery);
-	}
+//	public <E> List<E> query(CQLQuery cqlQuery) throws ApplicationException {
+//		return appService.query(cqlQuery);
+//	}
 
 	/**
 	 * Retrieves the result from the data source using the DetachedCriteria query. The DetachedCriteria query structure 

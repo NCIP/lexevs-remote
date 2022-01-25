@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.parentwithassociation.sametable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.inheritance.parentwithassociation.sametable.HardTop;
@@ -10,7 +11,7 @@ import gov.nih.nci.cacoresdk.domain.inheritance.parentwithassociation.sametable.
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class ParentWithAssociationSametableWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(ParentWithAssociationSametableWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(ParentWithAssociationSametableWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Parent With Association Same Table Test Case";
 	}

@@ -6,11 +6,12 @@ import gov.nih.nci.cagrid.syncgts.bean.SyncDescription;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SyncGTS
 {
-	protected static Logger log = Logger.getLogger(SyncGTS.class.getName());
+	protected static Logger log = LogManager.getLogger(SyncGTS.class.getName());
 	
 	public SyncGTS(File file, Boolean reSync) throws Exception
 	{

@@ -13,12 +13,13 @@ import java.util.StringTokenizer;
 
 import javax.xml.rpc.ServiceException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.remoting.jaxrpc.ServletEndpointSupport;
 
 
 public class WSQueryImpl extends ServletEndpointSupport implements WSQuery{
-	private static Logger log = Logger.getLogger(WSQueryImpl.class);
+	private static Logger log = LogManager.getLogger(WSQueryImpl.class);
 
 	private static ApplicationService applicationService;	
 	private static ClassCache classCache;

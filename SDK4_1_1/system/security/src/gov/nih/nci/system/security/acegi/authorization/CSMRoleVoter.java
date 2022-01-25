@@ -6,7 +6,8 @@ import org.acegisecurity.ConfigAttributeDefinition;
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.vote.AccessDecisionVoter;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.exceptions.CSException;
@@ -28,7 +29,7 @@ import java.util.Map;
  * 
  */
 public class CSMRoleVoter implements AccessDecisionVoter {
-	static final Logger log = Logger.getLogger(CSMRoleVoter.class.getName());
+	static final Logger log = LogManager.getLogger(CSMRoleVoter.class.getName());
 	/**
      * NOTE: RolePrefix isnt used in CSMRoleVoter. 
      * It is desired to delegate this to SecurityHelper implemented by SDK. 

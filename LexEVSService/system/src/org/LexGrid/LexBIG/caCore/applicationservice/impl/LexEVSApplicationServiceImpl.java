@@ -47,7 +47,8 @@ import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.codingSchemes.CodingScheme;
 import org.LexGrid.util.assertedvaluesets.AssertedValueSetParameters;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lexevs.locator.LexEvsServiceLocator;
 import org.lexevs.system.utility.MyClassLoader;
 import org.lexgrid.conceptdomain.LexEVSConceptDomainServices;
@@ -81,7 +82,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
 	
 	private RemoteResourceManager remoteResourceManager;
 	
-	private static Logger log = Logger.getLogger(LexEVSApplicationServiceImpl.class.getName());
+	private static Logger log = LogManager.getLogger(LexEVSApplicationServiceImpl.class.getName());
 	protected ApplicationContext appContext;
 
 	private Validator validator;
@@ -101,7 +102,7 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
     private static final String LEXBIG_SYSPROPERTY = "LG_CONFIG_FILE";
     
 	  
-	public LexEVSApplicationServiceImpl(ClassCache classCache, Validator validator, LexEVSProperties properties) throws Exception {		
+	public LexEVSApplicationServiceImpl(ClassCache classCache, Validator validator, LexEVSProperties properties) throws Exception {
 		super(classCache);
 		this.validator = validator;
 		System.setProperty(LEXBIG_SYSPROPERTY, properties.getLexBigConfigFileLocation());
@@ -173,11 +174,11 @@ public class LexEVSApplicationServiceImpl extends ApplicationServiceImpl impleme
      * Execute securely. (Note: currently the annotations parameter is used only on
      * the client side)
      *
-     * @param object the object
      * @param methodName the method name
      * @param annotations annotations used by this method
      * @param parameterClasses the parameter classes
      * @param args the args
+	 * @param tokens the tokens
      *
      * @return the object
      *

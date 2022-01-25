@@ -8,10 +8,8 @@
 */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
-import gov.nih.nci.system.applicationservice.ApplicationService;
-import gov.nih.nci.system.client.proxy.BeanProxy;
-import gov.nih.nci.system.client.proxy.ProxyHelperImpl;
 
+import gov.nih.nci.system.applicationservice.ApplicationService;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -20,13 +18,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.LexGrid.LexBIG.caCore.applicationservice.RemoteExecutionResults;
+import gov.nih.nci.system.client.proxy.BeanProxy;
+import gov.nih.nci.system.client.proxy.ProxyHelperImpl;
 import org.LexGrid.LexBIG.caCore.applicationservice.resource.RemoteShell;
 import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
 import org.LexGrid.LexBIG.caCore.utils.LexEVSCaCoreUtils;
 import org.LexGrid.annotations.LgAdminFunction;
 import org.LexGrid.annotations.LgClientSideSafe;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.aop.framework.ProxyFactory;
@@ -41,7 +42,7 @@ import org.springframework.aop.target.SingletonTargetSource;
  */
 public class LexEVSProxyHelperImpl extends ProxyHelperImpl {
 
-    private static final Logger log = Logger.getLogger(LexEVSProxyHelperImpl.class);
+    private static final Logger log = LogManager.getLogger(LexEVSProxyHelperImpl.class);
    
     /**
      * Annotation class used to mark LexBig classes and methods as

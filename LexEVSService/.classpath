@@ -91,12 +91,10 @@
 	<classpathentry kind="lib" path="system/lib/rmiio-2.0.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/saxpath-1.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/servlet.jar"/>
-	<classpathentry kind="lib" path="system/lib/slf4j-api-1.5.6.jar"/>
-	<classpathentry kind="lib" path="system/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="system/lib/slf4j-api-1.8.0-beta4.jar"/>
+	<classpathentry kind="lib" path="system/lib/slf4j-log4j12-1.8.0-beta4.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-batch-core-2.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-batch-infrastructure-2.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-web-2.5.6.jar" sourcepath="/Users/bauerhs/.m2/repository/org/springframework/spring-web/2.5.6/spring-web-2.5.6-sources.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-webmvc-2.5.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/velocity-1.6.jar"/>
 	<classpathentry kind="lib" path="system/lib/xsdlib-20030807.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-aop-3.1.0.RELEASE.jar" sourcepath="/Users/bauerhs/.m2/repository/org/springframework/spring-aop/3.1.0.RELEASE/spring-aop-3.1.0.RELEASE-sources.jar"/>
@@ -112,7 +110,6 @@
 	<classpathentry kind="lib" path="system/lib/spring-oxm-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-test-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring-xml-1.5.9.jar"/>
 	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="system/lib/lucene-analyzers-common-5.3.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/lucene-analyzers-phonetic-5.3.1.jar"/>
@@ -140,5 +137,14 @@
 	<classpathentry kind="lib" path="system/lib/velocypack-1.4.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/jackson-core-2.10.0.pr2.jar"/>
 	<classpathentry kind="lib" path="system/lib/lexbig-test-6.5.4.RC.2-tests.jar"/>
+	<classpathentry kind="lib" path="system/lib/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-annotations-3.4.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-commons-annotations-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-validator-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/log4j-api-2.17.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.springframework.web-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-xml-3.1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/wsdl4j-1.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,7 +1,8 @@
 package org.LexGrid.LexBIG.caCore.security;
 
 import org.LexGrid.LexBIG.caCore.security.properties.LexEVSProperties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.evs.security.SecurityToken;
 import gov.nih.nci.system.dao.security.DAOSecurity;
@@ -11,7 +12,7 @@ import gov.nih.nci.system.dao.security.UserCredentials;
 public class Validator {
 
 	private LexEVSProperties lexEVSprops;
-	private Logger log = Logger.getLogger(Validator.class);
+	private Logger log = LogManager.getLogger(Validator.class);
 	
 	
 	public Validator(LexEVSProperties lexEVSprops){

@@ -22,7 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.DocType;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -39,7 +40,7 @@ import org.mmbase.util.Encode;
 public class XmlMappingTransformer implements Transformer { 
 
 
-	private static Logger log = Logger.getLogger(XmlMappingTransformer.class);
+	private static Logger log = LogManager.getLogger(XmlMappingTransformer.class);
 	
 	private GeneratorErrors generatorErrors = new GeneratorErrors();
 	

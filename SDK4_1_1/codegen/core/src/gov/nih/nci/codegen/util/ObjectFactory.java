@@ -3,7 +3,8 @@ package gov.nih.nci.codegen.util;
 
 import gov.nih.nci.codegen.GenerationException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
@@ -16,7 +17,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class ObjectFactory
 {
-	private static Logger log = Logger.getLogger(ObjectFactory.class.getName());
+	private static Logger log = LogManager.getLogger(ObjectFactory.class.getName());
 
 	private static XmlBeanFactory factory;
 	

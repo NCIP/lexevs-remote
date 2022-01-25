@@ -24,7 +24,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.springframework.web.context.WebApplicationContext;
@@ -42,7 +43,7 @@ public class HTTPUtils implements Serializable{
 
 	private static final long serialVersionUID = 1234567890L;
 
-	private static Logger log= Logger.getLogger(HTTPUtils.class.getName());
+	private static Logger log= LogManager.getLogger(HTTPUtils.class.getName());
 
 	private ApplicationService applicationService;
 	private ClassCache classCache;

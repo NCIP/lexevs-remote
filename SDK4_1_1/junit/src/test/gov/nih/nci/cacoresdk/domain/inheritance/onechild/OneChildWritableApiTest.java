@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.onechild;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.inheritance.onechild.Human;
@@ -9,7 +10,7 @@ import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class OneChildWritableApiTest extends SDKWritableApiBaseTest{
 
-	private static Logger log = Logger.getLogger(OneChildWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(OneChildWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "One Child Writable Api Test Case";
 	}

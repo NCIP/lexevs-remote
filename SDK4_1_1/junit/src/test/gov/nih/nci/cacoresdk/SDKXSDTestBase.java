@@ -4,7 +4,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jaxen.JaxenException;
 import org.jaxen.jdom.JDOMXPath;
 import org.jdom.Document;
@@ -17,7 +18,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public abstract class SDKXSDTestBase extends TestCase {
 	
-	private static Logger log = Logger.getLogger(SDKXSDTestBase.class);
+	private static Logger log = LogManager.getLogger(SDKXSDTestBase.class);
 
 	private String namespace = "http://www.w3.org/2001/XMLSchema";
 	private String prefix = "xs";
