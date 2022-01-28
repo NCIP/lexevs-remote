@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.xml.MarshalException;
@@ -15,7 +16,7 @@ import org.xml.sax.InputSource;
 
 public class caCOREMarshaller implements gov.nih.nci.system.client.util.xml.Marshaller {
 	
-	private static Logger log= Logger.getLogger(caCOREMarshaller.class.getName());
+	private static Logger log= LogManager.getLogger(caCOREMarshaller.class.getName());
 
 	private Marshaller marshaller;
 	private Mapping mapping;

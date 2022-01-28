@@ -5,7 +5,8 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Generates the code from the {@link #model}. 
@@ -35,7 +36,7 @@ import org.apache.log4j.Logger;
 
 public class Generator
 {
-	private static Logger log = Logger.getLogger(Generator.class);
+	private static Logger log = LogManager.getLogger(Generator.class);
 
 	/**
 	 * UMLModel from which the code is to be generated

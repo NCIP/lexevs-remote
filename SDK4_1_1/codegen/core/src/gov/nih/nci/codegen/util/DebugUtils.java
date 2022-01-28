@@ -9,7 +9,8 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLPackage;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Utility methods for assisting in the debugging
@@ -19,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class DebugUtils
 {
-	private static Logger log = Logger.getLogger(DebugUtils.class);
+	private static Logger log = LogManager.getLogger(DebugUtils.class);
 	
 	/**
 	 * Logs the UML model information on the console

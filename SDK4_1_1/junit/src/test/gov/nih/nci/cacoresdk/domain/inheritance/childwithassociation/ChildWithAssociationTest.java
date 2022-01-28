@@ -14,14 +14,15 @@ import gov.nih.nci.system.query.cql.CQLQuery;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import test.gov.nih.nci.cacoresdk.SDKTestBase;
 
 public class ChildWithAssociationTest extends SDKTestBase
 {
 	
-	protected static Logger log = Logger.getLogger(ChildWithAssociationTest.class.getName());
+	protected static Logger log = LogManager.getLogger(ChildWithAssociationTest.class.getName());
 	
 	public static String getTestCaseName()
 	{

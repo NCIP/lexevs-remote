@@ -8,24 +8,22 @@
 */
 package org.LexGrid.LexBIG.caCore.client.proxy;
 
+import gov.nih.nci.system.applicationservice.ApplicationService;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.transaction.NotSupportedException;
 
 import org.LexGrid.LexBIG.caCore.applicationservice.QueryOptions;
-import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
-import org.apache.log4j.Logger;
-
-import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.client.proxy.ListProxy;
+import org.LexGrid.LexBIG.caCore.interfaces.LexEVSApplicationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 
 public class LexEVSListProxy extends ListProxy {
 	private static final long serialVersionUID = 2698044061654948213L;
 	public QueryOptions queryOptions;
 
-	private static Logger log = Logger.getLogger(ListProxy.class.getName());
+	private static Logger log = LogManager.getLogger(ListProxy.class.getName());
 	
 	private transient LexEVSApplicationService lexevsappService;
 	
@@ -39,18 +37,13 @@ public class LexEVSListProxy extends ListProxy {
 	// ==============================================================
 
 
-	/**
-	 * @see java.util.#isEmpty()
-	 */
+
 	public boolean isEmpty() {
 		return this.getListChunk().isEmpty();
 	}
 
 
-	/**
-	 * @see java.util.#toArray()
-	 * 
-	 */
+
 	public Object[] toArray() {
 		if (this.isHasAllRecords()) {
 			return this.getListChunk().toArray();

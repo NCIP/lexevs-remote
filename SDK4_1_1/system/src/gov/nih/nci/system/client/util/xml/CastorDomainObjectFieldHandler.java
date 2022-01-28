@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The FieldHandler for the Date class
@@ -14,7 +15,7 @@ public class CastorDomainObjectFieldHandler
     extends BaseCastorFieldHandler
 {
 
-    private static Logger log = Logger.getLogger(CastorDomainObjectFieldHandler.class);
+    private static Logger log = LogManager.getLogger(CastorDomainObjectFieldHandler.class);
 
     /**
      * Creates a new MyDateHandler instance

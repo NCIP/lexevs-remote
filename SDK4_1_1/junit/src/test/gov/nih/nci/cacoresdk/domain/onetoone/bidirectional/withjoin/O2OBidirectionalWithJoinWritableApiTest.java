@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.onetoone.bidirectional.withjoin;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.cacoresdk.domain.onetoone.bidirectional.withjoin.Chain;
 import gov.nih.nci.cacoresdk.domain.onetoone.bidirectional.withjoin.Pendant;
@@ -8,7 +9,7 @@ import junit.framework.Assert;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class O2OBidirectionalWithJoinWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(O2OBidirectionalWithJoinWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(O2OBidirectionalWithJoinWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "One to One Bidirectional With Join WritableApi Test Case";
 	}

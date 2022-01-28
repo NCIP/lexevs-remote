@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.manytoone.unidirectional.withjoin;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 
@@ -9,7 +10,7 @@ import gov.nih.nci.cacoresdk.domain.manytoone.unidirectional.withjoin.Song;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class M2OUnidirectionalWithJoinWritableApiTest extends SDKWritableApiBaseTest{
-	private static Logger log = Logger.getLogger(M2OUnidirectionalWithJoinWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(M2OUnidirectionalWithJoinWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Many to One Unidirectional With Join WritableApi Test Case";
 	}

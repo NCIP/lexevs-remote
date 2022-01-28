@@ -4,7 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.xml.MarshalException;
@@ -14,7 +15,7 @@ import org.xml.sax.InputSource;
 
 public class caCOREUnmarshaller implements gov.nih.nci.system.client.util.xml.Unmarshaller {
 
-	private static Logger log= Logger.getLogger(caCOREUnmarshaller.class.getName());
+	private static Logger log= LogManager.getLogger(caCOREUnmarshaller.class.getName());
 	
 	private Unmarshaller unmarshaller;
 	private Mapping mapping;

@@ -116,7 +116,7 @@ public class LexEVSSearch {
 		HashMap<String, ResolvedConceptReference> ret = new HashMap<String, ResolvedConceptReference>();
 
 		CodingScheme cs = evsService.resolveCodingScheme(scheme, null);
-		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].isIsForwardNavigable();
+		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].getIsForwardNavigable();
 		String relation = returnAssociations(cs);
 
 		// Perform the query ...
@@ -140,7 +140,7 @@ public class LexEVSSearch {
 		HashMap<String, ResolvedConceptReference> ret = new HashMap<String, ResolvedConceptReference>();
 
 		CodingScheme cs = evsService.resolveCodingScheme(scheme, null);
-		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].isIsForwardNavigable();
+		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].getIsForwardNavigable();
 		String relation = returnAssociations(cs);
 
 		// Perform the query ...
@@ -304,7 +304,7 @@ public class LexEVSSearch {
 		HashMap<String, String> ret = new HashMap<String, String>();
 
 		CodingScheme cs = evsService.resolveCodingScheme(scheme, null);
-		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].isIsForwardNavigable();
+		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].getIsForwardNavigable();
 		String relation = returnAssociations(cs);
 
 		// Perform the query ...
@@ -327,7 +327,7 @@ public class LexEVSSearch {
 		HashMap<String, String> ret = new HashMap<String, String>();
 
 		CodingScheme cs = evsService.resolveCodingScheme(scheme, null);
-		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].isIsForwardNavigable();
+		boolean forwardNavigable = cs.getMappings().getSupportedHierarchy()[0].getIsForwardNavigable();
 		String relation = returnAssociations(cs);
 
 		// Perform the query ...

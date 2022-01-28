@@ -3,7 +3,8 @@ package test.gov.nih.nci.cacoresdk.domain.inheritance.abstrakt;
 import java.util.Collection;
 import java.util.HashSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.inheritance.abstrakt.PrivateTeacher;
@@ -12,7 +13,7 @@ import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class AbstractParentWithAssociationWritableApiTest extends SDKWritableApiBaseTest {
 
-	private static Logger log = Logger.getLogger(AbstractParentWithAssociationWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(AbstractParentWithAssociationWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Abstract Parent With Association Writable Api Test Case";
 	}

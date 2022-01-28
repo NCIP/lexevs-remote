@@ -14,9 +14,9 @@
 	<classpathentry kind="lib" path="codegen/core/lib/jaxen-core.jar"/>
 	<classpathentry kind="lib" path="codegen/core/lib/jaxen-jdom.jar"/>
 	<classpathentry kind="lib" path="codegen/core/lib/jdom.jar"/>
-	<classpathentry kind="lib" path="codegen/core/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="codegen/core/lib/log4j-core-2.17.1.jar"/>
 	<classpathentry kind="lib" path="codegen/core/lib/mmbase.jar"/>
-	<classpathentry exported="true" kind="lib" path="codegen/core/lib/spring.jar" sourcepath="/LexEVSService/system/src"/>
+	<classpathentry exported="true" kind="lib" path="codegen/core/lib/org.springframework.core-3.1.0.RELEASE.jar" sourcepath="/LexEVSService/system/src"/>
 	<classpathentry kind="lib" path="codegen/core/lib/xmi.in.out.jar"/>
 	<classpathentry kind="lib" path="codegen/templates/lib/eclipse-codegen.jar"/>
 	<classpathentry kind="lib" path="codegen/templates/lib/eclipse-emf-common.jar"/>
@@ -38,18 +38,15 @@
 	<classpathentry kind="lib" path="system/lib/dom4j-1.4.jar"/>
 	<classpathentry kind="lib" path="system/lib/ehcache-1.2.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="system/lib/hibernate-commons-annotations.jar"/>
-	<classpathentry kind="lib" path="system/lib/hibernate-validator.jar"/>
 	<classpathentry kind="lib" path="system/lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="system/lib/jdom.jar"/>
 	<classpathentry kind="lib" path="system/lib/jta.jar"/>
-	<classpathentry kind="lib" path="system/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="system/lib/log4j-core-2.17.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/mysql-connector-java-3.1.13-bin.jar"/>
 	<classpathentry kind="lib" path="system/lib/ojdbc14.jar"/>
 	<classpathentry kind="lib" path="system/lib/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="system/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="system/lib/servlet.jar"/>
-	<classpathentry kind="lib" path="system/lib/spring.jar"/>
 	<classpathentry kind="lib" path="system/lib/wsdl4j-1.5.1.jar"/>
 	<classpathentry kind="lib" path="system/lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="system/lib/cog-jglobus.jar" sourcepath="/jglobus-cog-1.5"/>
@@ -77,7 +74,6 @@
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/cryptix-asn1.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/jce-jdk13-125.jar"/>
-	<classpathentry kind="lib" path="grid/grid-jaas/lib/log4j-1.2.8.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/puretls.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/wsdl4j.jar"/>
@@ -86,7 +82,6 @@
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/wss4j.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/xalan.jar"/>
 	<classpathentry kind="lib" path="grid/grid-jaas/lib/xmlsec.jar"/>
-	<classpathentry kind="lib" path="grid/grid-jaas/lib/spring.jar"/>
 	<classpathentry kind="lib" path="system/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/caGrid-sdkQuery4-beans-1.2.jar"/>
 	<classpathentry kind="lib" path="system/lib/caGrid-sdkQuery4-processor-1.2.jar"/>
@@ -123,5 +118,21 @@
 	<classpathentry kind="lib" path="system/lib/javassist-3.3.jar"/>
 	<classpathentry kind="lib" path="system/lib/ognl-3.0.5.jar"/>
 	<classpathentry kind="lib" path="system/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="system/lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-annotations-3.4.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-commons-annotations-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-core-3.3.2.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/hibernate-validator-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="system/lib/log4j-api-2.17.1.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.springframework.aop-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.springframework.beans-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.springframework.context-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/org.springframework.core-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-jdbc-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-orm-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-web-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-context-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-context-support-3.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="system/lib/spring-tx-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

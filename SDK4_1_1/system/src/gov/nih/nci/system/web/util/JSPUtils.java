@@ -14,7 +14,8 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -23,7 +24,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 
 public class JSPUtils {
-	private static Logger log = Logger.getLogger(JSPUtils.class.getName());
+	private static Logger log = LogManager.getLogger(JSPUtils.class.getName());
 
 	private static JSPUtils jspUtils;
 	private static boolean secured;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM ".\log4j.dtd">
 
-<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+<!--<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>-->
+	<log4j:configuration xmlns:log4j='https://logging.apache.org/log4j/2.x/'>
 
 @ENABLE_CLM_LOGGER_CFG_GENERATION_START@
 	<appender name="CLM_APPENDER"
@@ -13,7 +14,8 @@
 		<param name="dbUser" value="@CLM_DB_USERNAME@" />
 		<param name="dbPwd" value="@CLM_DB_PASSWORD@" />
 		<param name="useFilter" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">
+<!--		<layout class="org.apache.log4j.PatternLayout">-->
+		<layout class="org.apache.logging.log4j.core.layout.PatternLayout">
 			<param name="ConversionPattern"
 				value=":: [%d{ISO8601}] %-5p %c{1}.%M() %x - %m%n" />
 		</layout>
@@ -24,7 +26,7 @@
 		<!--      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>-->
 		<param name="Target" value="System.out" />
 		<param name="Threshold" value="INFO" />
-		<layout class="org.apache.log4j.PatternLayout">
+		<layout class="org.apache.logging.log4j.core.layout.PatternLayout">
 			<!-- The default pattern: Date Priority [Category] Message\n -->
 			<param name="ConversionPattern"
 				value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
@@ -36,7 +38,7 @@
 		<param name="Append" value="false" />
 		<param name="File"
 			value="${jboss_home}/server/default/log/hibernate.log" />
-		<layout class="org.apache.log4j.PatternLayout">
+		<layout class="org.apache.logging.log4j.core.layout.PatternLayout">
 			<param name="ConversionPattern"
 				value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
 		</layout>

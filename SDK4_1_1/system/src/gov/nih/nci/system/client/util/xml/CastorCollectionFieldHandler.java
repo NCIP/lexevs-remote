@@ -10,7 +10,8 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.exolab.castor.mapping.GeneralizedFieldHandler;
 
 /**
@@ -21,7 +22,7 @@ public class CastorCollectionFieldHandler
 extends BaseCastorFieldHandler
 {
 
-	private static Logger log = Logger.getLogger(CastorCollectionFieldHandler.class);
+	private static Logger log = LogManager.getLogger(CastorCollectionFieldHandler.class);
 
 	/**
 	 * Creates a new MyDateHandler instance

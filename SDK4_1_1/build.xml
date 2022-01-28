@@ -627,7 +627,12 @@
 		<ant antfile="${system.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
 	</target>
 
-	<target name="prepare" depends="prepare-codegen,prepare-system	"/>
+	<target name="prepare-webapp" depends="prepare-condition-system" if="prepare-required-system">
+		<SDKecho message="${ant.project.name}: Preparing the webapp project"/>
+		<ant antfile="${writable-api.dir}\build.xml" target="dist" inheritall="false" inheritrefs="false" />
+	</target>
+
+	<target name="prepare" depends="prepare-codegen,prepare-system,prepare-webapp	"/>
 
 
 	<!--***********************************************************************
@@ -745,7 +750,7 @@
 				<attribute name="Version" value="${VERSION}"/>
 			</manifest>
 			<lib dir="${system.dir}\${system.dist.dir}" includes="*.jar"/>
-			<lib dir="${writable-api.dir}\${writable-api.dist.dir}" includes="*.jar">
+			<lib dir="writable-api\dist" includes="*.jar">
 				<exclude name="${read-api-exclude-list}"/>
 			</lib>
 			<lib dir="${build.jar.dir}" includes="${bean.file}" />

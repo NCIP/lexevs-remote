@@ -21,7 +21,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.impl.CriteriaImpl;
 
@@ -38,7 +39,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	private Integer maxRecordCount = 1000;
 	
-	private static Logger log = Logger.getLogger(ApplicationServiceImpl.class.getName());
+	private static Logger log = LogManager.getLogger(ApplicationServiceImpl.class.getName());
 
 	/**
 	 * Default constructor. Cache is required and is expected to have a collection of DAO

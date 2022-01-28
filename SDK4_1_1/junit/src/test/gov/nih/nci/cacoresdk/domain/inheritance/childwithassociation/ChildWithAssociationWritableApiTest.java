@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.childwithassociation;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.inheritance.childwithassociation.Bank;
@@ -10,7 +11,7 @@ import gov.nih.nci.cacoresdk.domain.inheritance.childwithassociation.Payment;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class ChildWithAssociationWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(ChildWithAssociationWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(ChildWithAssociationWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Child With Association WritableApi Test Case";
 	}

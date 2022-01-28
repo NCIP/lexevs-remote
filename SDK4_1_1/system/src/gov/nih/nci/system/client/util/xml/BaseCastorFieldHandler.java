@@ -7,7 +7,8 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.exolab.castor.mapping.GeneralizedFieldHandler;
 import org.springframework.aop.framework.Advised;
 
@@ -19,7 +20,7 @@ public abstract class BaseCastorFieldHandler
 extends GeneralizedFieldHandler
 {
 
-	private static Logger log = Logger.getLogger(BaseCastorFieldHandler.class);
+	private static Logger log = LogManager.getLogger(BaseCastorFieldHandler.class);
 
 	static public Object convertObject(Object oldObj, boolean getAssociation) throws Exception
 	{

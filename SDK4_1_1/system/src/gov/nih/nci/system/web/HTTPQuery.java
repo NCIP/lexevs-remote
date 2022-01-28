@@ -20,7 +20,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.output.XMLOutputter;
 import org.jdom.transform.JDOMResult;
@@ -42,7 +43,7 @@ public class HTTPQuery extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger log = Logger.getLogger(HTTPQuery.class.getName());
+	private static Logger log = LogManager.getLogger(HTTPQuery.class.getName());
 
 	private String cacoreStyleSheet;
 

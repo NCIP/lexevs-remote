@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.twolevelinheritance.sametablerootlevel;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.inheritance.twolevelinheritance.sametablerootlevel.Calculator;
@@ -10,7 +11,7 @@ import gov.nih.nci.cacoresdk.domain.inheritance.twolevelinheritance.sametableroo
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class TwoLevelInheritanceSametablerootlevelWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(TwoLevelInheritanceSametablerootlevelWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(TwoLevelInheritanceSametablerootlevelWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Two Level Inheritance Same Table Root Level Writable Api Test Case";
 	}
