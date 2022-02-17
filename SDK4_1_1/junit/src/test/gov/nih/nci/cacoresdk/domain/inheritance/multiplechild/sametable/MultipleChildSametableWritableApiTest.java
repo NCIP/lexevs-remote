@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.multiplechild.sametable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.cacoresdk.domain.inheritance.multiplechild.sametable.GovtOrganization;
 import gov.nih.nci.cacoresdk.domain.inheritance.multiplechild.sametable.Organization;
@@ -11,7 +12,7 @@ import junit.framework.Assert;
 
 
 public class MultipleChildSametableWritableApiTest extends SDKWritableApiBaseTest{
-	private static Logger log = Logger.getLogger(MultipleChildSametableWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(MultipleChildSametableWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Multiple Child Same Table Test Case";
 	}

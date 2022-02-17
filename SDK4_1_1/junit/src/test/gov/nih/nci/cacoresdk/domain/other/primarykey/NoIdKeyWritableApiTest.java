@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.other.primarykey;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.other.primarykey.NoIdKey;
@@ -8,7 +9,7 @@ import gov.nih.nci.cacoresdk.domain.other.primarykey.NoIdKey;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class NoIdKeyWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(NoIdKeyWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(NoIdKeyWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "NoId Pk WritableApi Test Case";
 	}

@@ -15,11 +15,12 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLClass;
 import gov.nih.nci.ncicb.xmiinout.domain.UMLGeneralization;
 import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WritableApiValidator implements Validator {
 
-	private static Logger log = Logger.getLogger(WritableApiValidator.class);
+	private static Logger log = LogManager.getLogger(WritableApiValidator.class);
 	private static final String CASCADE_DELETE_ORPHAN = "delete-orphan";
 
 	private boolean enabled = true;

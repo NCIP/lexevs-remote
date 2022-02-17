@@ -22,7 +22,8 @@ import java.util.StringTokenizer;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.cagrid.grape.GridApplication;
 import org.jdom.Document;
 
@@ -33,7 +34,7 @@ import org.jdom.Document;
  * @author <A HREF="MAILTO:langella@bmi.osu.edu">Stephen Langella </A>
  */
 public class ResourceManager {
-    private static final Logger logger = Logger.getLogger(ResourceManager.class);
+    private static final Logger logger = LogManager.getLogger(ResourceManager.class);
     public static final int MAX_ARCHIVE = 5;
 
     public final static String SERVICE_URL_FILE = "service_urls.properties";

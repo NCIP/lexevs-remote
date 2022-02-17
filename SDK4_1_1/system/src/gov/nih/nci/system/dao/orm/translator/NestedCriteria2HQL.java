@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
@@ -25,7 +26,7 @@ public class NestedCriteria2HQL
 	private boolean caseSensitive;	
 	private HQLCriteria hqlCriteria;
 
-	private static Logger log = Logger.getLogger(NestedCriteria2HQL.class);
+	private static Logger log = LogManager.getLogger(NestedCriteria2HQL.class);
 
 	private List paramList = new ArrayList();
 

@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.multiplechild;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
@@ -9,7 +10,7 @@ import gov.nih.nci.cacoresdk.domain.inheritance.multiplechild.Student;
 import gov.nih.nci.cacoresdk.domain.inheritance.multiplechild.UndergraduateStudent;
 
 public class MultipleChildWritableApiTest extends SDKWritableApiBaseTest{
-	private static Logger log = Logger.getLogger(MultipleChildWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(MultipleChildWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "Multiple Child Writable Api Test Case";
 	}

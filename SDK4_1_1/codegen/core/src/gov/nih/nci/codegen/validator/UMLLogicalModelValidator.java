@@ -20,7 +20,8 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Validates the logical model (Object model) of the <code>model</code> passed in as a parameter
@@ -54,7 +55,7 @@ import org.apache.log4j.Logger;
 public class UMLLogicalModelValidator implements Validator
 {
 
-	private static Logger log = Logger.getLogger(UMLLogicalModelValidator.class);
+	private static Logger log = LogManager.getLogger(UMLLogicalModelValidator.class);
 	
 	private boolean enabled = true;
 	

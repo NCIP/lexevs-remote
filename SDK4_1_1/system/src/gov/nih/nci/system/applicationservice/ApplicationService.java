@@ -35,8 +35,8 @@ public interface ApplicationService
 	 * @throws ApplicationException
 	 * @see {@link #query(CQLQuery)}
 	 */
-	@Deprecated
-	public <E> List<E> query(CQLQuery cqlQuery, String targetClassName) throws ApplicationException;
+//	@Deprecated
+//	public <E> List<E> query(CQLQuery cqlQuery, String targetClassName) throws ApplicationException;
 	
 	/**
 	 * Retrieves the result from the data source using the CQL query. The CQL query structure is converted into the
@@ -54,7 +54,7 @@ public interface ApplicationService
 	 * @return
 	 * @throws ApplicationException
 	 */
-	public <E> List<E> query(CQLQuery cqlQuery) throws ApplicationException;
+//	public <E> List<E> query(CQLQuery cqlQuery) throws ApplicationException;
 
 	/**
 	 * Retrieves the result from the data source using the DetachedCriteria query. The DetachedCriteria query structure 

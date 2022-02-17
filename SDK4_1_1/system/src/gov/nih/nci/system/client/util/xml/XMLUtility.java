@@ -5,14 +5,15 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class used to convert domain objects to and from XML.
  */
 public class XMLUtility {
 
-	private static Logger log = Logger.getLogger(XMLUtility.class.getName());
+	private static Logger log = LogManager.getLogger(XMLUtility.class.getName());
 
 	private Marshaller marshaller;
 

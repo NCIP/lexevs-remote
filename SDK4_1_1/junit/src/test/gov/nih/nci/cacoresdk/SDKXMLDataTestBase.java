@@ -25,7 +25,8 @@ import javax.xml.validation.Validator;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.w3c.dom.Document;
@@ -36,7 +37,7 @@ import org.w3c.dom.Document;
  */
 public abstract class SDKXMLDataTestBase extends TestCase {
 	
-	private static Logger log = Logger.getLogger(SDKXMLDataTestBase.class);
+	private static Logger log = LogManager.getLogger(SDKXMLDataTestBase.class);
 	
 	protected boolean useGMETags;
 	private String namespaceUriPrefix=null;

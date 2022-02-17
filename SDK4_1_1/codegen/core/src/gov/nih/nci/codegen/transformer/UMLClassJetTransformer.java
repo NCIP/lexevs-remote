@@ -12,7 +12,8 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Satish Patel
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
 public abstract class UMLClassJetTransformer implements Transformer
 {
 	
-	private static Logger log = Logger.getLogger(UMLClassJetTransformer.class);
+	private static Logger log = LogManager.getLogger(UMLClassJetTransformer.class);
 	
 	private ArtifactHandler artifactHandler;
 

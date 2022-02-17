@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -45,7 +46,7 @@ import org.mmbase.util.Encode;
 public class SchemaTransformer implements Transformer { 
 
 
-	private static Logger log = Logger.getLogger(SchemaTransformer.class);
+	private static Logger log = LogManager.getLogger(SchemaTransformer.class);
 
 	private GeneratorErrors generatorErrors = new GeneratorErrors();
 
