@@ -7,14 +7,15 @@ import gov.nih.nci.system.security.acegi.providers.GroupNameAuthenticationToken;
 
 import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class SecurityInitializationHelper 
 {
-	static final Logger log = Logger.getLogger(SecurityInitializationHelper.class.getName());
+	static final Logger log = LogManager.getLogger(SecurityInitializationHelper.class.getName());
 	private AuthorizationManager authorizationManager ;
 	private boolean instanceLevelSecurityEnabled;
 	private boolean attributeLevelSecurityEnabled;

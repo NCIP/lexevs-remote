@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.inheritance.onechild.sametable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.cacoresdk.domain.inheritance.onechild.sametable.Currency;
 import gov.nih.nci.cacoresdk.domain.inheritance.onechild.sametable.Note;
@@ -8,7 +9,7 @@ import junit.framework.Assert;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class OneChildSametableWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(OneChildSametableWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(OneChildSametableWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "One Child Same Table Writable Api Test Case";
 	}

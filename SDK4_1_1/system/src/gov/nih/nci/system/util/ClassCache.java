@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /** 
  *  ClassCache
@@ -29,7 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class ClassCache {
 
-	private static Logger log = Logger.getLogger(ClassCache.class);
+	private static Logger log = LogManager.getLogger(ClassCache.class);
 
 	private List<String> allPackageNamesCache = new ArrayList<String>();
 	private Map<String,List<String>> pkgClassNamesCache = new HashMap<String,List<String>>();

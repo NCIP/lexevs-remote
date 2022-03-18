@@ -5,7 +5,8 @@ import gov.nih.nci.cagrid.introduce.IntroduceConstants;
 import java.io.File;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  * @author <A HREF="MAILTO:langella@bmi.osu.edu">Stephen Langella </A>
  */
 public class AntTools {
-    private static final Logger logger = Logger.getLogger(AntTools.class);
+    private static final Logger logger = LogManager.getLogger(AntTools.class);
 
     public static final String DEBUG_ANT_CALL_JAVA_OPTS = "-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000";
 

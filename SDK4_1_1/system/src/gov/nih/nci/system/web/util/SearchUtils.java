@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * SearchUtils presents various methods to build and modify a hibernate criteria.
@@ -19,7 +20,7 @@ import org.apache.log4j.Logger;
 
 public class SearchUtils {
 
-	private static Logger log = Logger.getLogger(SearchUtils.class.getName());
+	private static Logger log = LogManager.getLogger(SearchUtils.class.getName());
 	
 	private ClassCache classCache;	
 	

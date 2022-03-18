@@ -1,6 +1,7 @@
 package test.gov.nih.nci.cacoresdk.domain.onetoone.multipleassociation;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import junit.framework.Assert;
 import gov.nih.nci.cacoresdk.domain.onetoone.multipleassociation.Child;
@@ -8,7 +9,7 @@ import gov.nih.nci.cacoresdk.domain.onetoone.multipleassociation.Parent;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class O2OMultipleAssociationWritableApiTest extends SDKWritableApiBaseTest{
-	private static Logger log = Logger.getLogger(O2OMultipleAssociationWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(O2OMultipleAssociationWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "One to One MultipleAssociation WritableApi Test Case";
 	}

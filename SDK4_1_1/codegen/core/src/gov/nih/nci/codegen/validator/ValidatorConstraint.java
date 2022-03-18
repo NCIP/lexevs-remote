@@ -7,11 +7,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ValidatorConstraint {
 
-	private static Logger log = Logger.getLogger(ValidatorConstraint.class);
+	private static Logger log = LogManager.getLogger(ValidatorConstraint.class);
 	private String validatorClassName; 
 	private Map<String,String> constraintProperties;
 

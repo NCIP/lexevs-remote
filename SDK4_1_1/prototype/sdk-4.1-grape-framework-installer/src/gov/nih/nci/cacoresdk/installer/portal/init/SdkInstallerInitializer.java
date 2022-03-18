@@ -10,7 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
-import org.apache.log4j.PropertyConfigurator;
+//import org.apache.log4j.PropertyConfigurator;
+
 import org.cagrid.grape.ApplicationInitializer;
 
 public class SdkInstallerInitializer implements ApplicationInitializer {
@@ -18,8 +19,8 @@ public class SdkInstallerInitializer implements ApplicationInitializer {
     private static final int CONFIG_MENU = 3;
 
     public void intialize() throws Exception {
-        PropertyConfigurator.configure("." + File.separator + "conf" + File.separator
-            + "log4j.properties");
+//        PropertyConfigurator.configure("." + File.separator + "conf" + File.separator
+//            + "log4j.properties");
 
 //        ExtensionsLoader.getInstance();
         setConfigurationOptions();

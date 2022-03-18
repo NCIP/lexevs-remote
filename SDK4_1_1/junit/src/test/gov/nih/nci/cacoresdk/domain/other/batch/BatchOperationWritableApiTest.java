@@ -6,7 +6,8 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gov.nih.nci.cacoresdk.domain.onetomany.unidirectional.KeyChain;
 import gov.nih.nci.cacoresdk.domain.onetomany.unidirectional.LatchKey;
@@ -19,7 +20,7 @@ import gov.nih.nci.system.query.hql.UpdateHQLQuery;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class BatchOperationWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(BatchOperationWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(BatchOperationWritableApiTest.class);
 
 	public static String getTestCaseName() {
 		return "BatchOperation WritableApi Test Case";

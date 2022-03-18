@@ -15,3 +15,5 @@ SDK4_1_1/**/dist/
 
 .idea/
 *.iml
+
+caCoreTokenSecurity/dist/

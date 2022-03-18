@@ -3,7 +3,8 @@ package test.gov.nih.nci.cacoresdk.domain.onetomany.unidirectional;
 import java.util.Collection;
 import java.util.HashSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 
 import gov.nih.nci.cacoresdk.domain.onetomany.unidirectional.KeyChain;
@@ -11,7 +12,7 @@ import gov.nih.nci.cacoresdk.domain.onetomany.unidirectional.LatchKey;
 import test.gov.nih.nci.cacoresdk.SDKWritableApiBaseTest;
 
 public class O2MUnidirectionalWritableApiTest extends SDKWritableApiBaseTest {
-	private static Logger log = Logger.getLogger(O2MUnidirectionalWritableApiTest.class);
+	private static Logger log = LogManager.getLogger(O2MUnidirectionalWritableApiTest.class);
 	public static String getTestCaseName() {
 		return "One to Many WritableApi Test Case";
 	}

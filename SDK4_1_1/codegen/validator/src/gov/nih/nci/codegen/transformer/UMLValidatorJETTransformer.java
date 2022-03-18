@@ -20,7 +20,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Daniel Dumitru
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class UMLValidatorJETTransformer implements Transformer
 {
-	private static Logger log = Logger.getLogger(UMLValidatorJETTransformer.class);
+	private static Logger log = LogManager.getLogger(UMLValidatorJETTransformer.class);
 	
 	private ArtifactHandler artifactHandler;
 	

@@ -2,7 +2,8 @@ package test.gov.nih.nci.cacoresdk;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -10,7 +11,7 @@ import org.jdom.Element;
 
 public class AllHBMMappingTest extends SDKHBMMappingTestBase {
 
-	private static Logger log = Logger.getLogger(AllHBMMappingTest.class);
+	private static Logger log = LogManager.getLogger(AllHBMMappingTest.class);
 	private Document doc = null;
 	private String hibernateConfigFile = "hibernate.cfg.xml";
 

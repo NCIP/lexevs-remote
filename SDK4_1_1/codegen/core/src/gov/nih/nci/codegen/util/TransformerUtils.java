@@ -32,11 +32,12 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TransformerUtils
 {
-	private static Logger log = Logger.getLogger(TransformerUtils.class);
+	private static Logger log = LogManager.getLogger(TransformerUtils.class);
 	private String BASE_PKG_LOGICAL_MODEL;
 	private String BASE_PKG_DATA_MODEL;
 	private String INCLUDE_PACKAGE;

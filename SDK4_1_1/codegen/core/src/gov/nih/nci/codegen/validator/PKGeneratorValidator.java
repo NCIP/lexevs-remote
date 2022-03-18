@@ -14,11 +14,12 @@ import gov.nih.nci.ncicb.xmiinout.domain.UMLClass;
 import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
 import gov.nih.nci.ncicb.xmiinout.domain.UMLTaggedValue;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PKGeneratorValidator implements Validator {
 
-	private static Logger log = Logger.getLogger(PKGeneratorValidator.class);
+	private static Logger log = LogManager.getLogger(PKGeneratorValidator.class);
 
 	private boolean enabled = true;
 
